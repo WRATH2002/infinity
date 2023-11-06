@@ -1,38 +1,108 @@
-.App {
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  height: 3px;
+  width: 4px;
+}
+::-webkit-scrollbar {
+  height: 3px;
+  width: 4px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  transition: 0.5s;
+  width: 2px;
+  border-radius: 50px;
+  margin: 0px 550px;
+  /* padding-left: 300px; */
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cdd8dd;
+  border-radius: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #cdd8dd;
+}
+
+.neo {
+  /* border-radius: 46px; */
+  background: #f1f3f6;
+  box-shadow: 11px 11px 23px #e3e4e7, -11px -11px 23px #ffffff;
+}
+
+.neoout {
+  /* border-radius: 46px; */
+  /* background: #f1f3f6; */
+  box-shadow: 11px 11px 23px #e3e4e7, -11px -11px 23px #ffffff;
+}
+
+/* ---------------- */
+.dot-gathering {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: 50px;
+  background-color: #cdd8dd;
+  color: transparent;
+  margin: -1px 0;
+  /* filter: blur(2px); */
+}
+.dot-gathering::before,
+.dot-gathering::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: -50px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50px;
+  background-color: #cdd8dd;
+  color: transparent;
+  opacity: 0;
+  /* filter: blur(2px); */
+  animation: dot-gathering 2s infinite ease-in;
+}
+.dot-gathering::after {
+  animation-delay: 0.5s;
+}
+
+@keyframes dot-gathering {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  35%,
+  60% {
+    opacity: 1;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100px);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/*  */
+
+em-emoji-picker {
+  background-color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* -------------------- */
+@font-face {
+  font-family: wakanda;
+  src: url(./assets/font/WAKANDA\ PANTHER.ttf);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+  font-family: nunitosans;
+  src: url(./assets/font/Onest-VariableFont_wght.ttf);
 }
