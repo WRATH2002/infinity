@@ -55,49 +55,70 @@ export const UserInfo = () => {
     <>
       {userSidebar === false ? (
         <>
-          {" "}
-          <div
-            className="w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-0 fixed bg-slate-500 text-white z-30 overflow-hidden"
-            // style={{ transition: ".5s" }}
-          ></div>
-          <div className="w-full px-[20px] pt-[20px] h-[90px] bg-[#0b0c0b] text-[white]">
-            <div className="w-full h-full pb-[20px] flex justify-center items-center">
+          {ActiveChatUser.length === 0 ? (
+            <>
+              {" "}
               <div
-                className="w-[50px] h-[50px]  rounded-full"
-                onClick={() => {
-                  setUserSidebar(!userSidebar);
-                }}
-              >
-                {chatUserPhoto === "nophoto" ? (
-                  <img
-                    src={profile2}
-                    className="w-full h-full rounded-full object-cover"
-                  ></img>
-                ) : (
-                  <img
-                    src={chatUserPhoto}
-                    className="w-full h-full rounded-full object-cover"
-                  ></img>
-                )}
+                className="w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-0 fixed bg-slate-500 text-white z-30 overflow-hidden"
+                // style={{ transition: ".5s" }}
+              ></div>
+              <div className="w-full px-[20px] pt-[20px] h-[90px] bg-[#0b0c0b] text-[white]">
+                <div className="w-full h-full pb-[20px] flex justify-center items-center">
+                  <div className="w-[50px] h-[50px] rounded-full"></div>
+                  <div className="w-[calc(100%-105px)] lg:w-[calc(100%-65px)] md:w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start"></div>
+                  <div className="w-[35px] lg:w-[0] md:w-[0] h-[35px] rounded-full bg-[#cdd8dd] text-black flex justify-center items-center">
+                    <FaAngleLeft className="text-[20px]" />
+                  </div>
+                </div>
               </div>
-              <div className="w-[calc(100%-105px)] lg:w-[calc(100%-65px)] md:w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
-                <span className="text-[16px] font-semibold text-[#cdd8dd]">
-                  {chatUserName}
-                </span>
-                <span className="text-[15px] font-normal text-[#9fa5a7]">
-                  +91 8100524419
-                </span>
-              </div>
+            </>
+          ) : (
+            <>
+              {" "}
               <div
-                className="w-[35px] lg:w-[0] md:w-[0] h-[35px] rounded-full bg-[#cdd8dd] text-black flex justify-center items-center"
-                onClick={() => {
-                  dispatch(addActiveUser(""));
-                }}
-              >
-                <FaAngleLeft className="text-[20px]" />
+                className="w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-0 fixed bg-slate-500 text-white z-30 overflow-hidden"
+                // style={{ transition: ".5s" }}
+              ></div>
+              <div className="w-full px-[20px] pt-[20px] h-[90px] bg-[#0b0c0b] text-[white]">
+                <div className="w-full h-full pb-[20px] flex justify-center items-center">
+                  <div
+                    className="w-[50px] h-[50px]  rounded-full"
+                    onClick={() => {
+                      setUserSidebar(!userSidebar);
+                    }}
+                  >
+                    {chatUserPhoto === "nophoto" ? (
+                      <img
+                        src={profile2}
+                        className="w-full h-full rounded-full object-cover"
+                      ></img>
+                    ) : (
+                      <img
+                        src={chatUserPhoto}
+                        className="w-full h-full rounded-full object-cover"
+                      ></img>
+                    )}
+                  </div>
+                  <div className="w-[calc(100%-105px)] lg:w-[calc(100%-65px)] md:w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
+                    <span className="text-[16px] font-semibold text-[#cdd8dd]">
+                      {chatUserName}
+                    </span>
+                    <span className="text-[15px] font-normal text-[#9fa5a7]">
+                      +91 8100524419
+                    </span>
+                  </div>
+                  <div
+                    className="w-[35px] lg:w-[0] md:w-[0] h-[35px] rounded-full bg-[#cdd8dd] text-black flex justify-center items-center"
+                    onClick={() => {
+                      dispatch(addActiveUser(""));
+                    }}
+                  >
+                    <FaAngleLeft className="text-[20px]" />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </>
+          )}
         </>
       ) : (
         <>

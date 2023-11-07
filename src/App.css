@@ -106,3 +106,6 @@ em-emoji-picker {
   font-family: nunitosans;
   src: url(./assets/font/Onest-VariableFont_wght.ttf);
 }
+/* input[type="file"] {
+  opacity: 0;
+} */

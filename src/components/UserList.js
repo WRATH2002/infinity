@@ -19,6 +19,7 @@ import { onSnapshot, snapshotEqual, where } from "firebase/firestore";
 import { query } from "firebase/firestore";
 import { RxCross2 } from "react-icons/rx";
 import { LuSearch } from "react-icons/lu";
+import { BsFillCameraFill } from "react-icons/bs";
 import { BiSolidSearch } from "react-icons/bi";
 import { orderBy } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
@@ -116,10 +117,18 @@ const Friends = (props) => {
       setUnreadMessages(
         snapshot?.data()?.TotalMessage - snapshot?.data()?.LastMessage
       );
-      setLastMsg(
+      if (
         snapshot?.data()?.ChatHistory[snapshot?.data()?.ChatHistory?.length - 1]
-          ?.Message
-      );
+          ?.Message.length === 0
+      ) {
+        setLastMsg("Image");
+      } else {
+        setLastMsg(
+          snapshot?.data()?.ChatHistory[
+            snapshot?.data()?.ChatHistory?.length - 1
+          ]?.Message
+        );
+      }
     });
 
     if (props.data.UserId === ActiveChatUser) {
@@ -137,8 +146,8 @@ const Friends = (props) => {
 
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
-      {ActiveChatUser === UserUid ? (
+      <Toaster position="bottom-center" reverseOrder={false} />
+      {ActiveChatUser === UserUid && UserUid != "" ? (
         <>
           <div
             className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer bg-[#cdd8dd] px-[10px] rounded-lg"
@@ -171,11 +180,22 @@ const Friends = (props) => {
                   {Time}
                 </span>
               </div>
-              <div className="w-full flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]">
-                  {/* {props.data.msg} */}
-                  {lastMsg}
-                </span>
+              <div className="w-full flex h-[23px] items-center">
+                {/* {props.data.msg} */}
+
+                {lastMsg === "Image" ? (
+                  <>
+                    <BsFillCameraFill className="mr-[5px] text-[#474747]" />
+                    <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]">
+                      {lastMsg}
+                    </span>
+                  </>
+                ) : (
+                  <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]">
+                    {lastMsg}
+                  </span>
+                )}
+                {/* </span> */}
                 <span className="w-[70px] text-[15px] h-full font-normal  flex justify-end items-center">
                   {unreadMessages === 0 ? (
                     <></>
@@ -195,7 +215,7 @@ const Friends = (props) => {
       ) : (
         <>
           <div
-            className=" group w-full h-[70px] py-[10px] flex justify-center cursor-pointer hover:bg-[#beccd0] px-[10px] rounded-lg"
+            className=" group w-full h-[70px] py-[10px] flex justify-center bg-transparent cursor-pointer hover:bg-[#beccd0] px-[10px] rounded-lg"
             onClick={() => activerChatUser()}
           >
             <div className="w-[50px] h-[50px]  rounded-full">
@@ -222,11 +242,22 @@ const Friends = (props) => {
                   {Time}
                 </span>
               </div>
-              <div className="w-full flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
-                  {/* {props.data.msg} */}
+              <div className="w-full flex h-[23px] items-center">
+                {lastMsg === "Image" ? (
+                  <>
+                    <BsFillCameraFill className="mr-[5px] text-[#9fa5a7] group-hover:text-[#474747]" />
+                    <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
+                      {lastMsg}
+                    </span>
+                  </>
+                ) : (
+                  <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
+                    {lastMsg}
+                  </span>
+                )}
+                {/* <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
                   {lastMsg}
-                </span>
+                </span> */}
                 <span className="w-[70px] text-[15px] h-full font-normal  flex justify-end items-center">
                   {unreadMessages === 0 ? (
                     <></>
@@ -546,40 +577,6 @@ const UserList = () => {
   }
   return (
     <>
-      {/* toast.custom((t) => (
-      <div
-        className={`${
-          t.visible ? "animate-enter" : "animate-leave"
-        } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
-      >
-        <div className="flex-1 w-0 p-4">
-          <div className="flex items-start">
-            <div className="flex-shrink-0 pt-0.5">
-              <img
-                className="h-10 w-10 rounded-full"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=6GHAjsWpt9&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                alt=""
-              />
-            </div>
-            <div className="ml-3 flex-1">
-              <p className="text-sm font-medium text-gray-900">Emilia Gates</p>
-              <p className="mt-1 text-sm text-gray-500">
-                Sure! 8:30pm works great!
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="flex border-l border-gray-200">
-          <button
-            onClick={() => toast.dismiss(t.id)}
-            className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-      )) */}
-      {/* <Toaster position="top-center" reverseOrder={false} /> */}
       <div className="w-full lg:w-full md:w-full h-[calc(100%-70px)] pt-[20px] flex flex-col items-center ">
         {/* yserlist */}
         <div className="w-full flex justify-center items-center  mb-[20px] overflow-hidden">
@@ -659,7 +656,7 @@ const UserList = () => {
         ) : (
           <div className="w-full lg:w-full md:w-full h-[(100%-40px)] overflow-y-scroll overflow-x-hidden">
             {UserList.length === 0 ? (
-              <>Fetching User</>
+              <>No Friends Yet</>
             ) : (
               <>
                 {UserList?.map((friends) => {

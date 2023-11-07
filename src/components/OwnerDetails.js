@@ -82,26 +82,6 @@ const OwnerDetails = () => {
       });
       console.log("Uploaded a blob or file!");
     });
-    // const uploadTask = fileRef.put(image);
-    // uploadTask.on(
-    //   "state_changed",
-    //   (snapshot) => {
-    //     const progress =
-    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //     console.log("Upload is " + progress + "% done");
-    //     if (progress === "100") {
-    //       alert("Uploaded");
-    //     }
-    //   },
-    //   (error) => {
-    //     console.log(error.message);
-    //   },
-    //   () => {
-    //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-    //       console.log("File available at", downloadURL);
-    //     });
-    //   }
-    // );
   }
 
   const userSignOut = () => {
