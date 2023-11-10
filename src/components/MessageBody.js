@@ -24,6 +24,8 @@ import { HiDocumentText } from "react-icons/hi";
 import { IoMdPhotos } from "react-icons/io";
 import { MdContactPage } from "react-icons/md";
 import { PiStickerFill } from "react-icons/pi";
+import { FcImageFile } from "react-icons/fc";
+import { FcDocument } from "react-icons/fc";
 // import { TiAttachment } from "react-icons/ti";
 // import { TiAttachment } from "react-icons/ti";
 import chat from "../assets/img/chat.png";
@@ -32,11 +34,39 @@ import Picker from "@emoji-mart/react";
 import { storage } from "../firebase";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { getDownloadURL } from "firebase/storage";
-import toast, { Toaster } from "react-hot-toast";
+import toast, { Toaster, useToaster } from "react-hot-toast";
 import a from "../assets/img/a.jpg";
 import aa from "../assets/img/aa.jpg";
+// ----------------------------------
+import docc from "../assets/img/document.png";
+import phot from "../assets/img/image.png";
+import three from "../assets/img/threedots.png";
+import mic from "../assets/img/mic.png";
+import profile from "../assets/img/profile.png";
+import sendd from "../assets/img/send.png";
+import logout from "../assets/img/logout.png";
+import sticker from "../assets/img/sticker.png";
+import attach from "../assets/img/attach.png";
+import smiley from "../assets/img/smiley.png";
+import settings from "../assets/img/settings.png";
+import camera from "../assets/img/camera.png";
+import contacts from "../assets/img/contacts.png";
+import cross from "../assets/img/cross.png";
+import back from "../assets/img/back.png";
+import { Blurhash } from "react-blurhash";
 
 const Messagess = (props) => {
+  const [url, setUrl] = useState("");
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  // useEffect(() => {
+  //   g();
+  // }, []);
+
+  // async function g() {
+  //   const blurhash = await Blurhash.encode(props?.data?.Image, 4, 3);
+  //   setUrl(blurhash);
+  // }
   return (
     <>
       {props?.data?.Flag === 2 ? (
@@ -54,7 +84,7 @@ const Messagess = (props) => {
                 </div>
               </>
             ) : (
-              <div className="w-auto bg-[#1f201f] max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1px] rounded-lg flex text-black flex-wrap justify-between">
+              <div className="w-auto bg-[#1f201f] max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex text-black flex-wrap justify-between">
                 <img
                   loading="lazy"
                   src={props.data.Image}
@@ -81,12 +111,40 @@ const Messagess = (props) => {
                 </div>
               </div>
             ) : (
-              <div className="w-auto bg-[#cdd8dd] max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1px] rounded-lg flex text-black flex-wrap justify-between">
-                <img
+              <div className="w-auto bg-[#cdd8dd] max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex text-black flex-wrap justify-between">
+                {/* <img
                   loading="lazy"
                   src={props.data.Image}
-                  className="rounded-lg w-full h-full object-cover"
+                  className="rounded-lg w-full h-full object-cover "
+                ></img> */}
+
+                {/* {isImageLoaded === false ? ( */}
+                {/* <div
+                  style={{
+                    display: !isImageLoaded ? "inline" : "none",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                > */}
+                {/* <Blurhash
+                    hash={url}
+                    width="100%"
+                    height="100%"
+                    resolutionX={32}
+                    resolutionY={32}
+                    punch={1}
+                  />
+                </div> */}
+
+                {/* ) : ( */}
+                <img
+                  loading="lazy"
+                  onload={() => setIsImageLoaded(true)}
+                  src={props.data.Image}
+                  className="rounded-lg w-full h-full object-cover "
                 ></img>
+                {/* )} */}
+
                 {/* <div className="ml-auto w-auto  bg-slate-800 h-[calc(100%-2px)] flex justify-end items-end whitespace-nowrap text-[10px] rounded-lg text-[#9fa5a7] fixed ">
     
                   10.03 AM
@@ -404,9 +462,12 @@ export const MessageBody = () => {
 
   useEffect(() => {}, [imageUrl]);
 
+  const [imageLength, setImageLength] = useState();
+
   function Image(e) {
     console.log(e.target.files[0]);
     setImage(e.target.files[0]);
+    setImageLength(e.target.files.length);
   }
 
   function Document(e) {
@@ -431,12 +492,13 @@ export const MessageBody = () => {
         setMessages("");
       });
       // toast.success("Photo Changed Successfully");
-      toast("Photo Changed Successfully", {
+      toast("Image Sent", {
         icon: "✅",
+        className: "font-[nunitosans] font-normal",
         style: {
           borderRadius: "9px",
           background: "#333",
-          color: "#fff",
+          color: "#cdd8dd",
         },
       });
       console.log("Uploaded a blob or file!");
@@ -450,6 +512,7 @@ export const MessageBody = () => {
       getDownloadURL(snapshot.ref).then((url) => {
         console.log("urlbefore");
         console.log(url);
+        g(url);
         // setImageUrl(url);
         // console.log(imageUrl);
         // console.log("urlafter");
@@ -460,16 +523,26 @@ export const MessageBody = () => {
         setMessages("");
       });
       // toast.success("Photo Changed Successfully");
-      toast("Photo Changed Successfully", {
+      toast("Image Sent", {
         icon: "✅",
+        className: "font-[nunitosans] font-normal",
         style: {
           borderRadius: "9px",
           background: "#333",
-          color: "#fff",
+          color: "#cdd8dd",
         },
       });
       console.log("Uploaded a blob or file!");
     });
+  }
+
+  function g(imageUrl) {
+    const img = new Image();
+    img.src = imageUrl;
+    img.onload = () => {
+      console.log(img.height);
+      console.log(img.width);
+    };
   }
 
   return (
@@ -500,6 +573,7 @@ export const MessageBody = () => {
                   </>
                 );
               })}
+              {/* <img src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/chats_images%2Fmb05JDt06hedvvAijxzn09KfbHu1%2F5?alt=media&token=1b5182f5-1ca5-4bc0-81d1-f312d9eb7561"></img> */}
             </>
           )}
         </div>
@@ -518,102 +592,355 @@ export const MessageBody = () => {
         )}
       </div>
       {document === true ? (
-        <div className="w-[238px] px-[19px] fixed mt-[-220px]">
-          <div className="w-[200px] h-[220px] bg-[#cdd8dd] p-[20px] px-[10px] rounded-lg font-[nunitosans] font-normal text-[16px] flex flex-col justify-between">
-            {/* <input
-              type="file"
-              accept="document/*"
-              // onChange={(e) => Image(e)}
-            ></input> */}
+        <>
+          <div
+            className="w-[208px] px-[19px] fixed mt-[-258px]"
+            style={{ transition: ".5s" }}
+          >
+            <div
+              className="w-[170px] h-[258px] text-[#ccd7dc] bg-[#1f201fae] border border-[#ccd7dc1f]  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
+              style={{ transition: ".5s" }}
+            >
+              <div className="w-full flex flex-col items-center">
+                <label
+                  className="w-full flex items-center h-[40px] opacity-100 rounded-lg hover:backdrop-blur-md   cursor-pointer"
+                  // style={{ transition: ".2s" }}
+                  for="document-file-input"
+                  style={{ transition: "2s", transitionDelay: ".2s" }}
+                >
+                  <div className="w-full h-full px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl">
+                    <input
+                      id="document-file-input"
+                      type="file"
+                      accept="document/*"
+                      onChange={(e) => {
+                        Document(e);
+                        console.log(e.target.files);
+                      }}
+                      className="hidden"
+                    ></input>
+                    <img src={docc} className="w-[25px] mr-[8px]"></img>{" "}
+                    Documents
+                  </div>
+                </label>
+                <label
+                  className="w-full flex items-center h-[40px] opacity-100 rounded-lg   cursor-pointer"
+                  // style={{ transition: ".2s" }}
+                  style={{ transition: "2s", transitionDelay: ".5s" }}
+                  for="image-file-input"
+                >
+                  <div className="w-full h-full px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl">
+                    <input
+                      id="image-file-input"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => Image(e)}
+                      className="hidden"
+                    ></input>
+                    {/* <IoMdPhotos className="text-[24px] mr-[8px]" /> */}
+                    <img src={phot} className="w-[25px] mr-[8px]"></img>
+                    {/* <FcImageFile className="text-[24px] mr-[8px]" /> */}
+                    Photos
+                  </div>
+                </label>
+                <div
+                  className="w-full flex items-center h-[40px] opacity-100 rounded-lg  cursor-pointer"
+                  style={{ transition: "2s", transitionDelay: ".8s" }}
+                >
+                  {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
-            <div className="w-full flex flex-col items-center">
-              <label
-                className="w-full flex items-center h-[35px] hover:bg-[#0b0c0b] hover:text-[#cdd8dd] px-[10px] cursor-pointer"
-                for="document-file-input"
-              >
-                <input
-                  id="document-file-input"
-                  type="file"
-                  accept="document/*"
-                  onChange={(e) => {
-                    Document(e);
-                    console.log(e.target.files);
-                  }}
-                  className="hidden"
-                ></input>
-                <HiDocumentText className="text-[24px] mr-[8px]" /> Documents
-              </label>
-              <label
-                className="w-full flex items-center h-[35px] hover:bg-[#0b0c0b] hover:text-[#cdd8dd] px-[10px] cursor-pointer"
-                for="image-file-input"
-              >
-                <input
-                  id="image-file-input"
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => Image(e)}
-                  className="hidden"
-                ></input>
-                <IoMdPhotos className="text-[24px] mr-[8px]" /> Photos
-              </label>
-              <div className="w-full flex items-center h-[35px] hover:bg-[#0b0c0b] hover:text-[#cdd8dd] px-[10px] cursor-pointer">
-                <MdContactPage className="text-[24px] mr-[8px]" /> Contact
-              </div>
-              <div className="w-full flex items-center h-[35px] hover:bg-[#0b0c0b] hover:text-[#cdd8dd] px-[10px] cursor-pointer">
-                <PiStickerFill className="text-[24px] mr-[8px]" /> Sticker
-              </div>
-            </div>
+                  <div className="w-full h-full px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl">
+                    <img src={contacts} className="w-[25px] mr-[8px]"></img>{" "}
+                    Contact
+                  </div>
+                </div>
+                <div
+                  className="w-full flex items-center h-[40px] opacity-100 rounded-lg   cursor-pointer"
+                  style={{ transition: "2s", transitionDelay: "1.1s" }}
+                >
+                  {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
-            <div className="w-full flex items-center justify-center h-[35px] hover:bg-[#0b0c0b] hover:text-[#cdd8dd] px-[10px]">
-              <button
-                className="w-full h-full  cursor-pointer"
-                onClick={() => {
-                  if (image) {
-                    setDocument(false);
-                    setSend(true);
-                    uploadImage();
-                    setImage();
-                    console.log("upload");
-                  }
-                  // else if (doc) {
-                  //   setDocument(false);
-                  //   setSend(true);
-                  //   uploadDoc();
-                  //   setDoc();
-                  //   console.log("upload");
-                  // }
-                  else {
-                    console.log("not upload");
-                    // toast.error("Select Image First");
-                    toast("Select Image First", {
-                      icon: "❌",
-                      style: {
-                        borderRadius: "9px",
-                        background: "#333",
-                        color: "#fff",
-                      },
-                    });
-                  }
-                }}
-                // onClick={() => {
-                //   if (Messages.length !== 0) {
-                //     var temp = formatAMPM(new Date());
-                //     storeToReactStore(Messages, temp);
-                //     setSend(true);
-                //     // sendMessage(Messages);
-                //     setMessages("");
-                //     // sendMessage(Messages);
-                //     // dispatch(toggleSendFlag(true));
-                //   }
-                // }}
+                  <div className="w-full h-full px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl">
+                    <img src={sticker} className="w-[25px] mr-[8px]"></img>{" "}
+                    Sticker
+                  </div>
+                </div>
+                <div
+                  className="w-full flex items-center  opacity-100 rounded-lg   cursor-pointer my-[10px]"
+                  style={{ transition: "2s", transitionDelay: "1.125s" }}
+                >
+                  {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
+
+                  <div className="w-full border border-[#ccd7dc1f] px-[10px] flex items-center  "></div>
+                </div>
+              </div>
+
+              <div
+                className="w-full flex items-center justify-center  h-[40px]    opacity-100
+                 "
+                style={{ transition: "2s", transitionDelay: "1.4s" }}
               >
-                SEND
-              </button>
+                {image ? (
+                  <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px] rounded-lg cursor-pointer ">
+                    <button
+                      className="w-full h-full opacity cursor-pointer flex justify-between items-center"
+                      onClick={() => {
+                        if (image) {
+                          setDocument(false);
+                          setSend(true);
+                          uploadImage();
+                          setImage();
+                          console.log("upload");
+                          setImageLength();
+                        }
+                        // else if (doc) {
+                        //   setDocument(false);
+                        //   setSend(true);
+                        //   uploadDoc();
+                        //   setDoc();
+                        //   console.log("upload");
+                        // }
+                        else {
+                          console.log("not upload");
+                          // toast.error("Select Image First");
+                          toast("Select Image", {
+                            icon: "❌",
+                            className: "font-[nunitosans] font-normal",
+                            style: {
+                              borderRadius: "9px",
+                              background: "#333",
+                              color: "#cdd8dd",
+                            },
+                          });
+                        }
+                      }}
+                      // onClick={() => {
+                      //   if (Messages.length !== 0) {
+                      //     var temp = formatAMPM(new Date());
+                      //     storeToReactStore(Messages, temp);
+                      //     setSend(true);
+                      //     // sendMessage(Messages);
+                      //     setMessages("");
+                      //     // sendMessage(Messages);
+                      //     // dispatch(toggleSendFlag(true));
+                      //   }
+                      // }}
+                    >
+                      <img
+                        src={sendd}
+                        className="w-[25px] mr-[10px] z-20"
+                      ></img>
+                      Send
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[#cdd8dd] text-[black]   flex justify-center items-center">
+                        {imageLength}
+                      </span>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="w-full h-full opacity-30 px-[10px] rounded-lg">
+                    <div
+                      className="w-full h-full opacity cursor-pointer flex justify-between items-center"
+                      onClick={() => {
+                        if (image) {
+                          setDocument(false);
+                          setSend(true);
+                          uploadImage();
+                          setImage();
+                          console.log("upload");
+                          setImageLength();
+                        }
+                        // else if (doc) {
+                        //   setDocument(false);
+                        //   setSend(true);
+                        //   uploadDoc();
+                        //   setDoc();
+                        //   console.log("upload");
+                        // }
+                        else {
+                          console.log("not upload");
+                          // toast.error("Select Image First");
+                          toast("Select Image", {
+                            icon: "❌",
+                            className: "font-[nunitosans] font-normal",
+                            style: {
+                              borderRadius: "9px",
+                              background: "#333",
+                              color: "#cdd8dd",
+                            },
+                          });
+                        }
+                      }}
+                      // onClick={() => {
+                      //   if (Messages.length !== 0) {
+                      //     var temp = formatAMPM(new Date());
+                      //     storeToReactStore(Messages, temp);
+                      //     setSend(true);
+                      //     // sendMessage(Messages);
+                      //     setMessages("");
+                      //     // sendMessage(Messages);
+                      //     // dispatch(toggleSendFlag(true));
+                      //   }
+                      // }}
+                    >
+                      <img
+                        src={sendd}
+                        className="w-[25px] mr-[10px] z-20"
+                      ></img>
+                      Send
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[#cdd8dd00] text-[black]   flex justify-center items-center">
+                        {imageLength}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        </>
       ) : (
-        <></>
+        <>
+          <div
+            className="w-[208px] px-[19px] fixed mt-[-258px]"
+            style={{ transition: ".5s" }}
+          >
+            <div
+              className="w-[0] h-[258px] text-[#ccd7dc] bg-[#1f201fae] backdrop-blur-md py-[20px]  border-none rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
+              style={{ transition: ".5s" }}
+            >
+              <div className="w-full flex flex-col items-center">
+                <label
+                  className="w-full flex items-center h-[40px] opacity-0 rounded-lg hover:backdrop-blur-md hover:bg-[#ccd7dc]  hover:text-[black]  cursor-pointer"
+                  // style={{ transition: ".2s" }}
+                  for="document-file-input"
+                  style={{ transition: ".2s" }}
+                >
+                  <div className="w-full h-full px-[10px] flex items-center">
+                    <input
+                      id="document-file-input"
+                      type="file"
+                      accept="document/*"
+                      onChange={(e) => {
+                        Document(e);
+                        console.log(e.target.files);
+                      }}
+                      className="hidden"
+                    ></input>
+                    <img src={docc} className="w-[25px] mr-[8px]"></img>{" "}
+                    Documents
+                  </div>
+                </label>
+                <label
+                  className="w-full flex items-center h-[40px] opacity-0 rounded-lg  hover:backdrop-blur-md hover:bg-[#ccd7dc]  hover:text-[black] cursor-pointer"
+                  style={{ transition: ".2s" }}
+                  for="image-file-input"
+                >
+                  <div className="w-full h-full px-[10px] flex items-center">
+                    <input
+                      id="image-file-input"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => Image(e)}
+                      className="hidden"
+                      // style={{ transition: ".2s" }}
+                    ></input>
+                    {/* <IoMdPhotos className="text-[24px] mr-[8px]" /> */}
+                    <img src={phot} className="w-[25px] mr-[8px]"></img>
+                    {/* <FcImageFile className="text-[24px] mr-[8px]" /> */}
+                    Photos
+                  </div>
+                </label>
+                <div
+                  className="w-full flex items-center h-[40px] opacity-0 rounded-lg  hover:backdrop-blur-md hover:bg-[#ccd7dc]  hover:text-[black] cursor-pointer"
+                  style={{ transition: ".2s" }}
+                >
+                  {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
+
+                  <div className="w-full h-full px-[10px] flex items-center">
+                    <img src={contacts} className="w-[25px] mr-[8px]"></img>{" "}
+                    Contact
+                  </div>
+                </div>
+                <div
+                  className="w-full flex items-center h-[40px] opacity-0 rounded-lg  hover:backdrop-blur-md hover:bg-[#ccd7dc]  hover:text-[black] cursor-pointer"
+                  style={{ transition: ".2s" }}
+                >
+                  {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
+
+                  <div className="w-full h-full px-[10px] flex items-center">
+                    <img src={sticker} className="w-[25px] mr-[8px]"></img>{" "}
+                    Sticker
+                  </div>
+                </div>
+                <div
+                  className="w-full flex items-center  opacity-100 rounded-lg   cursor-pointer my-[10px]"
+                  style={{ transition: ".2s" }}
+                >
+                  {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
+
+                  <div className="w-full border border-[#ccd7dc1f] px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl"></div>
+                </div>
+              </div>
+
+              <div
+                className="w-full flex items-center justify-center  h-[40px]   opacity-0"
+                style={{ transition: ".2s" }}
+              >
+                <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px] rounded-lg">
+                  <button
+                    className="w-full h-full opacity cursor-pointer flex justify-between items-center"
+                    onClick={() => {
+                      if (image) {
+                        setDocument(false);
+                        setSend(true);
+                        uploadImage();
+                        setImage();
+                        console.log("upload");
+                        setImageLength();
+                      }
+                      // else if (doc) {
+                      //   setDocument(false);
+                      //   setSend(true);
+                      //   uploadDoc();
+                      //   setDoc();
+                      //   console.log("upload");
+                      // }
+                      else {
+                        console.log("not upload");
+                        // toast.error("Select Image First");
+                        toast("Select Image", {
+                          icon: "❌",
+                          className: "font-[nunitosans] font-normal",
+                          style: {
+                            borderRadius: "9px",
+                            background: "#333",
+                            color: "#cdd8dd",
+                          },
+                        });
+                      }
+                    }}
+                    // onClick={() => {
+                    //   if (Messages.length !== 0) {
+                    //     var temp = formatAMPM(new Date());
+                    //     storeToReactStore(Messages, temp);
+                    //     setSend(true);
+                    //     // sendMessage(Messages);
+                    //     setMessages("");
+                    //     // sendMessage(Messages);
+                    //     // dispatch(toggleSendFlag(true));
+                    //   }
+                    // }}
+                  >
+                    <img src={sendd} className="w-[25px] mr-[10px] z-20"></img>
+                    Send
+                    <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] opacity-0 text-[black]   flex justify-center items-center">
+                      {imageLength}
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
       )}
 
       <div className="w-full h-[80px] px-[20px] flex flex-col justify-center items-start bg-[#0b0c0b]">
@@ -627,14 +954,16 @@ export const MessageBody = () => {
                 className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer bg-white rounded-full  z-10 text-[black]  hover:text-[black]"
                 onClick={() => setEmoji(!emoji)}
               >
-                <BsFillEmojiLaughingFill className="text-[20px] " />
+                {/* <BsFillEmojiLaughingFill className="text-[20px] " /> */}
+                <img src={smiley} className="w-[25px]"></img>
               </div>
             ) : (
               <div
                 className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer hover:bg-white rounded-full  z-10 text-[black]  hover:text-[black]"
                 onClick={() => setEmoji(!emoji)}
               >
-                <BsFillEmojiLaughingFill className="text-[20px] " />
+                {/* <BsFillEmojiLaughingFill className="text-[20px] " /> */}
+                <img src={smiley} className="w-[25px] drop-shadow-md"></img>
               </div>
             )}
             <div
@@ -643,7 +972,8 @@ export const MessageBody = () => {
                 setDocument(!document);
               }}
             >
-              <TiAttachment className="text-[23px] " />
+              {/* <TiAttachment className="text-[23px] " /> */}
+              <img src={attach} className="w-[25px] drop-shadow-md"></img>
             </div>
 
             <input
@@ -683,14 +1013,17 @@ export const MessageBody = () => {
               }}
             >
               {Messages.length === 0 ? (
-                <BiSolidSend className="text-[20px] text-[#828282]" />
+                // <BiSolidSend className="text-[20px] text-[#828282]" />
+                <img src={sendd} className="w-[25px] z-20 drop-shadow-md"></img>
               ) : (
-                <BiSolidSend className="text-[20px] " />
+                // <BiSolidSend className="text-[20px] " />
+                <img src={sendd} className="w-[25px] z-20 drop-shadow-md"></img>
               )}
             </button>
             <div className="w-[50px] h-[50px] flex justify-center items-center cursor-pointer rounded-lg bg-[#cdd8dd]  z-10  ml-[10px] text-[black]  ">
               <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full hover:bg-white">
-                <BiSolidMicrophone className="text-[21px]  " />
+                {/* <BiSolidMicrophone className="text-[21px]  " /> */}
+                <img src={mic} className="w-[25px] drop-shadow-md"></img>
               </div>
             </div>
           </div>

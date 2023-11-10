@@ -21,6 +21,12 @@ import { onSnapshot } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import profile2 from "../assets/img/d.png";
+import profile from "../assets/img/profile.png";
+import logout from "../assets/img/logout.png";
+import settings from "../assets/img/settings.png";
+import three from "../assets/img/threedots.png";
+import cross from "../assets/img/cross.png";
+import uploadd from "../assets/img/upload.png";
 
 const OwnerDetails = () => {
   const [ownerInfo, setOwnerInfo] = useState("");
@@ -72,12 +78,13 @@ const OwnerDetails = () => {
         db.collection("Chat Record").doc(user.uid).update({ Photo: url });
       });
       // toast.success("Photo Changed Successfully");
-      toast("Photo Changed Successfully", {
+      toast("Photo Changed", {
         icon: "✅",
+        className: "font-[nunitosans] font-normal",
         style: {
           borderRadius: "9px",
           background: "#333",
-          color: "#fff",
+          color: "#cdd8dd",
         },
       });
       console.log("Uploaded a blob or file!");
@@ -118,7 +125,7 @@ const OwnerDetails = () => {
 
         {isMenu === true ? (
           <div
-            className="w-[35px] h-[35px] bg-white text-black rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
+            className="w-[35px] h-[35px]  text-black rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
             onClick={() => {
               setIsMenu(!isMenu);
               setIsProfileMenu(false);
@@ -127,16 +134,18 @@ const OwnerDetails = () => {
               setAboutChangeFlag(false);
             }}
           >
-            <RxCross2 className="" />
+            {/* <RxCross2 className="" /> */}
+            <img src={cross} className="w-[25px]"></img>
           </div>
         ) : (
           <div
-            className="w-[35px] h-[35px] hover:bg-white text-[#cdd8dd] hover:text-black rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
+            className="w-[35px] h-[35px]  text-[#cdd8dd] hover:text-black rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
             onClick={() => {
               setIsMenu(!isMenu);
             }}
           >
-            <PiDotsThreeOutlineVerticalFill />
+            {/* <PiDotsThreeOutlineVerticalFill /> */}
+            <img src={three} className="w-[25px]"></img>
           </div>
         )}
 
@@ -146,7 +155,7 @@ const OwnerDetails = () => {
         <>
           {isProfileMenu === true ? (
             <div
-              className="h-[120px] w-[360px] lg:w-[360px] md:w-[360px] mt-[60px] fixed rounded-lg px-[20px] bg-[#0b0c0b] text-[#cdd8dd] flex justify-between items-center drop-shadow-lg"
+              className="h-[120px] w-[360px] lg:w-[360px] md:w-[360px] mt-[60px] fixed rounded-lg px-[20px] bg-[#0b0c0b] flex justify-between items-center drop-shadow-lg z-10 text-[#ccd7dc] bg-[#1f201fae] border border-[#ccd7dc1f]  backdrop-blur-md font-[nunitosans]"
               style={{ transition: ".3s" }}
             >
               {/* <span
@@ -261,18 +270,20 @@ const OwnerDetails = () => {
                   } else {
                     console.log("not upload");
                     // toast.error("Select Image First");
-                    toast("Select Image First", {
+                    toast("Select Image", {
                       icon: "❌",
+                      className: "font-[nunitosans] font-normal",
                       style: {
                         borderRadius: "9px",
                         background: "#333",
-                        color: "#fff",
+                        color: "#cdd8dd",
                       },
                     });
                   }
                 }}
               >
-                <MdOutlineFileUpload className="text-[20px]" />
+                {/* <MdOutlineFileUpload className="text-[20px]" /> */}
+                <img src={uploadd} className="w-[25px]"></img>
               </button>
               {/* </div> */}
             </div>
@@ -301,38 +312,97 @@ const OwnerDetails = () => {
             </div>
           ) : (
             <div
-              className="h-[120px] w-[170px] mt-[60px] fixed rounded-lg p-[10px] bg-[#0b0c0b] text-[#cdd8dd] flex flex-col justify-center drop-shadow-lg"
-              style={{ transition: ".3s" }}
+              className="h-[120px] w-[170px] mt-[60px] fixed rounded-lg p-[10px] text-[#ccd7dc] bg-[#1f201fae] border border-[#ccd7dc1f]  backdrop-blur-sm z-10 flex flex-col justify-center drop-shadow-lg"
+              style={{ transition: ".5s" }}
             >
               <span
-                className="hover:bg-[#cdd8dd] hover:text-black  cursor-pointer px-[10px] py-[4px] flex justify-start items-center"
+                style={{ transition: "2s", transitionDelay: ".2s" }}
+                className=" opacity-100 cursor-pointer  flex justify-start items-center"
                 onClick={() => {
                   setIsProfileMenu(true);
                 }}
               >
-                <CgProfile className="mr-[10px]" /> Profile
+                {/* <CgProfile className="mr-[10px]" /> */}
+                <div
+                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#cdd8dd] rounded-md drop-shadow-md text-[#ccd7dc] hover:backdrop-blur-md hover:text-black flex justify-start items-center "
+                  // style={{ transition: ".2s" }}
+                >
+                  <img src={profile} className="w-[25px] mr-[8px]"></img>{" "}
+                  Profile
+                </div>
               </span>
               <span
-                className="hover:bg-[#cdd8dd] hover:text-black  cursor-pointer px-[10px] py-[4px] flex justify-start items-center"
+                style={{ transition: "2s", transitionDelay: ".6s" }}
+                className="opacity-100 cursor-pointer flex justify-start items-center"
                 onClick={() => {
                   setIsSettingsMenu(true);
                 }}
               >
-                <IoSettingsSharp className="mr-[10px]" /> Settings
+                <div
+                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#cdd8dd] rounded-md drop-shadow-md text-[#ccd7dc] hover:backdrop-blur-md hover:text-black flex justify-start items-center "
+                  // style={{ transition: ".2s" }}
+                >
+                  <img src={settings} className="w-[25px] mr-[8px]"></img>{" "}
+                  Settings
+                </div>
+                {/* <IoSettingsSharp className="mr-[10px]" /> */}
               </span>
               <span
-                className="hover:bg-[#cdd8dd] hover:text-black  cursor-pointer px-[10px] py-[4px] flex justify-start items-center"
+                style={{ transition: "2s", transitionDelay: "1s" }}
+                className="opacity-100 cursor-pointer flex justify-start items-center"
                 onClick={() => {
                   userSignOut();
                 }}
               >
-                <FiLogOut className="mr-[10px]" /> Logout
+                <div
+                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#cdd8dd] rounded-md drop-shadow-md text-[#ccd7dc] hover:backdrop-blur-md hover:text-black flex justify-start items-center "
+                  // style={{ transition: ".2s" }}
+                >
+                  <img src={logout} className="w-[25px] mr-[8px]"></img> Logout
+                </div>
+                {/* <FiLogOut className="mr-[10px]" /> */}
               </span>
             </div>
           )}
         </>
       ) : (
-        <></>
+        <>
+          <div
+            className="h-[120px] w-[0] mt-[60px] fixed rounded-lg  text-[#ccd7dc] bg-[#1f201fae] border border-transparent  backdrop-blur-md z-10 flex flex-col justify-center drop-shadow-lg"
+            style={{ transition: ".5s" }}
+          >
+            <span
+              style={{ transition: ".15s", transitionDelay: "0s" }}
+              className="hover:bg-[#cdd8dd] hover:backdrop-blur-md w-0 hover:text-black drop-shadow-md rounded-md  cursor-pointer opacity-0  flex justify-start items-center"
+              onClick={() => {
+                setIsProfileMenu(true);
+              }}
+            >
+              {/* <CgProfile className="mr-[10px]" /> */}
+              <img src={profile} className="w-[25px] mr-[8px]"></img> Profile
+            </span>
+            <span
+              style={{ transition: ".15s", transitionDelay: "0s" }}
+              className="hover:bg-[#cdd8dd] hover:text-black rounded-md  w-0 cursor-pointer opacity-0  flex justify-start items-center"
+              onClick={() => {
+                setIsSettingsMenu(true);
+              }}
+            >
+              {/* <IoSettingsSharp className="mr-[10px]" /> */}
+              <img src={settings} className="w-[25px] mr-[8px]"></img> Settings
+            </span>
+            <span
+              style={{ transition: ".15s", transitionDelay: "0s" }}
+              className="hover:bg-[#cdd8dd] hover:text-black rounded-md w-0  cursor-pointer opacity-0  flex justify-start items-center"
+              onClick={() => {
+                userSignOut();
+              }}
+            >
+              {/* <FiLogOut className="mr-[10px]" /> */}
+              <img src={logout} className="w-[25px] mr-[8px]"></img> Logout
+            </span>
+          </div>
+        </>
       )}
     </>
   );

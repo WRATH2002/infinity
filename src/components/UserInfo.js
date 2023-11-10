@@ -12,6 +12,10 @@ import { BiSolidVideo } from "react-icons/bi";
 import { PiChatCenteredTextFill } from "react-icons/pi";
 import { addActiveUser } from "../utils/chatSlice";
 import { onSnapshot } from "firebase/firestore";
+import back from "../assets/img/back.png";
+import call from "../assets/img/call.png";
+import videocall from "../assets/img/videocall.png";
+import chat from "../assets/img/message.png";
 
 export const UserInfo = () => {
   const [chatUserName, setChatUserName] = useState("");
@@ -108,7 +112,7 @@ export const UserInfo = () => {
                     </span>
                   </div>
                   <div
-                    className="w-[35px] lg:w-[0] md:w-[0] h-[35px] rounded-full bg-[#cdd8dd] text-black flex justify-center items-center"
+                    className="w-[35px] lg:w-[0] md:w-[0] h-[35px] rounded-full  text-black flex justify-center items-center"
                     onClick={() => {
                       dispatch(addActiveUser(""));
                     }}
@@ -123,21 +127,22 @@ export const UserInfo = () => {
       ) : (
         <>
           <div
-            className="w-full lg:w-[40%] md:w-[40%] h-[100vh] fixed bg-[#1f201f] text-white z-30 overflow-hidden flex flex-col justify-center items-center px-[50px] right-0 drop-shadow-xl"
+            className="w-full lg:w-[40%] md:w-[40%] h-[100vh] fixed bg-[#1f201fae]   backdrop-blur-md  text-white z-30 overflow-hidden flex flex-col justify-center items-center px-[50px] right-0 drop-shadow-xl"
             // style={{ transition: ".5s" }}
           >
             <div className="w-full h-[100px] flex justify-start items-center ">
               <div
-                className="w-[35px] h-[35px] rounded-full bg-[#cdd8dd] text-black flex justify-center items-center"
+                className="w-[35px] h-[35px] rounded-full  text-black flex justify-center items-center"
                 onClick={() => {
                   setUserSidebar(!userSidebar);
                 }}
               >
-                <FaAngleLeft className="text-[20px]" />
+                {/* <FaAngleLeft className="text-[20px]" /> */}
+                <img src={back} className="w-[25px] drop-shadow-lg"></img>
               </div>
             </div>
-            <div className="w-full h-full bg-[#1f201f] flex flex-col justify-center items-center">
-              <div className="w-[150px] lg:w-[200px] md:w-[200px] h-[150px] lg:h-[200px] md:h-[200px] rounded-full bg-[#cdd8dd] ">
+            <div className="w-full h-[calc(100%-100px)]  flex flex-col justify-center items-center">
+              <div className="w-[150px] lg:w-[200px] md:w-[200px] h-[150px] lg:h-[200px] md:h-[200px] rounded-full bg-[#cdd8dd]  drop-shadow-lg">
                 {/* <span>Photo</span> */}
                 {chatUserPhoto === "nophoto" ? (
                   <img
@@ -152,27 +157,33 @@ export const UserInfo = () => {
                 )}
               </div>
               <div className="flex flex-col justify-center items-center mt-[20px]">
-                <span className="text-[22px] font-normal text-[#cdd8dd]">
+                <span className="text-[22px] font-normal text-[#cdd8dd] drop-shadow-lg">
                   {chatUserName}
                 </span>
-                <span className="text-[17px] font-normal text-[#9fa5a7]">
+                <span className="text-[17px] font-normal text-[#9fa5a7] drop-shadow-lg">
                   +91 8100524419
                 </span>
               </div>
               <div className="mt-[20px] w-full flex justify-center items-start h-[26px] overflow-hidden text-ellipsis">
-                <span className="text-[16px]  font-normal text-[#cdd8dd]">
+                <span className="text-[16px]  font-normal text-[#cdd8dd] drop-shadow-lg">
                   ~ {chatUserAbout}
                 </span>
               </div>
               <div className="w-full flex justify-center items-center mt-[20px] ">
                 <span className="w-[50px] h-[50px] rounded-full hover:bg-[#cdd8dd] hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
-                  <MdCall className="text-[30px]" />
+                  {/* <MdCall className="text-[30px]" /> */}
+                  <img src={call} className="w-[35px] drop-shadow-lg"></img>
                 </span>
                 <span className="w-[50px] h-[50px] rounded-full hover:bg-[#cdd8dd] hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
-                  <BiSolidVideo className="text-[30px]" />
+                  {/* <BiSolidVideo className="text-[30px]" /> */}
+                  <img
+                    src={videocall}
+                    className="w-[35px] drop-shadow-lg"
+                  ></img>
                 </span>
                 <span className="w-[50px] h-[50px] rounded-full hover:bg-[#cdd8dd] hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
-                  <PiChatCenteredTextFill className="text-[30px]" />
+                  {/* <PiChatCenteredTextFill className="text-[30px]" /> */}
+                  <img src={chat} className="w-[35px] drop-shadow-lg"></img>
                 </span>
               </div>
             </div>
@@ -206,7 +217,7 @@ export const UserInfo = () => {
                 </span>
               </div>
               <div
-                className="w-[35px] lg:w-[0] md:w-[0] h-[35px] rounded-full bg-[#cdd8dd] text-black flex justify-center items-center"
+                className="w-[35px] lg:w-[0] md:w-[0] h-[35px] rounded-full  text-black flex justify-center items-center"
                 onClick={() => {
                   dispatch(addActiveUser(""));
                 }}

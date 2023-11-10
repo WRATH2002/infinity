@@ -23,6 +23,8 @@ import { BsFillCameraFill } from "react-icons/bs";
 import { BiSolidSearch } from "react-icons/bi";
 import { orderBy } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
+import searchh from "../assets/img/searchh.png";
+import cross from "../assets/img/cross.png";
 
 const Friends = (props) => {
   const [userName, setUserName] = useState("");
@@ -160,22 +162,22 @@ const Friends = (props) => {
               {photoURL === "nophoto" ? (
                 <img
                   src={profile2}
-                  className="w-full h-full rounded-full object-cover"
+                  className="w-full h-full rounded-full object-cover drop-shadow-lg"
                 ></img>
               ) : (
                 <img
                   src={photoURL}
-                  className="w-full h-full rounded-full object-cover"
+                  className="w-full h-full rounded-full object-cover drop-shadow-lg"
                 ></img>
               )}
             </div>
             <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black">
+                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black drop-shadow-lg">
                   {/* {props.data.user} */}
                   {userName}
                 </span>
-                <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-black">
+                <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-black drop-shadow-lg">
                   {/* {props.data.time} */}
                   {Time}
                 </span>
@@ -185,13 +187,13 @@ const Friends = (props) => {
 
                 {lastMsg === "Image" ? (
                   <>
-                    <BsFillCameraFill className="mr-[5px] text-[#474747]" />
-                    <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]">
+                    <BsFillCameraFill className="mr-[5px] text-[#474747] drop-shadow-lg" />
+                    <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg">
                       {lastMsg}
                     </span>
                   </>
                 ) : (
-                  <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]">
+                  <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg">
                     {lastMsg}
                   </span>
                 )}
@@ -222,22 +224,22 @@ const Friends = (props) => {
               {photoURL === "nophoto" ? (
                 <img
                   src={profile2}
-                  className="w-full h-full rounded-full object-cover"
+                  className="w-full h-full rounded-full object-cover drop-shadow-lg"
                 ></img>
               ) : (
                 <img
                   src={photoURL}
-                  className="w-full h-full rounded-full object-cover"
+                  className="w-full h-full rounded-full object-cover drop-shadow-lg"
                 ></img>
               )}
             </div>
             <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[#cdd8dd]  group-hover:text-black">
+                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[#cdd8dd]  group-hover:text-black drop-shadow-lg">
                   {/* {props.data.user} */}
                   {userName}
                 </span>
-                <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-[#cdd8dd] group-hover:text-black">
+                <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-[#cdd8dd] group-hover:text-black drop-shadow-lg">
                   {/* {props.data.time} */}
                   {Time}
                 </span>
@@ -245,13 +247,13 @@ const Friends = (props) => {
               <div className="w-full flex h-[23px] items-center">
                 {lastMsg === "Image" ? (
                   <>
-                    <BsFillCameraFill className="mr-[5px] text-[#9fa5a7] group-hover:text-[#474747]" />
-                    <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
+                    <BsFillCameraFill className="mr-[5px] text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg" />
+                    <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg">
                       {lastMsg}
                     </span>
                   </>
                 ) : (
-                  <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
+                  <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg">
                     {lastMsg}
                   </span>
                 )}
@@ -360,28 +362,28 @@ const SearchFriends = (props) => {
               {photoURL === "nophoto" ? (
                 <img
                   src={profile2}
-                  className="w-full h-full rounded-full object-cover"
+                  className="w-full h-full rounded-full object-cover drop-shadow-lg"
                 ></img>
               ) : (
                 <img
                   src={photoURL}
-                  className="w-full h-full rounded-full object-cover"
+                  className="w-full h-full rounded-full object-cover drop-shadow-lg"
                 ></img>
               )}
             </div>
             <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black">
+                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black drop-shadow-lg">
                   {/* {props.data.user} */}
                   {userName}
                 </span>
-                <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-black">
+                <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-black drop-shadow-lg">
                   {/* {props.data.time} */}
                   {/* {Time} */}
                 </span>
               </div>
               <div className="w-full flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]">
+                <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg">
                   {/* {props.data.msg} */}
                   {info}
                 </span>
@@ -416,28 +418,28 @@ const SearchFriends = (props) => {
               {photoURL === "nophoto" ? (
                 <img
                   src={profile2}
-                  className="w-full h-full rounded-full object-cover"
+                  className="w-full h-full rounded-full object-cover drop-shadow-lg"
                 ></img>
               ) : (
                 <img
                   src={photoURL}
-                  className="w-full h-full rounded-full object-cover"
+                  className="w-full h-full rounded-full object-cover drop-shadow-lg"
                 ></img>
               )}
             </div>
             <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-white  group-hover:text-black">
+                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-white  group-hover:text-black drop-shadow-lg">
                   {/* {props.data.user} */}
                   {userName}
                 </span>
-                <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-white group-hover:text-black">
+                <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-white group-hover:text-black drop-shadow-lg">
                   {/* {props.data.time} */}
                   {/* {Time} */}
                 </span>
               </div>
               <div className="w-full flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#d4d4d4] group-hover:text-[#474747]">
+                <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#d4d4d4] group-hover:text-[#474747] drop-shadow-lg">
                   {/* {props.data.msg} */}
                   {info}
                 </span>
@@ -590,7 +592,7 @@ const UserList = () => {
             }}
             onChange={(e) => setSearchUser(e.target.value)}
             placeholder="Search Friends"
-            className="w-[calc(100%-50px)] lg:w-[calc(100%-50px)] md:w-[calc(100%-50px)] min-h-[40px] bg-[#cdd8dd] outline-none rounded-lg pl-[10px] pr-[50px] text-[14px] "
+            className="w-[calc(100%-50px)] lg:w-[calc(100%-50px)] md:w-[calc(100%-50px)] min-h-[40px]  text-[black] bg-[#cdd8dd] border border-[#ccd7dc1f]  backdrop-blur-md z-0 outline-none rounded-lg pl-[10px] pr-[50px] text-[14px] drop-shadow-md "
           ></input>
 
           {/* <span
@@ -606,36 +608,44 @@ const UserList = () => {
           {searchUser.length === 0 ? (
             <>
               <div
-                className="ml-[10px] w-[40px] h-[40px] bg-[#cdd8dd] text-[black] rounded-full flex justify-center items-center cursor-pointer hover:bg-white"
+                className="ml-[10px] w-[40px] h-[40px]  text-[black] rounded-full flex justify-center items-center cursor-pointer "
                 onClick={() => {
                   searchUserFriend();
                   setSearchFlag(true);
                 }}
               >
-                <LuSearch className="text-[15px]" />
+                {/* <LuSearch className="text-[15px]" /> */}
+                <img src={searchh} className="w-[25px] drop-shadow-md"></img>
                 {/* <BiSolidSearch className="text-[15px]" /> */}
               </div>
             </>
           ) : (
             <>
               <span
-                className="w-[30px] h-[30px] rounded-full hover:bg-[white] mr-[10px] ml-[-40px] flex justify-center items-center cursor-pointer"
+                className="w-[30px] h-[30px] rounded-full  mr-[10px] ml-[-40px] flex justify-center items-center cursor-pointer z-[2]"
                 onClick={() => setSearchFlag(false)}
               >
-                <RxCross2
+                {/* <RxCross2
                   onClick={() => {
                     setSearchUser("");
                   }}
-                />
+                /> */}
+                <img
+                  src={cross}
+                  className="w-[25px] drop-shadow-md"
+                  onClick={() => {
+                    setSearchUser("");
+                  }}
+                ></img>
               </span>
               <div
-                className="ml-[10px] w-[40px] h-[40px] bg-[#cdd8dd] text-[black] rounded-full flex justify-center items-center cursor-pointer hover:bg-white"
+                className="ml-[10px] w-[40px] h-[40px]  text-[black] rounded-full flex justify-center items-center cursor-pointer "
                 onClick={() => {
                   searchUserFriend();
                   setSearchFlag(true);
                 }}
               >
-                <LuSearch className="text-[15px]" />
+                <img src={searchh} className="w-[25px] drop-shadow-md"></img>
                 {/* <BiSolidSearch className="text-[15px]" /> */}
               </div>
             </>
