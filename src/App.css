@@ -22,13 +22,13 @@
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #cdd8dd;
+  background: #b5dcdc;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #cdd8dd;
+  background: #b5dcdc;
 }
 
 .neo {
@@ -109,3 +109,23 @@ em-emoji-picker {
 /* input[type="file"] {
   opacity: 0;
 } */
+
+.gradients {
+  background-image: linear-gradient(to right, #b8dedf, #8db9aa);
+}
+
+.gradient {
+  background-image: linear-gradient(to left, #b8dedf, #8db9aa);
+}
+
+.gradientss:hover {
+  background-image: linear-gradient(to left, #b8dedf, #8db9aa);
+}
+
+.gradintss:hover {
+  background-image: linear-gradient(to right, #b8dedf, #8db9aa);
+}
+
+.gradientsss {
+  background-image: linear-gradient(to right, #b8dedf 55%, #8db9aa);
+}

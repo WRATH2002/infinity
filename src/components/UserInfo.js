@@ -170,18 +170,18 @@ export const UserInfo = () => {
                 </span>
               </div>
               <div className="w-full flex justify-center items-center mt-[20px] ">
-                <span className="w-[50px] h-[50px] rounded-full hover:bg-[#cdd8dd] hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
+                <span className="w-[50px] h-[50px] rounded-full gradintss hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
                   {/* <MdCall className="text-[30px]" /> */}
                   <img src={call} className="w-[35px] drop-shadow-lg"></img>
                 </span>
-                <span className="w-[50px] h-[50px] rounded-full hover:bg-[#cdd8dd] hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
+                <span className="w-[50px] h-[50px] rounded-full gradintss hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
                   {/* <BiSolidVideo className="text-[30px]" /> */}
                   <img
                     src={videocall}
                     className="w-[35px] drop-shadow-lg"
                   ></img>
                 </span>
-                <span className="w-[50px] h-[50px] rounded-full hover:bg-[#cdd8dd] hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
+                <span className="w-[50px] h-[50px] rounded-full gradintss hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
                   {/* <PiChatCenteredTextFill className="text-[30px]" /> */}
                   <img src={chat} className="w-[35px] drop-shadow-lg"></img>
                 </span>

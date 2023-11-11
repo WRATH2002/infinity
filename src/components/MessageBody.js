@@ -86,7 +86,7 @@ const Messagess = (props) => {
           <div className="w-full  my-[4px] flex text-[14px] justify-start drop-shadow-sm">
             {props.data.Message.length != 0 ? (
               <>
-                <div className="w-auto bg-[#1f201f] text-[#cdd8dd] max-w-[80%] lg:max-w-[60%] md:max-w-[60%] font-normal py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
+                <div className="w-auto bg-[#252525] text-[white] max-w-[80%] lg:max-w-[60%] md:max-w-[60%] font-normal py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
                   <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-sans">
                     {props?.data?.Message}
                   </pre>
@@ -100,6 +100,10 @@ const Messagess = (props) => {
                 {/* <a href={props.data.Image} download> */}
                 <img
                   loading="lazy"
+                  onLoad={() => {
+                    setIsImageLoaded(true);
+                    console.log("Loaded Image");
+                  }}
                   src={props.data.Image}
                   className="rounded-lg w-full h-full object-cover group-hover:opacity-60"
 
@@ -126,9 +130,14 @@ const Messagess = (props) => {
                     className="w-[25px]   z-20 drop-shadow-md"
                   ></img>
                 </div>
-                <div className="w-auto bottom-0 drop-shadow-md h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px]">
-                  {props?.data?.Time}
-                </div>
+
+                {isImageLoaded === true ? (
+                  <div className="w-auto bottom-0 drop-shadow-md h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px]">
+                    {props?.data?.Time}
+                  </div>
+                ) : (
+                  <></>
+                )}
                 {/* {props?.data?.Time} */}
                 {/* <div className="w-[60px] z-20 bg-slate-400 right-0 bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px]">
                   {props?.data?.Time}
@@ -146,7 +155,7 @@ const Messagess = (props) => {
         <>
           <div className="w-full  my-[4px] flex text-[14px] justify-end drop-shadow-sm">
             {props.data.Message.length != 0 ? (
-              <div className="w-auto bg-[#cdd8dd] max-w-[80%] lg:max-w-[60%] md:max-w-[60%] font-normal py-[8px] px-[14px] rounded-lg flex text-black flex-wrap justify-between">
+              <div className="w-auto gradients max-w-[80%] lg:max-w-[60%] md:max-w-[60%] font-normal py-[8px] px-[14px] rounded-lg flex text-black flex-wrap justify-between">
                 <pre className="max-w-[calc(100%)] whitespace-pre-wrap font-sans">
                   {props?.data?.Message}
                 </pre>
@@ -212,9 +221,13 @@ const Messagess = (props) => {
                     className="w-[25px]  z-20 drop-shadow-md"
                   ></img>
                 </div>
-                <div className="w-[60px]  right-0 bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px] drop-shadow-md">
-                  {props?.data?.Time}
-                </div>
+                {isImageLoaded === true ? (
+                  <div className="w-[60px]  right-0 bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px] drop-shadow-md">
+                    {props?.data?.Time}
+                  </div>
+                ) : (
+                  <></>
+                )}
                 {/* </a> */}
                 {/* )}  */}
 
@@ -681,7 +694,7 @@ export const MessageBody = () => {
                   for="document-file-input"
                   style={{ transition: "2s", transitionDelay: ".2s" }}
                 >
-                  <div className="w-full h-full px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl">
+                  <div className="w-full h-full px-[10px] flex items-center hover:bg-[#b8dedf]  hover:text-[black] rounded-lg hover:drop-shadow-xl">
                     <input
                       id="document-file-input"
                       type="file"
@@ -702,7 +715,7 @@ export const MessageBody = () => {
                   style={{ transition: "2s", transitionDelay: ".5s" }}
                   for="image-file-input"
                 >
-                  <div className="w-full h-full px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl">
+                  <div className="w-full h-full px-[10px] flex items-center hover:bg-[#b8dedf]  hover:text-[black] rounded-lg hover:drop-shadow-xl">
                     <input
                       id="image-file-input"
                       type="file"
@@ -723,7 +736,7 @@ export const MessageBody = () => {
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
                   <div
-                    className="w-full h-full px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl"
+                    className="w-full h-full px-[10px] flex items-center hover:bg-[#b8dedf]  hover:text-[black] rounded-lg hover:drop-shadow-xl"
                     onClick={() => {
                       toast("Contact Sharing not Supported", {
                         icon: "⚠️",
@@ -747,7 +760,7 @@ export const MessageBody = () => {
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
                   <div
-                    className="w-full h-full px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl"
+                    className="w-full h-full px-[10px] flex items-center hover:bg-[#b8dedf]  hover:text-[black] rounded-lg hover:drop-shadow-xl"
                     onClick={() => {
                       toast("Sticker Sharing not Supported", {
                         icon: "⚠️",
@@ -1095,7 +1108,7 @@ export const MessageBody = () => {
               onChange={(e) => setMessages(e.target.value)}
               value={Messages}
               placeholder="Write Something .."
-              className="bg-[#cdd8dd] w-[calc(100%-60px)] pl-[85px] px-[50px] h-[50px] outline-none font-normal rounded-lg drop-shadow-sm resize-none "
+              className="gradientsss w-[calc(100%-60px)] pl-[85px] px-[50px] h-[50px] outline-none font-normal rounded-lg drop-shadow-sm resize-none "
             ></input>
 
             {/* <EmojiPicker /> */}
@@ -1121,7 +1134,7 @@ export const MessageBody = () => {
                 <img src={sendd} className="w-[25px] z-20 drop-shadow-md"></img>
               )}
             </button>
-            <div className="w-[50px] h-[50px] flex justify-center items-center cursor-pointer rounded-lg bg-[#cdd8dd]  z-10  ml-[10px] text-[black]  ">
+            <div className="w-[50px] h-[50px] flex justify-center items-center cursor-pointer rounded-lg bg-[#8db9aa]  z-10  ml-[10px] text-[black]  ">
               <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full hover:bg-white">
                 {/* <BiSolidMicrophone className="text-[21px]  " /> */}
                 <img src={mic} className="w-[25px] drop-shadow-md"></img>

@@ -324,7 +324,7 @@ const OwnerDetails = () => {
               >
                 {/* <CgProfile className="mr-[10px]" /> */}
                 <div
-                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#cdd8dd] rounded-md drop-shadow-md text-[#ccd7dc] hover:backdrop-blur-md hover:text-black flex justify-start items-center "
+                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#b8dedf] rounded-md drop-shadow-md text-[#ccd7dc] hover:backdrop-blur-md hover:text-black flex justify-start items-center "
                   // style={{ transition: ".2s" }}
                 >
                   <img src={profile} className="w-[25px] mr-[8px]"></img>{" "}
@@ -339,7 +339,7 @@ const OwnerDetails = () => {
                 }}
               >
                 <div
-                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#cdd8dd] rounded-md drop-shadow-md text-[#ccd7dc] hover:backdrop-blur-md hover:text-black flex justify-start items-center "
+                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#b8dedf] rounded-md drop-shadow-md text-[#ccd7dc] hover:backdrop-blur-md hover:text-black flex justify-start items-center "
                   // style={{ transition: ".2s" }}
                 >
                   <img src={settings} className="w-[25px] mr-[8px]"></img>{" "}
@@ -355,7 +355,7 @@ const OwnerDetails = () => {
                 }}
               >
                 <div
-                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#cdd8dd] rounded-md drop-shadow-md text-[#ccd7dc] hover:backdrop-blur-md hover:text-black flex justify-start items-center "
+                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#b8dedf] rounded-md drop-shadow-md text-[#ccd7dc] hover:backdrop-blur-md hover:text-black flex justify-start items-center "
                   // style={{ transition: ".2s" }}
                 >
                   <img src={logout} className="w-[25px] mr-[8px]"></img> Logout

@@ -152,7 +152,7 @@ const Friends = (props) => {
       {ActiveChatUser === UserUid && UserUid != "" ? (
         <>
           <div
-            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer bg-[#cdd8dd] px-[10px] rounded-lg"
+            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer gradient px-[10px] rounded-lg"
             onClick={() => {
               activerChatUser();
               // dispatch(toggleSendFlag(true));
@@ -217,7 +217,7 @@ const Friends = (props) => {
       ) : (
         <>
           <div
-            className=" group w-full h-[70px] py-[10px] flex justify-center bg-transparent cursor-pointer hover:bg-[#beccd0] px-[10px] rounded-lg"
+            className=" group w-full h-[70px] py-[10px] flex justify-center bg-transparent cursor-pointer gradientss px-[10px] rounded-lg"
             onClick={() => activerChatUser()}
           >
             <div className="w-[50px] h-[50px]  rounded-full">
@@ -592,7 +592,7 @@ const UserList = () => {
             }}
             onChange={(e) => setSearchUser(e.target.value)}
             placeholder="Search Friends"
-            className="w-[calc(100%-50px)] lg:w-[calc(100%-50px)] md:w-[calc(100%-50px)] min-h-[40px]  text-[black] bg-[#cdd8dd] border border-[#ccd7dc1f]  backdrop-blur-md z-0 outline-none rounded-lg pl-[10px] pr-[50px] text-[14px] drop-shadow-md "
+            className="w-[calc(100%-50px)] lg:w-[calc(100%-50px)] md:w-[calc(100%-50px)] min-h-[40px]  text-[black] gradient border border-[#ccd7dc1f]  backdrop-blur-md z-0 outline-none rounded-lg pl-[10px] pr-[50px] text-[14px] drop-shadow-md "
           ></input>
 
           {/* <span
