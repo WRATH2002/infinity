@@ -20,7 +20,7 @@ import { BiSolidSend } from "react-icons/bi";
 import { BiSolidMicrophone } from "react-icons/bi";
 import { TiAttachment } from "react-icons/ti";
 import { BsFillEmojiLaughingFill } from "react-icons/bs";
-import { HiDocumentText } from "react-icons/hi";
+import { HiDocumentText, HiSaveAs } from "react-icons/hi";
 import { IoMdPhotos } from "react-icons/io";
 import { MdContactPage } from "react-icons/md";
 import { PiStickerFill } from "react-icons/pi";
@@ -53,7 +53,12 @@ import camera from "../assets/img/camera.png";
 import contacts from "../assets/img/contacts.png";
 import cross from "../assets/img/cross.png";
 import back from "../assets/img/back.png";
+import download from "../assets/img/download.png";
+import download1 from "../assets/img/download1.png";
+import download2 from "../assets/img/download2.png";
+import loading from "../assets/img/loading.png";
 import { Blurhash } from "react-blurhash";
+import { saveAs } from "file-saver";
 
 const Messagess = (props) => {
   const [url, setUrl] = useState("");
@@ -67,6 +72,13 @@ const Messagess = (props) => {
   //   const blurhash = await Blurhash.encode(props?.data?.Image, 4, 3);
   //   setUrl(blurhash);
   // }
+
+  const downloadImage = (data) => {
+    // console.log("url");
+    console.log(data);
+    let urll = data;
+    saveAs(urll, "helo.jpg");
+  };
   return (
     <>
       {props?.data?.Flag === 2 ? (
@@ -84,12 +96,44 @@ const Messagess = (props) => {
                 </div>
               </>
             ) : (
-              <div className="w-auto bg-[#1f201f] max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex text-black flex-wrap justify-between">
+              <div className="group w-auto bg-[#1f201f] max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[0px] rounded-lg flex text-black flex-wrap justify-end items-center">
+                {/* <a href={props.data.Image} download> */}
                 <img
                   loading="lazy"
                   src={props.data.Image}
-                  className="rounded-lg w-full h-full object-cover"
+                  className="rounded-lg w-full h-full object-cover group-hover:opacity-60"
+
+                  // onClick={() => {}}
                 ></img>
+                <div
+                  className="group-hover:flex  hidden w-[35px] h-[35px] rounded-full justify-center items-center bg-[#e3e3e35f] backdrop-blur-sm fixed z-20 cursor-pointer "
+                  onClick={() => {
+                    setUrl(props.data.Image);
+                    downloadImage(props.data.Image);
+                    toast("Downloading Image", {
+                      icon: "⬇️",
+                      className: "font-[nunitosans] font-normal",
+                      style: {
+                        borderRadius: "9px",
+                        background: "#333",
+                        color: "#cdd8dd",
+                      },
+                    });
+                  }}
+                >
+                  <img
+                    src={download}
+                    className="w-[25px]   z-20 drop-shadow-md"
+                  ></img>
+                </div>
+                <div className="w-auto bottom-0 drop-shadow-md h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px]">
+                  {props?.data?.Time}
+                </div>
+                {/* {props?.data?.Time} */}
+                {/* <div className="w-[60px] z-20 bg-slate-400 right-0 bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px]">
+                  {props?.data?.Time}
+                </div> */}
+                {/* </a> */}
                 {/* <div className="ml-auto w-auto  bg-slate-800 h-[calc(100%-2px)] flex justify-end items-end whitespace-nowrap text-[10px] rounded-lg text-[#9fa5a7] fixed ">
 
                   10.03 AM
@@ -111,7 +155,7 @@ const Messagess = (props) => {
                 </div>
               </div>
             ) : (
-              <div className="w-auto bg-[#cdd8dd] max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex text-black flex-wrap justify-between">
+              <div className="group w-auto  max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[0px] rounded-lg flex items-center text-black flex-wrap justify-center hover:bg-[#1f201f]">
                 {/* <img
                   loading="lazy"
                   src={props.data.Image}
@@ -125,8 +169,8 @@ const Messagess = (props) => {
                     width: "100%",
                     height: "100%",
                   }}
-                > */}
-                {/* <Blurhash
+                >
+                  <Blurhash
                     hash={url}
                     width="100%"
                     height="100%"
@@ -137,13 +181,42 @@ const Messagess = (props) => {
                 </div> */}
 
                 {/* ) : ( */}
+                {/* <a href={props.data.Image} download="image react"> */}
                 <img
                   loading="lazy"
-                  onload={() => setIsImageLoaded(true)}
+                  onLoad={() => {
+                    setIsImageLoaded(true);
+                    console.log("Loaded Image");
+                  }}
                   src={props.data.Image}
-                  className="rounded-lg w-full h-full object-cover "
+                  className="rounded-lg w-full h-full object-cover  group-hover:opacity-60"
                 ></img>
-                {/* )} */}
+                <div
+                  className="group-hover:flex hidden w-[35px] h-[35px] rounded-full justify-center items-center bg-[#e3e3e35f] backdrop-blur-sm fixed z-20 cursor-pointer"
+                  onClick={() => {
+                    setUrl(props.data.Image);
+                    downloadImage(props.data.Image);
+                    toast("Downloading Image", {
+                      icon: "⬇️",
+                      className: "font-[nunitosans] font-normal",
+                      style: {
+                        borderRadius: "9px",
+                        background: "#333",
+                        color: "#cdd8dd",
+                      },
+                    });
+                  }}
+                >
+                  <img
+                    src={download}
+                    className="w-[25px]  z-20 drop-shadow-md"
+                  ></img>
+                </div>
+                <div className="w-[60px]  right-0 bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px] drop-shadow-md">
+                  {props?.data?.Time}
+                </div>
+                {/* </a> */}
+                {/* )}  */}
 
                 {/* <div className="ml-auto w-auto  bg-slate-800 h-[calc(100%-2px)] flex justify-end items-end whitespace-nowrap text-[10px] rounded-lg text-[#9fa5a7] fixed ">
     
@@ -512,7 +585,7 @@ export const MessageBody = () => {
       getDownloadURL(snapshot.ref).then((url) => {
         console.log("urlbefore");
         console.log(url);
-        g(url);
+        // g(url);
         // setImageUrl(url);
         // console.log(imageUrl);
         // console.log("urlafter");
@@ -603,7 +676,7 @@ export const MessageBody = () => {
             >
               <div className="w-full flex flex-col items-center">
                 <label
-                  className="w-full flex items-center h-[40px] opacity-100 rounded-lg hover:backdrop-blur-md   cursor-pointer"
+                  className="w-full flex items-center h-[40px] opacity-100 rounded-lg cursor-pointer"
                   // style={{ transition: ".2s" }}
                   for="document-file-input"
                   style={{ transition: "2s", transitionDelay: ".2s" }}
@@ -615,7 +688,7 @@ export const MessageBody = () => {
                       accept="document/*"
                       onChange={(e) => {
                         Document(e);
-                        console.log(e.target.files);
+                        console.log(e.target.files[0].name);
                       }}
                       className="hidden"
                     ></input>
@@ -649,7 +722,20 @@ export const MessageBody = () => {
                 >
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
-                  <div className="w-full h-full px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl">
+                  <div
+                    className="w-full h-full px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl"
+                    onClick={() => {
+                      toast("Contact Sharing not Supported", {
+                        icon: "⚠️",
+                        className: "font-[nunitosans] font-normal",
+                        style: {
+                          borderRadius: "9px",
+                          background: "#333",
+                          color: "#cdd8dd",
+                        },
+                      });
+                    }}
+                  >
                     <img src={contacts} className="w-[25px] mr-[8px]"></img>{" "}
                     Contact
                   </div>
@@ -660,7 +746,20 @@ export const MessageBody = () => {
                 >
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
-                  <div className="w-full h-full px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl">
+                  <div
+                    className="w-full h-full px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl"
+                    onClick={() => {
+                      toast("Sticker Sharing not Supported", {
+                        icon: "⚠️",
+                        className: "font-[nunitosans] font-normal",
+                        style: {
+                          borderRadius: "9px",
+                          background: "#333",
+                          color: "#cdd8dd",
+                        },
+                      });
+                    }}
+                  >
                     <img src={sticker} className="w-[25px] mr-[8px]"></img>{" "}
                     Sticker
                   </div>
@@ -689,6 +788,8 @@ export const MessageBody = () => {
                           setDocument(false);
                           setSend(true);
                           uploadImage();
+                          // uploadDoc();
+                          // setDoc();
                           setImage();
                           console.log("upload");
                           setImageLength();
@@ -877,7 +978,7 @@ export const MessageBody = () => {
                 >
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
-                  <div className="w-full border border-[#ccd7dc1f] px-[10px] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl"></div>
+                  <div className="w-full border border-[#ccd7dc1f] flex items-center hover:bg-[#ccd7dc]  hover:text-[black] rounded-lg hover:drop-shadow-xl"></div>
                 </div>
               </div>
 
