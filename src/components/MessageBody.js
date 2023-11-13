@@ -86,11 +86,11 @@ const Messagess = (props) => {
           <div className="w-full  my-[4px] flex text-[14px] justify-start drop-shadow-sm">
             {props.data.Message.length != 0 ? (
               <>
-                <div className="w-auto bg-[#252525] text-[white] max-w-[80%] lg:max-w-[60%] md:max-w-[60%] font-normal py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
-                  <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-sans">
+                <div className="w-auto bg-[#252525] text-[white] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
+                  <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[work] font-normal">
                     {props?.data?.Message}
                   </pre>
-                  <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap text-[10px]  mb-[-5px] text-[#9fa5a7] ">
+                  <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap font-[work]  text-[10px]  mb-[-5px] text-[#9fa5a7] ">
                     {props?.data?.Time}
                   </div>{" "}
                 </div>
@@ -155,11 +155,11 @@ const Messagess = (props) => {
         <>
           <div className="w-full  my-[4px] flex text-[14px] justify-end drop-shadow-sm">
             {props.data.Message.length != 0 ? (
-              <div className="w-auto gradients max-w-[80%] lg:max-w-[60%] md:max-w-[60%] font-normal py-[8px] px-[14px] rounded-lg flex text-black flex-wrap justify-between">
-                <pre className="max-w-[calc(100%)] whitespace-pre-wrap font-sans">
+              <div className="w-auto gradients max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex text-black flex-wrap justify-between">
+                <pre className="max-w-[calc(100%)] whitespace-pre-wrap font-[work]">
                   {props?.data?.Message}
                 </pre>
-                <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap text-[10px]  mb-[-5px] text-[#474747]">
+                <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap font-[work]  text-[10px]  mb-[-5px] text-[#474747]">
                   {props?.data?.Time}
                 </div>
               </div>
@@ -684,7 +684,7 @@ export const MessageBody = () => {
             style={{ transition: ".5s" }}
           >
             <div
-              className="w-[170px] h-[258px] text-[#ccd7dc] bg-[#1f201fae] border border-[#ccd7dc1f]  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
+              className="w-[170px] h-[258px] text-[white] bg-[#313131ae] border border-transparent  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
               style={{ transition: ".5s" }}
             >
               <div className="w-full flex flex-col items-center">
@@ -694,7 +694,7 @@ export const MessageBody = () => {
                   for="document-file-input"
                   style={{ transition: "2s", transitionDelay: ".2s" }}
                 >
-                  <div className="w-full h-full px-[10px] flex items-center hover:bg-[#b8dedf]  hover:text-[black] rounded-lg hover:drop-shadow-xl">
+                  <div className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl">
                     <input
                       id="document-file-input"
                       type="file"
@@ -715,7 +715,7 @@ export const MessageBody = () => {
                   style={{ transition: "2s", transitionDelay: ".5s" }}
                   for="image-file-input"
                 >
-                  <div className="w-full h-full px-[10px] flex items-center hover:bg-[#b8dedf]  hover:text-[black] rounded-lg hover:drop-shadow-xl">
+                  <div className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl">
                     <input
                       id="image-file-input"
                       type="file"
@@ -736,7 +736,7 @@ export const MessageBody = () => {
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
                   <div
-                    className="w-full h-full px-[10px] flex items-center hover:bg-[#b8dedf]  hover:text-[black] rounded-lg hover:drop-shadow-xl"
+                    className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl"
                     onClick={() => {
                       toast("Contact Sharing not Supported", {
                         icon: "⚠️",
@@ -760,7 +760,7 @@ export const MessageBody = () => {
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
                   <div
-                    className="w-full h-full px-[10px] flex items-center hover:bg-[#b8dedf]  hover:text-[black] rounded-lg hover:drop-shadow-xl"
+                    className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl"
                     onClick={() => {
                       toast("Sticker Sharing not Supported", {
                         icon: "⚠️",
@@ -918,7 +918,7 @@ export const MessageBody = () => {
             style={{ transition: ".5s" }}
           >
             <div
-              className="w-[0] h-[258px] text-[#ccd7dc] bg-[#1f201fae] backdrop-blur-md py-[20px]  border-none rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
+              className="w-[0] h-[258px] text-[#ccd7dc] bg-[#1f201fae] backdrop-blur-md py-[20px]   border-transparent  rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
               style={{ transition: ".5s" }}
             >
               <div className="w-full flex flex-col items-center">
@@ -1108,7 +1108,7 @@ export const MessageBody = () => {
               onChange={(e) => setMessages(e.target.value)}
               value={Messages}
               placeholder="Write Something .."
-              className="gradientsss w-[calc(100%-60px)] pl-[85px] px-[50px] h-[50px] outline-none font-normal rounded-lg drop-shadow-sm resize-none "
+              className="bg-[#b8dedf] w-[calc(100%-60px)] pl-[85px] px-[50px] h-[50px] outline-none font-normal rounded-lg drop-shadow-sm resize-none "
             ></input>
 
             {/* <EmojiPicker /> */}
@@ -1134,7 +1134,7 @@ export const MessageBody = () => {
                 <img src={sendd} className="w-[25px] z-20 drop-shadow-md"></img>
               )}
             </button>
-            <div className="w-[50px] h-[50px] flex justify-center items-center cursor-pointer rounded-lg bg-[#8db9aa]  z-10  ml-[10px] text-[black]  ">
+            <div className="w-[50px] h-[50px] flex justify-center items-center cursor-pointer rounded-lg bg-[#b8dedf]  z-10  ml-[10px] text-[black]  ">
               <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full hover:bg-white">
                 {/* <BiSolidMicrophone className="text-[21px]  " /> */}
                 <img src={mic} className="w-[25px] drop-shadow-md"></img>

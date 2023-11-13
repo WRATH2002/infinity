@@ -152,7 +152,7 @@ const Friends = (props) => {
       {ActiveChatUser === UserUid && UserUid != "" ? (
         <>
           <div
-            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer gradient px-[10px] rounded-lg"
+            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer  bg-[#b8dedf]  px-[10px]"
             onClick={() => {
               activerChatUser();
               // dispatch(toggleSendFlag(true));
@@ -173,11 +173,11 @@ const Friends = (props) => {
             </div>
             <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black drop-shadow-lg">
+                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black drop-shadow-lg font-[work] ">
                   {/* {props.data.user} */}
                   {userName}
                 </span>
-                <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-black drop-shadow-lg">
+                <span className="w-[70px] h-full text-[13px]  flex justify-end items-center text-black drop-shadow-lg  font-[work] font-normal">
                   {/* {props.data.time} */}
                   {Time}
                 </span>
@@ -188,12 +188,12 @@ const Friends = (props) => {
                 {lastMsg === "Image" ? (
                   <>
                     <BsFillCameraFill className="mr-[5px] text-[#474747] drop-shadow-lg" />
-                    <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg">
+                    <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
                       {lastMsg}
                     </span>
                   </>
                 ) : (
-                  <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg">
+                  <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
                     {lastMsg}
                   </span>
                 )}
@@ -217,7 +217,7 @@ const Friends = (props) => {
       ) : (
         <>
           <div
-            className=" group w-full h-[70px] py-[10px] flex justify-center bg-transparent cursor-pointer gradientss px-[10px] rounded-lg"
+            className=" group w-full h-[70px] py-[10px] flex justify-center bg-transparent  cursor-pointer  px-[10px]  btn from-left "
             onClick={() => activerChatUser()}
           >
             <div className="w-[50px] h-[50px]  rounded-full">
@@ -235,11 +235,17 @@ const Friends = (props) => {
             </div>
             <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[#cdd8dd]  group-hover:text-black drop-shadow-lg">
+                <span
+                  className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]  group-hover:text-[black] drop-shadow-lg font-[work] "
+                  style={{ transition: ".9s" }}
+                >
                   {/* {props.data.user} */}
                   {userName}
                 </span>
-                <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-[#cdd8dd] group-hover:text-black drop-shadow-lg">
+                <span
+                  className="w-[70px] h-full text-[13px]   flex justify-end items-center text-[white] group-hover:text-[black] drop-shadow-lg font-[work] font-normal"
+                  style={{ transition: ".9s" }}
+                >
                   {/* {props.data.time} */}
                   {Time}
                 </span>
@@ -247,13 +253,22 @@ const Friends = (props) => {
               <div className="w-full flex h-[23px] items-center">
                 {lastMsg === "Image" ? (
                   <>
-                    <BsFillCameraFill className="mr-[5px] text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg" />
-                    <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg">
+                    <BsFillCameraFill
+                      className="mr-[5px] text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg"
+                      style={{ transition: ".5s" }}
+                    />
+                    <span
+                      className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg font-[work] font-normal"
+                      style={{ transition: ".5s" }}
+                    >
                       {lastMsg}
                     </span>
                   </>
                 ) : (
-                  <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg">
+                  <span
+                    className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg font-[work] font-normal"
+                    style={{ transition: ".5s" }}
+                  >
                     {lastMsg}
                   </span>
                 )}
@@ -592,7 +607,7 @@ const UserList = () => {
             }}
             onChange={(e) => setSearchUser(e.target.value)}
             placeholder="Search Friends"
-            className="w-[calc(100%-50px)] lg:w-[calc(100%-50px)] md:w-[calc(100%-50px)] min-h-[40px]  text-[black] gradient border border-[#ccd7dc1f]  backdrop-blur-md z-0 outline-none rounded-lg pl-[10px] pr-[50px] text-[14px] drop-shadow-md "
+            className="w-[calc(100%-50px)] lg:w-[calc(100%-50px)] md:w-[calc(100%-50px)] min-h-[40px]  text-[black] bg-[#b8dedf] font-[work] font-semibold border border-[#ccd7dc1f]   z-0 outline-none rounded-lg pl-[10px] pr-[50px] text-[14px] drop-shadow-md "
           ></input>
 
           {/* <span
@@ -651,6 +666,12 @@ const UserList = () => {
             </>
           )}
         </div>
+        {/* <div className="w-full  h-[40px] font-[work] font-semibold text-[white] flex justify-evenly items-center">
+          <span className="px-[10px]">Chats</span>
+          <span className="px-[10px]">Group</span>
+          <span className="px-[10px]">Status</span>
+          <span className="px-[10px]">Calls</span>
+        </div> */}
         {searchFlag === true ? (
           <div className="w-full lg:w-full md:w-full h-[(100%-40px)] overflow-y-scroll">
             {SearchUserList.length === 0 ? (
