@@ -24,7 +24,7 @@ const Loading = (props) => {
     <>
       {isLoading === true ? (
         <>
-          <div className="w-full bg-[#0b0c0b] flex flex-col justify-center items-center h-[100vh]">
+          <div className="w-full bg-[#0b0c0b] flex flex-col justify-center items-center h-[100dvh]">
             <div class="col-3">
               <div class="snippet" data-title="dot-gathering">
                 <div class="stage filter-contrast">
@@ -400,7 +400,7 @@ const AuthDetails = () => {
         </>
       ) : (
         <>
-          <div className="w-full h-[100vh] flex flex-col justify-center items-center bg-[#0b0c0b]">
+          <div className="w-full h-[100dvh] flex flex-col justify-center items-center bg-[#0b0c0b]">
             {mode === 1 ? <Login /> : <Signup />}
           </div>
         </>

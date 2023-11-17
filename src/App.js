@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <div className="w-full h-[100vh] flex">
+        <div className="w-full h-[100dvh] flex">
           {/* <Sidebar /> */}
           {/* <Chatbody /> */}
           <AuthDetails />

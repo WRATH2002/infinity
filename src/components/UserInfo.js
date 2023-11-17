@@ -1,7 +1,7 @@
 import React from "react";
 import dp from "../assets/img/dp2.jpg";
 import profile2 from "../assets/img/d.png";
-import { auth } from "../firebase";
+import { auth, storage } from "../firebase";
 import { db } from "../firebase";
 import firebase from "../firebase";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,12 +16,33 @@ import back from "../assets/img/back.png";
 import call from "../assets/img/call.png";
 import videocall from "../assets/img/videocall.png";
 import chat from "../assets/img/message.png";
+// import back from "../assets/img/back.png";
+import { getDownloadURL } from "firebase/storage";
+import { ref } from "firebase/storage";
+import { listAll } from "firebase/storage";
+
+const Media = (props) => {
+  return (
+    <>
+      {/* <div className="w-full h-full justify-start items-center  flex"> */}
+      <div className="min-w-[120px] h-[120px] bg-slate-200">
+        <img className="w-full object-cover"></img>
+      </div>
+      {/* <div className="min-w-[120px] h-[120px] bg-slate-300"><img className="w-full object-cover" src={}></img></div>
+        <div className="min-w-[120px] h-[120px] bg-slate-200"><img className="w-full object-cover" src={}></img></div>
+        <div className="min-w-[120px] h-[120px] bg-slate-300"><img className="w-full object-cover" src={}></img></div>
+        <div className="min-w-[120px] h-[120px] bg-slate-200"><img className="w-full object-cover" src={}></img></div> */}
+      {/* </div> */}
+    </>
+  );
+};
 
 export const UserInfo = () => {
   const [chatUserName, setChatUserName] = useState("");
   const [chatUserAbout, setChatUserAbout] = useState("");
   const [userSidebar, setUserSidebar] = useState(false);
   const [chatUserPhoto, setChatUserPhoto] = useState("");
+  const [media, setMedia] = useState();
 
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
 
@@ -30,6 +51,36 @@ export const UserInfo = () => {
   useEffect(() => {
     fetchChatUserInfo();
   }, [ActiveChatUser]);
+
+  useEffect(() => {
+    console.log("fetch media");
+    fetchMedia();
+  }, [ActiveChatUser]);
+
+  function fetchMedia() {
+    const user = firebase.auth().currentUser;
+    const listRef = ref(storage, `chats_images/${user.uid}/${ActiveChatUser}/`);
+
+    // Find all the prefixes and items.
+    listAll(listRef)
+      .then((res) => {
+        console.log("media");
+        console.log(res);
+        res.items.forEach((itemRef) => {
+          console.log("item");
+          console.log(itemRef);
+          itemRef.getDownloadURL().then((url) => {
+            console.log("media url");
+            console.log(url);
+          });
+          // console.log(itemRef.getDown)
+          // All the items under listRef.
+        });
+      })
+      .catch((error) => {
+        // Uh-oh, an error occurred!
+      });
+  }
 
   function fetchChatUserInfo() {
     if (ActiveChatUser.length !== 0) {
@@ -70,8 +121,9 @@ export const UserInfo = () => {
                 <div className="w-full h-full pb-[20px] flex justify-center items-center">
                   <div className="w-[50px] h-[50px] rounded-full"></div>
                   <div className="w-[calc(100%-105px)] lg:w-[calc(100%-65px)] md:w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start"></div>
-                  <div className="w-[35px] lg:w-[0] md:w-[0] h-[35px] rounded-full bg-[#cdd8dd] text-black flex justify-center items-center">
-                    <FaAngleLeft className="text-[20px]" />
+                  <div className="w-[35px] lg:w-[0] md:w-[0] h-[35px] rounded-full  text-black flex justify-center items-center">
+                    {/* <FaAngleLeft className="text-[20px]" /> */}
+                    <img src={back} className="w-[25px] drop-shadow-lg "></img>
                   </div>
                 </div>
               </div>
@@ -117,7 +169,8 @@ export const UserInfo = () => {
                       dispatch(addActiveUser(""));
                     }}
                   >
-                    <FaAngleLeft className="text-[20px]" />
+                    {/* <FaAngleLeft className="text-[20px]" /> */}
+                    <img src={back} className="w-[25px] drop-shadow-lg "></img>
                   </div>
                 </div>
               </div>
@@ -183,8 +236,11 @@ export const UserInfo = () => {
                 </span>
                 <span className="w-[50px] h-[50px] rounded-full gradintss hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
                   {/* <PiChatCenteredTextFill className="text-[30px]" /> */}
-                  <img src={chat} className="w-[35px] drop-shadow-lg"></img>
+                  <img src={chat} className="w-[35px] drop-shadow-lg "></img>
                 </span>
+              </div>
+              <div className="w-full h-[200px] bg-slate-400 overflow-x-scroll">
+                <Media />
               </div>
             </div>
           </div>
@@ -222,7 +278,7 @@ export const UserInfo = () => {
                   dispatch(addActiveUser(""));
                 }}
               >
-                <FaAngleLeft className="text-[20px]" />
+                <img src={back} className="w-[25px] drop-shadow-lg "></img>
               </div>
             </div>
           </div>

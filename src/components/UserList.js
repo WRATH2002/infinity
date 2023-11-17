@@ -14,6 +14,8 @@ import {
   toggleSendFlag,
   addSearchFriendList,
   clearSearchFriendList,
+  clearAllFriendList,
+  addAllFriendList,
 } from "../utils/chatSlice";
 import { onSnapshot, snapshotEqual, where } from "firebase/firestore";
 import { query } from "firebase/firestore";
@@ -34,6 +36,7 @@ const Friends = (props) => {
   const [Time, setTime] = useState("");
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [chatLength, setChatlength] = useState(0);
+  const [chatFlag, setChatFlag] = useState("");
 
   const dispatch = useDispatch();
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
@@ -42,44 +45,6 @@ const Friends = (props) => {
     setUserUid(props.data.UserId);
     fetchUserName();
   });
-
-  // useEffect(() => {
-  //   if (unreadMessages > 0) {
-  //     toast.custom((t) => (
-  //       <div
-  //         className={`${
-  //           t.visible ? "animate-enter" : "animate-leave"
-  //         } max-w-md w-full bg-[#333333] shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
-  //       >
-  //         <div className="flex-1 w-0 p-4">
-  //           <div className="flex items-start">
-  //             <div className="flex-shrink-0 pt-0.5">
-  //               <img
-  //                 className="h-10 w-10 rounded-full"
-  //                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=6GHAjsWpt9&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-  //                 alt=""
-  //               />
-  //             </div>
-  //             <div className="ml-3 flex-1">
-  //               <p className="text-sm font-medium text-[#cdd8dd]">{userName}</p>
-  //               <p className="mt-1 text-sm text-[#9fa5a7]">{lastMsg}</p>
-  //             </div>
-  //           </div>
-  //         </div>
-  //         <div className="flex border-l border-gray-200">
-  //           <button
-  //             onClick={() => toast.dismiss(t.id)}
-  //             className="group w-full bg-[#333333] border border-[black] rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-[#cdd8dd] hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-  //           >
-  //             <div className="w-[35px] h-[35px] rounded-full text-white group-hover:bg-[white] group-hover:text-[black] flex justify-center items-center">
-  //               <RxCross2 className=" text-[20px] " />
-  //             </div>
-  //           </button>
-  //         </div>
-  //       </div>
-  //     ));
-  //   }
-  // }, [unreadMessages]);
 
   function fetchUserName() {
     const user = firebase.auth().currentUser;
@@ -118,6 +83,10 @@ const Friends = (props) => {
       );
       setUnreadMessages(
         snapshot?.data()?.TotalMessage - snapshot?.data()?.LastMessage
+      );
+      setChatFlag(
+        snapshot?.data()?.ChatHistory[snapshot?.data()?.ChatHistory?.length - 1]
+          ?.Flag
       );
       if (
         snapshot?.data()?.ChatHistory[snapshot?.data()?.ChatHistory?.length - 1]
@@ -187,15 +156,36 @@ const Friends = (props) => {
 
                 {lastMsg === "Image" ? (
                   <>
+                    {chatFlag === 1 ? (
+                      <>
+                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020] drop-shadow-lg font-[work] font-normal">
+                          you:
+                        </span>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+
                     <BsFillCameraFill className="mr-[5px] text-[#474747] drop-shadow-lg" />
-                    <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
+                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
                       {lastMsg}
                     </span>
                   </>
                 ) : (
-                  <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
-                    {lastMsg}
-                  </span>
+                  <>
+                    {chatFlag === 1 ? (
+                      <>
+                        <span className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020] drop-shadow-lg font-[work] font-normal">
+                          you:
+                        </span>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <span className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
+                      {lastMsg}
+                    </span>
+                  </>
                 )}
                 {/* </span> */}
                 <span className="w-[70px] text-[15px] h-full font-normal  flex justify-end items-center">
@@ -253,24 +243,51 @@ const Friends = (props) => {
               <div className="w-full flex h-[23px] items-center">
                 {lastMsg === "Image" ? (
                   <>
+                    {chatFlag === 1 ? (
+                      <>
+                        <span
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] drop-shadow-lg font-[work] font-normal group-hover:text-[#202020]"
+                          style={{ transition: ".5s" }}
+                        >
+                          you:
+                        </span>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                     <BsFillCameraFill
                       className="mr-[5px] text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg"
                       style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg font-[work] font-normal"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg font-[work] font-normal"
                       style={{ transition: ".5s" }}
                     >
                       {lastMsg}
                     </span>
                   </>
                 ) : (
-                  <span
-                    className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg font-[work] font-normal"
-                    style={{ transition: ".5s" }}
-                  >
-                    {lastMsg}
-                  </span>
+                  <>
+                    {" "}
+                    {chatFlag === 1 ? (
+                      <>
+                        <span
+                          className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] drop-shadow-lg font-[work] font-normal group-hover:text-[#202020]"
+                          style={{ transition: ".5s" }}
+                        >
+                          you:
+                        </span>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <span
+                      className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg font-[work] font-normal"
+                      style={{ transition: ".5s" }}
+                    >
+                      {lastMsg}
+                    </span>
+                  </>
                 )}
                 {/* <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
                   {lastMsg}
@@ -365,7 +382,7 @@ const SearchFriends = (props) => {
       {ActiveChatUser === UserUid ? (
         <>
           <div
-            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer bg-[#cdd8dd] px-[10px] rounded-lg"
+            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer bg-[#b8dedf] px-[10px] "
             onClick={() => {
               activerChatUser();
               addToFriendList();
@@ -421,7 +438,7 @@ const SearchFriends = (props) => {
       ) : (
         <>
           <div
-            className=" group w-full h-[70px] py-[10px] flex justify-center cursor-pointer hover:bg-[#beccd0] px-[10px] rounded-lg"
+            className=" group w-full h-[70px] py-[10px] flex justify-center cursor-pointer hover:bg-[#b8dedf] px-[10px] "
             onClick={() => {
               activerChatUser();
               addToFriendList();
@@ -444,7 +461,10 @@ const SearchFriends = (props) => {
             </div>
             <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-white  group-hover:text-black drop-shadow-lg">
+                <span
+                  className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-white  group-hover:text-black drop-shadow-lg"
+                  // style={{ transition: ".9s" }}
+                >
                   {/* {props.data.user} */}
                   {userName}
                 </span>
@@ -454,7 +474,10 @@ const SearchFriends = (props) => {
                 </span>
               </div>
               <div className="w-full flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#d4d4d4] group-hover:text-[#474747] drop-shadow-lg">
+                <span
+                  className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#d4d4d4] group-hover:text-[#474747] drop-shadow-lg"
+                  // style={{ transition: ".9s" }}
+                >
                   {/* {props.data.msg} */}
                   {info}
                 </span>
@@ -511,35 +534,22 @@ const UserList = () => {
   // const [SearchUserList, setSearchUserList] = useState([]);
   const [searchUser, setSearchUser] = useState("");
   const [searchFlag, setSearchFlag] = useState(false);
+  const [section, setSection] = useState("Chat");
 
   const dispatch = useDispatch();
   const UserList = useSelector((store) => store.chat.FriendList);
+  const AllUserList = useSelector((store) => store.chat.AllFriendList);
   const SearchUserList = useSelector((store) => store.chat.SearchFriendList);
   // addFriendList;
   console.log("UserList");
   console.log(UserList);
 
   useEffect(() => {
-    // dispatch(clearFriendList());
     fetchUserList();
-    // console.log(SearchUserList);
-    // console.log("userList");
-    // console.log(userList);
-    // console.log("userList[0].id");
-    // console.log(userList[0]?.id);
   }, []);
-  // useEffect(() => {
-  //   console.log("UserList");
-  //   console.log(UserList);
-  //   setUserList(UserList);
-  //   console.log("userList");
-  //   console.log(userList);
-  // }, [UserList]);
 
   function fetchUserList() {
     const user = firebase.auth().currentUser;
-    console.log("user");
-    console.log(user);
     const userDoc = db
       .collection("Chat Record")
       .doc(user.uid)
@@ -558,14 +568,33 @@ const UserList = () => {
     //   });
     // });
     onSnapshot(userDoc, (snapshot) => {
-      console.log("snapshot.docs");
+      console.log("Last Updated User Message");
       console.log(snapshot.docs);
       // setUserList(snapshot.docs);
       dispatch(clearFriendList());
       snapshot.docs?.map((user) => {
-        console.log(user.id);
-
         dispatch(addFriendList({ UserId: user.id }));
+      });
+    });
+  }
+
+  function allUserList() {
+    const users = firebase.auth().currentUser;
+    const userDoc = db.collection("Chat Record").orderBy("Name", "desc");
+    onSnapshot(userDoc, (snapshot) => {
+      console.log("Last Updated User Message");
+      console.log(snapshot.docs);
+      // setUserList(snapshot.docs);
+      dispatch(clearAllFriendList());
+      snapshot.docs?.map((user) => {
+        // console.log(typeof user.id);
+        // console.log(typeof users.uid);
+        if (user.id !== users.uid) {
+          // console.log("Same user");
+          dispatch(addAllFriendList({ UserId: user.id }));
+        } else {
+          // console.log("different user");
+        }
       });
     });
   }
@@ -596,7 +625,7 @@ const UserList = () => {
     <>
       <div className="w-full lg:w-full md:w-full h-[calc(100%-70px)] pt-[20px] flex flex-col items-center ">
         {/* yserlist */}
-        <div className="w-full flex justify-center items-center  mb-[20px] overflow-hidden">
+        <div className="w-full flex justify-center items-center min-h-[50px] mb-[20px] overflow-hidden">
           <input
             value={searchUser}
             onKeyDown={(e) => {
@@ -607,7 +636,7 @@ const UserList = () => {
             }}
             onChange={(e) => setSearchUser(e.target.value)}
             placeholder="Search Friends"
-            className="w-[calc(100%-50px)] lg:w-[calc(100%-50px)] md:w-[calc(100%-50px)] min-h-[40px]  text-[black] bg-[#b8dedf] font-[work] font-semibold border border-[#ccd7dc1f]   z-0 outline-none rounded-lg pl-[10px] pr-[50px] text-[14px] drop-shadow-md "
+            className="w-[100%] lg:w-[100%] md:w-[100%] h-full  text-[black] bg-[#b8dedf] font-[work] font-semibold border border-[#ccd7dc1f]   z-0 outline-none  pl-[20px] pr-[50px] text-[14px] drop-shadow-md "
           ></input>
 
           {/* <span
@@ -623,7 +652,7 @@ const UserList = () => {
           {searchUser.length === 0 ? (
             <>
               <div
-                className="ml-[10px] w-[40px] h-[40px]  text-[black] rounded-full flex justify-center items-center cursor-pointer "
+                className="ml-[-40px] w-[40px] h-[40px]  text-[black] rounded-full flex justify-center items-center cursor-pointer "
                 onClick={() => {
                   searchUserFriend();
                   setSearchFlag(true);
@@ -666,14 +695,68 @@ const UserList = () => {
             </>
           )}
         </div>
-        {/* <div className="w-full  h-[40px] font-[work] font-semibold text-[white] flex justify-evenly items-center">
-          <span className="px-[10px]">Chats</span>
-          <span className="px-[10px]">Group</span>
-          <span className="px-[10px]">Status</span>
-          <span className="px-[10px]">Calls</span>
-        </div> */}
+        <div className="w-full min-h-[40px] font-semibold text-[white] flex justify-evenly items-center font-[work] text-[15px] overflow-hidden">
+          {section === "All" ? (
+            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#b8dedf] text-black border-[#b8dedf]">
+              All
+            </span>
+          ) : (
+            <span
+              className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full border-transparent text-[#aaaaaa] cursor-pointer hover:text-[white]"
+              onClick={() => {
+                allUserList();
+                setSection("All");
+              }}
+            >
+              All
+            </span>
+          )}
+          {section === "Chat" ? (
+            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#b8dedf] text-black border-[#b8dedf]">
+              Chats
+            </span>
+          ) : (
+            <span
+              className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full border-transparent text-[#aaaaaa] cursor-pointer hover:text-[white]"
+              onClick={() => {
+                fetchUserList();
+                setSection("Chat");
+              }}
+            >
+              Chats
+            </span>
+          )}
+          {section === "Group" ? (
+            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#b8dedf] text-black border-[#b8dedf]">
+              Group
+            </span>
+          ) : (
+            <span
+              className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full border-transparent text-[#aaaaaa] cursor-pointer hover:text-[white]"
+              onClick={() => {
+                setSection("Group");
+              }}
+            >
+              Group
+            </span>
+          )}
+          {section === "Status" ? (
+            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#b8dedf] text-black border-[#b8dedf]">
+              Status
+            </span>
+          ) : (
+            <span
+              className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full border-transparent text-[#aaaaaa] cursor-pointer hover:text-[white]"
+              onClick={() => {
+                setSection("Status");
+              }}
+            >
+              Status
+            </span>
+          )}
+        </div>
         {searchFlag === true ? (
-          <div className="w-full lg:w-full md:w-full h-[(100%-40px)] overflow-y-scroll">
+          <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll">
             {SearchUserList.length === 0 ? (
               <>No users</>
             ) : (
@@ -684,8 +767,20 @@ const UserList = () => {
               </>
             )}
           </div>
-        ) : (
-          <div className="w-full lg:w-full md:w-full h-[(100%-40px)] overflow-y-scroll overflow-x-hidden">
+        ) : section === "All" ? (
+          <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden">
+            {AllUserList.length === 0 ? (
+              <>No Friends Yet</>
+            ) : (
+              <>
+                {AllUserList?.map((friends) => {
+                  return <SearchFriends data={friends} />;
+                })}
+              </>
+            )}
+          </div>
+        ) : section === "Chat" ? (
+          <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden">
             {UserList.length === 0 ? (
               <>No Friends Yet</>
             ) : (
@@ -696,6 +791,8 @@ const UserList = () => {
               </>
             )}
           </div>
+        ) : (
+          <></>
         )}
       </div>
     </>

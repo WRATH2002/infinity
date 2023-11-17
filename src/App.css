@@ -142,12 +142,13 @@ font-family: 'Work Sans', sans-serif;
 */
 
 input::placeholder {
-  color: #494949;
+  color: #5e5e5e;
   /* font-family: "Montserrat", sans-serif; */
   /* font-family: "Noto Sans", sans-serif; */
   /* font-family: "Noto Sans JP", sans-serif; */
   /* font-family: "Ubuntu", sans-serif; */
   font-family: "Work Sans", sans-serif;
+  font-weight: 400;
 }
 
 @font-face {

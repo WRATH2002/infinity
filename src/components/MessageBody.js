@@ -563,7 +563,10 @@ export const MessageBody = () => {
 
   function uploadImage() {
     const user = firebase.auth().currentUser;
-    const fileRef = ref(storage, `/chats_images/${user.uid}/${lastIdOne + 1}`);
+    const fileRef = ref(
+      storage,
+      `/chats_images/${user.uid}/${ActiveChatUser}/${lastIdOne + 1}`
+    );
     uploadBytes(fileRef, image).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         console.log("urlbefore");

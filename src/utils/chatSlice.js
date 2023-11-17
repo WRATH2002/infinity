@@ -7,6 +7,7 @@ const chatSlice = createSlice({
     FlagOneMessage: [],
     FlagTwoMessage: [],
     FriendList: [],
+    AllFriendList: [],
     SearchFriendList: [],
     ActiveUser: "",
     SendFlag: true,
@@ -66,6 +67,14 @@ const chatSlice = createSlice({
       state.SearchFriendList = [];
       // console.log(state.messages);
     },
+    addAllFriendList: (state, action) => {
+      state.AllFriendList.push(action.payload);
+      // console.log(state.messages);
+    },
+    clearAllFriendList: (state, action) => {
+      state.AllFriendList = [];
+      // console.log(state.messages);
+    },
     clearFriendList: (state, action) => {
       state.FriendList = [];
       // console.log(state.messages);
@@ -122,6 +131,8 @@ export const {
   clearSearchFriendList,
   addLastId,
   toggleStateMode,
+  addAllFriendList,
+  clearAllFriendList,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

@@ -312,7 +312,7 @@ const OwnerDetails = () => {
             </div>
           ) : (
             <div
-              className="h-[120px] w-[170px] mt-[60px] fixed rounded-lg p-[10px] text-[#ccd7dc] bg-[#1f201fae]  backdrop-blur-sm z-10 flex flex-col justify-center drop-shadow-lg"
+              className="h-[120px] w-[170px] mt-[60px] fixed rounded-lg p-[10px] text-[#ccd7dc] bg-[#1f201fae] backdrop-blur-md z-10 flex flex-col justify-center drop-shadow-lg"
               style={{ transition: ".5s" }}
             >
               <span
