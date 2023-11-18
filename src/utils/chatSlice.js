@@ -13,6 +13,7 @@ const chatSlice = createSlice({
     SendFlag: true,
     LastId: 1,
     signingMode: 1,
+    imageMediaLink: [],
     // chatSegment: [{ chatId: "hello" }],
     // signingMode: 1,
     // darkMode: 1,
@@ -53,6 +54,14 @@ const chatSlice = createSlice({
     },
     clearFlagTwoMessage: (state, action) => {
       state.FlagTwoMessage = [];
+      // console.log(state.messages);
+    },
+    addImageMediaLink: (state, action) => {
+      state.imageMediaLink.push(action.payload);
+      // console.log(state.messages);
+    },
+    clearImageMediaLink: (state, action) => {
+      state.imageMediaLink = [];
       // console.log(state.messages);
     },
     addFriendList: (state, action) => {
@@ -133,6 +142,8 @@ export const {
   toggleStateMode,
   addAllFriendList,
   clearAllFriendList,
+  addImageMediaLink,
+  clearImageMediaLink,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

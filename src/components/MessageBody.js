@@ -12,6 +12,8 @@ import {
   clearFlagTwoMessage,
   pushFlagOneMessage,
   pushFlagTwoMessage,
+  clearImageMediaLink,
+  addImageMediaLink,
 } from "../utils/chatSlice";
 import { doc, onSnapshot, serverTimestamp } from "firebase/firestore";
 import { useRef } from "react";
@@ -643,6 +645,49 @@ export const MessageBody = () => {
     };
   }
 
+  const ImageMediaLinkk = useSelector((store) => store.chat.imageMediaLink);
+  useEffect(() => {
+    console.log("urlllll------------------------------------------------");
+    console.log(ImageMediaLinkk);
+    getImageMediaLink();
+  }, [ActiveChatUser]);
+
+  function getImageMediaLink() {
+    const user = firebase.auth().currentUser;
+    if (ActiveChatUser.length !== 0) {
+      const mediaRef = db
+        .collection("Chat Record")
+        .doc(user.uid)
+        .collection("Chat Friends")
+        .doc(ActiveChatUser);
+      onSnapshot(mediaRef, (snapshot) => {
+        console.log(
+          "Last Updated User Message -------------------------------------------"
+        );
+        console.log(snapshot.data().ChatHistory);
+        dispatch(clearImageMediaLink());
+        snapshot.data().ChatHistory.forEach((media) => {
+          if (media.Image !== "") {
+            console.log(media.Image);
+            dispatch(addImageMediaLink({ url: media.Image }));
+          }
+        });
+        // setUserList(snapshot.docs);
+        // dispatch(clearAllFriendList());
+        // snapshot.docs?.map((user) => {
+        //   // console.log(typeof user.id);
+        //   // console.log(typeof users.uid);
+        //   if (user.id !== users.uid) {
+        //     // console.log("Same user");
+        //     dispatch(addAllFriendList({ UserId: user.id }));
+        //   } else {
+        //     // console.log("different user");
+        //   }
+        // });
+      });
+    }
+  }
+
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
@@ -1124,16 +1169,16 @@ export const MessageBody = () => {
             {/* <EmojiPicker /> */}
             {emoji === true ? (
               <div
-                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer bg-[#8171f3] hover:text-[white] rounded-full  z-10 text-[black]"
+                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer hover:bg-[#80999b] hover:text-[white] rounded-full  z-10 text-[black]"
                 onClick={() => setEmoji(!emoji)}
               >
                 {/* <BsFillEmojiLaughingFill className="text-[20px] " /> */}
                 {/* <img src={smiley} className="w-[25px]"></img> */}
-                <MdEmojiEmotions className="text-[20px]" />
+                <MdEmojiEmotions className="text-[25px]" />
               </div>
             ) : (
               <div
-                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer hover:bg-[#8171f3] hover:text-[white] rounded-full  z-10 text-[black]"
+                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer hover:bg-[#80999b] hover:text-[white] rounded-full  z-10 text-[black]"
                 onClick={() => setEmoji(!emoji)}
               >
                 {/* <BsFillEmojiLaughingFill className="text-[20px] " /> */}
@@ -1142,7 +1187,7 @@ export const MessageBody = () => {
               </div>
             )}
             <div
-              className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer hover:bg-[#8171f3] hover:text-[white] rounded-full mr-[-78px] z-10 text-[black]"
+              className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer hover:bg-[#80999b] hover:text-[white] rounded-full mr-[-78px] z-10 text-[black]"
               onClick={() => {
                 setDocument(!document);
               }}
@@ -1176,7 +1221,7 @@ export const MessageBody = () => {
 
             {/* <EmojiPicker /> */}
             <button
-              className="ml-[-43px] mr-[8px] z-10 h-[35px]   w-[35px] flex justify-center items-center cursor-pointer text-[black]  hover:bg-[#8171f3] rounded-full hover:text-[white]"
+              className="ml-[-43px] mr-[8px] z-10 h-[35px]   w-[35px] flex justify-center items-center cursor-pointer text-[black]  hover:bg-[#80999b] rounded-full hover:text-[white]"
               onClick={() => {
                 if (Messages.length !== 0) {
                   var temp = formatAMPM(new Date());
@@ -1197,8 +1242,8 @@ export const MessageBody = () => {
                 // <img src={sendd} className="w-[25px] z-20 drop-shadow-md"></img>
               )}
             </button>
-            <div className="w-[50px] h-[50px] flex justify-center items-center cursor-pointer rounded-full bg-[#b8dedf]  z-10  ml-[10px] text-[black]  ">
-              <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full hover:bg-[#8171f3] hover:text-white">
+            <div className="w-[50px] h-[50px] flex justify-center items-center cursor-pointer rounded-full bg-[#b8dedf] hover:bg-[#80999b] z-10  ml-[10px] text-[black]  ">
+              <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full  hover:text-white">
                 <BiSolidMicrophone className="text-[25px]  " />
                 {/* <img src={mic} className="w-[25px] drop-shadow-md"></img> */}
               </div>

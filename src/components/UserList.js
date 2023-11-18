@@ -126,7 +126,7 @@ const Friends = (props) => {
       {ActiveChatUser === UserUid && UserUid != "" ? (
         <>
           <div
-            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer  bg-[#b8dedf]  px-[10px]"
+            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer  bg-[#b8dedf] rounded-lg  px-[10px]"
             onClick={() => {
               activerChatUser();
               // dispatch(toggleSendFlag(true));
@@ -630,23 +630,94 @@ const UserList = () => {
     <>
       <div className="w-full lg:w-full md:w-full h-[calc(100%-70px)] pt-[20px] flex flex-col items-center ">
         {/* yserlist */}
-        <div className="w-full flex justify-center items-center min-h-[45px] mb-[20px]  overflow-hidden">
-          <input
-            value={searchUser}
-            onKeyDown={(e) => {
-              if (e.nativeEvent.key === "Enter" && searchUser.length !== 0) {
-                searchUserFriend();
-                setSearchFlag(true);
-              }
-            }}
-            onChange={(e) => setSearchUser(e.target.value)}
-            placeholder="Search Friends"
-            className="w-[calc(100%-50px)] lg:w-[calc(100%-50px)] md:w-[calc(100%-100px)] h-full  text-[black] bg-[#b8dedf] font-[work] font-semibold border border-[#ccd7dc1f]   z-0 outline-none  pl-[20px] pr-[50px] text-[14px] drop-shadow-md rounded-full"
-          ></input>
 
-          {searchUser.length === 0 ? (
-            <>
-              {/* <div
+        <div className="w-full min-h-[40px] font-semibold text-[white] flex justify-evenly items-center font-[work] text-[15px] overflow-hidden">
+          {section === "All" ? (
+            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#80999b] text-white border-[#80999b]">
+              All
+            </span>
+          ) : (
+            <span
+              className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full border-transparent text-[#aaaaaa] cursor-pointer hover:text-[white]"
+              onClick={() => {
+                setSearchFlag(false);
+                allUserList();
+                setSection("All");
+              }}
+            >
+              All
+            </span>
+          )}
+          {section === "Chat" ? (
+            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#80999b] text-white border-[#80999b]">
+              Chats
+            </span>
+          ) : (
+            <span
+              className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full border-transparent text-[#aaaaaa] cursor-pointer hover:text-[white]"
+              onClick={() => {
+                setSearchFlag(false);
+                fetchUserList();
+                setSection("Chat");
+              }}
+            >
+              Chats
+            </span>
+          )}
+          {section === "Group" ? (
+            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#80999b] text-white border-[#80999b]">
+              Group
+            </span>
+          ) : (
+            <span
+              className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full border-transparent text-[#aaaaaa] cursor-pointer hover:text-[white]"
+              onClick={() => {
+                setSearchFlag(false);
+                setSection("Group");
+              }}
+            >
+              Group
+            </span>
+          )}
+          {section === "Status" ? (
+            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#80999b] text-white border-[#80999b]">
+              Status
+            </span>
+          ) : (
+            <span
+              className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full border-transparent text-[#aaaaaa] cursor-pointer hover:text-[white]"
+              onClick={() => {
+                setSearchFlag(false);
+                setSection("Status");
+              }}
+            >
+              Status
+            </span>
+          )}
+        </div>
+        {searchFlag === true ? (
+          <>
+            <div className="min-h-[70px] w-full  flex justify-center items-center">
+              <div className="w-full flex justify-center items-center min-h-[45px]  overflow-hidden">
+                <input
+                  value={searchUser}
+                  onKeyDown={(e) => {
+                    if (
+                      e.nativeEvent.key === "Enter" &&
+                      searchUser.length !== 0
+                    ) {
+                      searchUserFriend();
+                      setSearchFlag(true);
+                    }
+                  }}
+                  onChange={(e) => setSearchUser(e.target.value)}
+                  placeholder="Search Friends"
+                  className="w-[calc(100%-50px)] lg:w-[calc(100%-50px)] md:w-[calc(100%-100px)] h-[45px]  text-[black] bg-[#b8dedf] font-[work] font-semibold border border-[#ccd7dc1f]   z-0 outline-none  pl-[20px] pr-[50px] text-[14px] drop-shadow-md rounded-full"
+                ></input>
+
+                {searchUser.length === 0 ? (
+                  <>
+                    {/* <div
                 className="ml-[-40px] w-[40px] h-[40px]  text-[black] rounded-full flex justify-center items-center cursor-pointer "
                 onClick={() => {
                   searchUserFriend();
@@ -657,10 +728,10 @@ const UserList = () => {
                 <img src={searchh} className="w-[25px] drop-shadow-md"></img>
             
               </div> */}
-            </>
-          ) : (
-            <>
-              {/* <span
+                  </>
+                ) : (
+                  <>
+                    {/* <span
                 className="w-[40px] h-[40px] rounded-full  ml-[-40px] flex justify-center items-center cursor-pointer z-[2]"
                 onClick={() => setSearchFlag(false)}
               >
@@ -677,16 +748,16 @@ const UserList = () => {
                   }}
                 ></img>
               </span> */}
-              <div
-                className="w-[35px] h-[35px] hover:bg-[#8171f3] hover:text-white cursor-pointer rounded-full flex justify-center items-center mr-[5px] z-5 ml-[-40px]  drop-shadow-md"
-                onClick={() => {
-                  setSearchFlag(false);
-                  setSearchUser("");
-                }}
-              >
-                <RxCross2 className="text-[20px]  drop-shadow-md" />
-              </div>
-              {/* <div
+                    <div
+                      className="w-[35px] h-[35px] hover:bg-[#80999b] hover:text-white cursor-pointer rounded-full flex justify-center items-center mr-[5px] z-5 ml-[-40px]  drop-shadow-md"
+                      onClick={() => {
+                        setSearchFlag(false);
+                        setSearchUser("");
+                      }}
+                    >
+                      <RxCross2 className="text-[20px]  drop-shadow-md" />
+                    </div>
+                    {/* <div
                 className="ml-[-40px] w-[40px] h-[40px]  text-[black] rounded-full flex justify-center items-center cursor-pointer "
                 onClick={() => {
                   searchUserFriend();
@@ -696,114 +767,140 @@ const UserList = () => {
                 <img src={searchh} className="w-[25px] drop-shadow-md"></img>
 
               </div> */}
-            </>
-          )}
-          <div
-            className="w-[45px] h-[45px] bg-[#b8dedf]  rounded-full flex justify-center items-center ml-[10px] z-5 drop-shadow-md hover:text-white text-black cursor-pointer"
-            onClick={() => {
-              if (searchUser.length !== 0) {
-                searchUserFriend();
-                setSearchFlag(true);
-              }
-            }}
-          >
-            <div className="w-[35px] h-[35px] rounded-full flex justify-center items-center hover:bg-[#8171f3]">
-              <RiSearch2Line className="text-[20px]  drop-shadow-md" />
-            </div>
-          </div>
-        </div>
-        <div className="w-full min-h-[40px] font-semibold text-[white] flex justify-evenly items-center font-[work] text-[15px] overflow-hidden">
-          {section === "All" ? (
-            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#b8dedf] text-black border-[#b8dedf]">
-              All
-            </span>
-          ) : (
-            <span
-              className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full border-transparent text-[#aaaaaa] cursor-pointer hover:text-[white]"
-              onClick={() => {
-                setSearchFlag(false);
-                allUserList();
-                setSection("All");
-              }}
-            >
-              All
-            </span>
-          )}
-          {section === "Chat" ? (
-            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#b8dedf] text-black border-[#b8dedf]">
-              Chats
-            </span>
-          ) : (
-            <span
-              className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full border-transparent text-[#aaaaaa] cursor-pointer hover:text-[white]"
-              onClick={() => {
-                setSearchFlag(false);
-                fetchUserList();
-                setSection("Chat");
-              }}
-            >
-              Chats
-            </span>
-          )}
-          {section === "Group" ? (
-            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#b8dedf] text-black border-[#b8dedf]">
-              Group
-            </span>
-          ) : (
-            <span
-              className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full border-transparent text-[#aaaaaa] cursor-pointer hover:text-[white]"
-              onClick={() => {
-                setSearchFlag(false);
-                setSection("Group");
-              }}
-            >
-              Group
-            </span>
-          )}
-          {section === "Status" ? (
-            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#b8dedf] text-black border-[#b8dedf]">
-              Status
-            </span>
-          ) : (
-            <span
-              className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full border-transparent text-[#aaaaaa] cursor-pointer hover:text-[white]"
-              onClick={() => {
-                setSearchFlag(false);
-                setSection("Status");
-              }}
-            >
-              Status
-            </span>
-          )}
-        </div>
-        {searchFlag === true ? (
-          <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll">
-            {SearchUserList.length === 0 ? (
-              <>
-                <div className=" group w-full h-[70px] py-[10px] flex justify-center items-center cursor-pointer font-[work]   px-[10px]  text-[white] ">
-                  <span>No Users Found</span>
+                  </>
+                )}
+                <div
+                  className="w-[45px] h-[45px] bg-[#b8dedf] hover:bg-[#80999b] rounded-full flex justify-center items-center ml-[10px] z-5 drop-shadow-md hover:text-white text-black cursor-pointer"
+                  onClick={() => {
+                    if (searchUser.length !== 0) {
+                      searchUserFriend();
+                      setSearchFlag(true);
+                    }
+                  }}
+                >
+                  <div className="w-[35px] h-[35px] rounded-full flex justify-center items-center ">
+                    <RiSearch2Line className="text-[20px]  drop-shadow-md" />
+                  </div>
                 </div>
-              </>
-            ) : (
-              <>
-                {SearchUserList.map((friends) => {
-                  return <SearchFriends data={friends} />;
-                })}
-              </>
-            )}
-          </div>
+              </div>
+            </div>
+            <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll">
+              {SearchUserList.length === 0 ? (
+                <>
+                  <div className=" group w-full h-[70px] py-[10px] flex justify-center items-center cursor-pointer font-[work]   px-[10px]  text-[white] ">
+                    <span>No Users Found</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {SearchUserList.map((friends) => {
+                    return <SearchFriends data={friends} />;
+                  })}
+                </>
+              )}
+            </div>
+          </>
         ) : section === "All" ? (
-          <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden">
-            {AllUserList.length === 0 ? (
-              <>No Friends Yet</>
-            ) : (
-              <>
-                {AllUserList?.map((friends) => {
-                  return <SearchFriends data={friends} />;
-                })}
-              </>
-            )}
-          </div>
+          <>
+            <div className="min-h-[70px] w-full  flex justify-center items-center">
+              <div className="w-full flex justify-center items-center min-h-[45px]  overflow-hidden">
+                <input
+                  value={searchUser}
+                  onKeyDown={(e) => {
+                    if (
+                      e.nativeEvent.key === "Enter" &&
+                      searchUser.length !== 0
+                    ) {
+                      searchUserFriend();
+                      setSearchFlag(true);
+                    }
+                  }}
+                  onChange={(e) => setSearchUser(e.target.value)}
+                  placeholder="Search Friends"
+                  className="w-[calc(100%-50px)] lg:w-[calc(100%-50px)] md:w-[calc(100%-100px)] h-[45px]  text-[black] bg-[#b8dedf] font-[work] font-semibold border border-[#ccd7dc1f]   z-0 outline-none  pl-[20px] pr-[50px] text-[14px] drop-shadow-md rounded-full"
+                ></input>
+
+                {searchUser.length === 0 ? (
+                  <>
+                    {/* <div
+                className="ml-[-40px] w-[40px] h-[40px]  text-[black] rounded-full flex justify-center items-center cursor-pointer "
+                onClick={() => {
+                  searchUserFriend();
+                  setSearchFlag(true);
+                }}
+              >
+      
+                <img src={searchh} className="w-[25px] drop-shadow-md"></img>
+            
+              </div> */}
+                  </>
+                ) : (
+                  <>
+                    {/* <span
+                className="w-[40px] h-[40px] rounded-full  ml-[-40px] flex justify-center items-center cursor-pointer z-[2]"
+                onClick={() => setSearchFlag(false)}
+              >
+                <RxCross2
+                  onClick={() => {
+                    setSearchUser("");
+                  }}
+                />
+                <img
+                  src={cross}
+                  className="w-[25px] drop-shadow-md"
+                  onClick={() => {
+                    setSearchUser("");
+                  }}
+                ></img>
+              </span> */}
+                    <div
+                      className="w-[35px] h-[35px] hover:bg-[#80999b] hover:text-white cursor-pointer rounded-full flex justify-center items-center mr-[5px] z-5 ml-[-40px]  drop-shadow-md"
+                      onClick={() => {
+                        setSearchFlag(false);
+                        setSearchUser("");
+                      }}
+                    >
+                      <RxCross2 className="text-[20px]  drop-shadow-md" />
+                    </div>
+                    {/* <div
+                className="ml-[-40px] w-[40px] h-[40px]  text-[black] rounded-full flex justify-center items-center cursor-pointer "
+                onClick={() => {
+                  searchUserFriend();
+                  setSearchFlag(true);
+                }}
+              >
+                <img src={searchh} className="w-[25px] drop-shadow-md"></img>
+
+              </div> */}
+                  </>
+                )}
+                <div
+                  className="w-[45px] h-[45px] bg-[#b8dedf] hover:bg-[#80999b] rounded-full flex justify-center items-center ml-[10px] z-5 drop-shadow-md hover:text-white text-black cursor-pointer"
+                  onClick={() => {
+                    if (searchUser.length !== 0) {
+                      searchUserFriend();
+                      setSearchFlag(true);
+                    }
+                  }}
+                >
+                  <div className="w-[35px] h-[35px] rounded-full flex justify-center items-center ">
+                    <RiSearch2Line className="text-[20px]  drop-shadow-md" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden">
+              {AllUserList.length === 0 ? (
+                <>No Users Yet</>
+              ) : (
+                <>
+                  {AllUserList?.map((friends) => {
+                    return <SearchFriends data={friends} />;
+                  })}
+                </>
+              )}
+            </div>
+          </>
         ) : section === "Chat" ? (
           <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden">
             {UserList.length === 0 ? (

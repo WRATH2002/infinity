@@ -20,13 +20,18 @@ import chat from "../assets/img/message.png";
 import { getDownloadURL } from "firebase/storage";
 import { ref } from "firebase/storage";
 import { listAll } from "firebase/storage";
+import { MdChevronRight } from "react-icons/md";
 
 const Media = (props) => {
   return (
     <>
       {/* <div className="w-full h-full justify-start items-center  flex"> */}
-      <div className="min-w-[120px] h-[120px] bg-slate-200">
-        <img className="w-full object-cover"></img>
+      <div className="min-w-[90px] lg:min-w-[120px] md:min-w-[120px] h-[90px] lg:h-[120px] md:h-[120px] mx-[3px] lg:mx-[5px] md:mx-[5px] rounded-xl">
+        <img
+          className="w-full h-full object-cover rounded-xl"
+          src={props.data.url}
+        ></img>
+        {/* url :{props.link.url} */}
       </div>
       {/* <div className="min-w-[120px] h-[120px] bg-slate-300"><img className="w-full object-cover" src={}></img></div>
         <div className="min-w-[120px] h-[120px] bg-slate-200"><img className="w-full object-cover" src={}></img></div>
@@ -45,11 +50,14 @@ export const UserInfo = () => {
   const [media, setMedia] = useState();
 
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
+  const ImageMediaLink = useSelector((store) => store.chat.imageMediaLink);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     fetchChatUserInfo();
+    // console.log("urlllllllllllllllllllllllllllllll");
+    // console.log(ImageMediaLink);
   }, [ActiveChatUser]);
 
   useEffect(() => {
@@ -239,8 +247,21 @@ export const UserInfo = () => {
                   <img src={chat} className="w-[35px] drop-shadow-lg "></img>
                 </span>
               </div>
-              <div className="w-full h-[200px] bg-slate-400 overflow-x-scroll">
-                <Media />
+              <span className="font-[work] font-normal text-[16px] w-full flex justify-start items-center mt-[20px] text-[#a0a0a0]">
+                Media, Links & Docs{" "}
+                <div className="ml-[10px]  w-[20px] h-[20px] flex justify-center items-center text-[14px] font-semibold text-black rounded-full bg-[#b8dedf]">
+                  {ImageMediaLink.length}{" "}
+                </div>
+                <MdChevronRight className="text-[#a0a0a0] text-[25px] ml-[5px]" />
+              </span>
+              <div className="w-full h-[200px]  flex overflow-x-scroll mt-[5px] ">
+                {ImageMediaLink.map((link) => {
+                  return (
+                    <>
+                      <Media data={link} />
+                    </>
+                  );
+                })}
               </div>
             </div>
           </div>
