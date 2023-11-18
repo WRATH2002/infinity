@@ -19,6 +19,7 @@ import { BiSolidLockAlt } from "react-icons/bi";
 import { BiSolidSend } from "react-icons/bi";
 import { BiSolidMicrophone } from "react-icons/bi";
 import { TiAttachment } from "react-icons/ti";
+import { GrFormAttachment } from "react-icons/gr";
 import { BsFillEmojiLaughingFill } from "react-icons/bs";
 import { HiDocumentText, HiSaveAs } from "react-icons/hi";
 import { IoMdPhotos } from "react-icons/io";
@@ -60,6 +61,14 @@ import loading from "../assets/img/loading.png";
 import { Blurhash } from "react-blurhash";
 import { saveAs } from "file-saver";
 
+// import d from "../assets/video/";
+import vid from "../assets/video/video2.mp4";
+import vid3 from "../assets/video/video3.mp4";
+import vid4 from "../assets/video/video4.mp4";
+import vid5 from "../assets/video/video5.mp4";
+import vid6 from "../assets/video/video6.mp4";
+import vid8 from "../assets/video/video8.mp4";
+import { MdEmojiEmotions } from "react-icons/md";
 const Messagess = (props) => {
   const [url, setUrl] = useState("");
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -662,6 +671,50 @@ export const MessageBody = () => {
                   </>
                 );
               })}
+              {/* <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
+                <video
+                  controls
+                  className="w-auto  h-full rounded-lg 
+              "
+                >
+                  <source src={vid6}></source>
+                </video>
+              </div>
+              <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
+                <video
+                  controls
+                  className="w-auto  h-full rounded-lg 
+              "
+                >
+                  <source src={vid3}></source>
+                </video>
+              </div>
+              <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
+                <video
+                  controls
+                  className="w-auto  h-full rounded-lg 
+              "
+                >
+                  <source src={vid8}></source>
+                </video>
+              </div>
+              <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
+                <video
+                  controls
+                  className="w-auto  h-full rounded-lg 
+              "
+                >
+                  <source src={vid8}></source>
+                </video>
+              </div> */}
+
+              {/* <video
+                className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] rounded-lg bg-slate-500 
+              "
+              >
+                <source src={vid3}></source>
+              </video> */}
+              {/* <VideoPlayer /> */}
               {/* <img src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/chats_images%2Fmb05JDt06hedvvAijxzn09KfbHu1%2F5?alt=media&token=1b5182f5-1ca5-4bc0-81d1-f312d9eb7561"></img> */}
             </>
           )}
@@ -796,7 +849,7 @@ export const MessageBody = () => {
                 style={{ transition: "2s", transitionDelay: "1.4s" }}
               >
                 {image ? (
-                  <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px] rounded-lg cursor-pointer ">
+                  <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px]  cursor-pointer ">
                     <button
                       className="w-full h-full opacity cursor-pointer flex justify-between items-center"
                       onClick={() => {
@@ -917,7 +970,7 @@ export const MessageBody = () => {
       ) : (
         <>
           <div
-            className="w-[208px] px-[19px] fixed mt-[-258px]"
+            className="w-[0] px-[19px] fixed mt-[-258px]"
             style={{ transition: ".5s" }}
           >
             <div
@@ -1002,9 +1055,9 @@ export const MessageBody = () => {
                 className="w-full flex items-center justify-center  h-[40px]   opacity-0"
                 style={{ transition: ".2s" }}
               >
-                <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px] rounded-lg">
+                <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px] bg-slate-500 z-0">
                   <button
-                    className="w-full h-full opacity cursor-pointer flex justify-between items-center"
+                    className="w-full h-full opacity cursor-pointer flex justify-between items-center bg-slate-100 z-0"
                     onClick={() => {
                       if (image) {
                         setDocument(false);
@@ -1047,7 +1100,10 @@ export const MessageBody = () => {
                     //   }
                     // }}
                   >
-                    <img src={sendd} className="w-[25px] mr-[10px] z-20"></img>
+                    <img
+                      src={sendd}
+                      className="w-[25px] mr-[0] z-0 bg-slate-400"
+                    ></img>
                     Send
                     <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] opacity-0 text-[black]   flex justify-center items-center">
                       {imageLength}
@@ -1068,29 +1124,33 @@ export const MessageBody = () => {
             {/* <EmojiPicker /> */}
             {emoji === true ? (
               <div
-                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer bg-white rounded-full  z-10 text-[black]  hover:text-[black]"
+                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer bg-[#8171f3] hover:text-[white] rounded-full  z-10 text-[black]"
                 onClick={() => setEmoji(!emoji)}
               >
                 {/* <BsFillEmojiLaughingFill className="text-[20px] " /> */}
-                <img src={smiley} className="w-[25px]"></img>
+                {/* <img src={smiley} className="w-[25px]"></img> */}
+                <MdEmojiEmotions className="text-[20px]" />
               </div>
             ) : (
               <div
-                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer hover:bg-white rounded-full  z-10 text-[black]  hover:text-[black]"
+                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer hover:bg-[#8171f3] hover:text-[white] rounded-full  z-10 text-[black]"
                 onClick={() => setEmoji(!emoji)}
               >
                 {/* <BsFillEmojiLaughingFill className="text-[20px] " /> */}
-                <img src={smiley} className="w-[25px] drop-shadow-md"></img>
+                {/* <img src={smiley} className="w-[25px] drop-shadow-md"></img> */}
+                <MdEmojiEmotions className="text-[25px]" />
               </div>
             )}
             <div
-              className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer hover:bg-white rounded-full mr-[-78px] z-10 text-[black]  hover:text-[black]"
+              className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer hover:bg-[#8171f3] hover:text-[white] rounded-full mr-[-78px] z-10 text-[black]"
               onClick={() => {
                 setDocument(!document);
               }}
             >
               {/* <TiAttachment className="text-[23px] " /> */}
-              <img src={attach} className="w-[25px] drop-shadow-md"></img>
+              {/* <img src={attach} className="w-[25px] drop-shadow-md"></img> */}
+
+              <TiAttachment className="text-[25px]" />
             </div>
 
             <input
@@ -1111,12 +1171,12 @@ export const MessageBody = () => {
               onChange={(e) => setMessages(e.target.value)}
               value={Messages}
               placeholder="Write Something .."
-              className="bg-[#b8dedf] w-[calc(100%-60px)] pl-[85px] px-[50px] h-[50px] outline-none font-normal rounded-lg drop-shadow-sm resize-none "
+              className="bg-[#b8dedf] w-[calc(100%-60px)] pl-[85px] px-[50px] h-[50px] outline-none font-normal rounded-full drop-shadow-sm resize-none "
             ></input>
 
             {/* <EmojiPicker /> */}
             <button
-              className="ml-[-35px] mr-[8px] z-10 h-[35px]   w-[35px] flex justify-center items-center cursor-pointer text-[black]  hover:bg-white rounded-full"
+              className="ml-[-43px] mr-[8px] z-10 h-[35px]   w-[35px] flex justify-center items-center cursor-pointer text-[black]  hover:bg-[#8171f3] rounded-full hover:text-[white]"
               onClick={() => {
                 if (Messages.length !== 0) {
                   var temp = formatAMPM(new Date());
@@ -1130,17 +1190,17 @@ export const MessageBody = () => {
               }}
             >
               {Messages.length === 0 ? (
-                // <BiSolidSend className="text-[20px] text-[#828282]" />
-                <img src={sendd} className="w-[25px] z-20 drop-shadow-md"></img>
+                <BiSolidSend className="text-[20px] text-[#828282]" />
               ) : (
-                // <BiSolidSend className="text-[20px] " />
-                <img src={sendd} className="w-[25px] z-20 drop-shadow-md"></img>
+                // <img src={sendd} className="w-[25px] z-20 drop-shadow-md"></img>
+                <BiSolidSend className="text-[20px] " />
+                // <img src={sendd} className="w-[25px] z-20 drop-shadow-md"></img>
               )}
             </button>
-            <div className="w-[50px] h-[50px] flex justify-center items-center cursor-pointer rounded-lg bg-[#b8dedf]  z-10  ml-[10px] text-[black]  ">
-              <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full hover:bg-white">
-                {/* <BiSolidMicrophone className="text-[21px]  " /> */}
-                <img src={mic} className="w-[25px] drop-shadow-md"></img>
+            <div className="w-[50px] h-[50px] flex justify-center items-center cursor-pointer rounded-full bg-[#b8dedf]  z-10  ml-[10px] text-[black]  ">
+              <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full hover:bg-[#8171f3] hover:text-white">
+                <BiSolidMicrophone className="text-[25px]  " />
+                {/* <img src={mic} className="w-[25px] drop-shadow-md"></img> */}
               </div>
             </div>
           </div>

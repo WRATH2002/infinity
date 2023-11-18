@@ -177,7 +177,7 @@ const Chatbody = () => {
             >
               <div className="w-full h-full">
                 <div
-                  className="w-full cursor-pointer "
+                  className="w-full cursor-pointer  "
                   // onClick={() => {
                   //   toggleUserInfoSidebar();
                   // }}

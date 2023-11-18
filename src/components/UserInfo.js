@@ -135,7 +135,7 @@ export const UserInfo = () => {
                 className="w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-0 fixed bg-slate-500 text-white z-30 overflow-hidden"
                 // style={{ transition: ".5s" }}
               ></div>
-              <div className="w-full px-[20px] pt-[20px] h-[90px] bg-[#0b0c0b] text-[white]">
+              <div className="w-full px-[20px] pt-[20px] h-[90px] bg-[#1f201f] text-[white]">
                 <div className="w-full h-full pb-[20px] flex justify-center items-center">
                   <div
                     className="w-[50px] h-[50px]  rounded-full"
@@ -244,7 +244,7 @@ export const UserInfo = () => {
               </div>
             </div>
           </div>
-          <div className="w-full px-[20px] pt-[20px] h-[90px] bg-[#0b0c0b] text-[white]">
+          <div className="w-full px-[20px] pt-[20px] h-[90px] bg-[#1f201f] text-[white]">
             <div className="w-full h-full pb-[20px] flex justify-center items-center">
               <div
                 className="w-[50px] h-[50px]  rounded-full"

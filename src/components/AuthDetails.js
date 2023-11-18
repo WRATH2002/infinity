@@ -25,16 +25,17 @@ const Loading = (props) => {
       {isLoading === true ? (
         <>
           <div className="w-full bg-[#0b0c0b] flex flex-col justify-center items-center h-[100dvh]">
-            <div class="col-3">
+            {/* <div class="col-3">
               <div class="snippet" data-title="dot-gathering">
                 <div class="stage filter-contrast">
                   <div class="dot-gathering"></div>
                 </div>
               </div>
-            </div>
-            <span className="text-[13px] lg:text-[16px] md:text-[16px] tracking-[13px] lg:tracking-[17px] md:tracking-[17px] font-semibold text-[#cdd8dd] mt-[20px] w-full flex justify-center items-center">
+            </div> */}
+            <div class="custom-loader"></div>
+            {/* <span className="text-[13px] lg:text-[16px] md:text-[16px] tracking-[13px] lg:tracking-[17px] md:tracking-[17px] font-semibold text-[#cdd8dd] mt-[20px] w-full flex justify-center items-center">
               FETCHING MESSAGES
-            </span>
+            </span> */}
           </div>
           <div className="hidden">
             <Sidebar />
