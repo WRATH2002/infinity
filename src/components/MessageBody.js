@@ -691,7 +691,7 @@ export const MessageBody = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-full h-[calc(100%-170px)] px-[20px] overflow-y-scroll bg-[#0b0c0b] z-20">
+      <div className="w-full h-[calc(100%-155px)] lg:h-[calc(100%-170px)] md:h-[calc(100%-170px)] px-[20px] overflow-y-scroll bg-[#0b0c0b] z-20">
         <div ref={listRef} className="w-full h-full  py-[10px] flex flex-col">
           {ActiveChatUser.length === 0 ? (
             <>
@@ -1174,7 +1174,7 @@ export const MessageBody = () => {
               >
                 {/* <BsFillEmojiLaughingFill className="text-[20px] " /> */}
                 {/* <img src={smiley} className="w-[25px]"></img> */}
-                <MdEmojiEmotions className="text-[25px]" />
+                <MdEmojiEmotions className="text-[20px]" />
               </div>
             ) : (
               <div
@@ -1183,7 +1183,7 @@ export const MessageBody = () => {
               >
                 {/* <BsFillEmojiLaughingFill className="text-[20px] " /> */}
                 {/* <img src={smiley} className="w-[25px] drop-shadow-md"></img> */}
-                <MdEmojiEmotions className="text-[25px]" />
+                <MdEmojiEmotions className="text-[20px]" />
               </div>
             )}
             <div
@@ -1195,7 +1195,7 @@ export const MessageBody = () => {
               {/* <TiAttachment className="text-[23px] " /> */}
               {/* <img src={attach} className="w-[25px] drop-shadow-md"></img> */}
 
-              <TiAttachment className="text-[25px]" />
+              <TiAttachment className="text-[20px]" />
             </div>
 
             <input
@@ -1244,7 +1244,7 @@ export const MessageBody = () => {
             </button>
             <div className="w-[50px] h-[50px] flex justify-center items-center cursor-pointer rounded-full bg-[#b8dedf] hover:bg-[#80999b] z-10  ml-[10px] text-[black]  ">
               <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full  hover:text-white">
-                <BiSolidMicrophone className="text-[25px]  " />
+                <BiSolidMicrophone className="text-[20px]  " />
                 {/* <img src={mic} className="w-[25px] drop-shadow-md"></img> */}
               </div>
             </div>
