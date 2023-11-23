@@ -42,12 +42,15 @@ import a from "../assets/img/a.jpg";
 import aa from "../assets/img/aa.jpg";
 // ----------------------------------
 import docc from "../assets/img/document.png";
+import doccc from "../assets/img/documents.png";
 import phot from "../assets/img/image.png";
 import three from "../assets/img/threedots.png";
 import mic from "../assets/img/mic.png";
 import profile from "../assets/img/profile.png";
 import sendd from "../assets/img/send.png";
 import logout from "../assets/img/logout.png";
+import vide from "../assets/img/videoo.png";
+import giff from "../assets/img/gif.png";
 import sticker from "../assets/img/sticker.png";
 import attach from "../assets/img/attach.png";
 import smiley from "../assets/img/smiley.png";
@@ -70,7 +73,9 @@ import vid4 from "../assets/video/video4.mp4";
 import vid5 from "../assets/video/video5.mp4";
 import vid6 from "../assets/video/video6.mp4";
 import vid8 from "../assets/video/video8.mp4";
+import bb from "../assets/doc/bb.pdf";
 import { MdEmojiEmotions } from "react-icons/md";
+
 const Messagess = (props) => {
   const [url, setUrl] = useState("");
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -106,7 +111,7 @@ const Messagess = (props) => {
                   </div>{" "}
                 </div>
               </>
-            ) : (
+            ) : props.data.Image.length != 0 ? (
               <div className="group w-auto bg-[#1f201f] max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[0px] rounded-lg flex text-black flex-wrap justify-end items-center">
                 {/* <a href={props.data.Image} download> */}
                 <img
@@ -120,6 +125,9 @@ const Messagess = (props) => {
 
                   // onClick={() => {}}
                 ></img>
+                <span className="fixed text-transparent overflow-hidden">
+                  {props.data.Image}
+                </span>
                 <div
                   className="group-hover:flex  hidden w-[35px] h-[35px] rounded-full justify-center items-center bg-[#e3e3e35f] backdrop-blur-sm fixed z-20 cursor-pointer "
                   onClick={() => {
@@ -159,6 +167,44 @@ const Messagess = (props) => {
                   10.03 AM
                 </div> */}
               </div>
+            ) : props.data.Video.length != 0 ? (
+              <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
+                <video
+                  controls
+                  className="w-auto  h-full rounded-lg 
+              "
+                >
+                  <source src={props.data.Video}></source>
+                </video>
+                <span className="fixed text-transparent overflow-hidden">
+                  {props.data.Video}
+                </span>
+              </div>
+            ) : (
+              <>
+                <div className="w-[32%] h-[65px] rounded-lg bg-[#1f201f] flex justify-center items-center">
+                  <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
+                    <img src={doccc} className="w-[40px]"></img>
+                  </div>
+                  <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
+                    <span className="w-full font-[work] text-[14px] font-semibold text-[white] whitespace-nowrap text-ellipsis overflow-hidden">
+                      {props.data.docName}
+                    </span>
+                    <span className="font-[work] text-[11px] font-normal text-[white]">
+                      {props.data.docSize > 1024 ? (
+                        <>{(props.data.docSize / 1024).toFixed(2)} mB</>
+                      ) : (
+                        <>{props.data.docSize} kB</>
+                      )}
+                    </span>
+                  </div>
+                  <div className="w-[40px] h-full flex justify-start items-center">
+                    <div className="w-[30px] h-[30px] rounded-full hover:bg-[#383938] flex justify-center items-center cursor-pointer">
+                      <img src={download} className="w-[20px]"></img>
+                    </div>
+                  </div>
+                </div>
+              </>
             )}
           </div>
         </>
@@ -174,7 +220,7 @@ const Messagess = (props) => {
                   {props?.data?.Time}
                 </div>
               </div>
-            ) : (
+            ) : props.data.Image.length != 0 ? (
               <div className="group w-auto  max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[0px] rounded-lg flex items-center text-black flex-wrap justify-center hover:bg-[#1f201f]">
                 {/* <img
                   loading="lazy"
@@ -211,6 +257,9 @@ const Messagess = (props) => {
                   src={props.data.Image}
                   className="rounded-lg w-full h-full object-cover  group-hover:opacity-60"
                 ></img>
+                <span className="fixed text-transparent overflow-hidden">
+                  {props.data.Image}
+                </span>
                 <div
                   className="group-hover:flex hidden w-[35px] h-[35px] rounded-full justify-center items-center bg-[#e3e3e35f] backdrop-blur-sm fixed z-20 cursor-pointer"
                   onClick={() => {
@@ -247,6 +296,44 @@ const Messagess = (props) => {
                   10.03 AM
                 </div> */}
               </div>
+            ) : props.data.Video.length != 0 ? (
+              <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
+                <video
+                  controls
+                  className="w-auto  h-full rounded-lg 
+              "
+                >
+                  <source src={props.data.Video}></source>
+                </video>
+                <span className="fixed text-transparent overflow-hidden ">
+                  {props.data.Video}
+                </span>
+              </div>
+            ) : (
+              <>
+                <div className="w-[32%] h-[65px] rounded-lg bg-[#1f201f] flex justify-center items-center">
+                  <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
+                    <img src={doccc} className="w-[40px]"></img>
+                  </div>
+                  <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
+                    <span className="w-full font-[work] text-[14px] font-semibold text-[white] whitespace-nowrap text-ellipsis overflow-hidden">
+                      {props.data.docName}
+                    </span>
+                    <span className="font-[work] text-[11px] font-normal text-[white]">
+                      {props.data.docSize > 1024 ? (
+                        <>{(props.data.docSize / 1024).toFixed(2)} mB</>
+                      ) : (
+                        <>{props.data.docSize} kB</>
+                      )}
+                    </span>
+                  </div>
+                  <div className="w-[40px] h-full flex justify-start items-center">
+                    <div className="w-[30px] h-[30px] rounded-full hover:bg-[#383938] flex justify-center items-center cursor-pointer">
+                      <img src={download} className="w-[20px]"></img>
+                    </div>
+                  </div>
+                </div>
+              </>
             )}
           </div>
         </>
@@ -262,10 +349,6 @@ export const MessageBody = () => {
   const [time, setTime] = useState("");
   const [dayFlag, setDayFlag] = useState("");
 
-  const dispatch = useDispatch();
-  const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
-  const ChatOne = useSelector((store) => store.chat.FlagOneMessage);
-  const ChatTwo = useSelector((store) => store.chat.FlagTwoMessage);
   const [lastIdOne, setLastIdOne] = useState(0);
   const [lastIdTwo, setLastIdTwo] = useState(0);
   const [LastMessageOne, setLastMessageOne] = useState(0);
@@ -276,8 +359,20 @@ export const MessageBody = () => {
 
   const [image, setImage] = useState();
   const [Doc, setDoc] = useState();
+  const [DocName, setDocName] = useState();
+  const [DocSize, setDocSize] = useState();
+  const [video, setVideo] = useState();
   const [profileURL, setProfileURL] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
+  const [documentUrl, setDocumentUrl] = useState("");
+
+  const dispatch = useDispatch();
+  const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
+  const ChatOne = useSelector((store) => store.chat.FlagOneMessage);
+  const ChatTwo = useSelector((store) => store.chat.FlagTwoMessage);
+
+  // -------------------------------------------------------------------------- Send Message to Firebase Firestore
 
   function sendMessage() {
     console.log("Clicked");
@@ -296,26 +391,6 @@ export const MessageBody = () => {
           LastMessage: ChatOne.length,
         });
 
-      // userDoc.get().then((doc) => {
-      //   if (doc.exists) {
-      //     // console.log("Document available");
-      //     userDoc.set({
-      //       ChatHistory: ChatOne,
-      //     });
-      //   } else {
-      //     db.collection("Chat Record")
-      //       .doc(user.uid)
-      //       .collection("Chat Friends")
-      //       .doc(ActiveChatUser)
-      //       .set({
-      //         ChatHistory: ChatOne,
-      //       });
-      //     // console.log("No such document");
-      //   }
-      // });
-
-      // -------------------------------------------
-
       const MyDoc = db
         .collection("Chat Record")
         .doc(ActiveChatUser)
@@ -328,142 +403,42 @@ export const MessageBody = () => {
           TotalMessage: ChatTwo.length,
           LastMessage: LastMessageTwo,
         });
-
-      // MyDoc.get().then((doc) => {
-      //   if (doc.exists) {
-      //     console.log("Document available");
-      //     MyDoc.set({
-      //       ChatHistory: ChatTwo,
-      //     });
-      //   } else {
-      //     db.collection("Chat Record")
-      //       .doc(ActiveChatUser)
-      //       .collection("Chat Friends")
-      //       .doc(user.uid)
-      //       .set({
-      //         ChatHistory: ChatTwo,
-      //       });
-      //     console.log("No such document");
-      //   }
-      // });
     }
   }
 
+  // --------------------------------------------------------------------------
+
   useEffect(() => {
+    console.log("chattttsssss");
     console.log(ChatOne);
     if (send === true) {
       sendMessage();
-      // console.log("Chat one");
-      // console.log(ChatOne);
-      // console.log("Chat Two");
-      // console.log(ChatTwo);
       setSend(false);
     }
   }, [ChatOne]);
-  // useEffect(() => {
-  //   console.log("ActiveChatUser");
-  //   console.log(ActiveChatUser);
-  //   console.log("Chat");
-  //   console.log(ChatOne);
-  // }, [ActiveChatUser]);
 
-  // useEffect(() => {
-  //   dispatch(clearFlagOneMessage());
-  //   dispatch(clearFlagTwoMessage());
-  //   fetchChatHistory();
-  //   console.log("chatMessage");
-  //   console.log(chatMessage);
-  // }, [ActiveChatUser]);
+  // -------------------------------------------------------------------------- Store Chats in React Redux Store
 
-  // useEffect(() => {
-  //   if (Messages.length === 0) {
-  //     dispatch(clearFlagOneMessage());
-  //     dispatch(clearFlagTwoMessage());
-  //     fetchChatHistory();
-  //   }
-  // }, [Messages]);
-
-  // function fetchChatHistory() {
-  //   const user = firebase.auth().currentUser;
-
-  //   if (ActiveChatUser.length !== 0) {
-  //     const userOneDoc = db
-  //       .collection("Chat Record")
-  //       .doc(user.uid)
-  //       .collection("Chat Friends")
-  //       .doc(ActiveChatUser);
-  //     // // dispatch(clearFlagOneMessage());
-  //     // userOneDoc.get().then((doc) => {
-  //     //   console.log(doc.data().ChatHistory);
-  //     //   doc.data().ChatHistory.forEach((element) => {
-  //     //     console.log(element);
-  //     //     dispatch(
-  //     //       addFlagOneMessage({
-  //     //         id: element.id,
-  //     //         Message: element.Message,
-  //     //         Flag: element.Flag,
-  //     //       })
-  //     //     );
-  //     //     // chatMessage.push({
-  //     //     //   id: element.id,
-  //     //     //   Message: element.Message,
-  //     //     //   Flag: element.Flag,
-  //     //     // });
-  //     //   });
-  //     // });
-  //     userOneDoc.get().then((doc) => {
-  //       console.log("doc.data().ChatHistory)");
-  //       console.log(doc.data().ChatHistory);
-  //       // setChatMessage(doc.data().ChatHistory);
-  //       doc.data().ChatHistory.forEach((chats) => {
-  //         dispatch(
-  //           addFlagOneMessage({
-  //             id: chats.id,
-  //             Message: chats.Message,
-  //             Flag: chats.Flag,
-  //           })
-  //         );
-  //       });
-  //       // dispatch(addFlagOneMessage(doc.data().ChatHistory));
-  //       // setChatMessage(doc.data().ChatHistory);
-  //     });
-  //     const userTwoDoc = db
-  //       .collection("Chat Record")
-  //       .doc(ActiveChatUser)
-  //       .collection("Chat Friends")
-  //       .doc(user?.uid);
-  //     dispatch(clearFlagTwoMessage());
-  //     userTwoDoc.get().then((doc) => {
-  //       console.log("doc.data().ChatHistory)");
-  //       console.log(doc.data().ChatHistory);
-  //       doc.data().ChatHistory.forEach((chats) => {
-  //         dispatch(
-  //           addFlagTwoMessage({
-  //             id: chats.id,
-  //             Message: chats.Message,
-  //             Flag: chats.Flag,
-  //           })
-  //         );
-  //       });
-  //       // dispatch(addFlagOneMessage(doc.data().ChatHistory));
-  //       // setChatMessage(doc.data().ChatHistory);
-  //     });
-  //   } else {
-  //     dispatch(clearFlagOneMessage());
-  //     dispatch(clearFlagTwoMessage());
-  //   }
-  // }
-
-  // -------------------------------------------------
-
-  function storeToReactStore(Messages, temp, url) {
+  function storeToReactStore(
+    Messages,
+    temp,
+    imageUrl,
+    videoUrl,
+    documentUrl,
+    DocName,
+    DocSize
+  ) {
     dispatch(
       pushFlagOneMessage({
         id: lastIdOne + 1,
         Message: Messages,
         Flag: 1,
         Time: temp,
-        Image: url,
+        Image: imageUrl,
+        Video: videoUrl,
+        Document: documentUrl,
+        docName: DocName,
+        docSize: DocSize,
       })
     );
     dispatch(
@@ -472,65 +447,72 @@ export const MessageBody = () => {
         Message: Messages,
         Flag: 2,
         Time: temp,
-        Image: url,
+        Image: imageUrl,
+        Video: videoUrl,
+        Document: documentUrl,
       })
     );
   }
 
-  // useEffect(() => {
-  //   dispatch(clearFlagOneMessage());
-  //   dispatch(clearFlagTwoMessage());
-  //   fetchChatHistory();
-  // }, [ActiveChatUser]);
+  // -------------------------------------------------------------------------- Fetch Chat History from Firebase Firestore
 
   useEffect(() => {
     const user = firebase.auth().currentUser;
     if (ActiveChatUser.length !== 0) {
-      // -----------------------for flag one
-      db.collection("Chat Record")
+      // -----------------------for Chat User One
+
+      const userOneChat = db
+        .collection("Chat Record")
         .doc(user.uid)
         .collection("Chat Friends")
+        .doc(ActiveChatUser);
+      onSnapshot(userOneChat, (snapshot) => {
+        setChatMessage(snapshot.data().ChatHistory);
+        setLastIdOne(snapshot.data().LastId);
+        setLastMessageOne(snapshot.data().LastMessage);
+        dispatch(clearFlagOneMessage());
+        snapshot.data().ChatHistory.forEach((flagOne) => {
+          dispatch(pushFlagOneMessage(flagOne));
+        });
+      });
+
+      // -----------------------for Chat User Two
+
+      const userTwoChat = db
+        .collection("Chat Record")
         .doc(ActiveChatUser)
-        .onSnapshot((doc) => {
-          setChatMessage(doc.data().ChatHistory);
-          setLastIdOne(doc.data().LastId);
-          setLastMessageOne(doc.data().LastMessage);
-          dispatch(clearFlagOneMessage());
-          doc.data().ChatHistory.forEach((flagOne) => {
-            dispatch(pushFlagOneMessage(flagOne));
+        .collection("Chat Friends")
+        .doc(user.uid);
+      onSnapshot(userTwoChat, (snapshot) => {
+        if (snapshot.data()) {
+          console.log("exists");
+          setLastIdTwo(snapshot.data().LastId);
+          setLastMessageTwo(snapshot.data().LastMessage);
+          dispatch(clearFlagTwoMessage());
+          snapshot.data().ChatHistory.forEach((flagTwo) => {
+            dispatch(pushFlagTwoMessage(flagTwo));
           });
-        });
-      // -----------------------for flag two
-      db.collection("Chat Record")
-        .doc(ActiveChatUser)
-        .collection("Chat Friends")
-        .doc(user.uid)
-        .onSnapshot((doc) => {
-          if (doc.data()) {
-            console.log("exists");
-            setLastIdTwo(doc.data().LastId);
-            setLastMessageTwo(doc.data().LastMessage);
-            dispatch(clearFlagTwoMessage());
-            doc.data().ChatHistory.forEach((flagTwo) => {
-              dispatch(pushFlagTwoMessage(flagTwo));
-            });
-          } else {
-            console.log("dont exists");
-            setLastIdTwo(0);
-            setLastMessageTwo(0);
-            dispatch(clearFlagTwoMessage());
-            doc.data()?.ChatHistory?.forEach((flagTwo) => {
-              dispatch(pushFlagTwoMessage(flagTwo));
-            });
-          }
-        });
+        } else {
+          console.log("dont exists");
+          setLastIdTwo(0);
+          setLastMessageTwo(0);
+          dispatch(clearFlagTwoMessage());
+          snapshot.data()?.ChatHistory?.forEach((flagTwo) => {
+            dispatch(pushFlagTwoMessage(flagTwo));
+          });
+        }
+      });
     }
   }, [ActiveChatUser]);
+
+  // --------------------------------------------------------------------------
 
   const listRef = useRef(null);
   useEffect(() => {
     listRef.current?.lastElementChild?.scrollIntoView();
   }, [chatMessage]);
+
+  // --------------------------------------------------------------------------
 
   function formatAMPM(date) {
     var hours = date.getHours();
@@ -543,23 +525,13 @@ export const MessageBody = () => {
     return strTime;
   }
 
-  function onSelectEmoji(emoji) {
-    console.log(emoji);
-    /*
-    // result
-    { 
-        i: "😚", 
-        n: ["kissing face"], 
-        r: "1f61a", // with skin tone
-        t: "neutral", // skin tone
-        u: "1f61a" // without tone
-    }
-    */
-  }
+  // --------------------------------------------------------------------------
 
   useEffect(() => {}, [imageUrl]);
 
   const [imageLength, setImageLength] = useState();
+
+  // -------------------------------------------------------------------------- Get Image, Gif File
 
   function Image(e) {
     console.log(e.target.files[0]);
@@ -567,83 +539,186 @@ export const MessageBody = () => {
     setImageLength(e.target.files.length);
   }
 
+  // -------------------------------------------------------------------------- Get Document File
+
   function Document(e) {
     console.log(e.target.files[0]);
     setDoc(e.target.files[0]);
+    setDocName(e.target.files[0].name);
+    setDocSize(Math.round(e.target.files[0].size / 1024));
   }
 
-  function uploadImage() {
+  // -------------------------------------------------------------------------- Get Video File
+
+  function Video(e) {
+    console.log(e.target.files[0]);
+    setVideo(e.target.files[0]);
+  }
+
+  // -------------------------------------------------------------------------- Upload Image, Gif & Get Url
+
+  const uploadImageGetUrl = async (fileRef) => {
+    var geturl = await uploadBytes(fileRef, image).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        console.log(url);
+        var temp = formatAMPM(new Date());
+        storeToReactStore(
+          Messages,
+          temp,
+          url,
+          videoUrl,
+          documentUrl,
+          DocName,
+          DocSize
+        );
+        setMessages("");
+        geturl = url;
+      });
+      console.log("Uploaded a blob or file!");
+    });
+    return geturl;
+  };
+
+  const uploadImage = async () => {
     const user = firebase.auth().currentUser;
     const fileRef = ref(
       storage,
       `/chats_images/${user.uid}/${ActiveChatUser}/${lastIdOne + 1}`
     );
-    uploadBytes(fileRef, image).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        console.log("urlbefore");
-        console.log(url);
-        setImageUrl(url);
-        console.log(imageUrl);
-        console.log("urlafter");
-        var temp = formatAMPM(new Date());
-        storeToReactStore(Messages, temp, url);
-
-        // sendMessage(Messages);
-        setMessages("");
-      });
-      // toast.success("Photo Changed Successfully");
-      toast("Image Sent", {
-        icon: "✅",
-        className: "font-[nunitosans] font-normal",
+    const myPromise = uploadImageGetUrl(fileRef);
+    toast.promise(
+      myPromise,
+      {
+        loading: "Sending Image",
+        success: "Image Sent",
+        error: "Error",
+      },
+      {
         style: {
-          borderRadius: "9px",
-          background: "#333",
-          color: "#cdd8dd",
+          backgroundColor: "#333333",
+          color: "#fff",
+          font: "work",
+          fontWeight: "400",
         },
+      }
+    );
+  };
+
+  // -------------------------------------------------------------------------- Upload Video & Get Url
+
+  const uploadVideoGetUrl = async (fileRef) => {
+    var geturl = await uploadBytes(fileRef, video).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        console.log(url);
+        var temp = formatAMPM(new Date());
+        storeToReactStore(
+          Messages,
+          temp,
+          imageUrl,
+          url,
+          documentUrl,
+          DocName,
+          DocSize
+        );
+        setMessages("");
+        geturl = url;
       });
       console.log("Uploaded a blob or file!");
     });
-  }
+    return geturl;
+  };
 
-  function uploadDoc() {
+  const uploadVideo = () => {
     const user = firebase.auth().currentUser;
-    const fileRef = ref(storage, `/chats_doc/${user.uid}/${lastIdOne + 1}`);
-    uploadBytes(fileRef, doc).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        console.log("urlbefore");
-        console.log(url);
-        // g(url);
-        // setImageUrl(url);
-        // console.log(imageUrl);
-        // console.log("urlafter");
-        var temp = formatAMPM(new Date());
-        storeToReactStore(Messages, temp, url);
-
-        // sendMessage(Messages);
-        setMessages("");
-      });
-      // toast.success("Photo Changed Successfully");
-      toast("Image Sent", {
-        icon: "✅",
-        className: "font-[nunitosans] font-normal",
+    const fileRef = ref(
+      storage,
+      `/chats_videos/${user.uid}/${ActiveChatUser}/${lastIdOne + 1}`
+    );
+    const myPromise = uploadVideoGetUrl(fileRef);
+    toast.promise(
+      myPromise,
+      {
+        loading: "Sending Video",
+        success: "Video Sent",
+        error: "Error",
+      },
+      {
         style: {
-          borderRadius: "9px",
-          background: "#333",
-          color: "#cdd8dd",
+          backgroundColor: "#333333",
+          color: "#fff",
+          font: "work",
+          fontWeight: "400",
         },
+      }
+    );
+  };
+
+  // --------------------------------------------------------------------------  Upload Document & Get Url
+
+  const uploadDocumentGetUrl = async (fileRef) => {
+    var geturl = await uploadBytes(fileRef, video).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        console.log(url);
+        var temp = formatAMPM(new Date());
+        storeToReactStore(
+          Messages,
+          temp,
+          imageUrl,
+          videoUrl,
+          url,
+          DocName,
+          DocSize
+        );
+        setMessages("");
+        setDocName();
+        setDocSize();
+        geturl = url;
       });
       console.log("Uploaded a blob or file!");
     });
-  }
+    return geturl;
+  };
 
-  function g(imageUrl) {
-    const img = new Image();
-    img.src = imageUrl;
-    img.onload = () => {
-      console.log(img.height);
-      console.log(img.width);
-    };
-  }
+  const uploadDocument = () => {
+    const user = firebase.auth().currentUser;
+    const fileRef = ref(
+      storage,
+      `/chats_documents/${user.uid}/${ActiveChatUser}/${lastIdOne + 1}`
+    );
+    const myPromise = uploadDocumentGetUrl(fileRef);
+    toast.promise(
+      myPromise,
+      {
+        loading: "Sending Document",
+        success: "Document Sent",
+        error: "Error",
+      },
+      {
+        style: {
+          backgroundColor: "#333333",
+          color: "#fff",
+          font: "work",
+          fontWeight: "400",
+        },
+      }
+    );
+  };
+
+  // function uploadDoc() {
+  //   const user = firebase.auth().currentUser;
+  //   const fileRef = ref(storage, `/chats_doc/${user.uid}/${lastIdOne + 1}`);
+  //   uploadBytes(fileRef, doc).then((snapshot) => {
+  //     getDownloadURL(snapshot.ref).then((url) => {
+  //       console.log(url);
+  //       var temp = formatAMPM(new Date());
+  //       storeToReactStore(Messages, temp, url);
+  //       setMessages("");
+  //     });
+  //     console.log("Uploaded a blob or file!");
+  //   });
+  // }
+
+  // --------------------------------------------------------------------------
 
   const ImageMediaLinkk = useSelector((store) => store.chat.imageMediaLink);
   useEffect(() => {
@@ -651,6 +726,8 @@ export const MessageBody = () => {
     console.log(ImageMediaLinkk);
     getImageMediaLink();
   }, [ActiveChatUser]);
+
+  // -------------------------------------------------------------------------- Get User Media Urls
 
   function getImageMediaLink() {
     const user = firebase.auth().currentUser;
@@ -672,21 +749,11 @@ export const MessageBody = () => {
             dispatch(addImageMediaLink({ url: media.Image }));
           }
         });
-        // setUserList(snapshot.docs);
-        // dispatch(clearAllFriendList());
-        // snapshot.docs?.map((user) => {
-        //   // console.log(typeof user.id);
-        //   // console.log(typeof users.uid);
-        //   if (user.id !== users.uid) {
-        //     // console.log("Same user");
-        //     dispatch(addAllFriendList({ UserId: user.id }));
-        //   } else {
-        //     // console.log("different user");
-        //   }
-        // });
       });
     }
   }
+
+  // --------------------------------------------------------------------------
 
   return (
     <>
@@ -716,6 +783,38 @@ export const MessageBody = () => {
                   </>
                 );
               })}
+              {/* <div className="w-[32%] h-[65px] rounded-lg bg-[#1f201f] flex justify-center items-center">
+                <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
+                  <img src={doccc} className="w-[40px]"></img>
+                </div>
+                <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
+                  <span className="font-[work] text-[14px] font-semibold text-[white]">
+                    Assignment 4.pdf
+                  </span>
+                  <span className="font-[work] text-[11px] font-normal text-[white]">
+                    pdf • 20kb
+                  </span>
+                </div>
+                <div className="w-[40px] h-full flex justify-start items-center">
+                  <div className="w-[30px] h-[30px] rounded-full hover:bg-[#383938] flex justify-center items-center cursor-pointer">
+                    <img src={download} className="w-[20px]"></img>
+                  </div>
+                </div>
+              </div> */}
+              {/* <button
+                className="text-white"
+                onClick={() => {
+                  const myPromise = handleSend();
+
+                  toast.promise(myPromise, {
+                    loading: "Loading",
+                    success: "Got the data",
+                    error: "Error when fetching",
+                  });
+                }}
+              >
+                Toast Me !
+              </button> */}
               {/* <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
                 <video
                   controls
@@ -781,11 +880,11 @@ export const MessageBody = () => {
       {document === true ? (
         <>
           <div
-            className="w-[208px] px-[19px] fixed mt-[-258px]"
+            className="w-[208px] px-[19px] fixed mt-[-338px]"
             style={{ transition: ".5s" }}
           >
             <div
-              className="w-[170px] h-[258px] text-[white] bg-[#313131ae] border border-transparent  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
+              className="w-[170px] h-[338px] text-[white] bg-[#313131ae] border border-transparent  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
               style={{ transition: ".5s" }}
             >
               <div className="w-full flex flex-col items-center">
@@ -813,7 +912,7 @@ export const MessageBody = () => {
                 <label
                   className="w-full flex items-center h-[40px] opacity-100 rounded-lg   cursor-pointer"
                   // style={{ transition: ".2s" }}
-                  style={{ transition: "2s", transitionDelay: ".5s" }}
+                  style={{ transition: "2s", transitionDelay: ".4s" }}
                   for="image-file-input"
                 >
                   <div className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl">
@@ -830,33 +929,49 @@ export const MessageBody = () => {
                     Photos
                   </div>
                 </label>
-                <div
-                  className="w-full flex items-center h-[40px] opacity-100 rounded-lg  cursor-pointer"
-                  style={{ transition: "2s", transitionDelay: ".8s" }}
+                <label
+                  className="w-full flex items-center h-[40px] opacity-100 rounded-lg   cursor-pointer"
+                  // style={{ transition: ".2s" }}
+                  style={{ transition: "2s", transitionDelay: ".6s" }}
+                  for="video-file-input"
                 >
-                  {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
-
-                  <div
-                    className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl"
-                    onClick={() => {
-                      toast("Contact Sharing not Supported", {
-                        icon: "⚠️",
-                        className: "font-[nunitosans] font-normal",
-                        style: {
-                          borderRadius: "9px",
-                          background: "#333",
-                          color: "#cdd8dd",
-                        },
-                      });
-                    }}
-                  >
-                    <img src={contacts} className="w-[25px] mr-[8px]"></img>{" "}
-                    Contact
+                  <div className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl">
+                    <input
+                      id="video-file-input"
+                      type="file"
+                      accept="video/*"
+                      onChange={(e) => Video(e)}
+                      className="hidden"
+                    ></input>
+                    {/* <IoMdPhotos className="text-[24px] mr-[8px]" /> */}
+                    <img src={vide} className="w-[25px] mr-[8px]"></img>
+                    {/* <FcImageFile className="text-[24px] mr-[8px]" /> */}
+                    Videos
                   </div>
-                </div>
+                </label>
+                <label
+                  className="w-full flex items-center h-[40px] opacity-100 rounded-lg   cursor-pointer"
+                  // style={{ transition: ".2s" }}
+                  style={{ transition: "2s", transitionDelay: ".8s" }}
+                  for="gif-file-input"
+                >
+                  <div className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl">
+                    <input
+                      id="gif-file-input"
+                      type="file"
+                      accept="image/gif"
+                      onChange={(e) => Image(e)}
+                      className="hidden"
+                    ></input>
+                    {/* <IoMdPhotos className="text-[24px] mr-[8px]" /> */}
+                    <img src={giff} className="w-[25px] mr-[8px]"></img>
+                    {/* <FcImageFile className="text-[24px] mr-[8px]" /> */}
+                    Gif's
+                  </div>
+                </label>
                 <div
                   className="w-full flex items-center h-[40px] opacity-100 rounded-lg   cursor-pointer"
-                  style={{ transition: "2s", transitionDelay: "1.1s" }}
+                  style={{ transition: "2s", transitionDelay: "1s" }}
                 >
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
@@ -879,6 +994,31 @@ export const MessageBody = () => {
                   </div>
                 </div>
                 <div
+                  className="w-full flex items-center h-[40px] opacity-100 rounded-lg  cursor-pointer"
+                  style={{ transition: "2s", transitionDelay: "1.2s" }}
+                >
+                  {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
+
+                  <div
+                    className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl"
+                    onClick={() => {
+                      toast("Contact Sharing not Supported", {
+                        icon: "⚠️",
+                        className: "font-[nunitosans] font-normal",
+                        style: {
+                          borderRadius: "9px",
+                          background: "#333",
+                          color: "#cdd8dd",
+                        },
+                      });
+                    }}
+                  >
+                    <img src={contacts} className="w-[25px] mr-[8px]"></img>{" "}
+                    Contact
+                  </div>
+                </div>
+
+                <div
                   className="w-full flex items-center  opacity-100 rounded-lg   cursor-pointer my-[10px]"
                   style={{ transition: "2s", transitionDelay: "1.125s" }}
                 >
@@ -894,7 +1034,7 @@ export const MessageBody = () => {
                 style={{ transition: "2s", transitionDelay: "1.4s" }}
               >
                 {image ? (
-                  <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px]  cursor-pointer ">
+                  <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px]  cursor-pointer rounded-lg ">
                     <button
                       className="w-full h-full opacity cursor-pointer flex justify-between items-center"
                       onClick={() => {
@@ -950,6 +1090,101 @@ export const MessageBody = () => {
                         {imageLength}
                       </span>
                     </button>
+                  </div>
+                ) : video ? (
+                  <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px] rounded-lg  cursor-pointer ">
+                    <button
+                      className="w-full h-full opacity cursor-pointer flex justify-between items-center"
+                      onClick={() => {
+                        if (video) {
+                          setDocument(false);
+                          setSend(true);
+                          uploadVideo();
+                          // uploadDoc();
+                          // setDoc();
+                          setVideo();
+                          console.log("upload");
+                          setImageLength();
+                        } else {
+                          console.log("not upload");
+                          // toast.error("Select Image First");
+                          toast("Select Image", {
+                            icon: "❌",
+                            className: "font-[nunitosans] font-normal",
+                            style: {
+                              borderRadius: "9px",
+                              background: "#333",
+                              color: "#cdd8dd",
+                            },
+                          });
+                        }
+                      }}
+                    >
+                      <img
+                        src={sendd}
+                        className="w-[25px] mr-[10px] z-20"
+                      ></img>
+                      Send
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[#cdd8dd] text-[black]   flex justify-center items-center">
+                        {imageLength}
+                      </span>
+                    </button>
+                  </div>
+                ) : Doc ? (
+                  <div className="w-full h-full opacity-30 px-[10px] rounded-lg">
+                    <div
+                      className="w-full h-full opacity cursor-pointer flex justify-between items-center"
+                      onClick={() => {
+                        if (Doc) {
+                          setDocument(false);
+                          setSend(true);
+                          uploadDocument();
+                          setDoc();
+                          console.log("upload");
+                          setImageLength();
+                        }
+                        // else if (doc) {
+                        //   setDocument(false);
+                        //   setSend(true);
+                        //   uploadDoc();
+                        //   setDoc();
+                        //   console.log("upload");
+                        // }
+                        else {
+                          console.log("not upload");
+                          // toast.error("Select Image First");
+                          toast("Select Image", {
+                            icon: "❌",
+                            className: "font-[nunitosans] font-normal",
+                            style: {
+                              borderRadius: "9px",
+                              background: "#333",
+                              color: "#cdd8dd",
+                            },
+                          });
+                        }
+                      }}
+                      // onClick={() => {
+                      //   if (Messages.length !== 0) {
+                      //     var temp = formatAMPM(new Date());
+                      //     storeToReactStore(Messages, temp);
+                      //     setSend(true);
+                      //     // sendMessage(Messages);
+                      //     setMessages("");
+                      //     // sendMessage(Messages);
+                      //     // dispatch(toggleSendFlag(true));
+                      //   }
+                      // }}
+                    >
+                      <img
+                        src={sendd}
+                        className="w-[25px] mr-[10px] z-20"
+                      ></img>
+                      Send
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[#cdd8dd00] text-[black]   flex justify-center items-center">
+                        {imageLength}
+                      </span>
+                    </div>
                   </div>
                 ) : (
                   <div className="w-full h-full opacity-30 px-[10px] rounded-lg">
@@ -1015,11 +1250,11 @@ export const MessageBody = () => {
       ) : (
         <>
           <div
-            className="w-[0] px-[19px] fixed mt-[-258px]"
+            className="w-[0] px-[19px] fixed mt-[-0px]"
             style={{ transition: ".5s" }}
           >
             <div
-              className="w-[0] h-[258px] text-[#ccd7dc] bg-[#1f201fae] backdrop-blur-md py-[20px]   border-transparent  rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
+              className="w-[0] h-[0px] text-[#ccd7dc] bg-[#1f201fae] backdrop-blur-md py-[20px]   border-transparent  rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
               style={{ transition: ".5s" }}
             >
               <div className="w-full flex flex-col items-center">
@@ -1064,17 +1299,46 @@ export const MessageBody = () => {
                     Photos
                   </div>
                 </label>
-                <div
+                <label
                   className="w-full flex items-center h-[40px] opacity-0 rounded-lg  hover:backdrop-blur-md hover:bg-[#ccd7dc]  hover:text-[black] cursor-pointer"
                   style={{ transition: ".2s" }}
+                  for="image-file-input"
                 >
-                  {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
-
                   <div className="w-full h-full px-[10px] flex items-center">
-                    <img src={contacts} className="w-[25px] mr-[8px]"></img>{" "}
-                    Contact
+                    <input
+                      id="image-file-input"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => Image(e)}
+                      className="hidden"
+                      // style={{ transition: ".2s" }}
+                    ></input>
+                    {/* <IoMdPhotos className="text-[24px] mr-[8px]" /> */}
+                    <img src={vide} className="w-[25px] mr-[8px]"></img>
+                    {/* <FcImageFile className="text-[24px] mr-[8px]" /> */}
+                    Videos
                   </div>
-                </div>
+                </label>
+                <label
+                  className="w-full flex items-center h-[40px] opacity-0 rounded-lg  hover:backdrop-blur-md hover:bg-[#ccd7dc]  hover:text-[black] cursor-pointer"
+                  style={{ transition: ".2s" }}
+                  for="image-file-input"
+                >
+                  <div className="w-full h-full px-[10px] flex items-center">
+                    <input
+                      id="image-file-input"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => Image(e)}
+                      className="hidden"
+                      // style={{ transition: ".2s" }}
+                    ></input>
+                    {/* <IoMdPhotos className="text-[24px] mr-[8px]" /> */}
+                    <img src={giff} className="w-[25px] mr-[8px]"></img>
+                    {/* <FcImageFile className="text-[24px] mr-[8px]" /> */}
+                    Gif's
+                  </div>
+                </label>
                 <div
                   className="w-full flex items-center h-[40px] opacity-0 rounded-lg  hover:backdrop-blur-md hover:bg-[#ccd7dc]  hover:text-[black] cursor-pointer"
                   style={{ transition: ".2s" }}
@@ -1086,6 +1350,18 @@ export const MessageBody = () => {
                     Sticker
                   </div>
                 </div>
+                <div
+                  className="w-full flex items-center h-[40px] opacity-0 rounded-lg  hover:backdrop-blur-md hover:bg-[#ccd7dc]  hover:text-[black] cursor-pointer"
+                  style={{ transition: ".2s" }}
+                >
+                  {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
+
+                  <div className="w-full h-full px-[10px] flex items-center">
+                    <img src={contacts} className="w-[25px] mr-[8px]"></img>{" "}
+                    Contact
+                  </div>
+                </div>
+
                 <div
                   className="w-full flex items-center  opacity-100 rounded-lg   cursor-pointer my-[10px]"
                   style={{ transition: ".2s" }}
@@ -1100,9 +1376,9 @@ export const MessageBody = () => {
                 className="w-full flex items-center justify-center  h-[40px]   opacity-0"
                 style={{ transition: ".2s" }}
               >
-                <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px] bg-slate-500 z-0">
+                <div className="w-full h-full opacity-30   px-[10px] z-0">
                   <button
-                    className="w-full h-full opacity cursor-pointer flex justify-between items-center bg-slate-100 z-0"
+                    className="w-full h-full opacity cursor-pointer flex justify-between items-center  z-0"
                     onClick={() => {
                       if (image) {
                         setDocument(false);
@@ -1145,10 +1421,7 @@ export const MessageBody = () => {
                     //   }
                     // }}
                   >
-                    <img
-                      src={sendd}
-                      className="w-[25px] mr-[0] z-0 bg-slate-400"
-                    ></img>
+                    <img src={sendd} className="w-[25px] mr-[0] z-0 "></img>
                     Send
                     <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] opacity-0 text-[black]   flex justify-center items-center">
                       {imageLength}
@@ -1189,6 +1462,9 @@ export const MessageBody = () => {
             <div
               className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer hover:bg-[#80999b] hover:text-[white] rounded-full mr-[-78px] z-10 text-[black]"
               onClick={() => {
+                setImage();
+                setVideo();
+                setDocument();
                 setDocument(!document);
               }}
             >
@@ -1204,7 +1480,15 @@ export const MessageBody = () => {
                 if (e.nativeEvent.key === "Enter") {
                   if (Messages.length !== 0) {
                     var temp = formatAMPM(new Date());
-                    storeToReactStore(Messages, temp, imageUrl);
+                    storeToReactStore(
+                      Messages,
+                      temp,
+                      imageUrl,
+                      videoUrl,
+                      documentUrl,
+                      DocName,
+                      DocSize
+                    );
                     setSend(true);
                     // sendMessage(Messages);
                     setMessages("");
@@ -1225,7 +1509,15 @@ export const MessageBody = () => {
               onClick={() => {
                 if (Messages.length !== 0) {
                   var temp = formatAMPM(new Date());
-                  storeToReactStore(Messages, temp, imageUrl);
+                  storeToReactStore(
+                    Messages,
+                    temp,
+                    imageUrl,
+                    videoUrl,
+                    documentUrl,
+                    DocName,
+                    DocSize
+                  );
                   setSend(true);
                   // sendMessage(Messages);
                   setMessages("");

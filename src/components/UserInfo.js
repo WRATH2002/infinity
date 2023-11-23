@@ -11,7 +11,7 @@ import { MdCall } from "react-icons/md";
 import { BiSolidVideo } from "react-icons/bi";
 import { PiChatCenteredTextFill } from "react-icons/pi";
 import { addActiveUser } from "../utils/chatSlice";
-import { onSnapshot } from "firebase/firestore";
+import { onSnapshot, serverTimestamp } from "firebase/firestore";
 import back from "../assets/img/back.png";
 import call from "../assets/img/call.png";
 import videocall from "../assets/img/videocall.png";
@@ -162,30 +162,26 @@ export const UserInfo = () => {
 
     chatRef.get().then((doc) => {
       if (doc.data().ChatHistory.length == 0) {
-        toast("No Chats to Delete", {
-          icon: "❌",
-          className: "font-[nunitosans] font-normal",
+        toast.error("No Chats to Delete", {
           style: {
-            borderRadius: "9px",
-            background: "#333",
-            color: "#cdd8dd",
+            backgroundColor: "#333333",
+            color: "#fff",
+            font: "work",
+            fontWeight: "400",
           },
         });
-        // toast.error("No Chats to Delete");
       } else {
-        toast("Chats Deleted", {
-          icon: "✅",
-          className: "font-[nunitosans] font-normal",
+        toast.success("Chats Deleted", {
           style: {
-            borderRadius: "9px",
-            background: "#333",
-            color: "#cdd8dd",
+            backgroundColor: "#333333",
+            color: "#fff",
+            font: "work",
+            fontWeight: "400",
           },
         });
-        // toast.success("Chats Deleted");
         chatRef.set({
           ChatHistory: [],
-          LastUpdated: "",
+          LastUpdated: serverTimestamp(),
           LastId: 0,
           TotalMessage: 0,
           LastMessage: 0,
@@ -298,7 +294,7 @@ export const UserInfo = () => {
                     </div>
                     <div className=" h-[80px] w-full flex justify-between items-center px-[30px] rounded-xl">
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white cursor-pointer font-[work] bg-[#494949] hover:bg-[#303030] rounded-full"
+                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white cursor-pointer font-[work] bg-[#494949] hover:bg-[#303030] rounded-xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -307,7 +303,7 @@ export const UserInfo = () => {
                         Cancel
                       </button>
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white cursor-pointer font-[work] bg-[#494949] hover:bg-[#303030] rounded-full"
+                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white cursor-pointer font-[work] bg-[#494949] hover:bg-[#303030] rounded-xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
