@@ -182,25 +182,27 @@ const Messagess = (props) => {
               </div>
             ) : (
               <>
-                <div className="w-[32%] h-[65px] rounded-lg bg-[#1f201f] flex justify-center items-center">
-                  <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
-                    <img src={doccc} className="w-[40px]"></img>
-                  </div>
-                  <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
-                    <span className="w-full font-[work] text-[14px] font-semibold text-[white] whitespace-nowrap text-ellipsis overflow-hidden">
-                      {props.data.docName}
-                    </span>
-                    <span className="font-[work] text-[11px] font-normal text-[white]">
-                      {props.data.docSize > 1024 ? (
-                        <>{(props.data.docSize / 1024).toFixed(2)} mB</>
-                      ) : (
-                        <>{props.data.docSize} kB</>
-                      )}
-                    </span>
-                  </div>
-                  <div className="w-[40px] h-full flex justify-start items-center">
-                    <div className="w-[30px] h-[30px] rounded-full hover:bg-[#383938] flex justify-center items-center cursor-pointer">
-                      <img src={download} className="w-[20px]"></img>
+                <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[0px] bg-[#252525] rounded-lg  flex justify-center items-center">
+                  <div className="w-full h-full  rounded-lg  flex justify-start items-center ">
+                    <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
+                      <img src={doccc} className="w-[40px]"></img>
+                    </div>
+                    <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
+                      <span className="w-full font-[work] text-[14px] font-semibold text-[white] whitespace-nowrap text-ellipsis overflow-hidden">
+                        {props.data.docName}
+                      </span>
+                      <span className="font-[work] text-[11px] font-normal text-[white]">
+                        {props.data.docSize > 1024 ? (
+                          <>{(props.data.docSize / 1024).toFixed(2)} mB</>
+                        ) : (
+                          <>{props.data.docSize} kB</>
+                        )}
+                      </span>
+                    </div>
+                    <div className="w-[40px] h-full flex justify-start items-center">
+                      <div className="w-[30px] h-[30px] rounded-full hover:bg-[#0b0c0b] flex justify-center items-center cursor-pointer">
+                        <img src={download} className="w-[20px]"></img>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -221,7 +223,7 @@ const Messagess = (props) => {
                 </div>
               </div>
             ) : props.data.Image.length != 0 ? (
-              <div className="group w-auto  max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[0px] rounded-lg flex items-center text-black flex-wrap justify-center hover:bg-[#1f201f]">
+              <div className="group w-auto  max-w-[75%] lg:max-w-[32%] bg-[#b8dedf] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[0px] rounded-lg flex items-center text-black flex-wrap justify-center hover:bg-[#1f201f]">
                 {/* <img
                   loading="lazy"
                   src={props.data.Image}
@@ -311,25 +313,29 @@ const Messagess = (props) => {
               </div>
             ) : (
               <>
-                <div className="w-[32%] h-[65px] rounded-lg bg-[#1f201f] flex justify-center items-center">
-                  <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
-                    <img src={doccc} className="w-[40px]"></img>
-                  </div>
-                  <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
-                    <span className="w-full font-[work] text-[14px] font-semibold text-[white] whitespace-nowrap text-ellipsis overflow-hidden">
-                      {props.data.docName}
-                    </span>
-                    <span className="font-[work] text-[11px] font-normal text-[white]">
-                      {props.data.docSize > 1024 ? (
-                        <>{(props.data.docSize / 1024).toFixed(2)} mB</>
-                      ) : (
-                        <>{props.data.docSize} kB</>
-                      )}
-                    </span>
-                  </div>
-                  <div className="w-[40px] h-full flex justify-start items-center">
-                    <div className="w-[30px] h-[30px] rounded-full hover:bg-[#383938] flex justify-center items-center cursor-pointer">
-                      <img src={download} className="w-[20px]"></img>
+                <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[0px] bg-[#b8dedf] rounded-lg  flex justify-center items-center">
+                  <div className="w-full h-full  rounded-lg  flex justify-start items-center ">
+                    <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
+                      <img src={doccc} className="w-[40px]"></img>
+                    </div>
+                    <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
+                      <span className="w-full font-[work] text-[14px] font-semibold text-[black] whitespace-nowrap text-ellipsis overflow-hidden">
+                        {props.data.docName}
+                      </span>
+                      <span className="font-[work] text-[11px] font-normal text-[black]">
+                        {props.data.docSize > 1024 ? (
+                          <>{(props.data.docSize / 1024).toFixed(2)} mB</>
+                        ) : (
+                          <>{props.data.docSize} kB</>
+                        )}
+                      </span>
+                    </div>
+                    <div className="w-[40px] h-full flex justify-start items-center">
+                      <a href={props.data.Document} download>
+                        <div className="w-[30px] h-[30px] rounded-full hover:bg-[#99b6b8] flex justify-center items-center cursor-pointer">
+                          <img src={download} className="w-[20px]"></img>
+                        </div>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -359,8 +365,8 @@ export const MessageBody = () => {
 
   const [image, setImage] = useState();
   const [Doc, setDoc] = useState();
-  const [DocName, setDocName] = useState();
-  const [DocSize, setDocSize] = useState();
+  const [DocName, setDocName] = useState("");
+  const [DocSize, setDocSize] = useState("");
   const [video, setVideo] = useState();
   const [profileURL, setProfileURL] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -450,6 +456,8 @@ export const MessageBody = () => {
         Image: imageUrl,
         Video: videoUrl,
         Document: documentUrl,
+        docName: DocName,
+        docSize: DocSize,
       })
     );
   }
@@ -670,8 +678,8 @@ export const MessageBody = () => {
           DocSize
         );
         setMessages("");
-        setDocName();
-        setDocSize();
+        setDocName("");
+        setDocSize("");
         geturl = url;
       });
       console.log("Uploaded a blob or file!");
@@ -744,7 +752,16 @@ export const MessageBody = () => {
         console.log(snapshot.data().ChatHistory);
         dispatch(clearImageMediaLink());
         snapshot.data().ChatHistory.forEach((media) => {
-          if (media.Image !== "") {
+          if (media.Document !== "") {
+            console.log("media.Document");
+
+            console.log(media.Document);
+            dispatch(
+              addImageMediaLink({ url: media.Document, docName: media.docName })
+            );
+          } else if (media.Image !== "") {
+            console.log("media.image");
+
             console.log(media.Image);
             dispatch(addImageMediaLink({ url: media.Image }));
           }
@@ -804,16 +821,25 @@ export const MessageBody = () => {
               {/* <button
                 className="text-white"
                 onClick={() => {
-                  const myPromise = handleSend();
+                  const user = firebase.auth().currentUser;
 
-                  toast.promise(myPromise, {
-                    loading: "Loading",
-                    success: "Got the data",
-                    error: "Error when fetching",
+                  const UpdateRef = db.collection("Chat Record").doc(user.uid);
+
+                  UpdateRef.update({
+                    Name: "Himadri Purkait",
+                    Info: "hello world",
                   });
+
+                  // onSnapshot(UpdateRef, (snapshot) => {
+                  //   console.log(snapshot.data().test);
+                  //   snapshot.data().test.update({
+                  //     name: "Himadri",
+                  //     info: "hello world",
+                  //   });
+                  // });
                 }}
               >
-                Toast Me !
+                Update Me !
               </button> */}
               {/* <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
                 <video
@@ -1131,7 +1157,7 @@ export const MessageBody = () => {
                     </button>
                   </div>
                 ) : Doc ? (
-                  <div className="w-full h-full opacity-30 px-[10px] rounded-lg">
+                  <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px] rounded-lg  cursor-pointer ">
                     <div
                       className="w-full h-full opacity cursor-pointer flex justify-between items-center"
                       onClick={() => {
@@ -1181,7 +1207,7 @@ export const MessageBody = () => {
                         className="w-[25px] mr-[10px] z-20"
                       ></img>
                       Send
-                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[#cdd8dd00] text-[black]   flex justify-center items-center">
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[#cdd8dd] text-[black]   flex justify-center items-center">
                         {imageLength}
                       </span>
                     </div>

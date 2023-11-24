@@ -40,36 +40,47 @@ const Media = (props) => {
   return (
     <>
       {/* <div className="w-full h-full justify-start items-center  flex"> */}
-      <div className="group min-w-[90px] lg:min-w-[120px] md:min-w-[120px] max-w-[90px] lg:max-w-[120px] md:max-w-[120px] h-[90px] lg:h-[120px] md:h-[120px] mx-[3px] lg:mx-[5px] md:mx-[5px] rounded-xl">
-        <img
-          className="group-hover:opacity-40 w-full h-full object-cover rounded-xl"
-          src={props.data.url}
-        ></img>
-        <div className="min-w-[90px] lg:min-w-[120px] md:min-w-[120px] h-[90px] lg:h-[120px] md:h-[120px] mt-[-90px] lg:mt-[-120px] md:mt-[-120px] rounded-xl flex justify-center items-center bg-[#1f201f]">
-          <div
-            className="group-hover:flex  hidden w-[35px] h-[35px] rounded-full justify-center items-center bg-[#e3e3e35f] backdrop-blur-sm z-20 cursor-pointer "
-            onClick={() => {
-              setUrl(props.data.url);
-              downloadImage(props.data.url);
-              toast("Downloading Image", {
-                icon: "⬇️",
-                className: "font-[nunitosans] font-normal",
-                style: {
-                  borderRadius: "9px",
-                  background: "#333",
-                  color: "#cdd8dd",
-                },
-              });
-            }}
-          >
-            <img
-              src={download}
-              className="w-[20px]   z-20 drop-shadow-md"
-            ></img>
+      {!props.data.docName ? (
+        <div className="group min-w-[90px] lg:min-w-[120px] md:min-w-[120px] max-w-[90px] lg:max-w-[120px] md:max-w-[120px] h-[90px] lg:h-[120px] md:h-[120px] mx-[3px] lg:mx-[5px] md:mx-[5px] rounded-xl">
+          <img
+            className="group-hover:opacity-40 w-full h-full object-cover rounded-xl"
+            src={props.data.url}
+          ></img>
+          <div className="min-w-[90px] lg:min-w-[120px] md:min-w-[120px] h-[90px] lg:h-[120px] md:h-[120px] mt-[-90px] lg:mt-[-120px] md:mt-[-120px] rounded-xl flex justify-center items-center bg-[#1f201f]">
+            <div
+              className="group-hover:flex  hidden w-[35px] h-[35px] rounded-full justify-center items-center bg-[#e3e3e35f] backdrop-blur-sm z-20 cursor-pointer "
+              onClick={() => {
+                setUrl(props.data.url);
+                downloadImage(props.data.url);
+                toast("Downloading Image", {
+                  icon: "⬇️",
+                  className: "font-[nunitosans] font-normal",
+                  style: {
+                    borderRadius: "9px",
+                    background: "#333",
+                    color: "#cdd8dd",
+                  },
+                });
+              }}
+            >
+              <img
+                src={download}
+                className="w-[20px]   z-20 drop-shadow-md"
+              ></img>
+            </div>
           </div>
         </div>
-        {/* url :{props.link.url} */}
-      </div>
+      ) : (
+        <div className="group min-w-[90px] lg:min-w-[120px] md:min-w-[120px] max-w-[90px] lg:max-w-[120px] md:max-w-[120px] h-[90px] lg:h-[120px] md:h-[120px] mx-[3px] lg:mx-[5px] md:mx-[5px] rounded-xl ">
+          <div className="w-full h-full bg-white rounded-xl flex justify-center items-center">
+            <div className="w-[70px] h-[70px] rounded-xl bg-[#e8e8e8] flex justify-center items-center text-black font-[work] ">
+              {props.data.docName
+                ?.substring(props.data.docName?.indexOf(".") + 1)
+                .toUpperCase()}
+            </div>
+          </div>
+        </div>
+      )}
       {/* <div className="min-w-[120px] h-[120px] bg-slate-300"><img className="w-full object-cover" src={}></img></div>
         <div className="min-w-[120px] h-[120px] bg-slate-200"><img className="w-full object-cover" src={}></img></div>
         <div className="min-w-[120px] h-[120px] bg-slate-300"><img className="w-full object-cover" src={}></img></div>

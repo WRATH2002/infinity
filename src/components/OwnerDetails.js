@@ -30,7 +30,9 @@ import uploadd from "../assets/img/upload.png";
 
 const OwnerDetails = () => {
   const [ownerInfo, setOwnerInfo] = useState("");
+  const [changeOwnerInfo, setChangeOwnerInfo] = useState("");
   const [ownerName, setOwnerName] = useState("");
+  const [changeOwnerName, setChangeOwnerName] = useState("");
   const [isMenu, setIsMenu] = useState(false);
   const [isProfileMenu, setIsProfileMenu] = useState(false);
   const [isSettingsMenu, setIsSettingsMenu] = useState(false);
@@ -186,9 +188,9 @@ const OwnerDetails = () => {
                   {nameChangeFlag === true ? (
                     <input
                       autoFocus
-                      onChange={(e) => setOwnerName(e.target.value)}
-                      value={ownerName}
-                      className="text-[14px] w-[130px] outline-none bg-transparent text-[#9fa5a7]"
+                      onChange={(e) => setChangeOwnerName(e.target.value)}
+                      value={changeOwnerName}
+                      className="text-[14px] w-[130px] outline-none bg-transparent text-[#ffffff]"
                     ></input>
                   ) : (
                     <input
@@ -197,24 +199,55 @@ const OwnerDetails = () => {
                       className="text-[14px] w-[130px] outline-none bg-transparent text-[#9fa5a7]"
                     ></input>
                   )}
-                  <div
-                    className="ml-[10px] hover:bg-white hover:text-black cursor-pointer w-[25px] h-[25px] rounded-full flex justify-center items-center"
-                    onClick={() => {
-                      setNameChangeFlag(true);
-                    }}
-                  >
-                    <AiTwotoneEdit className="" />
-                  </div>
+                  {nameChangeFlag === true ? (
+                    <div
+                      className="ml-[10px] hover:bg-white hover:text-black cursor-pointer w-[25px] h-[25px] rounded-full flex justify-center items-center"
+                      onClick={() => {
+                        const user = firebase.auth().currentUser;
+
+                        const UpdateRef = db
+                          .collection("Chat Record")
+                          .doc(user.uid);
+
+                        UpdateRef.update({
+                          Name: changeOwnerName,
+                          // Info: "hello world",
+                        });
+                        setNameChangeFlag(false);
+                        toast.success("Profile Name Changed", {
+                          style: {
+                            backgroundColor: "#333333",
+                            color: "#fff",
+                            font: "work",
+                            fontWeight: "400",
+                          },
+                        });
+                      }}
+                    >
+                      ✅{/* <AiTwotoneEdit className="" /> */}
+                    </div>
+                  ) : (
+                    <div
+                      className="ml-[10px] hover:bg-white hover:text-black cursor-pointer w-[25px] h-[25px] rounded-full flex justify-center items-center"
+                      onClick={() => {
+                        setChangeOwnerName(ownerName);
+                        setNameChangeFlag(true);
+                      }}
+                    >
+                      <AiTwotoneEdit className="" />
+                    </div>
+                  )}
                 </div>
                 <span className="text-[14px] text-[#cdd8dd] font-semibold">
                   About
                 </span>
                 <div className="flex">
-                  {nameChangeFlag === true ? (
+                  {aboutChangeFlag === true ? (
                     <input
                       autoFocus
-                      value={ownerInfo}
-                      className="text-[14px] w-[130px] outline-none bg-transparent text-[#9fa5a7]"
+                      onChange={(e) => setChangeOwnerInfo(e.target.value)}
+                      value={changeOwnerInfo}
+                      className="text-[14px] w-[130px] outline-none bg-transparent text-[#ffffff]"
                     ></input>
                   ) : (
                     <input
@@ -223,14 +256,44 @@ const OwnerDetails = () => {
                       className="text-[14px] w-[130px] outline-none bg-transparent text-[#9fa5a7]"
                     ></input>
                   )}
-                  <div
-                    className="ml-[10px] hover:bg-white hover:text-black cursor-pointer w-[25px] h-[25px] rounded-full flex justify-center items-center"
-                    onClick={() => {
-                      setAboutChangeFlag(true);
-                    }}
-                  >
-                    <AiTwotoneEdit className="" />
-                  </div>
+                  {aboutChangeFlag === true ? (
+                    <div
+                      className="ml-[10px] hover:bg-white hover:text-black cursor-pointer w-[25px] h-[25px] rounded-full flex justify-center items-center"
+                      onClick={() => {
+                        const user = firebase.auth().currentUser;
+
+                        const UpdateRef = db
+                          .collection("Chat Record")
+                          .doc(user.uid);
+
+                        UpdateRef.update({
+                          Info: changeOwnerInfo,
+                          // Info: "hello world",
+                        });
+                        setAboutChangeFlag(false);
+                        toast.success("Profile Info Changed", {
+                          style: {
+                            backgroundColor: "#333333",
+                            color: "#fff",
+                            font: "work",
+                            fontWeight: "400",
+                          },
+                        });
+                      }}
+                    >
+                      ✅{/* <AiTwotoneEdit className="" /> */}
+                    </div>
+                  ) : (
+                    <div
+                      className="ml-[10px] hover:bg-white hover:text-black cursor-pointer w-[25px] h-[25px] rounded-full flex justify-center items-center"
+                      onClick={() => {
+                        setChangeOwnerInfo(ownerInfo);
+                        setAboutChangeFlag(true);
+                      }}
+                    >
+                      <AiTwotoneEdit className="" />
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="group w-[80px] h-[80px] rounded-full  flex justify-center items-center">

@@ -30,6 +30,8 @@ import cross from "../assets/img/cross.png";
 import { MdGroups2 } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import { RiSearch2Line } from "react-icons/ri";
+import { IoMdDocument } from "react-icons/io";
+import { TiVideo } from "react-icons/ti";
 // import { LuSearch } from "react-icons/lu";
 // import { RxCross2 } from "react-icons/rx";
 
@@ -42,6 +44,7 @@ const Friends = (props) => {
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [chatLength, setChatlength] = useState(0);
   const [chatFlag, setChatFlag] = useState("");
+  const [docName, setDocName] = useState("");
 
   const dispatch = useDispatch();
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
@@ -97,7 +100,35 @@ const Friends = (props) => {
         snapshot?.data()?.ChatHistory[snapshot?.data()?.ChatHistory?.length - 1]
           ?.Message.length === 0
       ) {
-        setLastMsg("Image");
+        if (
+          snapshot?.data()?.ChatHistory[
+            snapshot?.data()?.ChatHistory?.length - 1
+          ]?.Image.length === 0
+        ) {
+          if (
+            snapshot?.data()?.ChatHistory[
+              snapshot?.data()?.ChatHistory?.length - 1
+            ]?.Video.length === 0
+          ) {
+            if (
+              snapshot?.data()?.ChatHistory[
+                snapshot?.data()?.ChatHistory?.length - 1
+              ]?.Document.length === 0
+            ) {
+            } else {
+              setLastMsg("Document");
+              setDocName(
+                snapshot?.data()?.ChatHistory[
+                  snapshot?.data()?.ChatHistory?.length - 1
+                ]?.docName
+              );
+            }
+          } else {
+            setLastMsg("Video");
+          }
+        } else {
+          setLastMsg("Image");
+        }
       } else {
         setLastMsg(
           snapshot?.data()?.ChatHistory[
@@ -174,6 +205,40 @@ const Friends = (props) => {
                     <BsFillCameraFill className="mr-[5px] text-[#474747] drop-shadow-lg" />
                     <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
                       {lastMsg}
+                    </span>
+                  </>
+                ) : lastMsg === "Video" ? (
+                  <>
+                    {chatFlag === 1 ? (
+                      <>
+                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020] drop-shadow-lg font-[work] font-normal">
+                          you:
+                        </span>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+
+                    <TiVideo className="mr-[5px] text-[#474747] drop-shadow-lg" />
+                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
+                      {lastMsg}
+                    </span>
+                  </>
+                ) : lastMsg === "Document" ? (
+                  <>
+                    {chatFlag === 1 ? (
+                      <>
+                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020] drop-shadow-lg font-[work] font-normal">
+                          you:
+                        </span>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+
+                    <IoMdDocument className="mr-[5px] text-[#474747] drop-shadow-lg" />
+                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
+                      {docName}
                     </span>
                   </>
                 ) : (
@@ -269,6 +334,56 @@ const Friends = (props) => {
                       style={{ transition: ".5s" }}
                     >
                       {lastMsg}
+                    </span>
+                  </>
+                ) : lastMsg === "Video" ? (
+                  <>
+                    {chatFlag === 1 ? (
+                      <>
+                        <span
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] drop-shadow-lg font-[work] font-normal group-hover:text-[#202020]"
+                          style={{ transition: ".5s" }}
+                        >
+                          you:
+                        </span>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <TiVideo
+                      className="mr-[5px] text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg"
+                      style={{ transition: ".5s" }}
+                    />
+                    <span
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg font-[work] font-normal"
+                      style={{ transition: ".5s" }}
+                    >
+                      {lastMsg}
+                    </span>
+                  </>
+                ) : lastMsg === "Document" ? (
+                  <>
+                    {chatFlag === 1 ? (
+                      <>
+                        <span
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] drop-shadow-lg font-[work] font-normal group-hover:text-[#202020]"
+                          style={{ transition: ".5s" }}
+                        >
+                          you:
+                        </span>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <IoMdDocument
+                      className="mr-[5px] text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg"
+                      style={{ transition: ".5s" }}
+                    />
+                    <span
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg font-[work] font-normal"
+                      style={{ transition: ".5s" }}
+                    >
+                      {docName}
                     </span>
                   </>
                 ) : (
@@ -904,7 +1019,11 @@ const UserList = () => {
         ) : section === "Chat" ? (
           <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden">
             {UserList.length === 0 ? (
-              <>No Friends Yet</>
+              <>
+                <div className=" group w-full h-[70px] py-[10px] flex justify-center items-center cursor-pointer font-[work]   px-[10px]  text-[white] ">
+                  <span>No Friends Yet</span>
+                </div>
+              </>
             ) : (
               <>
                 {UserList?.map((friends) => {
