@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 
 const Loading = (props) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubLoading, setIsSubLoading] = useState(true);
   useEffect(() => {
     // Creating a timeout within the useEffect hook
     const timer = setTimeout(() => {
@@ -20,11 +21,20 @@ const Loading = (props) => {
     }, 4000);
   }, []);
 
+  useEffect(() => {
+    // Creating a timeout within the useEffect hook
+    const timer = setTimeout(() => {
+      // setData("Welcome to gfg!");
+      setIsSubLoading(false);
+      return () => clearTimeout(timer);
+    }, 9000);
+  }, []);
+
   return (
     <>
       {isLoading === true ? (
         <>
-          <div className="w-full bg-[#0b0c0b] flex flex-col justify-center items-center h-[100dvh]">
+          <div className="w-full bg-[black] flex flex-col justify-center items-center h-[100dvh]">
             {/* <div class="col-3">
               <div class="snippet" data-title="dot-gathering">
                 <div class="stage filter-contrast">
@@ -32,17 +42,44 @@ const Loading = (props) => {
                 </div>
               </div>
             </div> */}
+            {/* <svg viewBox="0 0 1236 600" className=" block m-auto">
+              <text
+                x="50%"
+                y="50%"
+                textAnchor="middle"
+                className="text-[120px] lg:text-[50px] md:text-[50px] text-center stroke-[2px] lg:stroke-[1px] md:stroke-[1px]"
+              >
+                INFINITY
+              </text>
+            </svg> */}
             <div class="custom-loader"></div>
             <div className="w-[200px] lg:w-[400px] md:w-[400px] h-[4px] rounded-full mt-[50px]">
-              {/* <div
-                className="w-[100%] bg-[#b8dedf] h-full rounded-full progress"
-                // style={{ width: "0", transition: "4s" }}
-              ></div> */}
               <span class="loader"></span>
             </div>
             {/* <span className="text-[13px] lg:text-[16px] md:text-[16px] tracking-[13px] lg:tracking-[17px] md:tracking-[17px] font-semibold text-[#cdd8dd] mt-[20px] w-full flex justify-center items-center">
               FETCHING MESSAGES
             </span> */}
+          </div>
+          <div className="hidden">
+            <Sidebar />
+          </div>
+        </>
+      ) : isSubLoading === true ? (
+        <>
+          <div className="w-full bg-[black] flex flex-col justify-center items-center h-[100dvh]">
+            <svg
+              viewBox="0 0 1236 600"
+              className="  m-auto flex justify-center items-center"
+            >
+              <text
+                x="50%"
+                y="50%"
+                textAnchor="middle"
+                className="text-[120px] lg:text-[50px] md:text-[50px] text-center stroke-[2px] lg:stroke-[1px] md:stroke-[1px]"
+              >
+                INFINITY
+              </text>
+            </svg>
           </div>
           <div className="hidden">
             <Sidebar />

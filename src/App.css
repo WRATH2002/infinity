@@ -152,8 +152,12 @@ input::placeholder {
 }
 
 @font-face {
+  font-family: workt;
+  src: url(./assets/font/Mukta-Regular.ttf);
+}
+@font-face {
   font-family: work;
-  src: url(./assets/font/Work_Sans/WorkSans-Light.ttf);
+  src: url(./assets/font/Mukta-Light.ttf);
 }
 @font-face {
   font-family: ubu;
@@ -226,10 +230,10 @@ input::placeholder {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: radial-gradient(farthest-side, #b8dedf 94%, #0000) top/8px 8px
+  background: radial-gradient(farthest-side, white 94%, #0000) top/4px 4px
       no-repeat,
-    conic-gradient(#0000 30%, #b8dedf);
-  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+    conic-gradient(#0000 30%, white);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0);
   animation: s3 1s infinite linear;
 }
 
@@ -277,7 +281,7 @@ input::placeholder {
 
 .loader {
   width: 100%;
-  height: 4px;
+  height: 3px;
   display: inline-block;
   border-radius: 50px;
   position: relative;
@@ -290,9 +294,9 @@ input::placeholder {
   box-sizing: border-box;
   width: 0;
 
-  height: 4px;
+  height: 3px;
   border-radius: 50px;
-  background: #b8dedf;
+  background: white;
   position: absolute;
   top: 0;
   left: 0;
@@ -305,5 +309,39 @@ input::placeholder {
   }
   100% {
     width: 100%;
+  }
+}
+
+.bggOne {
+  background: conic-gradient(#f7ec7d, #e38f66);
+  rotate: -90deg;
+}
+.bggTwo {
+  background: conic-gradient(#50e6ff, purple);
+  rotate: 90deg;
+}
+
+/*  */
+
+svg text {
+  font-family: "Roboto", sans-serif;
+  stroke: white;
+  font-size: 70px;
+  /* stroke-width: 2px; */
+  animation: textanimation 5s infinite alternate;
+  /* font-family: "Mukta", sans-serif; */
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  /* color: transparent; */
+}
+
+@keyframes textanimation {
+  0% {
+    stroke-dasharray: 0 50%;
+    stroke-dashoffset: 10%;
+  }
+  100% {
+    stroke-dasharray: 50% 0;
+    stroke-dashoffset: -10%;
   }
 }

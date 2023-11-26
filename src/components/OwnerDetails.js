@@ -102,7 +102,7 @@ const OwnerDetails = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-full  h-[70px] pb-[20px] flex justify-center items-center">
+      <div className="w-full px-[10px]  h-[50px] pb-[0px] flex justify-center items-center">
         <div className="w-[50px] h-[50px]  rounded-full">
           {profileURL === "nophoto" ? (
             <img
@@ -116,18 +116,18 @@ const OwnerDetails = () => {
             ></img>
           )}
         </div>
-        <div className="w-[calc(100%-95px)] lg:w-[calc(100%-95px)] md:w-[calc(100%-95px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start overflow-hidden">
-          <span className="text-[16px] font-semibold text-[#cdd8dd]">
+        <div className="w-[calc(100%-95px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start overflow-hidden">
+          <span className="text-[16px]  text-[#ffffff]  font-[work] font-semibold tracking-[.4px]">
             {ownerName}
           </span>
-          <span className="text-[15px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]  w-[93%]">
+          <span className="text-[15px] whitespace-nowrap overflow-hidden text-ellipsis font-[work] font-normal text-[#9fa5a7]  w-[93%]">
             {ownerInfo}
           </span>
         </div>
 
         {isMenu === true ? (
           <div
-            className="w-[35px] h-[35px]  text-black rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
+            className="w-[35px] h-[35px]  text-black rounded-full flex justify-end items-center cursor-pointer overflow-hidden"
             onClick={() => {
               setIsMenu(!isMenu);
               setIsProfileMenu(false);
@@ -141,7 +141,7 @@ const OwnerDetails = () => {
           </div>
         ) : (
           <div
-            className="w-[35px] h-[35px]  text-[#cdd8dd] hover:text-black rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
+            className="w-[35px] h-[35px]  text-[#cdd8dd] hover:text-black rounded-full flex justify-end items-center cursor-pointer overflow-hidden"
             onClick={() => {
               setIsMenu(!isMenu);
             }}

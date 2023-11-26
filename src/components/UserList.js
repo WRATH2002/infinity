@@ -157,7 +157,7 @@ const Friends = (props) => {
       {ActiveChatUser === UserUid && UserUid != "" ? (
         <>
           <div
-            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer  bg-[#b8dedf] rounded-lg  px-[10px]"
+            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer  bg-[#b8dedf]  px-[10px]"
             onClick={() => {
               activerChatUser();
               // dispatch(toggleSendFlag(true));
@@ -178,7 +178,7 @@ const Friends = (props) => {
             </div>
             <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black drop-shadow-lg font-[work] ">
+                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black drop-shadow-lg font-[work] font-semibold tracking-[.4px] ">
                   {/* {props.data.user} */}
                   {userName}
                 </span>
@@ -203,7 +203,7 @@ const Friends = (props) => {
                     )}
 
                     <BsFillCameraFill className="mr-[5px] text-[#474747] drop-shadow-lg" />
-                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
+                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg  font-[work] font-normal tracking-[.4px]">
                       {lastMsg}
                     </span>
                   </>
@@ -220,7 +220,7 @@ const Friends = (props) => {
                     )}
 
                     <TiVideo className="mr-[5px] text-[#474747] drop-shadow-lg" />
-                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
+                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg  font-[work] font-normal tracking-[.4px]">
                       {lastMsg}
                     </span>
                   </>
@@ -237,7 +237,7 @@ const Friends = (props) => {
                     )}
 
                     <IoMdDocument className="mr-[5px] text-[#474747] drop-shadow-lg" />
-                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
+                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg  font-[work] font-normal tracking-[.4px]">
                       {docName}
                     </span>
                   </>
@@ -252,7 +252,7 @@ const Friends = (props) => {
                     ) : (
                       <></>
                     )}
-                    <span className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg font-[work] font-normal">
+                    <span className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg  font-[work] font-normal tracking-[.4px]">
                       {lastMsg}
                     </span>
                   </>
@@ -277,7 +277,7 @@ const Friends = (props) => {
       ) : (
         <>
           <div
-            className=" group w-full h-[70px] py-[10px] flex justify-center bg-transparent  cursor-pointer  px-[10px]  btn from-left "
+            className=" group w-full h-[70px] py-[10px] flex justify-center bg-transparent  cursor-pointer  px-[10px] rounded-lg  btn from-left "
             onClick={() => activerChatUser()}
           >
             <div className="w-[50px] h-[50px]  rounded-full">
@@ -296,7 +296,7 @@ const Friends = (props) => {
             <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
                 <span
-                  className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]  group-hover:text-[black] drop-shadow-lg font-[work] "
+                  className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]  group-hover:text-[black] drop-shadow-lg  font-[work] font-semibold tracking-[.4px] "
                   style={{ transition: ".9s" }}
                 >
                   {/* {props.data.user} */}
@@ -316,7 +316,7 @@ const Friends = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] drop-shadow-lg font-[work] font-normal group-hover:text-[#202020]"
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] drop-shadow-lg  group-hover:text-[#202020]  font-[work] font-normal tracking-[.4px]"
                           style={{ transition: ".5s" }}
                         >
                           you:
@@ -330,7 +330,7 @@ const Friends = (props) => {
                       style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg font-[work] font-normal"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg  font-[work] font-normal tracking-[.4px]"
                       style={{ transition: ".5s" }}
                     >
                       {lastMsg}
@@ -355,7 +355,7 @@ const Friends = (props) => {
                       style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg font-[work] font-normal"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg  font-[work] font-normal tracking-[.4px]"
                       style={{ transition: ".5s" }}
                     >
                       {lastMsg}
@@ -380,7 +380,7 @@ const Friends = (props) => {
                       style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg font-[work] font-normal"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg  font-[work] font-normal tracking-[.4px]"
                       style={{ transition: ".5s" }}
                     >
                       {docName}
@@ -402,7 +402,7 @@ const Friends = (props) => {
                       <></>
                     )}
                     <span
-                      className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg font-[work] font-normal"
+                      className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747] drop-shadow-lg  font-[work] font-normal tracking-[.4px]"
                       style={{ transition: ".5s" }}
                     >
                       {lastMsg}
@@ -525,7 +525,7 @@ const SearchFriends = (props) => {
             </div>
             <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black drop-shadow-lg">
+                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black drop-shadow-lg  font-[work] font-semibold tracking-[.4px]">
                   {/* {props.data.user} */}
                   {userName}
                 </span>
@@ -535,7 +535,7 @@ const SearchFriends = (props) => {
                 </span>
               </div>
               <div className="w-full flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg">
+                <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747] drop-shadow-lg  font-[work] font-normal tracking-[.4px]">
                   {/* {props.data.msg} */}
                   {info}
                 </span>
@@ -582,7 +582,7 @@ const SearchFriends = (props) => {
             <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
                 <span
-                  className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-white  group-hover:text-black drop-shadow-lg"
+                  className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-white  group-hover:text-black drop-shadow-lg  font-[work] font-semibold tracking-[.4px]"
                   // style={{ transition: ".9s" }}
                 >
                   {/* {props.data.user} */}
@@ -595,7 +595,7 @@ const SearchFriends = (props) => {
               </div>
               <div className="w-full flex h-[23px]">
                 <span
-                  className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#d4d4d4] group-hover:text-[#474747] drop-shadow-lg"
+                  className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#d4d4d4] group-hover:text-[#474747] drop-shadow-lg  font-[work] font-normal tracking-[.4px]"
                   // style={{ transition: ".9s" }}
                 >
                   {/* {props.data.msg} */}
@@ -748,7 +748,7 @@ const UserList = () => {
 
         <div className="w-full min-h-[40px] font-semibold text-[white] flex justify-evenly items-center font-[work] text-[15px] overflow-hidden">
           {section === "All" ? (
-            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#80999b] text-white border-[#80999b]">
+            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full text-white border-[#a93cee]">
               All
             </span>
           ) : (
@@ -764,7 +764,7 @@ const UserList = () => {
             </span>
           )}
           {section === "Chat" ? (
-            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#80999b] text-white border-[#80999b]">
+            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full text-white border-[#a93cee]">
               Chats
             </span>
           ) : (
@@ -780,7 +780,7 @@ const UserList = () => {
             </span>
           )}
           {section === "Group" ? (
-            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#80999b] text-white border-[#80999b]">
+            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full text-white border-[#a93cee]">
               Group
             </span>
           ) : (
@@ -795,7 +795,7 @@ const UserList = () => {
             </span>
           )}
           {section === "Status" ? (
-            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full bg-[#80999b] text-white border-[#80999b]">
+            <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full text-white border-[#a93cee]">
               Status
             </span>
           ) : (

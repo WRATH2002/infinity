@@ -266,10 +266,10 @@ export const UserInfo = () => {
                     )}
                   </div>
                   <div className="w-[calc(100%-160px)] lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                    <span className="text-[16px] font-semibold text-[#cdd8dd]">
+                    <span className="text-[16px]  font-[work] font-semibold tracking-[.4px] text-[#ffffff]">
                       {chatUserName}
                     </span>
-                    <span className="text-[15px] font-normal text-[#9fa5a7]">
+                    <span className="text-[15px]  font-[work] font-normal tracking-[.4px] text-[#9fa5a7]">
                       +91 8100524419
                     </span>
                   </div>
@@ -299,13 +299,13 @@ export const UserInfo = () => {
                 <div className="fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[calc(100%-155px)] lg:h-[calc(100%-170px)] md:h-[calc(100%-170px)]  flex justify-center items-center z-30 bg-[#1f201f92]">
                   <div className="bg-[#1f201f] w-[320px] lg:w-[450px] md:w-[450px] h-[190px] rounded-xl flex flex-col">
                     <div className="w-full h-[110px] rounded-xl  flex justify-center items-center px-[30px]">
-                      <span className="font-[work] font-semibold text-white">
+                      <span className=" font-[work] font-semibold tracking-[.4px] text-white">
                         ⚠️ Are you sure? you want to delete all chats!
                       </span>
                     </div>
                     <div className=" h-[80px] w-full flex justify-between items-center px-[30px] rounded-xl">
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white cursor-pointer font-[work] bg-[#494949] hover:bg-[#303030] rounded-xl"
+                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white cursor-pointer  font-[work] font-semibold tracking-[.4px] bg-[#494949] hover:bg-[#303030] rounded-xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -314,7 +314,7 @@ export const UserInfo = () => {
                         Cancel
                       </button>
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white cursor-pointer font-[work] bg-[#494949] hover:bg-[#303030] rounded-xl"
+                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white cursor-pointer  font-[work] font-semibold tracking-[.4px] bg-[#494949] hover:bg-[#303030] rounded-xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -365,15 +365,15 @@ export const UserInfo = () => {
                 )}
               </div>
               <div className="flex flex-col justify-center items-center mt-[20px]">
-                <span className="text-[22px] font-normal text-[#cdd8dd] drop-shadow-lg">
+                <span className="text-[22px]  font-[work] font-semibold tracking-[.4px] text-[#ffffff] drop-shadow-lg">
                   {chatUserName}
                 </span>
-                <span className="text-[17px] font-normal text-[#9fa5a7] drop-shadow-lg">
+                <span className="text-[17px]  font-[work] font-normal tracking-[.4px] text-[#9fa5a7] drop-shadow-lg">
                   +91 8100524419
                 </span>
               </div>
               <div className="mt-[20px] w-full flex justify-center items-start h-[26px] overflow-hidden text-ellipsis">
-                <span className="text-[16px]  font-normal text-[#cdd8dd] drop-shadow-lg">
+                <span className="text-[16px]   font-[work] font-normal tracking-[.4px] text-[#cdd8dd] drop-shadow-lg">
                   ~ {chatUserAbout}
                 </span>
               </div>
@@ -394,7 +394,7 @@ export const UserInfo = () => {
                   <img src={chat} className="w-[35px] drop-shadow-lg "></img>
                 </span>
               </div>
-              <span className="font-[work] font-normal text-[16px] w-full flex justify-start items-center mt-[20px] text-[#a0a0a0]">
+              <span className=" font-[work] font-normal tracking-[.4px] text-[16px] w-full flex justify-start items-center mt-[20px] text-[#a0a0a0]">
                 Media, Links & Docs{" "}
                 <div className="ml-[10px]  w-[20px] h-[20px] flex justify-center items-center text-[14px] font-semibold text-black rounded-full bg-[#b8dedf]">
                   {ImageMediaLink.length}{" "}
@@ -442,10 +442,10 @@ export const UserInfo = () => {
                 )}
               </div>
               <div className="w-[calc(100%-160px)] lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                <span className="text-[16px] font-semibold text-[#cdd8dd]">
+                <span className="text-[16px]  font-[work] font-semibold tracking-[.4px] text-[#ffffff]">
                   {chatUserName}
                 </span>
-                <span className="text-[15px] font-normal text-[#9fa5a7]">
+                <span className="text-[15px]  font-[work] font-normal tracking-[.4px] text-[#9fa5a7]">
                   +91 8100524419
                 </span>
               </div>
@@ -458,7 +458,7 @@ export const UserInfo = () => {
               >
                 {/* <MdDelete className="text-[20px] text-[white] hover:text-[#b54848]" /> */}
                 <div className="group flex justify-end items-center">
-                  <div className="hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px] font-[work] font-normal bg-[#505050]">
+                  <div className="hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px]  font-[work] font-normal tracking-[.4px] bg-[#505050]">
                     Delete Chats
                   </div>
                   <img src={del} className=" w-[25px] drop-shadow-lg "></img>

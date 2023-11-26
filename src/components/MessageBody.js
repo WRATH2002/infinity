@@ -103,10 +103,10 @@ const Messagess = (props) => {
             {props.data.Message.length != 0 ? (
               <>
                 <div className="w-auto bg-[#252525] text-[white] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
-                  <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[work] font-normal">
+                  <pre className=" max-w-[calc(100%)] whitespace-pre-wrap  font-[work] font-medium tracking-[.4px]">
                     {props?.data?.Message}
                   </pre>
-                  <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap font-[work]  text-[10px]  mb-[-5px] text-[#9fa5a7] ">
+                  <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[work] font-normal tracking-[.4px]  text-[10px]  mb-[-5px] text-[#9fa5a7] ">
                     {props?.data?.Time}
                   </div>{" "}
                 </div>
@@ -151,7 +151,7 @@ const Messagess = (props) => {
                 </div>
 
                 {isImageLoaded === true ? (
-                  <div className="w-auto bottom-0 drop-shadow-md h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px]">
+                  <div className="w-auto bottom-0 drop-shadow-md h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px]  font-[work] font-normal tracking-[.4px]">
                     {props?.data?.Time}
                   </div>
                 ) : (
@@ -188,10 +188,10 @@ const Messagess = (props) => {
                       <img src={doccc} className="w-[40px]"></img>
                     </div>
                     <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
-                      <span className="w-full font-[work] text-[14px] font-semibold text-[white] whitespace-nowrap text-ellipsis overflow-hidden">
+                      <span className="w-full text-[14px]  text-[white] whitespace-nowrap text-ellipsis overflow-hidden  font-[work] font-medium tracking-[.4px]">
                         {props.data.docName}
                       </span>
-                      <span className="font-[work] text-[11px] font-normal text-[white]">
+                      <span className=" font-[work] font-normal tracking-[.4px] text-[11px]  text-[white]">
                         {props.data.docSize > 1024 ? (
                           <>{(props.data.docSize / 1024).toFixed(2)} mB</>
                         ) : (
@@ -215,10 +215,10 @@ const Messagess = (props) => {
           <div className="w-full  my-[4px] flex text-[14px] justify-end drop-shadow-sm">
             {props.data.Message.length != 0 ? (
               <div className="w-auto gradients max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex text-black flex-wrap justify-between">
-                <pre className="max-w-[calc(100%)] whitespace-pre-wrap font-[work]">
+                <pre className="max-w-[calc(100%)] whitespace-pre-wrap  font-[work] font-medium tracking-[.4px]">
                   {props?.data?.Message}
                 </pre>
-                <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap font-[work]  text-[10px]  mb-[-5px] text-[#474747]">
+                <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[work] font-normal tracking-[.4px]  text-[10px]  mb-[-5px] text-[#474747]">
                   {props?.data?.Time}
                 </div>
               </div>
@@ -284,7 +284,7 @@ const Messagess = (props) => {
                   ></img>
                 </div>
                 {isImageLoaded === true ? (
-                  <div className="w-[60px]  right-0 bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px] drop-shadow-md">
+                  <div className="w-[60px]  right-0 bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px] drop-shadow-md  font-[work] font-normal tracking-[.4px]">
                     {props?.data?.Time}
                   </div>
                 ) : (
@@ -319,10 +319,10 @@ const Messagess = (props) => {
                       <img src={doccc} className="w-[40px]"></img>
                     </div>
                     <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
-                      <span className="w-full font-[work] text-[14px] font-semibold text-[black] whitespace-nowrap text-ellipsis overflow-hidden">
+                      <span className="w-full  font-[work] font-medium tracking-[.4px] text-[14px] text-[black] whitespace-nowrap text-ellipsis overflow-hidden">
                         {props.data.docName}
                       </span>
-                      <span className="font-[work] text-[11px] font-normal text-[black]">
+                      <span className=" font-[work] font-normal tracking-[.4px] text-[11px] text-[black]">
                         {props.data.docSize > 1024 ? (
                           <>{(props.data.docSize / 1024).toFixed(2)} mB</>
                         ) : (
@@ -841,6 +841,12 @@ export const MessageBody = () => {
               >
                 Update Me !
               </button> */}
+              {/* <div className="w-full h-[700px] bg-slate-500 flex justify-center items-center">
+                {" "}
+                jhglis
+                <div className="w-[100px] h-[100px] bggOne rounded-full"></div>
+                <div className="w-[100px] h-[100px] bggTwo rounded-full"></div>
+              </div> */}
               {/* <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
                 <video
                   controls
@@ -1526,7 +1532,7 @@ export const MessageBody = () => {
               onChange={(e) => setMessages(e.target.value)}
               value={Messages}
               placeholder="Write Something .."
-              className="bg-[#b8dedf] w-[calc(100%-60px)] pl-[85px] px-[50px] h-[50px] outline-none font-normal rounded-full drop-shadow-sm resize-none "
+              className="bg-[#b8dedf] w-[calc(100%-60px)] pl-[85px] px-[50px] h-[50px] outline-none  font-[work] font-medium tracking-[.4px] rounded-full drop-shadow-sm resize-none "
             ></input>
 
             {/* <EmojiPicker /> */}
