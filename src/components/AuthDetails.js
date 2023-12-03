@@ -52,8 +52,8 @@ const Loading = (props) => {
                 INFINITY
               </text>
             </svg> */}
-            <div class="custom-loader"></div>
-            <div className="w-[200px] lg:w-[400px] md:w-[400px] h-[4px] rounded-full mt-[50px]">
+            {/* <div class="custom-loader"></div> */}
+            <div className="w-[200px] lg:w-[400px] md:w-[400px] h-[4px] rounded-full ">
               <span class="loader"></span>
             </div>
             {/* <span className="text-[13px] lg:text-[16px] md:text-[16px] tracking-[13px] lg:tracking-[17px] md:tracking-[17px] font-semibold text-[#cdd8dd] mt-[20px] w-full flex justify-center items-center">

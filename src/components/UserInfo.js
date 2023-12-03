@@ -73,7 +73,7 @@ const Media = (props) => {
       ) : (
         <div className="group min-w-[90px] lg:min-w-[120px] md:min-w-[120px] max-w-[90px] lg:max-w-[120px] md:max-w-[120px] h-[90px] lg:h-[120px] md:h-[120px] mx-[3px] lg:mx-[5px] md:mx-[5px] rounded-xl ">
           <div className="w-full h-full bg-white rounded-xl flex justify-center items-center">
-            <div className="w-[70px] h-[70px] rounded-xl bg-[#e8e8e8] flex justify-center items-center text-black font-[work] ">
+            <div className="w-[70px] h-[70px] rounded-xl bg-[#e8e8e8] flex justify-center items-center text-black font-[rubik] font-light ">
               {props.data.docName
                 ?.substring(props.data.docName?.indexOf(".") + 1)
                 .toUpperCase()}
@@ -91,6 +91,7 @@ const Media = (props) => {
 };
 
 export const UserInfo = () => {
+  const [chatUserNumber, setChatUserNumber] = useState("");
   const [chatUserName, setChatUserName] = useState("");
   const [chatUserAbout, setChatUserAbout] = useState("");
   const [userSidebar, setUserSidebar] = useState(false);
@@ -151,6 +152,7 @@ export const UserInfo = () => {
         // console.log(snapshot.data());
         setChatUserName(snapshot?.data()?.Name);
         setChatUserAbout(snapshot?.data()?.Info);
+        setChatUserNumber(snapshot?.data()?.Phone);
         // setChatUserPhoto(snapshot?.data()?.Photo);
         if (snapshot.data().Photo) {
           setChatUserPhoto(snapshot.data().Photo);
@@ -238,7 +240,7 @@ export const UserInfo = () => {
               <div className="w-full px-[10px] pt-[20px] h-[75px] lg:h-[90px] md:h-[90px] bg-[#1f201f] text-[white]">
                 <div className="w-full h-full pb-[20px] flex justify-center items-center">
                   <div
-                    className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full  text-white flex justify-center items-center cursor-pointer"
+                    className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full hover:bg-white hover:text-black  text-white flex justify-center items-center cursor-pointer"
                     onClick={() => {
                       dispatch(addActiveUser(""));
                     }}
@@ -266,11 +268,11 @@ export const UserInfo = () => {
                     )}
                   </div>
                   <div className="w-[calc(100%-160px)] lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                    <span className="text-[16px]  font-[work] font-semibold tracking-[.4px] text-[#ffffff]">
+                    <span className="text-[16px]  font-[rubik] font-normal text-[#ffffff]">
                       {chatUserName}
                     </span>
-                    <span className="text-[15px]  font-[work] font-normal tracking-[.4px] text-[#9fa5a7]">
-                      +91 8100524419
+                    <span className="text-[14px]  font-[rubik] font-light text-[#9fa5a7]">
+                      +91 {chatUserNumber}
                     </span>
                   </div>
 
@@ -297,15 +299,15 @@ export const UserInfo = () => {
               </div>
               {delConfirmation === true ? (
                 <div className="fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[calc(100%-155px)] lg:h-[calc(100%-170px)] md:h-[calc(100%-170px)]  flex justify-center items-center z-30 bg-[#1f201f92]">
-                  <div className="bg-[#1f201f] w-[320px] lg:w-[450px] md:w-[450px] h-[190px] rounded-xl flex flex-col">
+                  <div className="bg-[white] text-black w-[320px] lg:w-[450px] md:w-[450px] h-[190px] rounded-xl flex flex-col">
                     <div className="w-full h-[110px] rounded-xl  flex justify-center items-center px-[30px]">
-                      <span className=" font-[work] font-semibold tracking-[.4px] text-white">
+                      <span className=" font-[rubik] font-light ">
                         ⚠️ Are you sure? you want to delete all chats!
                       </span>
                     </div>
                     <div className=" h-[80px] w-full flex justify-between items-center px-[30px] rounded-xl">
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white cursor-pointer  font-[work] font-semibold tracking-[.4px] bg-[#494949] hover:bg-[#303030] rounded-xl"
+                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white  cursor-pointer  font-[rubik] font-light bg-[black] hover:bg-[#474747] rounded-xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -314,7 +316,7 @@ export const UserInfo = () => {
                         Cancel
                       </button>
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white cursor-pointer  font-[work] font-semibold tracking-[.4px] bg-[#494949] hover:bg-[#303030] rounded-xl"
+                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white  cursor-pointer  font-[rubik] font-light bg-[black] hover:bg-[#303030] rounded-xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -340,13 +342,13 @@ export const UserInfo = () => {
           >
             <div className="w-full h-[100px] flex justify-start items-center ">
               <div
-                className="w-[35px] h-[35px] rounded-full  text-black flex justify-center items-center cursor-pointer"
+                className="w-[35px] h-[35px] rounded-full hover:bg-white hover:text-black text-white flex justify-center items-center cursor-pointer"
                 onClick={() => {
                   setUserSidebar(!userSidebar);
                 }}
               >
-                {/* <FaAngleLeft className="text-[20px]" /> */}
-                <img src={back} className="w-[25px] drop-shadow-lg"></img>
+                <FaAngleLeft className="text-[20px]" />
+                {/* <img src={back} className="w-[25px] drop-shadow-lg"></img> */}
               </div>
             </div>
             <div className="w-full h-[calc(100%-100px)]  flex flex-col justify-center items-center">
@@ -365,15 +367,15 @@ export const UserInfo = () => {
                 )}
               </div>
               <div className="flex flex-col justify-center items-center mt-[20px]">
-                <span className="text-[22px]  font-[work] font-semibold tracking-[.4px] text-[#ffffff] drop-shadow-lg">
+                <span className="text-[22px] font-[rubik] font-light text-[#ffffff] drop-shadow-lg">
                   {chatUserName}
                 </span>
-                <span className="text-[17px]  font-[work] font-normal tracking-[.4px] text-[#9fa5a7] drop-shadow-lg">
-                  +91 8100524419
+                <span className="text-[17px]  font-[rubik] font-light text-[#9fa5a7] drop-shadow-lg">
+                  +91 {chatUserNumber}
                 </span>
               </div>
               <div className="mt-[20px] w-full flex justify-center items-start h-[26px] overflow-hidden text-ellipsis">
-                <span className="text-[16px]   font-[work] font-normal tracking-[.4px] text-[#cdd8dd] drop-shadow-lg">
+                <span className="text-[16px]   font-[rubik] font-extralight text-[#9fa5a7] drop-shadow-lg">
                   ~ {chatUserAbout}
                 </span>
               </div>
@@ -394,9 +396,9 @@ export const UserInfo = () => {
                   <img src={chat} className="w-[35px] drop-shadow-lg "></img>
                 </span>
               </div>
-              <span className=" font-[work] font-normal tracking-[.4px] text-[16px] w-full flex justify-start items-center mt-[20px] text-[#a0a0a0]">
+              <span className=" font-[rubik] font-light text-[16px] w-full flex justify-start items-center mt-[20px] text-[#a0a0a0]">
                 Media, Links & Docs{" "}
-                <div className="ml-[10px]  w-[20px] h-[20px] flex justify-center items-center text-[14px] font-semibold text-black rounded-full bg-[#b8dedf]">
+                <div className="ml-[10px]  w-[20px] h-[20px] flex justify-center items-center text-[14px] font-[rubik] font-light text-black rounded-full bg-[#b8dedf]">
                   {ImageMediaLink.length}{" "}
                 </div>
                 <MdChevronRight className="text-[#a0a0a0] text-[25px] ml-[5px]" />
@@ -442,11 +444,11 @@ export const UserInfo = () => {
                 )}
               </div>
               <div className="w-[calc(100%-160px)] lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                <span className="text-[16px]  font-[work] font-semibold tracking-[.4px] text-[#ffffff]">
+                <span className="text-[16px]  font-[rubik] font-normal text-[#ffffff]">
                   {chatUserName}
                 </span>
-                <span className="text-[15px]  font-[work] font-normal tracking-[.4px] text-[#9fa5a7]">
-                  +91 8100524419
+                <span className="text-[14px]  font-[rubik] font-light text-[#9fa5a7]">
+                  +91 {chatUserNumber}
                 </span>
               </div>
 

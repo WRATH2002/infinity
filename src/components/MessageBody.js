@@ -40,6 +40,7 @@ import { getDownloadURL } from "firebase/storage";
 import toast, { Toaster, useToaster } from "react-hot-toast";
 import a from "../assets/img/a.jpg";
 import aa from "../assets/img/aa.jpg";
+import ww from "../assets/img/w2.png";
 // ----------------------------------
 import docc from "../assets/img/document.png";
 import doccc from "../assets/img/documents.png";
@@ -99,14 +100,14 @@ const Messagess = (props) => {
     <>
       {props?.data?.Flag === 2 ? (
         <>
-          <div className="w-full  my-[4px] flex text-[14px] justify-start drop-shadow-sm">
+          <div className="w-full  my-[4px] flex text-[14px] justify-start drop-shadow-sm pl-[10px]">
             {props.data.Message.length != 0 ? (
               <>
                 <div className="w-auto bg-[#252525] text-[white] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
-                  <pre className=" max-w-[calc(100%)] whitespace-pre-wrap  font-[work] font-medium tracking-[.4px]">
+                  <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[rubik] font-light">
                     {props?.data?.Message}
                   </pre>
-                  <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[work] font-normal tracking-[.4px]  text-[10px]  mb-[-5px] text-[#9fa5a7] ">
+                  <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[rubik] font-light  text-[10px]  mb-[-5px] text-[#9fa5a7] ">
                     {props?.data?.Time}
                   </div>{" "}
                 </div>
@@ -151,7 +152,7 @@ const Messagess = (props) => {
                 </div>
 
                 {isImageLoaded === true ? (
-                  <div className="w-auto bottom-0 drop-shadow-md h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px]  font-[work] font-normal tracking-[.4px]">
+                  <div className="w-auto bottom-0 drop-shadow-md h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px] font-[rubik] font-light">
                     {props?.data?.Time}
                   </div>
                 ) : (
@@ -188,10 +189,10 @@ const Messagess = (props) => {
                       <img src={doccc} className="w-[40px]"></img>
                     </div>
                     <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
-                      <span className="w-full text-[14px]  text-[white] whitespace-nowrap text-ellipsis overflow-hidden  font-[work] font-medium tracking-[.4px]">
+                      <span className="w-full text-[14px]  text-[white] whitespace-nowrap text-ellipsis overflow-hidden  font-[rubik] font-light ">
                         {props.data.docName}
                       </span>
-                      <span className=" font-[work] font-normal tracking-[.4px] text-[11px]  text-[white]">
+                      <span className=" font-[rubik] font-light text-[11px]  text-[white]">
                         {props.data.docSize > 1024 ? (
                           <>{(props.data.docSize / 1024).toFixed(2)} mB</>
                         ) : (
@@ -212,18 +213,18 @@ const Messagess = (props) => {
         </>
       ) : (
         <>
-          <div className="w-full  my-[4px] flex text-[14px] justify-end drop-shadow-sm">
+          <div className="w-full  my-[4px] flex text-[14px] justify-end drop-shadow-sm pr-[10px]">
             {props.data.Message.length != 0 ? (
-              <div className="w-auto gradients max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex text-black flex-wrap justify-between">
-                <pre className="max-w-[calc(100%)] whitespace-pre-wrap  font-[work] font-medium tracking-[.4px]">
+              <div className="w-auto bg-white max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex text-black flex-wrap justify-between">
+                <pre className="max-w-[calc(100%)] whitespace-pre-wrap  font-[rubik] font-light">
                   {props?.data?.Message}
                 </pre>
-                <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[work] font-normal tracking-[.4px]  text-[10px]  mb-[-5px] text-[#474747]">
+                <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[rubik] font-light  text-[10px]  mb-[-5px] text-[#474747]">
                   {props?.data?.Time}
                 </div>
               </div>
             ) : props.data.Image.length != 0 ? (
-              <div className="group w-auto  max-w-[75%] lg:max-w-[32%] bg-[#b8dedf] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[0px] rounded-lg flex items-center text-black flex-wrap justify-center hover:bg-[#1f201f]">
+              <div className="group w-auto  max-w-[75%] lg:max-w-[32%] bg-[white] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex items-center text-black flex-wrap justify-center hover:bg-[#1f201f]">
                 {/* <img
                   loading="lazy"
                   src={props.data.Image}
@@ -284,7 +285,7 @@ const Messagess = (props) => {
                   ></img>
                 </div>
                 {isImageLoaded === true ? (
-                  <div className="w-[60px]  right-0 bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px] drop-shadow-md  font-[work] font-normal tracking-[.4px]">
+                  <div className="w-[60px]  right-0 bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px] drop-shadow-md  font-[rubik] font-light">
                     {props?.data?.Time}
                   </div>
                 ) : (
@@ -313,16 +314,16 @@ const Messagess = (props) => {
               </div>
             ) : (
               <>
-                <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[0px] bg-[#b8dedf] rounded-lg  flex justify-center items-center">
-                  <div className="w-full h-full  rounded-lg  flex justify-start items-center ">
+                <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[2px] bg-[#ffffff] rounded-lg  flex justify-center items-center">
+                  <div className="w-full h-full  rounded-lg bg-[#e8e8e8] flex justify-start items-center ">
                     <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
                       <img src={doccc} className="w-[40px]"></img>
                     </div>
                     <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
-                      <span className="w-full  font-[work] font-medium tracking-[.4px] text-[14px] text-[black] whitespace-nowrap text-ellipsis overflow-hidden">
+                      <span className="w-full  font-[rubik] font-light text-[14px] text-[black] whitespace-nowrap text-ellipsis overflow-hidden">
                         {props.data.docName}
                       </span>
-                      <span className=" font-[work] font-normal tracking-[.4px] text-[11px] text-[black]">
+                      <span className=" font-[rubik] font-light text-[11px] text-[black]">
                         {props.data.docSize > 1024 ? (
                           <>{(props.data.docSize / 1024).toFixed(2)} mB</>
                         ) : (
@@ -775,8 +776,11 @@ export const MessageBody = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-full h-[calc(100%-155px)] lg:h-[calc(100%-170px)] md:h-[calc(100%-170px)] px-[20px] overflow-y-scroll bg-[#0b0c0b] z-20">
-        <div ref={listRef} className="w-full h-full  py-[10px] flex flex-col">
+      <div className="w-full h-[calc(100%-135px)] lg:h-[calc(100%-150px)] md:h-[calc(100%-150px)] overflow-y-scroll bg-[#0b0c0b] z-20 ">
+        <div
+          ref={listRef}
+          className="w-full h-full  flex flex-col   font-[rubik] font-normal"
+        >
           {ActiveChatUser.length === 0 ? (
             <>
               <div className="w-full h-full bg-[#0b0c0b] rounded-lg flex justify-center items-center drop-shadow-sm">
@@ -787,9 +791,12 @@ export const MessageBody = () => {
             </>
           ) : (
             <>
-              <div className="w-full min-h-[40px] bg-[#0b0c0b] rounded-lg flex justify-center items-center drop-shadow-sm px-[10px]">
-                <span className="w-full h-full flex justify-center items-center ml-[10px] font-normal text-[15px] text-[#8171f3]">
-                  <BiSolidLockAlt className="text-[#8171f3] mr-[10px]" />{" "}
+              <div className="fixed flex lg:hidden md:hidden w-full h-[calc(100%-135px)] lg:h-[calc(100%-150px)] md:h-[calc(100%-150px)]  justify-center items-center ">
+                <img src={ww} className="h-full w-full object-cover"></img>
+              </div>
+              <div className="w-full min-h-[40px]  rounded-lg flex justify-center items-center drop-shadow-sm px-[10px]">
+                <span className="w-full h-full flex justify-center items-center ml-[10px] font-[rubik] font-light text-[14px] text-[#c37eff]">
+                  <BiSolidLockAlt className="text-[#c37eff] mr-[10px]" />{" "}
                   Messages are end-to-end encrypted.
                 </span>
               </div>
@@ -800,6 +807,9 @@ export const MessageBody = () => {
                   </>
                 );
               })}
+              {/* <section class="buttons">
+                <button class="draw">Draw</button>
+              </section> */}
               {/* <div className="w-[32%] h-[65px] rounded-lg bg-[#1f201f] flex justify-center items-center">
                 <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
                   <img src={doccc} className="w-[40px]"></img>
@@ -896,9 +906,14 @@ export const MessageBody = () => {
           )}
         </div>
       </div>
-      <div className="w-full px-[19px] fixed mt-[-435px]">
+      <div className="w-full px-[10px] fixed mt-[-435px]">
         {emoji === true ? (
           <Picker
+            // className="bg-slate-300"
+            // onClickOutside={() => {
+            //   setEmoji(false);
+            // }}
+            theme="light"
             data={data}
             onEmojiSelect={(e) => {
               console.log(e.native);
@@ -912,11 +927,11 @@ export const MessageBody = () => {
       {document === true ? (
         <>
           <div
-            className="w-[208px] px-[19px] fixed mt-[-338px]"
+            className="w-[208px] px-[10px] fixed mt-[-338px] "
             style={{ transition: ".5s" }}
           >
             <div
-              className="w-[170px] h-[338px] text-[white] bg-[#313131ae] border border-transparent  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
+              className="w-[170px] h-[338px] text-[black] bg-[white] border border-transparent  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[rubik] font-normal text-[14px] flex flex-col justify-between"
               style={{ transition: ".5s" }}
             >
               <div className="w-full flex flex-col items-center">
@@ -1118,7 +1133,7 @@ export const MessageBody = () => {
                         className="w-[25px] mr-[10px] z-20"
                       ></img>
                       Send
-                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[#cdd8dd] text-[black]   flex justify-center items-center">
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[black] text-[white]   flex justify-center items-center">
                         {imageLength}
                       </span>
                     </button>
@@ -1157,8 +1172,8 @@ export const MessageBody = () => {
                         className="w-[25px] mr-[10px] z-20"
                       ></img>
                       Send
-                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[#cdd8dd] text-[black]   flex justify-center items-center">
-                        {imageLength}
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[black] text-[white]   flex justify-center items-center">
+                        1
                       </span>
                     </button>
                   </div>
@@ -1213,8 +1228,8 @@ export const MessageBody = () => {
                         className="w-[25px] mr-[10px] z-20"
                       ></img>
                       Send
-                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[#cdd8dd] text-[black]   flex justify-center items-center">
-                        {imageLength}
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[black] text-[white]   flex justify-center items-center">
+                        1
                       </span>
                     </div>
                   </div>
@@ -1269,8 +1284,8 @@ export const MessageBody = () => {
                         className="w-[25px] mr-[10px] z-20"
                       ></img>
                       Send
-                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[#cdd8dd00] text-[black]   flex justify-center items-center">
-                        {imageLength}
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[black] text-[white]   flex justify-center items-center">
+                        1
                       </span>
                     </div>
                   </div>
@@ -1282,11 +1297,11 @@ export const MessageBody = () => {
       ) : (
         <>
           <div
-            className="w-[0] px-[19px] fixed mt-[-0px]"
+            className="w-[0] px-[19px] fixed mt-[0] "
             style={{ transition: ".5s" }}
           >
             <div
-              className="w-[0] h-[0px] text-[#ccd7dc] bg-[#1f201fae] backdrop-blur-md py-[20px]   border-transparent  rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
+              className="w-[0] h-[0] text-[#ccd7dc] bg-[#1f201fae] backdrop-blur-md py-[0px]   border-transparent  rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between"
               style={{ transition: ".5s" }}
             >
               <div className="w-full flex flex-col items-center">
@@ -1466,7 +1481,7 @@ export const MessageBody = () => {
         </>
       )}
 
-      <div className="w-full h-[80px] px-[20px] flex flex-col justify-center items-start bg-[#0b0c0b]">
+      <div className="w-full h-[60px]   flex flex-col justify-center items-start bg-[#0b0c0b]">
         {ActiveChatUser.length === 0 ? (
           <></>
         ) : (
@@ -1474,37 +1489,62 @@ export const MessageBody = () => {
             {/* <EmojiPicker /> */}
             {emoji === true ? (
               <div
-                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer hover:bg-[#80999b] hover:text-[white] rounded-full  z-10 text-[black]"
+                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer   rounded-full  z-10 text-[#c5c5c5]"
                 onClick={() => setEmoji(!emoji)}
               >
                 {/* <BsFillEmojiLaughingFill className="text-[20px] " /> */}
                 {/* <img src={smiley} className="w-[25px]"></img> */}
-                <MdEmojiEmotions className="text-[20px]" />
+                <MdEmojiEmotions className="text-[25px]" />
               </div>
             ) : (
               <div
-                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer hover:bg-[#80999b] hover:text-[white] rounded-full  z-10 text-[black]"
-                onClick={() => setEmoji(!emoji)}
+                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer  hover:text-[#c5c5c5] rounded-full  z-10 text-[white]"
+                onClick={() => {
+                  setEmoji(!emoji);
+                  setDocument(false);
+                }}
               >
                 {/* <BsFillEmojiLaughingFill className="text-[20px] " /> */}
                 {/* <img src={smiley} className="w-[25px] drop-shadow-md"></img> */}
-                <MdEmojiEmotions className="text-[20px]" />
+                <MdEmojiEmotions className="text-[25px]" />
               </div>
             )}
-            <div
-              className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer hover:bg-[#80999b] hover:text-[white] rounded-full mr-[-78px] z-10 text-[black]"
-              onClick={() => {
-                setImage();
-                setVideo();
-                setDocument();
-                setDocument(!document);
-              }}
-            >
-              {/* <TiAttachment className="text-[23px] " /> */}
-              {/* <img src={attach} className="w-[25px] drop-shadow-md"></img> */}
+            {document === true ? (
+              <>
+                <div
+                  className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer   rounded-full  z-10 text-[#c5c5c5]"
+                  onClick={() => {
+                    setImage();
+                    setVideo();
+                    // setDocument();
+                    setDocument(!document);
+                  }}
+                >
+                  {/* <TiAttachment className="text-[23px] " /> */}
+                  {/* <img src={attach} className="w-[25px] drop-shadow-md"></img> */}
 
-              <TiAttachment className="text-[20px]" />
-            </div>
+                  <TiAttachment className="text-[25px]" />
+                </div>
+              </>
+            ) : (
+              <>
+                <div
+                  className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer  hover:text-[#c5c5c5] rounded-full  z-10 text-[white]"
+                  onClick={() => {
+                    setImage();
+                    setVideo();
+                    // setDocument();
+                    setDocument(!document);
+                    setEmoji(false);
+                  }}
+                >
+                  {/* <TiAttachment className="text-[23px] " /> */}
+                  {/* <img src={attach} className="w-[25px] drop-shadow-md"></img> */}
+
+                  <TiAttachment className="text-[25px]" />
+                </div>
+              </>
+            )}
 
             <input
               type="text"
@@ -1532,12 +1572,12 @@ export const MessageBody = () => {
               onChange={(e) => setMessages(e.target.value)}
               value={Messages}
               placeholder="Write Something .."
-              className="bg-[#b8dedf] w-[calc(100%-60px)] pl-[85px] px-[50px] h-[50px] outline-none  font-[work] font-medium tracking-[.4px] rounded-full drop-shadow-sm resize-none "
+              className="input bg-[white] w-[calc(100%-135px)] ml-[10px]  text-black px-[20px] pr-[50px] h-[45px] outline-none text-[17px] font-[work] font-medium tracking-[.4px] rounded-full drop-shadow-sm resize-none "
             ></input>
 
             {/* <EmojiPicker /> */}
             <button
-              className="ml-[-43px] mr-[8px] z-10 h-[35px]   w-[35px] flex justify-center items-center cursor-pointer text-[black]  hover:bg-[#80999b] rounded-full hover:text-[white]"
+              className="ml-[-43px] mr-[8px] z-10 h-[35px]   w-[35px] flex justify-center items-center cursor-pointer text-[black]  hover:bg-[black] rounded-full hover:text-[white]"
               onClick={() => {
                 if (Messages.length !== 0) {
                   var temp = formatAMPM(new Date());
@@ -1566,9 +1606,9 @@ export const MessageBody = () => {
                 // <img src={sendd} className="w-[25px] z-20 drop-shadow-md"></img>
               )}
             </button>
-            <div className="w-[50px] h-[50px] flex justify-center items-center cursor-pointer rounded-full bg-[#b8dedf] hover:bg-[#80999b] z-10  ml-[10px] text-[black]  ">
-              <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full  hover:text-white">
-                <BiSolidMicrophone className="text-[20px]  " />
+            <div className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer rounded-full  hover:text-[#c5c5c5] z-10  ml-[10px] mr-[10px] text-[white]  ">
+              <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full  ">
+                <BiSolidMicrophone className="text-[25px]  " />
                 {/* <img src={mic} className="w-[25px] drop-shadow-md"></img> */}
               </div>
             </div>

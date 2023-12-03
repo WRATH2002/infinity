@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* font-family: 'Nova Square', sans-serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Raleway', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Rubik', sans-serif; */
+
+.in {
+  font-family: "Roboto", sans-serif;
+  -webkit-text-stroke-width: 1.5px;
+  letter-spacing: 2px;
+  -webkit-text-stroke-color: black;
+  color: white;
+}
+
+.input::placeholder {
+  color: rgb(84, 84, 84);
+  font-family: work;
+  font-weight: 500;
+  /* letter-spacing: 5px; */
+}
+
 ::-webkit-scrollbar {
   height: 3px;
   width: 2px;
@@ -105,6 +126,21 @@ em-emoji-picker {
 @font-face {
   font-family: nunitosans;
   src: url(./assets/font/Onest-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: nova;
+  src: url(./assets/font/Nova_Square/NovaSquare-Regular.ttf);
+}
+
+@font-face {
+  font-family: rale;
+  src: url(./assets/font/Raleway/static/Raleway-Regular.ttf);
+}
+
+@font-face {
+  font-family: rubik;
+  src: url(./assets/font/Rubik/Rubik-VariableFont_wght.ttf);
 }
 /* input[type="file"] {
   opacity: 0;
@@ -344,4 +380,30 @@ svg text {
     stroke-dasharray: 50% 0;
     stroke-dashoffset: -10%;
   }
+}
+
+/* --------------------- */
+em-emoji-picker {
+  --background-rgb: 85, 170, 255;
+  font-family: rubik;
+  /* --border-radius: 24px; */
+  /* --category-icon-size: 24px; */
+  /* --color-border-over: rgba(0, 0, 0, 0.1); */
+  /* --color-border: rgba(0, 0, 0, 0.05);
+  --font-family: "Comic Sans MS", "Chalkboard SE", cursive;
+  --font-size: 20px;
+  --rgb-accent: 255, 105, 180;
+  --rgb-background: 262, 240, 283;
+  --rgb-color: 102, 51, 153;
+  --rgb-input: 255, 235, 235;
+  --shadow: 5px 5px 15px -8px rebeccapurple;
+
+  height: 50vh;
+  min-height: 400px;
+  max-height: 800px; */
+}
+
+/*  */
+input {
+  background-image: none;
 }

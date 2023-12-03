@@ -5,6 +5,7 @@ import { db } from "../../firebase";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleStateMode } from "../../utils/chatSlice";
+import toast, { Toaster } from "react-hot-toast";
 // import { auth } from "../firebase";
 // import { onAuthStateChanged, signOut } from "firebase/auth";
 // import { db } from "../firebase";
@@ -70,19 +71,29 @@ const Signup = () => {
   }
   const signUp = (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential.user.uid);
-        console.log(userCredential.user.email);
-        console.log(userCredential);
-        createUserCollection(userCredential.user);
-        // db.collection("Chat Record")
-        //   .doc(userCredential.user.uid)
-        //   .collection("Chats");
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    if (name.length === 0) {
+      toast.error("Enter your Name");
+    } else if (number.length === 0) {
+      toast.error("Enter your Phone Number");
+    } else if (email.length === 0 || !email.includes("@gmail.com")) {
+      toast.error("Enter valid Email id");
+    } else if (password.length <= 6) {
+      toast.error("Password must be atleast 6 digits");
+    } else {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          console.log(userCredential.user.uid);
+          console.log(userCredential.user.email);
+          console.log(userCredential);
+          createUserCollection(userCredential.user);
+          // db.collection("Chat Record")
+          //   .doc(userCredential.user.uid)
+          //   .collection("Chats");
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
   };
   function changeModeTwo() {
     dispatch(toggleStateMode(1));
@@ -90,15 +101,16 @@ const Signup = () => {
 
   return (
     <>
-      <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-lg h-[70%] bg-[#1f201f] flex flex-col justify-center items-center">
+      <Toaster position="bottom-center" reverseOrder={false} />
+      <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-lg h-[70%] bg-[#ffffff] flex flex-col justify-center items-center">
         <div className="w-full flex flex-col">
-          <span className="text-[32px] text-[#cdd8dd] font-semibold">
+          <span className="text-[32px] text-[#000000] font-[rubik] font-medium">
             Signup{" "}
           </span>
-          <span className="text-[14px] font-normal font-[nunitosans] text-[#9fa5a7] ">
+          <span className="text-[14px] font-normal font-[rubik] text-[#5e5e5e] ">
             already a user
             <span
-              className="text-[#7761f2] hover:text-[#9a8af5] cursor-pointer"
+              className="text-[#000000] hover:text-[#343434] cursor-pointer font-medium"
               style={{ transition: ".3s" }}
               onClick={() => changeModeTwo()}
             >
@@ -109,14 +121,14 @@ const Signup = () => {
         </div>
         {/* <div>Signup</div> */}
         <input
-          className="outline-none  mt-[40px]  w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-black bg-[#cdd8dd]"
+          className="input outline-none  mt-[40px]  w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-black bg-[#dadada]"
           placeholder="Name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         ></input>
         <input
-          className="outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-black bg-[#cdd8dd]"
+          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-black bg-[#dadada]"
           placeholder="Phone Number"
           type="tel"
           value={number}
@@ -128,14 +140,14 @@ const Signup = () => {
           }}
         ></input>
         <input
-          className="outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-black bg-[#cdd8dd]"
+          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-black bg-[#dadada]"
           placeholder="Email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
         <input
-          className="outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-black bg-[#cdd8dd]"
+          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-black bg-[#dadada]"
           placeholder="Password"
           type="password"
           value={password}
@@ -149,7 +161,7 @@ const Signup = () => {
           Signup
         </button> */}
         <button
-          className="w-full h-[40px] text-[#cdd8dd] font-semibold outline-none flex justify-center items-center bg-[#5841d9] hover:bg-[#9a8af5] rounded-md mt-[30px]"
+          className="w-full h-[40px] text-[#ffffff] font-medium font-[rubik] outline-none flex justify-center items-center bg-[#000000] hover:bg-[#4e4e4e] rounded-md mt-[30px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signUp}
