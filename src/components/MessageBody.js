@@ -315,7 +315,7 @@ const Messagess = (props) => {
             ) : (
               <>
                 <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[2px] bg-[#ffffff] rounded-lg  flex justify-center items-center">
-                  <div className="w-full h-full  rounded-lg bg-[#e8e8e8] flex justify-start items-center ">
+                  <div className="w-full h-full  rounded-lg bg-[#ffffff] flex justify-start items-center ">
                     <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
                       <img src={doccc} className="w-[40px]"></img>
                     </div>

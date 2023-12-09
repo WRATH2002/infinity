@@ -9,6 +9,8 @@ const chatSlice = createSlice({
     FriendList: [],
     AllFriendList: [],
     SearchFriendList: [],
+    allGroup: [],
+    allGroupMembers: [],
     ActiveUser: "",
     SendFlag: true,
     LastId: 1,
@@ -99,6 +101,23 @@ const chatSlice = createSlice({
       state.signingMode = action.payload;
       console.log(state.signingMode);
     },
+
+    addAllGroup: (state, action) => {
+      state.allGroup.push(action.payload);
+      // console.log(state.messages);
+    },
+    clearAllGroup: (state, action) => {
+      state.allGroup = [];
+      // console.log(state.messages);
+    },
+    addAllGroupMembers: (state, action) => {
+      state.allGroupMembers.push(action.payload);
+      // console.log(state.messages);
+    },
+    clearAllGroupMembers: (state, action) => {
+      state.allGroupMembers = [];
+      // console.log(state.messages);
+    },
     // addMessageNew: (state, action) => {
     //   state.messages = [];
     // },
@@ -144,6 +163,10 @@ export const {
   clearAllFriendList,
   addImageMediaLink,
   clearImageMediaLink,
+  addAllGroup,
+  clearAllGroup,
+  addAllGroupMembers,
+  clearAllGroupMembers,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

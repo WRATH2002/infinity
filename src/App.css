@@ -43,13 +43,13 @@ font-family: 'Rubik', sans-serif; */
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #b5dcdc;
+  background: white;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b5dcdc;
+  background: white;
 }
 
 .neo {
@@ -407,3 +407,5 @@ em-emoji-picker {
 input {
   background-image: none;
 }
+
+/* ------ */

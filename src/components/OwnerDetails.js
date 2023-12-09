@@ -201,7 +201,7 @@ const OwnerDetails = () => {
                     <input
                       disabled
                       value={ownerName}
-                      className="text-[14px] w-[calc(100%-45px)] outline-none bg-transparent text-[#747474] font-normal border-[1px] border-black px-[10px] mt-[-11px] rounded-[4px] py-[5px] font-[rubik] input"
+                      className="text-[14px] w-[calc(100%-45px)] outline-none bg-transparent text-[#9d9d9d] font-normal border-[1px] border-black px-[10px] mt-[-11px] rounded-[4px] py-[5px] font-[rubik] input"
                       style={{ zIndex: "-5" }}
                     ></input>
                   )}
@@ -263,7 +263,7 @@ const OwnerDetails = () => {
                     <input
                       disabled
                       value={ownerInfo}
-                      className="text-[14px] w-[calc(100%-45px)] outline-none border-[1px] border-black px-[10px] mt-[-11px] rounded-[4px] py-[5px] bg-transparent text-[#000000] font-normal font-[rubik] input"
+                      className="text-[14px] w-[calc(100%-45px)] outline-none border-[1px] border-black px-[10px] mt-[-11px] rounded-[4px] py-[5px] bg-transparent text-[#9d9d9d] font-normal font-[rubik] input"
                       style={{ zIndex: "-5" }}
                     ></input>
                   )}
