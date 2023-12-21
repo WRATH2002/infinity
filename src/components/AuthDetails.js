@@ -77,9 +77,9 @@ const Loading = (props) => {
                 x="50%"
                 y="50%"
                 textAnchor="middle"
-                className="text-[120px] lg:text-[50px] md:text-[50px] text-center stroke-[2px] lg:stroke-[1px] md:stroke-[1px]"
+                className="text-[120px] lg:text-[50px] md:text-[50px] text-center stroke-[#3d737d] stroke-[2px] lg:stroke-[.7px] md:stroke-[.7px]"
               >
-                INFINITY
+                CHAT-X
               </text>
             </svg>
           </div>

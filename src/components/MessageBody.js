@@ -41,7 +41,9 @@ import toast, { Toaster, useToaster } from "react-hot-toast";
 import a from "../assets/img/a.jpg";
 import aa from "../assets/img/aa.jpg";
 import ww from "../assets/img/w2.png";
-// ----------------------------------
+
+// ---------------------------------------------------------- Import Icons Png
+
 import docc from "../assets/img/document.png";
 import doccc from "../assets/img/documents.png";
 import phot from "../assets/img/image.png";
@@ -67,7 +69,8 @@ import loading from "../assets/img/loading.png";
 import { Blurhash } from "react-blurhash";
 import { saveAs } from "file-saver";
 
-// import d from "../assets/video/";
+// ---------------------------------------------------------- Test Videos
+
 import vid from "../assets/video/video2.mp4";
 import vid3 from "../assets/video/video3.mp4";
 import vid4 from "../assets/video/video4.mp4";
@@ -103,7 +106,7 @@ const Messagess = (props) => {
           <div className="w-full  my-[4px] flex text-[14px] justify-start drop-shadow-sm pl-[10px]">
             {props.data.Message.length != 0 ? (
               <>
-                <div className="w-auto bg-[#252525] text-[white] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
+                <div className="w-auto bg-[#19303b] text-[white] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
                   <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[rubik] font-light">
                     {props?.data?.Message}
                   </pre>
@@ -113,7 +116,7 @@ const Messagess = (props) => {
                 </div>
               </>
             ) : props.data.Image.length != 0 ? (
-              <div className="group w-auto bg-[#1f201f] max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[0px] rounded-lg flex text-black flex-wrap justify-end items-center">
+              <div className="group w-auto bg-[#19303b] max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[0px] rounded-lg flex text-black flex-wrap justify-end items-center">
                 {/* <a href={props.data.Image} download> */}
                 <img
                   loading="lazy"
@@ -183,7 +186,7 @@ const Messagess = (props) => {
               </div>
             ) : (
               <>
-                <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[0px] bg-[#252525] rounded-lg  flex justify-center items-center">
+                <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[0px] bg-[#19303b] rounded-lg  flex justify-center items-center">
                   <div className="w-full h-full  rounded-lg  flex justify-start items-center ">
                     <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
                       <img src={doccc} className="w-[40px]"></img>
@@ -215,16 +218,16 @@ const Messagess = (props) => {
         <>
           <div className="w-full  my-[4px] flex text-[14px] justify-end drop-shadow-sm pr-[10px]">
             {props.data.Message.length != 0 ? (
-              <div className="w-auto bg-white max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex text-black flex-wrap justify-between">
+              <div className="w-auto bg-[#3e727d] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex text-[white] flex-wrap justify-between">
                 <pre className="max-w-[calc(100%)] whitespace-pre-wrap  font-[rubik] font-light">
                   {props?.data?.Message}
                 </pre>
-                <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[rubik] font-light  text-[10px]  mb-[-5px] text-[#474747]">
+                <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[rubik] font-light  text-[10px]  mb-[-5px] text-[#bcbcbc]">
                   {props?.data?.Time}
                 </div>
               </div>
             ) : props.data.Image.length != 0 ? (
-              <div className="group w-auto  max-w-[75%] lg:max-w-[32%] bg-[white] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex items-center text-black flex-wrap justify-center hover:bg-[#1f201f]">
+              <div className="group w-auto  max-w-[75%] lg:max-w-[32%] bg-[#3e727d] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex items-center text-[white] flex-wrap justify-center hover:bg-[#1f201f]">
                 {/* <img
                   loading="lazy"
                   src={props.data.Image}
@@ -285,7 +288,7 @@ const Messagess = (props) => {
                   ></img>
                 </div>
                 {isImageLoaded === true ? (
-                  <div className="w-[60px]  right-0 bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px] drop-shadow-md  font-[rubik] font-light">
+                  <div className="w-[60px]  right-[10px] bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#bcbcbc] py-[8px] px-[14px] drop-shadow-md  font-[rubik] font-light">
                     {props?.data?.Time}
                   </div>
                 ) : (
@@ -382,7 +385,7 @@ export const MessageBody = () => {
   // -------------------------------------------------------------------------- Send Message to Firebase Firestore
 
   function sendMessage() {
-    console.log("Clicked");
+    console.log("Message Sending to Firestore -----");
     if (ActiveChatUser.length !== 0) {
       const user = firebase.auth().currentUser;
       const userDoc = db
@@ -416,7 +419,7 @@ export const MessageBody = () => {
   // --------------------------------------------------------------------------
 
   useEffect(() => {
-    console.log("chattttsssss");
+    console.log("Chat One Changed ---- ");
     console.log(ChatOne);
     if (send === true) {
       sendMessage();
@@ -807,112 +810,14 @@ export const MessageBody = () => {
                   </>
                 );
               })}
-              {/* <section class="buttons">
-                <button class="draw">Draw</button>
-              </section> */}
-              {/* <div className="w-[32%] h-[65px] rounded-lg bg-[#1f201f] flex justify-center items-center">
-                <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
-                  <img src={doccc} className="w-[40px]"></img>
-                </div>
-                <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
-                  <span className="font-[work] text-[14px] font-semibold text-[white]">
-                    Assignment 4.pdf
-                  </span>
-                  <span className="font-[work] text-[11px] font-normal text-[white]">
-                    pdf • 20kb
-                  </span>
-                </div>
-                <div className="w-[40px] h-full flex justify-start items-center">
-                  <div className="w-[30px] h-[30px] rounded-full hover:bg-[#383938] flex justify-center items-center cursor-pointer">
-                    <img src={download} className="w-[20px]"></img>
-                  </div>
-                </div>
-              </div> */}
-              {/* <button
-                className="text-white"
-                onClick={() => {
-                  const user = firebase.auth().currentUser;
-
-                  const UpdateRef = db.collection("Chat Record").doc(user.uid);
-
-                  UpdateRef.update({
-                    Name: "Himadri Purkait",
-                    Info: "hello world",
-                  });
-
-                  // onSnapshot(UpdateRef, (snapshot) => {
-                  //   console.log(snapshot.data().test);
-                  //   snapshot.data().test.update({
-                  //     name: "Himadri",
-                  //     info: "hello world",
-                  //   });
-                  // });
-                }}
-              >
-                Update Me !
-              </button> */}
-              {/* <div className="w-full h-[700px] bg-slate-500 flex justify-center items-center">
-                {" "}
-                jhglis
-                <div className="w-[100px] h-[100px] bggOne rounded-full"></div>
-                <div className="w-[100px] h-[100px] bggTwo rounded-full"></div>
-              </div> */}
-              {/* <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
-                <video
-                  controls
-                  className="w-auto  h-full rounded-lg 
-              "
-                >
-                  <source src={vid6}></source>
-                </video>
-              </div>
-              <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
-                <video
-                  controls
-                  className="w-auto  h-full rounded-lg 
-              "
-                >
-                  <source src={vid3}></source>
-                </video>
-              </div>
-              <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
-                <video
-                  controls
-                  className="w-auto  h-full rounded-lg 
-              "
-                >
-                  <source src={vid8}></source>
-                </video>
-              </div>
-              <div className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] w-auto rounded-lg flex justify-start items-center min-w-[25%]">
-                <video
-                  controls
-                  className="w-auto  h-full rounded-lg 
-              "
-                >
-                  <source src={vid8}></source>
-                </video>
-              </div> */}
-
-              {/* <video
-                className="max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] md:max-h-[370px] rounded-lg bg-slate-500 
-              "
-              >
-                <source src={vid3}></source>
-              </video> */}
-              {/* <VideoPlayer /> */}
-              {/* <img src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/chats_images%2Fmb05JDt06hedvvAijxzn09KfbHu1%2F5?alt=media&token=1b5182f5-1ca5-4bc0-81d1-f312d9eb7561"></img> */}
             </>
           )}
         </div>
       </div>
-      <div className="w-full px-[10px] fixed mt-[-435px]">
+      <div className="w-full px-[10px] fixed mt-[-435px] drop-shadow-lg">
         {emoji === true ? (
           <Picker
-            // className="bg-slate-300"
-            // onClickOutside={() => {
-            //   setEmoji(false);
-            // }}
+            // className="w-[100%]"
             theme="light"
             data={data}
             onEmojiSelect={(e) => {
@@ -931,17 +836,16 @@ export const MessageBody = () => {
             style={{ transition: ".5s" }}
           >
             <div
-              className="w-[170px] h-[338px] text-[black] bg-[white] border border-transparent  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[rubik] font-normal text-[14px] flex flex-col justify-between"
+              className="w-[170px] h-[338px] text-[white] bg-[#3d737d] border border-transparent  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[rubik] font-normal text-[14px] flex flex-col justify-between drop-shadow-lg"
               style={{ transition: ".5s" }}
             >
               <div className="w-full flex flex-col items-center">
                 <label
                   className="w-full flex items-center h-[40px] opacity-100 rounded-lg cursor-pointer"
-                  // style={{ transition: ".2s" }}
                   for="document-file-input"
                   style={{ transition: "2s", transitionDelay: ".2s" }}
                 >
-                  <div className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl">
+                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#b8dedf] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
                     <input
                       id="document-file-input"
                       type="file"
@@ -958,11 +862,10 @@ export const MessageBody = () => {
                 </label>
                 <label
                   className="w-full flex items-center h-[40px] opacity-100 rounded-lg   cursor-pointer"
-                  // style={{ transition: ".2s" }}
                   style={{ transition: "2s", transitionDelay: ".4s" }}
                   for="image-file-input"
                 >
-                  <div className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl">
+                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#b8dedf] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
                     <input
                       id="image-file-input"
                       type="file"
@@ -982,7 +885,7 @@ export const MessageBody = () => {
                   style={{ transition: "2s", transitionDelay: ".6s" }}
                   for="video-file-input"
                 >
-                  <div className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl">
+                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#b8dedf] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
                     <input
                       id="video-file-input"
                       type="file"
@@ -1002,7 +905,7 @@ export const MessageBody = () => {
                   style={{ transition: "2s", transitionDelay: ".8s" }}
                   for="gif-file-input"
                 >
-                  <div className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl">
+                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#b8dedf] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
                     <input
                       id="gif-file-input"
                       type="file"
@@ -1023,7 +926,7 @@ export const MessageBody = () => {
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
                   <div
-                    className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl"
+                    className="w-full h-full px-[10px] flex items-center  hover:bg-[#b8dedf] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md"
                     onClick={() => {
                       toast("Sticker Sharing not Supported", {
                         icon: "⚠️",
@@ -1047,7 +950,7 @@ export const MessageBody = () => {
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
                   <div
-                    className="w-full h-full px-[10px] flex items-center border-l-[2.5px] hover:text-[#b8dedf] border-transparent hover:border-l-[#b8dedf]   hover:drop-shadow-xl"
+                    className="w-full h-full px-[10px] flex items-center  hover:bg-[#b8dedf] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md"
                     onClick={() => {
                       toast("Contact Sharing not Supported", {
                         icon: "⚠️",
@@ -1081,7 +984,7 @@ export const MessageBody = () => {
                 style={{ transition: "2s", transitionDelay: "1.4s" }}
               >
                 {image ? (
-                  <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px]  cursor-pointer rounded-lg ">
+                  <div className="w-full h-full hover:bg-[#b8dedf]  hover:text-[black] px-[10px]  cursor-pointer rounded-lg ">
                     <button
                       className="w-full h-full opacity cursor-pointer flex justify-between items-center"
                       onClick={() => {
@@ -1133,13 +1036,13 @@ export const MessageBody = () => {
                         className="w-[25px] mr-[10px] z-20"
                       ></img>
                       Send
-                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[black] text-[white]   flex justify-center items-center">
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[white] text-[black]   flex justify-center items-center">
                         {imageLength}
                       </span>
                     </button>
                   </div>
                 ) : video ? (
-                  <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px] rounded-lg  cursor-pointer ">
+                  <div className="w-full h-full hover:bg-[#b8dedf]  hover:text-[black] px-[10px] rounded-lg  cursor-pointer ">
                     <button
                       className="w-full h-full opacity cursor-pointer flex justify-between items-center"
                       onClick={() => {
@@ -1172,13 +1075,13 @@ export const MessageBody = () => {
                         className="w-[25px] mr-[10px] z-20"
                       ></img>
                       Send
-                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[black] text-[white]   flex justify-center items-center">
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[white] text-[black]   flex justify-center items-center">
                         1
                       </span>
                     </button>
                   </div>
                 ) : Doc ? (
-                  <div className="w-full h-full hover:bg-[#8171f3]  hover:text-[white] px-[10px] rounded-lg  cursor-pointer ">
+                  <div className="w-full h-full hover:bg-[#b8dedf]  hover:text-[black] px-[10px] rounded-lg  cursor-pointer ">
                     <div
                       className="w-full h-full opacity cursor-pointer flex justify-between items-center"
                       onClick={() => {
@@ -1228,7 +1131,7 @@ export const MessageBody = () => {
                         className="w-[25px] mr-[10px] z-20"
                       ></img>
                       Send
-                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[black] text-[white]   flex justify-center items-center">
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[white] text-[black]   flex justify-center items-center">
                         1
                       </span>
                     </div>
@@ -1284,7 +1187,7 @@ export const MessageBody = () => {
                         className="w-[25px] mr-[10px] z-20"
                       ></img>
                       Send
-                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[black] text-[white]   flex justify-center items-center">
+                      <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[white] text-[black]   flex justify-center items-center">
                         1
                       </span>
                     </div>

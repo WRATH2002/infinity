@@ -243,12 +243,12 @@ const Chatbody = () => {
               {/* <div className="w-0 h-full" style={{ transition: ".5s" }}>
                 <UserInfoSidebar data={true} />
               </div> */}
-              <div
+              {/* <div
                 className="w-0  bg-[#f8fafc] h-full fixed lg:flex md:flex overflow-hidden"
                 style={{ transition: ".5s" }}
               >
                 hello
-              </div>
+              </div> */}
             </div>
           </>
         ) : (

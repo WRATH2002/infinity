@@ -114,7 +114,7 @@ font-family: 'Rubik', sans-serif; */
 /*  */
 
 em-emoji-picker {
-  background-color: white;
+  background-color: 61, 115, 125;
 }
 
 /* -------------------- */
@@ -332,7 +332,7 @@ input::placeholder {
 
   height: 3px;
   border-radius: 50px;
-  background: white;
+  background: #3d737d;
   position: absolute;
   top: 0;
   left: 0;
@@ -384,23 +384,27 @@ svg text {
 
 /* --------------------- */
 em-emoji-picker {
-  --background-rgb: 85, 170, 255;
+  --background-rgb: 61, 115, 125;
   font-family: rubik;
   /* --border-radius: 24px; */
   /* --category-icon-size: 24px; */
-  /* --color-border-over: rgba(0, 0, 0, 0.1); */
-  /* --color-border: rgba(0, 0, 0, 0.05);
+  --color-border-over: rgba(0, 0, 0, 0.1);
+  --color-border: rgba(0, 0, 0, 0.05);
   --font-family: "Comic Sans MS", "Chalkboard SE", cursive;
   --font-size: 20px;
-  --rgb-accent: 255, 105, 180;
-  --rgb-background: 262, 240, 283;
-  --rgb-color: 102, 51, 153;
-  --rgb-input: 255, 235, 235;
-  --shadow: 5px 5px 15px -8px rebeccapurple;
+  --rgb-accent: 52, 151, 169;
+  --rgb-background: 61, 115, 125;
+  --rgb-color: 255, 255, 255;
+  --rgb-input: 58, 109, 119;
+  /* --shadow: 5px 5px 15px -8px black; */
 
-  height: 50vh;
+  /* height: 50vh;
   min-height: 400px;
   max-height: 800px; */
+  /* width: 400px; */
+  /* min-width: 250px;
+  resize: horizontal;
+  overflow: auto; */
 }
 
 /*  */

@@ -168,7 +168,7 @@ const Friends = (props) => {
       {ActiveChatUser === UserUid && UserUid != "" ? (
         <>
           <div
-            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer  bg-[white]  px-[10px]"
+            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer  bg-[#3d737d]  px-[10px] border-t-[1px] border-[#404040] "
             onClick={() => {
               activerChatUser();
               // dispatch(toggleSendFlag(true));
@@ -189,11 +189,11 @@ const Friends = (props) => {
             </div>
             <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black  font-[rubik] font-normal  ">
+                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-white  font-[rubik] font-normal  ">
                   {/* {props.data.user} */}
                   {userName}
                 </span>
-                <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[rubik] font-light">
+                <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-white   font-[rubik] font-light">
                   {/* {props.data.time} */}
                   {Time}
                 </span>
@@ -205,7 +205,7 @@ const Friends = (props) => {
                   <>
                     {chatFlag === 1 ? (
                       <>
-                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020]  font-[rubik] font-light">
+                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
                           you:
                         </span>
                       </>
@@ -213,8 +213,8 @@ const Friends = (props) => {
                       <></>
                     )}
 
-                    <BsFillCameraFill className="mr-[5px] text-[#474747] " />
-                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]   font-[rubik] font-light">
+                    <BsFillCameraFill className="mr-[5px] text-[#bcbcbc] " />
+                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
                       {lastMsg}
                     </span>
                   </>
@@ -222,7 +222,7 @@ const Friends = (props) => {
                   <>
                     {chatFlag === 1 ? (
                       <>
-                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020]  font-[rubik] font-light">
+                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
                           you:
                         </span>
                       </>
@@ -230,8 +230,8 @@ const Friends = (props) => {
                       <></>
                     )}
 
-                    <TiVideo className="mr-[5px] text-[#474747] " />
-                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]   font-[rubik] font-light">
+                    <TiVideo className="mr-[5px] text-[#bcbcbc] " />
+                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
                       {lastMsg}
                     </span>
                   </>
@@ -239,7 +239,7 @@ const Friends = (props) => {
                   <>
                     {chatFlag === 1 ? (
                       <>
-                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020]  font-[rubik] font-light">
+                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
                           you:
                         </span>
                       </>
@@ -247,8 +247,8 @@ const Friends = (props) => {
                       <></>
                     )}
 
-                    <IoMdDocument className="mr-[5px] text-[#474747] " />
-                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]   font-[rubik] font-light">
+                    <IoMdDocument className="mr-[5px] text-[#bcbcbc] " />
+                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
                       {docName}
                     </span>
                   </>
@@ -256,14 +256,14 @@ const Friends = (props) => {
                   <>
                     {chatFlag === 1 ? (
                       <>
-                        <span className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020]  font-[rubik] font-light">
+                        <span className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
                           you:
                         </span>
                       </>
                     ) : (
                       <></>
                     )}
-                    <span className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]   font-[rubik] font-light">
+                    <span className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
                       {lastMsg}
                     </span>
                   </>
@@ -289,7 +289,7 @@ const Friends = (props) => {
         <>
           {/* btn from-left */}
           <div
-            className=" group w-full h-[70px] py-[10px] flex justify-center bg-transparent  cursor-pointer  px-[10px]  hover:bg-[#ffffffe1] border-t-[1px] border-[#404040] "
+            className=" group w-full h-[70px] py-[10px] flex justify-center bg-transparent  cursor-pointer  px-[10px]  hover:bg-[#26484e] border-t-[1px] border-[#404040] "
             onClick={() => activerChatUser()}
           >
             <div className="w-[50px] h-[50px]  rounded-full">
@@ -308,14 +308,14 @@ const Friends = (props) => {
             <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
                 <span
-                  className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]  group-hover:text-[black]   font-[rubik] font-normal "
+                  className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]    font-[rubik] font-normal "
                   // style={{ transition: ".9s" }}
                 >
                   {/* {props.data.user} */}
                   {userName}
                 </span>
                 <span
-                  className="w-[70px] h-full text-[11px] flex justify-end items-center text-[white] group-hover:text-[black]  font-[rubik] font-light"
+                  className="w-[70px] h-full text-[11px] flex justify-end items-center text-[white]   font-[rubik] font-light"
                   // style={{ transition: ".9s" }}
                 >
                   {/* {props.data.time} */}
@@ -328,7 +328,7 @@ const Friends = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]   group-hover:text-[#202020]  font-[rubik] font-light"
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]   group-hover:text-[#fff]  font-[rubik] font-light"
                           // style={{ transition: ".5s" }}
                         >
                           you:
@@ -338,11 +338,11 @@ const Friends = (props) => {
                       <></>
                     )}
                     <BsFillCameraFill
-                      className="mr-[5px] text-[#9fa5a7] group-hover:text-[#474747] "
+                      className="mr-[5px] text-[#9fa5a7] group-hover:text-[#bcbcbc] "
                       // style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]   font-[rubik] font-light"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#bcbcbc]   font-[rubik] font-light"
                       // style={{ transition: ".5s" }}
                     >
                       {lastMsg}
@@ -353,7 +353,7 @@ const Friends = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[rubik] font-light group-hover:text-[#202020]"
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light group-hover:text-[white]"
                           // style={{ transition: ".5s" }}
                         >
                           you:
@@ -363,11 +363,11 @@ const Friends = (props) => {
                       <></>
                     )}
                     <TiVideo
-                      className="mr-[5px] text-[#9fa5a7] group-hover:text-[#474747] "
+                      className="mr-[5px] text-[#9fa5a7] group-hover:text-[#bcbcbc] "
                       // style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]   font-[rubik] font-light"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#bcbcbc]   font-[rubik] font-light"
                       // style={{ transition: ".5s" }}
                     >
                       {lastMsg}
@@ -378,7 +378,7 @@ const Friends = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[rubik] font-light group-hover:text-[#202020]"
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[rubik] font-light group-hover:text-[white]"
                           // style={{ transition: ".5s" }}
                         >
                           you:
@@ -388,11 +388,11 @@ const Friends = (props) => {
                       <></>
                     )}
                     <IoMdDocument
-                      className="mr-[5px] text-[#9fa5a7] group-hover:text-[#474747] "
+                      className="mr-[5px] text-[#9fa5a7] group-hover:text-[#bcbcbc] "
                       // style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]   font-[rubik] font-light"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#bcbcbc]   font-[rubik] font-light"
                       // style={{ transition: ".5s" }}
                     >
                       {docName}
@@ -404,7 +404,7 @@ const Friends = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[rubik] font-light group-hover:text-[#202020]"
+                          className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[rubik] font-light group-hover:text-[white]"
                           // style={{ transition: ".5s" }}
                         >
                           you:
@@ -414,7 +414,7 @@ const Friends = (props) => {
                       <></>
                     )}
                     <span
-                      className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]   font-[rubik] font-light"
+                      className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#bcbcbc]   font-[rubik] font-light"
                       // style={{ transition: ".5s" }}
                     >
                       {lastMsg}
@@ -429,7 +429,7 @@ const Friends = (props) => {
                     <></>
                   ) : (
                     <>
-                      <span className="w-[18px] h-[18px] text-[11px] flex justify-center items-center rounded-full bg-[#ffffff] text-black">
+                      <span className="w-[18px] h-[18px] text-[11px] flex justify-center items-center rounded-full bg-[#3e727d] text-[white]">
                         {unreadMessages}
                       </span>
                     </>
@@ -520,11 +520,14 @@ const SearchFriends = (props) => {
           // dispatch(toggleSendFlag(true));
         }}
       >
-        <div className="w-[50px] h-[50px]  rounded-full">
+        <div
+          className="w-[50px] h-[50px]  rounded-full z-20"
+          style={{ zIndex: "10" }}
+        >
           {photoURL === "nophoto" ? (
             <img
               src={profile2}
-              className="w-full h-full rounded-full object-cover drop-shadow-lg"
+              className="w-full h-full rounded-full object-cover drop-shadow-lg z-20"
             ></img>
           ) : (
             <img
@@ -965,8 +968,8 @@ const UserList = () => {
           </>
         ) : section === "All" ? (
           <>
-            <div className="min-h-[70px] w-full  flex justify-center items-center">
-              {/* <div className="w-full flex justify-center items-center min-h-[45px]  overflow-hidden">
+            {/* <div className="min-h-[70px] w-full  flex justify-center items-center"> */}
+            {/* <div className="w-full flex justify-center items-center min-h-[45px]  overflow-hidden">
                 <input
                   value={searchUser}
                   onKeyDown={(e) => {
@@ -1016,86 +1019,86 @@ const UserList = () => {
                   </div>
                 </div>
               </div> */}
-              {isSearchBar === false ? (
-                <>
-                  <div className="w-full flex justify-start px-[10px] items-center min-h-[45px]  overflow-hidden">
-                    <input
-                      disabled
-                      style={{ transition: ".5s" }}
-                      value={searchUser}
-                      onKeyDown={(e) => {
-                        if (
-                          e.nativeEvent.key === "Enter" &&
-                          searchUser.length !== 0
-                        ) {
-                          searchUserFriend();
-                          setSearchFlag(true);
-                        }
-                      }}
-                      onChange={(e) => setSearchUser(e.target.value)}
-                      onClick={() => {
-                        // setIsSearchBar(!isSearchBar);
-                      }}
-                      // placeholder="Search Friends"
-                      className="w-[45px] h-[45px]  text-[black] bg-[white] font-[work] font-semibold border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-full"
-                    ></input>
-                    <div
-                      className="w-[35px] h-[35px] ml-[-40px]  hover:bg-[black] rounded-full flex justify-center items-center z-5 drop-shadow-md hover:text-white text-black cursor-pointer"
-                      onClick={() => {
-                        // if (searchUser.length !== 0) {
-                        //   searchUserFriend();
-                        //   setSearchFlag(true);
-                        // }
-                        setIsSearchBar(true);
-                      }}
-                    >
-                      <div className="w-[35px] h-[35px] rounded-full flex justify-center items-center ">
-                        <RiSearch2Line className="text-[20px]  drop-shadow-md" />
-                      </div>
+            {isSearchBar === false ? (
+              <>
+                <div className="fixed bottom-[10px] mr-0 sm:w-full md:w-[400px] lg:w-[400px] flex justify-end pl-[5px] pr-[15px] items-center min-h-[45px]  overflow-hidden">
+                  <input
+                    disabled
+                    style={{ transition: ".5s" }}
+                    value={searchUser}
+                    onKeyDown={(e) => {
+                      if (
+                        e.nativeEvent.key === "Enter" &&
+                        searchUser.length !== 0
+                      ) {
+                        searchUserFriend();
+                        setSearchFlag(true);
+                      }
+                    }}
+                    onChange={(e) => setSearchUser(e.target.value)}
+                    onClick={() => {
+                      // setIsSearchBar(!isSearchBar);
+                    }}
+                    // placeholder="Search Friends"
+                    className="w-[45px] h-[45px]  text-[black] bg-[white] font-[work] font-semibold border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-full"
+                  ></input>
+                  <div
+                    className="w-[35px] h-[35px] ml-[-40px]  hover:bg-[black] rounded-full flex justify-center items-center z-5 drop-shadow-md hover:text-white text-black cursor-pointer"
+                    onClick={() => {
+                      // if (searchUser.length !== 0) {
+                      //   searchUserFriend();
+                      //   setSearchFlag(true);
+                      // }
+                      setIsSearchBar(true);
+                    }}
+                  >
+                    <div className="w-[35px] h-[35px] rounded-full flex justify-center items-center ">
+                      <RiSearch2Line className="text-[20px]  drop-shadow-md" />
                     </div>
                   </div>
-                </>
-              ) : (
-                <>
-                  <div className="w-full flex justify-start px-[10px] items-center min-h-[45px]  overflow-hidden">
-                    <input
-                      style={{ transition: ".5s" }}
-                      value={searchUser}
-                      onKeyDown={(e) => {
-                        if (
-                          e.nativeEvent.key === "Enter" &&
-                          searchUser.length !== 0
-                        ) {
-                          searchUserFriend();
-                          setSearchFlag(true);
-                        }
-                      }}
-                      onChange={(e) => setSearchUser(e.target.value)}
-                      onClick={() => {
-                        // setIsSearchBar(!isSearchBar);
-                      }}
-                      placeholder="Search Friends"
-                      className="input w-full h-[45px]  text-[black] bg-[white] font-[work] font-medium text-[17px] tracking-[.4px] border-none z-0 outline-none  pl-[20px] pr-[50px]  drop-shadow-md rounded-full "
-                    ></input>
-                    <div
-                      className="w-[35px] h-[35px] ml-[-40px] bg-[#0b0c0b] hover:bg-[#3b3b3b] rounded-full flex justify-center items-center z-5 drop-shadow-md hover:text-white text-white cursor-pointer"
-                      onClick={() => {
-                        // if (searchUser.length !== 0) {
-                        //   searchUserFriend();
-                        //   setSearchFlag(true);
-                        // }
-                        setSearchUser("");
-                        setIsSearchBar(false);
-                      }}
-                    >
-                      <div className="w-[35px] h-[35px] rounded-full flex justify-center items-center ">
-                        <RxCross2 className="text-[20px]  drop-shadow-md" />
-                      </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="fixed bottom-[10px] mr-0 sm:w-full md:w-[400px] lg:w-[400px] flex justify-end pl-[5px] pr-[15px] items-center min-h-[45px]  overflow-hidden">
+                  <input
+                    style={{ transition: ".5s", zIndex: "60" }}
+                    value={searchUser}
+                    onKeyDown={(e) => {
+                      if (
+                        e.nativeEvent.key === "Enter" &&
+                        searchUser.length !== 0
+                      ) {
+                        searchUserFriend();
+                        setSearchFlag(true);
+                      }
+                    }}
+                    onChange={(e) => setSearchUser(e.target.value)}
+                    onClick={() => {
+                      // setIsSearchBar(!isSearchBar);
+                    }}
+                    placeholder="Search Friends"
+                    className="input w-full h-[45px] z-50  text-[black] bg-[white] font-[work] font-medium text-[17px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px]  drop-shadow-md rounded-full "
+                  ></input>
+                  <div
+                    className="w-[35px] h-[35px] ml-[-40px] bg-[#0b0c0b] hover:bg-[#3b3b3b] rounded-full flex justify-center items-center z-5 drop-shadow-md hover:text-white text-white cursor-pointer"
+                    onClick={() => {
+                      // if (searchUser.length !== 0) {
+                      //   searchUserFriend();
+                      //   setSearchFlag(true);
+                      // }
+                      setSearchUser("");
+                      setIsSearchBar(false);
+                    }}
+                  >
+                    <div className="w-[35px] h-[35px] rounded-full flex justify-center items-center ">
+                      <RxCross2 className="text-[20px]  drop-shadow-md" />
                     </div>
                   </div>
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            )}
+            {/* </div> */}
             <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden">
               {AllUserList.length === 0 ? (
                 <>No Users Yet</>
@@ -1318,6 +1321,7 @@ const UserList = () => {
                   className="fixed z-20 bottom-[20px] w-[40px] h-[40px]  rounded-full bg-[white] text-black  flex justify-center items-center rotate-[135deg] cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
+                    setStatusTextModal(false);
                   }}
                   style={{ transition: ".4s" }}
                 >
@@ -1355,13 +1359,17 @@ const UserList = () => {
                   }}
                   style={{ transition: ".4s", transitionDelay: ".1s" }}
                 >
-                  <FaPen className="text-[17px]" />
+                  {statusTextModal === true ? (
+                    <img src={tick} className="w-full"></img>
+                  ) : (
+                    <FaPen className="text-[17px]" />
+                  )}
                 </div>
               </>
             ) : (
               <>
                 <div
-                  className="fixed z-30 bottom-[20px] w-[40px] h-[40px]  rounded-full hover:bg-[white] hover:text-black text-white flex justify-center items-center  cursor-pointer"
+                  className="fixed z-20 bottom-[20px] w-[40px] h-[40px]  rounded-full hover:bg-[white] hover:text-black text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                   }}
@@ -1402,11 +1410,12 @@ const UserList = () => {
             )}
             {statusTextModal === true ? (
               <>
-                <input
-                  className="h-[40px] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] bottom-[70px] fixed opacity-100 bg-[white] rounded-full outline-none px-[20px] font-[rubik] font-normal text-[14px] input"
+                <textarea
+                  className="h-[120px] resize-none py-[10px] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] bottom-[70px] fixed opacity-100 bg-[white] rounded-3xl outline-none px-[20px] font-[rubik] font-normal text-[14px] input"
                   placeholder="Enter Text"
+                  // type="textarea"
                   style={{ transition: ".4s" }}
-                ></input>
+                ></textarea>
               </>
             ) : (
               // <div
@@ -1430,11 +1439,12 @@ const UserList = () => {
               //   )}
               // </div>
               <>
-                <input
-                  className="h-[40px] w-0 bottom-[70px] fixed opacity-0 bg-[white] rounded-full outline-none px-[20px] font-[rubik] font-normal text-[14px] input"
+                <textarea
+                  className="h-[40px] resize-none py-[10px] w-0 bottom-[70px] fixed opacity-0 bg-[white] rounded-3xl outline-none px-[20px] font-[rubik] font-normal text-[14px] input"
                   placeholder="Enter Text"
+                  // type="textarea"
                   style={{ transition: ".4s" }}
-                ></input>
+                ></textarea>
                 {/* <div
                   className="fixed bottom-[70px]  h-[40px] w-0 bg-[#ffffff] rounded-full   flex justify-end items-center"
                   style={{ transition: ".4s" }}

@@ -128,7 +128,7 @@ const OwnerDetails = () => {
 
         {isMenu === true ? (
           <div
-            className="w-[35px] h-[35px] bg-white  text-black rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
+            className="w-[35px] h-[35px] bg-[#3d737d]  text-white rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
             onClick={() => {
               setIsMenu(!isMenu);
               setIsProfileMenu(false);
@@ -142,7 +142,7 @@ const OwnerDetails = () => {
           </div>
         ) : (
           <div
-            className="w-[35px] h-[35px]  text-[#cdd8dd] hover:text-black hover:bg-white rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
+            className="w-[35px] h-[35px]  text-[white] hover:text-black hover:bg-[#3d737d] rounded-full flex justify-center items-center cursor-pointer overflow-hidden"
             onClick={() => {
               setIsMenu(!isMenu);
             }}
@@ -158,7 +158,7 @@ const OwnerDetails = () => {
         <>
           {isProfileMenu === true ? (
             <div
-              className="h-[120px] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] mt-[60px] fixed rounded-lg px-[10px]  flex justify-between items-center drop-shadow-lg z-10 text-[#ccd7dc] bg-[#ffffff] backdrop-blur-md font-[nunitosans] "
+              className="h-[120px] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] mt-[60px] fixed rounded-lg px-[10px]  flex justify-between items-center drop-shadow-lg z-10 text-[#ccd7dc] bg-[#3d737d] backdrop-blur-md font-[nunitosans] "
               style={{ transition: ".3s" }}
             >
               {/* <span
@@ -183,7 +183,7 @@ const OwnerDetails = () => {
               {/* <span>Profile</span> */}
               <div className="w-[calc(100%-115px)] h-full py-[10px] pb-[13px] flex flex-col justify-between items-start">
                 <span
-                  className="text-[12px] text-[#000000] font-normal font-[rubik] ml-[7px] px-[3px] bg-white z-30"
+                  className="text-[12px] text-[#fff] font-normal font-[rubik] ml-[7px] px-[3px] bg-[#3d737d] z-30"
                   // style={{ zIndex: "40" }}
                 >
                   Name
@@ -194,7 +194,7 @@ const OwnerDetails = () => {
                       autoFocus
                       onChange={(e) => setChangeOwnerName(e.target.value)}
                       value={changeOwnerName}
-                      className="text-[14px] w-[calc(100%-45px)] outline-none bg-transparent text-[#000000] font-normal border-[1px] border-black px-[10px] mt-[-11px] rounded-[4px] py-[5px] font-[rubik] input z-10"
+                      className="text-[14px] w-[calc(100%-45px)] outline-none bg-transparent text-[#fff] font-normal border-[1px] border-white px-[10px] mt-[-11px] rounded-[4px] py-[5px] font-[rubik] input z-10"
                       style={{ zIndex: "10" }}
                     ></input>
                   ) : (
@@ -207,7 +207,7 @@ const OwnerDetails = () => {
                   )}
                   {nameChangeFlag === true ? (
                     <div
-                      className="ml-[10px] hover:bg-black hover:text-black cursor-pointer w-[25px] h-[25px] mr-[10px] rounded-full flex justify-center items-center"
+                      className="ml-[10px] hover:bg-white hover:text-black cursor-pointer w-[25px] h-[25px] mr-[10px] rounded-full flex justify-center items-center"
                       onClick={() => {
                         const user = firebase.auth().currentUser;
 
@@ -234,7 +234,7 @@ const OwnerDetails = () => {
                     </div>
                   ) : (
                     <div
-                      className="ml-[10px] hover:bg-[#000000] hover:text-[#ffffff] font-normal font-[rubik] text-[black] cursor-pointer w-[25px] h-[25px] mr-[10px] rounded-full flex justify-center items-center"
+                      className="ml-[10px] hover:bg-[#fff] hover:text-[black] font-normal font-[rubik] text-[white] cursor-pointer w-[25px] h-[25px] mr-[10px] rounded-full flex justify-center items-center"
                       onClick={() => {
                         setChangeOwnerName(ownerName);
                         setNameChangeFlag(true);
@@ -245,7 +245,7 @@ const OwnerDetails = () => {
                   )}
                 </div>
                 <span
-                  className="text-[12px] text-[#000000] font-normal font-[rubik] ml-[7px] px-[3px] bg-[#ffffff]  "
+                  className="text-[12px] text-[#000000] font-normal font-[rubik] ml-[7px] px-[3px] bg-[#3d737d]  "
                   style={{ zIndex: "4" }}
                 >
                   About
@@ -269,7 +269,7 @@ const OwnerDetails = () => {
                   )}
                   {aboutChangeFlag === true ? (
                     <div
-                      className="ml-[10px] hover:bg-[#000000] hover:text-[#ffffff] cursor-pointer w-[25px] h-[25px] mr-[10px] rounded-full flex justify-center items-center"
+                      className="ml-[10px] hover:bg-[#fff] hover:text-[#000] cursor-pointer w-[25px] h-[25px] mr-[10px] rounded-full flex justify-center items-center"
                       onClick={() => {
                         const user = firebase.auth().currentUser;
 
@@ -296,7 +296,7 @@ const OwnerDetails = () => {
                     </div>
                   ) : (
                     <div
-                      className="ml-[10px] hover:bg-black hover:text-white text-black cursor-pointer w-[25px] h-[25px] mr-[10px] rounded-full flex justify-center items-center"
+                      className="ml-[10px] hover:bg-white hover:text-black text-white cursor-pointer w-[25px] h-[25px] mr-[10px] rounded-full flex justify-center items-center"
                       onClick={() => {
                         setChangeOwnerInfo(ownerInfo);
                         setAboutChangeFlag(true);
@@ -387,7 +387,7 @@ const OwnerDetails = () => {
             </div>
           ) : (
             <div
-              className="h-[120px] w-[170px] mt-[60px] fixed rounded-lg p-[10px] text-[black] bg-[white]  z-10 flex flex-col justify-center "
+              className="h-[120px] w-[170px] mt-[60px] fixed rounded-lg p-[10px] text-[black] bg-[#3d737d]  z-10 flex flex-col justify-center drop-shadow-lg "
               style={{ transition: ".5s" }}
             >
               <span
@@ -399,7 +399,7 @@ const OwnerDetails = () => {
               >
                 {/* <CgProfile className="mr-[10px]" /> */}
                 <div
-                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#b8dedf] rounded-md  text-[black]  hover:text-black flex justify-start items-center "
+                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#b8dedf] rounded-md  text-[white] font-[rubik] font-light text-[15px]  hover:text-black flex justify-start items-center "
                   // style={{ transition: ".2s" }}
                 >
                   <img src={profile} className="w-[25px] mr-[8px]"></img>{" "}
@@ -414,7 +414,7 @@ const OwnerDetails = () => {
                 }}
               >
                 <div
-                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#b8dedf] rounded-md  text-[black]  hover:text-black flex justify-start items-center "
+                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#b8dedf] rounded-md  text-[white] font-[rubik] font-light text-[15px]  hover:text-black flex justify-start items-center "
                   // style={{ transition: ".2s" }}
                 >
                   <img src={settings} className="w-[25px] mr-[8px]"></img>{" "}
@@ -430,7 +430,7 @@ const OwnerDetails = () => {
                 }}
               >
                 <div
-                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#b8dedf] rounded-md  text-[black]  hover:text-black flex justify-start items-center "
+                  className="w-full h-full px-[10px] py-[4px] hover:bg-[#b8dedf] rounded-md  text-[white] font-[rubik] font-light text-[15px]  hover:text-black flex justify-start items-center "
                   // style={{ transition: ".2s" }}
                 >
                   <img src={logout} className="w-[25px] mr-[8px]"></img> Logout
@@ -443,7 +443,7 @@ const OwnerDetails = () => {
       ) : (
         <>
           <div
-            className="h-[120px] w-[0] mt-[60px] fixed rounded-lg  text-[black] bg-[white]    z-10 flex flex-col justify-center"
+            className="h-[120px] w-[0] mt-[60px] fixed rounded-lg  text-[white] bg-[#3d737d]    z-10 flex flex-col justify-center"
             style={{ transition: ".5s" }}
           >
             <span
