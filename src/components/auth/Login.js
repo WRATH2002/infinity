@@ -37,16 +37,16 @@ const Login = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-lg h-[70%] bg-white flex flex-col justify-center items-center">
+      <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-lg h-[70%] bg-[#fce9ed] flex flex-col justify-center items-center">
         {/* <span className="in  font-bold text-[40px] mb-[30px]">INFINITY</span> */}
         <div className="w-full flex flex-col ">
-          <span className="text-[32px] text-[#000000] font-[rubik] font-medium ">
+          <span className="text-[32px] text-[black] font-[rubik] font-medium ">
             Login{" "}
           </span>
-          <span className="text-[14px] font-normal text-[#5e5e5e] font-[rubik] ">
+          <span className="text-[14px] font-normal text-[black] font-[rubik] ">
             new user
             <span
-              className="text-[#000000] hover:text-[#343434] cursor-pointer  font-medium"
+              className="text-[black] hover:text-[#9aa0a2] cursor-pointer  font-normal"
               style={{ transition: ".3s" }}
               onClick={() => changeMode()}
             >
@@ -76,14 +76,14 @@ const Login = () => {
           }}
         ></input> */}
         <input
-          className="input outline-none font-[rubik] mt-[40px] bg   w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-black bg-[#dadada]"
+          className="log outline-none font-[rubik] mt-[40px] bg   w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-[white] bg-[#d9e1e4]"
           placeholder="Email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
         <input
-          className="input outline-none font-[rubik]    w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-black bg-[#dadada]"
+          className="log outline-none font-[rubik]    w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-[white] bg-[#d9e1e4]"
           placeholder="Password"
           type="password"
           value={password}
@@ -97,7 +97,7 @@ const Login = () => {
           Signup
         </button> */}
         <button
-          className="w-full h-[40px] text-[#ffffff] font-[rubik] font-medium outline-none flex justify-center items-center bg-[#000000] hover:bg-[#4e4e4e] rounded-md mt-[30px]"
+          className="w-full h-[40px] text-[#ffffff] font-[rubik] font-medium outline-none flex justify-center items-center bg-[#09161c] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signIn}

@@ -28,6 +28,7 @@ import three from "../assets/img/threedots.png";
 import cross from "../assets/img/cross.png";
 import uploadd from "../assets/img/upload.png";
 import { GrFormUpload } from "react-icons/gr";
+import { FiSearch } from "react-icons/fi";
 
 const OwnerDetails = () => {
   const [ownerInfo, setOwnerInfo] = useState("");
@@ -41,6 +42,7 @@ const OwnerDetails = () => {
   const [aboutChangeFlag, setAboutChangeFlag] = useState(false);
   const [image, setImage] = useState();
   const [profileURL, setProfileURL] = useState("");
+  const [totalChats, setTotalChats] = useState(0);
 
   useEffect(() => {
     fetchownerInfo();
@@ -48,6 +50,15 @@ const OwnerDetails = () => {
 
   function fetchownerInfo() {
     const user = firebase.auth().currentUser;
+
+    const collectionRef = db
+      .collection("Chat Record")
+      .doc(user.uid)
+      .collection("Chat Friends");
+
+    onSnapshot(collectionRef, (snapshot) => {
+      setTotalChats(snapshot.size);
+    });
 
     const userDoc = db.collection("Chat Record").doc(user.uid);
     onSnapshot(userDoc, (snapshot) => {
@@ -103,7 +114,17 @@ const OwnerDetails = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-full pl-[10px]  h-[50px] mb-[20px] flex justify-center items-center">
+      <div className="w-full h-[80px]  fixed top-0 flex md:hidden lg:hidden bg-[#fce9ed] justify-between items-center px-[20px] rounded-b-[30px] drop-shadow-md">
+        <div className="text-[22px] font-[rubik] font-medium text-[black] flex flex-col justify-center items-start">
+          <span>Message's ({totalChats})</span>
+          {/* <span className="text-[13px] font-[rubik] font-normal">RECENT</span> */}
+        </div>
+        <div className="w-[40px] h-[40px] text-black rounded-full flex justify-center items-center ">
+          <FiSearch className="text-[23px]" />
+        </div>
+      </div>
+      <div className="w-full h-[80px] top-0 flex md:hidden lg:hidden bg-transparent justify-between items-center px-[20px] rounded-b-[30px]"></div>
+      <div className="w-full px-[30px] pt-[20px] h-[50px] mb-[20px] hidden md:flex lg:flex justify-center items-center">
         <div className="w-[50px] h-[50px]  rounded-full">
           {profileURL === "nophoto" ? (
             <img

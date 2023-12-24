@@ -26,6 +26,9 @@ import { saveAs } from "file-saver";
 import toast, { Toaster, useToaster } from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 import del from "../assets/img/delete2.png";
+import { IoMdVideocam } from "react-icons/io";
+import { RiMessage2Fill } from "react-icons/ri";
+// import {MdCall} from "react-icons/md";
 
 // import { FaAngleLeft } from "react-icons/fa6";
 
@@ -237,10 +240,10 @@ export const UserInfo = () => {
                 className="w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-0 fixed bg-slate-500 text-white z-30 overflow-hidden"
                 // style={{ transition: ".5s" }}
               ></div>
-              <div className="w-full px-[10px] pt-[20px] h-[75px] lg:h-[90px] md:h-[90px] bg-[#1f201f] text-[white]">
+              <div className="w-full px-[10px] pt-[20px] h-[80px]  bg-[#d9e1e4] text-[black]">
                 <div className="w-full h-full pb-[20px] flex justify-center items-center">
                   <div
-                    className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full hover:bg-white hover:text-black  text-white flex justify-center items-center cursor-pointer"
+                    className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full hover:bg-[white]   text-black drop-shadow-md flex justify-center items-center cursor-pointer"
                     onClick={() => {
                       dispatch(addActiveUser(""));
                     }}
@@ -250,7 +253,7 @@ export const UserInfo = () => {
                   </div>
 
                   <div
-                    className="w-[50px] h-[50px]  rounded-full cursor-pointer bg-slate-400 ml-[10px] lg:ml-0 md:ml-0"
+                    className="w-[50px] h-[50px]  rounded-full cursor-pointer bg-[#21323a] ml-[10px] lg:ml-0 md:ml-0 text-black drop-shadow-md"
                     onClick={() => {
                       setUserSidebar(!userSidebar);
                     }}
@@ -268,10 +271,10 @@ export const UserInfo = () => {
                     )}
                   </div>
                   <div className="w-[calc(100%-160px)] lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                    <span className="text-[16px]  font-[rubik] font-normal text-[#ffffff]">
+                    <span className="text-[16px]  font-[rubik] font-normal text-black drop-shadow-md">
                       {chatUserName}
                     </span>
-                    <span className="text-[14px]  font-[rubik] font-light text-[#9fa5a7]">
+                    <span className="text-[14px]  font-[rubik] font-light text-[#5d5d5d] drop-shadow-md">
                       +91 {chatUserNumber}
                     </span>
                   </div>
@@ -288,7 +291,7 @@ export const UserInfo = () => {
                       <div className="hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px] font-[work] font-normal bg-[#505050]">
                         Delete Chats
                       </div>
-                      <MdDelete className="text-[20px]" />
+                      <MdDelete className="text-[20px] text-black group-hover:text-[white] drop-shadow-md" />
                       {/* <img
                         src={del}
                         className=" w-[25px] drop-shadow-lg "
@@ -298,7 +301,7 @@ export const UserInfo = () => {
                 </div>
               </div>
               {delConfirmation === true ? (
-                <div className="fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[calc(100%-155px)] lg:h-[calc(100%-170px)] md:h-[calc(100%-170px)]  flex justify-center items-center z-30 bg-[#1f201f92]">
+                <div className="fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[calc(100%-80px)] lg:h-[calc(100%-170px)] md:h-[calc(100%-170px)]  flex justify-center items-center z-30 bg-[#d9e1e463]   backdrop-blur-sm">
                   <div className="bg-[white] text-black w-[320px] lg:w-[450px] md:w-[450px] h-[190px] rounded-xl flex flex-col">
                     <div className="w-full h-[110px] rounded-xl  flex justify-center items-center px-[30px]">
                       <span className=" font-[rubik] font-light ">
@@ -307,7 +310,7 @@ export const UserInfo = () => {
                     </div>
                     <div className=" h-[80px] w-full flex justify-between items-center px-[30px] rounded-xl">
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white  cursor-pointer  font-[rubik] font-light bg-[black] hover:bg-[#474747] rounded-xl"
+                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-[black] hover:text-[white]  cursor-pointer  font-[rubik] font-light bg-[#fce9ed] hover:bg-[#36515e] rounded-xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -316,7 +319,7 @@ export const UserInfo = () => {
                         Cancel
                       </button>
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-white  cursor-pointer  font-[rubik] font-light bg-[black] hover:bg-[#303030] rounded-xl"
+                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-[black] hover:text-[white]  cursor-pointer  font-[rubik] font-light bg-[#fce9ed] hover:bg-[#36515e] rounded-xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -337,12 +340,12 @@ export const UserInfo = () => {
       ) : (
         <>
           <div
-            className="w-full lg:w-[40%] md:w-[40%] h-[100vh] fixed bg-[#1f201fae]   backdrop-blur-md  text-white z-30 overflow-hidden flex flex-col justify-center items-center px-[50px] right-0 drop-shadow-xl"
+            className="w-full lg:w-[40%] md:w-[40%] h-[100svh] fixed bg-[#d9e1e463]   backdrop-blur-lg drop-shadow-md  text-white z-30 overflow-hidden flex flex-col justify-center items-center px-[10px] right-0 "
             // style={{ transition: ".5s" }}
           >
-            <div className="w-full h-[100px] flex justify-start items-center ">
+            <div className="w-full h-[80px] flex justify-start items-center ">
               <div
-                className="w-[35px] h-[35px] rounded-full hover:bg-white hover:text-black text-white flex justify-center items-center cursor-pointer"
+                className="w-[35px] h-[35px] rounded-full hover:bg-white hover:text-black text-black flex justify-center items-center cursor-pointer"
                 onClick={() => {
                   setUserSidebar(!userSidebar);
                 }}
@@ -351,7 +354,7 @@ export const UserInfo = () => {
                 {/* <img src={back} className="w-[25px] drop-shadow-lg"></img> */}
               </div>
             </div>
-            <div className="w-full h-[calc(100%-100px)]  flex flex-col justify-center items-center">
+            <div className="w-full h-[calc(100%-80px)]  flex flex-col justify-center items-center">
               <div className="w-[150px] lg:w-[200px] md:w-[200px] h-[150px] lg:h-[200px] md:h-[200px] rounded-full bg-[#cdd8dd]  drop-shadow-lg">
                 {/* <span>Photo</span> */}
                 {chatUserPhoto === "nophoto" ? (
@@ -367,43 +370,44 @@ export const UserInfo = () => {
                 )}
               </div>
               <div className="flex flex-col justify-center items-center mt-[20px]">
-                <span className="text-[22px] font-[rubik] font-light text-[#ffffff] drop-shadow-lg">
+                <span className="text-[22px] font-[rubik] font-normal text-[#000000] drop-shadow-lg">
                   {chatUserName}
                 </span>
-                <span className="text-[17px]  font-[rubik] font-light text-[#9fa5a7] drop-shadow-lg">
+                <span className="text-[17px]  font-[rubik] font-light text-[#2d2d2d] drop-shadow-lg">
                   +91 {chatUserNumber}
                 </span>
               </div>
               <div className="mt-[20px] w-full flex justify-center items-start h-[26px] overflow-hidden text-ellipsis">
-                <span className="text-[16px]   font-[rubik] font-extralight text-[#9fa5a7] drop-shadow-lg">
+                <span className="text-[16px]   font-[rubik] font-extralight text-[#2d2d2d] drop-shadow-lg">
                   ~ {chatUserAbout}
                 </span>
               </div>
+
               <div className="w-full flex justify-center items-center mt-[20px] ">
-                <span className="w-[50px] h-[50px] rounded-full gradintss hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
-                  {/* <MdCall className="text-[30px]" /> */}
-                  <img src={call} className="w-[35px] drop-shadow-lg"></img>
+                <span className="w-[50px] h-[50px] drop-shadow-md rounded-full hover:bg-[white] hover:text-[black] text-[#000000] flex justify-center items-center mx-[10px]">
+                  <MdCall className="text-[30px]" />
+                  {/* <img src={call} className="w-[35px] drop-shadow-lg"></img> */}
                 </span>
-                <span className="w-[50px] h-[50px] rounded-full gradintss hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
-                  {/* <BiSolidVideo className="text-[30px]" /> */}
-                  <img
+                <span className="w-[50px] h-[50px] drop-shadow-md rounded-full hover:bg-[white] hover:text-[black] text-[#000000] flex justify-center items-center mx-[10px]">
+                  <IoMdVideocam className="text-[30px]" />
+                  {/* <img
                     src={videocall}
                     className="w-[35px] drop-shadow-lg"
-                  ></img>
+                  ></img> */}
                 </span>
-                <span className="w-[50px] h-[50px] rounded-full gradintss hover:text-[black] text-[#cdd8dd] flex justify-center items-center mx-[10px]">
-                  {/* <PiChatCenteredTextFill className="text-[30px]" /> */}
-                  <img src={chat} className="w-[35px] drop-shadow-lg "></img>
+                <span className="w-[50px] h-[50px] drop-shadow-md rounded-full hover:bg-[white] hover:text-[black] text-[#000000] flex justify-center items-center mx-[10px]">
+                  <RiMessage2Fill className="text-[30px]" />
+                  {/* <img src={chat} className="w-[35px] drop-shadow-lg "></img> */}
                 </span>
               </div>
-              <span className=" font-[rubik] font-light text-[16px] w-full flex justify-start items-center mt-[20px] text-[#a0a0a0]">
+              <span className=" font-[rubik] font-light text-[16px] w-full flex justify-start items-center mt-[20px] text-[black] px-[10px]">
                 Media, Links & Docs{" "}
-                <div className="ml-[10px]  w-[20px] h-[20px] flex justify-center items-center text-[14px] font-[rubik] font-light text-black rounded-full bg-[#b8dedf]">
+                <div className="ml-[10px]  w-[20px] h-[20px] flex justify-center items-center text-[13px] font-[rubik] font-light text-white rounded-full bg-[#6346bd]">
                   {ImageMediaLink.length}{" "}
                 </div>
                 <MdChevronRight className="text-[#a0a0a0] text-[25px] ml-[5px]" />
               </span>
-              <div className="w-full h-[200px]  flex overflow-x-scroll mt-[5px] ">
+              <div className="w-full h-[200px]  flex overflow-x-scroll mt-[5px] px-[10px]">
                 {ImageMediaLink.map((link) => {
                   return (
                     <>
@@ -414,7 +418,7 @@ export const UserInfo = () => {
               </div>
             </div>
           </div>
-          <div className="w-full px-[10px] pt-[20px] h-[75px] lg:h-[90px] md:h-[90px] bg-[#1f201f] text-[white]">
+          <div className="w-full px-[10px] pt-[20px] h-[80px]  bg-[#d9e1e4] text-[black]">
             <div className="w-full h-full pb-[20px] flex justify-center items-center">
               <div
                 className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full  text-black flex justify-center items-center cursor-pointer"

@@ -22,7 +22,12 @@ import {
   addAllGroupMembers,
   clearAllGroupMembers,
 } from "../utils/chatSlice";
-import { onSnapshot, snapshotEqual, where } from "firebase/firestore";
+import {
+  onSnapshot,
+  serverTimestamp,
+  snapshotEqual,
+  where,
+} from "firebase/firestore";
 import { query } from "firebase/firestore";
 import { RxCross2 } from "react-icons/rx";
 import { LuSearch } from "react-icons/lu";
@@ -45,6 +50,14 @@ import { FaPen } from "react-icons/fa";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 // import { LuSearch } from "react-icons/lu";
 // import { RxCross2 } from "react-icons/rx";
+import { TbPlaystationCircle } from "react-icons/tb";
+import { MdGroups } from "react-icons/md";
+import { BsFillChatSquareTextFill } from "react-icons/bs";
+import { PiChatCircleTextFill } from "react-icons/pi";
+// import { FaPlus } from "react-icons/fa6";
+import { MdSettings } from "react-icons/md";
+import { BsFillPersonPlusFill } from "react-icons/bs";
+import { TiGroup } from "react-icons/ti";
 
 const Friends = (props) => {
   const [userName, setUserName] = useState("");
@@ -286,160 +299,163 @@ const Friends = (props) => {
           </div>
         </>
       ) : (
-        <>
-          {/* btn from-left */}
-          <div
-            className=" group w-full h-[70px] py-[10px] flex justify-center bg-transparent  cursor-pointer  px-[10px]  hover:bg-[#26484e] border-t-[1px] border-[#404040] "
-            onClick={() => activerChatUser()}
-          >
-            <div className="w-[50px] h-[50px]  rounded-full">
-              {photoURL === "nophoto" ? (
-                <img
-                  src={profile2}
-                  className="w-full h-full rounded-full object-cover "
-                ></img>
-              ) : (
-                <img
-                  src={photoURL}
-                  className="w-full h-full rounded-full object-cover "
-                ></img>
-              )}
+        <div
+          className="px-[20px] bor group w-full h-[75px] py-[10px] flex justify-center items-center bg-transparent  cursor-pointer   hover:bg-[#fce9ed]  "
+          onClick={() => activerChatUser()}
+        >
+          <div className="w-[50px] h-[50px]  rounded-full">
+            {photoURL === "nophoto" ? (
+              <img
+                src={profile2}
+                className="w-full h-full rounded-full object-cover "
+              ></img>
+            ) : (
+              <img
+                src={photoURL}
+                className="w-full h-full rounded-full object-cover "
+              ></img>
+            )}
+          </div>
+          <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
+            <div className="w-full font-semibold flex h-[23px]">
+              <span
+                className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[black]    font-[rubik] font-normal "
+                // style={{ transition: ".9s" }}
+              >
+                {/* {props.data.user} */}
+                {userName}
+              </span>
+              <span
+                className="w-[70px] h-full text-[11px] flex justify-end items-center text-[#8e9396]   font-[rubik] font-light"
+                // style={{ transition: ".9s" }}
+              >
+                {/* {props.data.time} */}
+                {Time}
+              </span>
             </div>
-            <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
-              <div className="w-full font-semibold flex h-[23px]">
-                <span
-                  className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]    font-[rubik] font-normal "
-                  // style={{ transition: ".9s" }}
-                >
-                  {/* {props.data.user} */}
-                  {userName}
-                </span>
-                <span
-                  className="w-[70px] h-full text-[11px] flex justify-end items-center text-[white]   font-[rubik] font-light"
-                  // style={{ transition: ".9s" }}
-                >
-                  {/* {props.data.time} */}
-                  {Time}
-                </span>
-              </div>
-              <div className="w-full  flex h-[23px] justify-between items-center">
-                {lastMsg === "Image" ? (
-                  <>
-                    {chatFlag === 1 ? (
-                      <>
-                        <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]   group-hover:text-[#fff]  font-[rubik] font-light"
-                          // style={{ transition: ".5s" }}
-                        >
-                          you:
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <BsFillCameraFill
-                      className="mr-[5px] text-[#9fa5a7] group-hover:text-[#bcbcbc] "
-                      // style={{ transition: ".5s" }}
-                    />
-                    <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#bcbcbc]   font-[rubik] font-light"
-                      // style={{ transition: ".5s" }}
-                    >
-                      {lastMsg}
-                    </span>
-                  </>
-                ) : lastMsg === "Video" ? (
-                  <>
-                    {chatFlag === 1 ? (
-                      <>
-                        <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light group-hover:text-[white]"
-                          // style={{ transition: ".5s" }}
-                        >
-                          you:
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <TiVideo
-                      className="mr-[5px] text-[#9fa5a7] group-hover:text-[#bcbcbc] "
-                      // style={{ transition: ".5s" }}
-                    />
-                    <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#bcbcbc]   font-[rubik] font-light"
-                      // style={{ transition: ".5s" }}
-                    >
-                      {lastMsg}
-                    </span>
-                  </>
-                ) : lastMsg === "Document" ? (
-                  <>
-                    {chatFlag === 1 ? (
-                      <>
-                        <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[rubik] font-light group-hover:text-[white]"
-                          // style={{ transition: ".5s" }}
-                        >
-                          you:
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <IoMdDocument
-                      className="mr-[5px] text-[#9fa5a7] group-hover:text-[#bcbcbc] "
-                      // style={{ transition: ".5s" }}
-                    />
-                    <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#bcbcbc]   font-[rubik] font-light"
-                      // style={{ transition: ".5s" }}
-                    >
-                      {docName}
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    {" "}
-                    {chatFlag === 1 ? (
-                      <>
-                        <span
-                          className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[rubik] font-light group-hover:text-[white]"
-                          // style={{ transition: ".5s" }}
-                        >
-                          you:
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <span
-                      className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#bcbcbc]   font-[rubik] font-light"
-                      // style={{ transition: ".5s" }}
-                    >
-                      {lastMsg}
-                    </span>
-                  </>
-                )}
-                {/* <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
-                  {lastMsg}
-                </span> */}
-                <span className="w-[70px] text-[15px] h-full font-normal  flex justify-end items-center">
-                  {unreadMessages === 0 ? (
+            <div className="w-full  flex h-[23px] justify-between items-center">
+              {lastMsg === "Image" ? (
+                <>
+                  {chatFlag === 1 ? (
+                    <>
+                      <span
+                        className="w-[35px] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]   group-hover:text-[#8e9396]  font-[rubik] font-light"
+                        // style={{ transition: ".5s" }}
+                      >
+                        you:
+                      </span>
+                    </>
+                  ) : (
                     <></>
+                  )}
+                  <BsFillCameraFill
+                    className="mr-[5px] text-[#8e9396] group-hover:text-[#8e9396] "
+                    // style={{ transition: ".5s" }}
+                  />
+                  <span
+                    className="w-[calc(100%-105px)] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                    // style={{ transition: ".5s" }}
+                  >
+                    {lastMsg}
+                  </span>
+                </>
+              ) : lastMsg === "Video" ? (
+                <>
+                  {chatFlag === 1 ? (
+                    <>
+                      <span
+                        className="w-[35px] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
+                        // style={{ transition: ".5s" }}
+                      >
+                        you:
+                      </span>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  <TiVideo
+                    className="mr-[5px] text-[#8e9396] group-hover:text-[#8e9396] "
+                    // style={{ transition: ".5s" }}
+                  />
+                  <span
+                    className="w-[calc(100%-105px)] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                    // style={{ transition: ".5s" }}
+                  >
+                    {lastMsg}
+                  </span>
+                </>
+              ) : lastMsg === "Document" ? (
+                <>
+                  {chatFlag === 1 ? (
+                    <>
+                      <span
+                        className="w-[35px] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
+                        // style={{ transition: ".5s" }}
+                      >
+                        you:
+                      </span>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  <IoMdDocument
+                    className="mr-[5px] text-[#8e9396] group-hover:text-[#8e9396] "
+                    // style={{ transition: ".5s" }}
+                  />
+                  <span
+                    className="w-[calc(100%-105px)] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                    // style={{ transition: ".5s" }}
+                  >
+                    {docName}
+                  </span>
+                </>
+              ) : (
+                <>
+                  {chatFlag === 1 ? (
+                    <>
+                      <span
+                        className="w-[30px] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
+                        // style={{ transition: ".5s" }}
+                      >
+                        you:
+                      </span>
+                    </>
                   ) : (
                     <>
-                      <span className="w-[18px] h-[18px] text-[11px] flex justify-center items-center rounded-full bg-[#3e727d] text-[white]">
-                        {unreadMessages}
+                      <span
+                        className="w-[100%] text-[13px]  leading-[13px] whitespace-nowrap  text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                        // style={{ transition: ".5s" }}
+                      >
+                        Messages are end-to-end encrypted.
                       </span>
                     </>
                   )}
-                </span>
-              </div>
-              {/* <span className="text-[15px]">Hello! How Are you</span> */}
+                  <span
+                    className="w-[calc(100%-100px)] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                    // style={{ transition: ".5s" }}
+                  >
+                    {lastMsg}
+                  </span>
+                </>
+              )}
+              {/* <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
+                  {lastMsg}
+                </span> */}
+              <span className="w-[70px] text-[15px] h-full font-normal  flex justify-end items-center">
+                {unreadMessages === 0 ? (
+                  <></>
+                ) : (
+                  <>
+                    <span className="w-[18px] h-[18px] text-[11px] flex justify-center items-center rounded-full bg-[#6946c2] text-[white]">
+                      {unreadMessages}
+                    </span>
+                  </>
+                )}
+              </span>
             </div>
+            {/* <span className="text-[15px]">Hello! How Are you</span> */}
           </div>
-        </>
+        </div>
       )}
     </>
   );
@@ -500,7 +516,7 @@ const SearchFriends = (props) => {
         console.log("not frinds");
         tete.set({
           ChatHistory: [],
-          LastUpdated: "",
+          LastUpdated: serverTimestamp(),
           LastId: 0,
           TotalMessage: 0,
           LastMessage: 0,
@@ -512,7 +528,7 @@ const SearchFriends = (props) => {
   return (
     <>
       <div
-        className=" group w-[calc(100%-10px)] h-[70px] py-[10px] flex justify-center cursor-pointer  pl-[10px] mr-[10px]  border-t-[1px] border-[#404040] "
+        className="borrr group w-[100%] h-[75px] px-[20px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent hover:bg-[#fce9ed]   "
         onClick={() => {
           activerChatUser();
           addToFriendList();
@@ -527,32 +543,32 @@ const SearchFriends = (props) => {
           {photoURL === "nophoto" ? (
             <img
               src={profile2}
-              className="w-full h-full rounded-full object-cover drop-shadow-lg z-20"
+              className="w-full h-full rounded-full object-cover drop-shadow-sm z-20"
             ></img>
           ) : (
             <img
               src={photoURL}
-              className="w-full h-full rounded-full object-cover drop-shadow-lg"
+              className="w-full h-full rounded-full object-cover drop-shadow-sm"
             ></img>
           )}
         </div>
         <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
           <div className="w-full font-semibold flex h-[23px]">
             <span
-              className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-white   drop-shadow-lg  font-[rubik] font-normal"
+              className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-black   drop-shadow-sm  font-[rubik] font-normal"
               // style={{ transition: ".9s" }}
             >
               {/* {props.data.user} */}
               {userName}
             </span>
-            <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-white group-hover:text-black drop-shadow-lg">
+            <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-white group-hover:text-black drop-shadow-md">
               {/* {props.data.time} */}
               {/* {Time} */}
             </span>
           </div>
           <div className="w-full flex h-[23px]">
             <span
-              className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#a1a1a1] drop-shadow-lg  font-[rubik] font-light"
+              className="w-[calc(100%-70px)] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] drop-shadow-sm  font-[rubik] font-light"
               // style={{ transition: ".9s" }}
             >
               {/* {props.data.msg} */}
@@ -634,6 +650,7 @@ const UserList = () => {
 
   const [statusImage, setStatusImage] = useState();
   const [statusTextModal, setStatusTextModal] = useState(false);
+  const [statusImageUrl, setStatusImageUrl] = useState("");
   // addFriendList;
   console.log("UserList");
   console.log(UserList);
@@ -653,6 +670,7 @@ const UserList = () => {
       // console.log(snapshot.data());
       setOwnerName(snapshot?.data()?.Name);
       setIsStatus(snapshot?.data()?.Status);
+      setStatusImageUrl(snapshot?.data()?.Status);
       setStatusCount(snapshot?.data()?.Status.length);
       setProfileURL(snapshot?.data()?.Photo);
       setStatusTimestamp(snapshot?.data()?.LastStatus);
@@ -836,10 +854,10 @@ const UserList = () => {
 
   return (
     <>
-      <div className="w-full lg:w-full md:w-full h-[calc(100%-70px)] flex flex-col items-end ">
+      <div className="w-full  lg:w-full md:w-full h-[calc(100%-160px)] md:h-[calc(100%-70px)] lg:h-[calc(100%-70px)]  flex flex-col items-end bg-[#d9e1e4] pt-[0px]">
         {/* yserlist */}
 
-        <div className="w-full min-h-[40px] font-semibold text-[white] flex justify-evenly items-center font-[work] text-[15px] overflow-hidden">
+        <div className="w-full min-h-[40px] hidden md:flex lg:flex font-semibold text-[white] justify-evenly items-center font-[work] text-[15px] overflow-hidden">
           {section === "All" ? (
             <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full text-white border-[#a93cee]">
               All
@@ -968,60 +986,9 @@ const UserList = () => {
           </>
         ) : section === "All" ? (
           <>
-            {/* <div className="min-h-[70px] w-full  flex justify-center items-center"> */}
-            {/* <div className="w-full flex justify-center items-center min-h-[45px]  overflow-hidden">
-                <input
-                  value={searchUser}
-                  onKeyDown={(e) => {
-                    if (
-                      e.nativeEvent.key === "Enter" &&
-                      searchUser.length !== 0
-                    ) {
-                      searchUserFriend();
-                      setSearchFlag(true);
-                    }
-                  }}
-                  onChange={(e) => setSearchUser(e.target.value)}
-                  placeholder="Search Friends"
-                  className="w-[calc(100%-50px)] lg:w-[calc(100%-50px)] md:w-[calc(100%-100px)] h-[45px]  text-[black] bg-[#b8dedf] font-[work] font-semibold border border-[#ccd7dc1f]   z-0 outline-none  pl-[20px] pr-[50px] text-[14px] drop-shadow-md rounded-full"
-                ></input>
-
-                {searchUser.length === 0 ? (
-                  <>
-           
-                  </>
-                ) : (
-                  <>
-           
-                    <div
-                      className="w-[35px] h-[35px] hover:bg-[#80999b] hover:text-white cursor-pointer rounded-full flex justify-center items-center mr-[5px] z-5 ml-[-40px]  drop-shadow-md"
-                      onClick={() => {
-                        setSearchFlag(false);
-                        setSearchUser("");
-                      }}
-                    >
-                      <RxCross2 className="text-[20px]  drop-shadow-md" />
-                    </div>
-                  
-                  </>
-                )}
-                <div
-                  className="w-[45px] h-[45px] bg-[#b8dedf] hover:bg-[#80999b] rounded-full flex justify-center items-center ml-[10px] z-5 drop-shadow-md hover:text-white text-black cursor-pointer"
-                  onClick={() => {
-                    if (searchUser.length !== 0) {
-                      searchUserFriend();
-                      setSearchFlag(true);
-                    }
-                  }}
-                >
-                  <div className="w-[35px] h-[35px] rounded-full flex justify-center items-center ">
-                    <RiSearch2Line className="text-[20px]  drop-shadow-md" />
-                  </div>
-                </div>
-              </div> */}
             {isSearchBar === false ? (
               <>
-                <div className="fixed bottom-[10px] mr-0 sm:w-full md:w-[400px] lg:w-[400px] flex justify-end pl-[5px] pr-[15px] items-center min-h-[45px]  overflow-hidden">
+                <div className="fixed bottom-[90px] md:bottom-[10px] lg:bottom-[10px]  w-full md:w-[400px] lg:w-[400px] flex justify-end pl-[5px] pr-[15px] items-center min-h-[45px]  overflow-hidden">
                   <input
                     disabled
                     style={{ transition: ".5s" }}
@@ -1060,7 +1027,7 @@ const UserList = () => {
               </>
             ) : (
               <>
-                <div className="fixed bottom-[10px] mr-0 sm:w-full md:w-[400px] lg:w-[400px] flex justify-end pl-[5px] pr-[15px] items-center min-h-[45px]  overflow-hidden">
+                <div className="fixed bottom-[90px] md:bottom-[10px] lg:bottom-[10px] mr-[20px] md:mr-0 lg:mr-0 sm:w-full md:w-[400px] lg:w-[400px] flex justify-end pl-[5px] pr-[15px] items-center min-h-[45px]  overflow-hidden">
                   <input
                     style={{ transition: ".5s", zIndex: "60" }}
                     value={searchUser}
@@ -1099,7 +1066,7 @@ const UserList = () => {
               </>
             )}
             {/* </div> */}
-            <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden">
+            <div className="borr w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden mr-0">
               {AllUserList.length === 0 ? (
                 <>No Users Yet</>
               ) : (
@@ -1112,7 +1079,7 @@ const UserList = () => {
             </div>
           </>
         ) : section === "Chat" ? (
-          <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden">
+          <div className="borr w-full lg:w-full md:w-full h-[(100%-110px)] ">
             {UserList.length === 0 ? (
               <>
                 <div className=" group w-full h-[70px] py-[10px] flex justify-center items-center cursor-pointer font-[work]   px-[10px]  text-[white] ">
@@ -1212,7 +1179,7 @@ const UserList = () => {
 
               <span className="">Create New Group</span>
             </div> */}
-            <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden">
+            <div className=" w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden">
               {GroupList.length === 0 ? (
                 <>No Groups Yet</>
               ) : (
@@ -1234,7 +1201,7 @@ const UserList = () => {
           <>
             {showStatus === true ? (
               // <div className="fixed">
-              <div className=" z-30 fixed bottom-0 h-[100svh] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] bg-[#1f201f] rounded-lg drop-shadow-lg flex-col flex justify-center items-center">
+              <div className=" z-30 fixed bottom-0 h-[100svh] w-[400px] lg:w-[400px] md:w-[360px] mr-0 md:mr-[-20px] lg:mr-[-20px] bg-[#1f201f] drop-shadow-lg flex-col flex justify-center items-center">
                 {/* Cross ------------------------- */}
                 <div
                   className="fixed right-0 top-[25px] w-[40px] h-[40px]  rounded-full hover:bg-[white] hover:text-black text-white flex justify-center items-center  cursor-pointer rotate-45 z-40"
@@ -1247,7 +1214,7 @@ const UserList = () => {
                 </div>
                 {/* Profile ---------------------- */}
                 <div
-                  className=" group w-full h-[90px] py-[10px] flex justify-start items-center cursor-pointer font-[rubik] font-normal  px-[10px]  text-[#ffffff]  fixed top-0 border-b-[1px] border-[#404040]"
+                  className=" group w-full h-[90px] py-[10px] flex justify-start items-center cursor-pointer font-[rubik] font-normal  px-[20px]  text-[#ffffff]  fixed top-0 border-b-[1px] border-[#404040]"
                   onClick={() => {
                     // setShowStatus(true);
                   }}
@@ -1295,10 +1262,7 @@ const UserList = () => {
                   </div>
 
                   {/* Status ------------------------- */}
-                  <img
-                    className="w-full rounded-xl"
-                    src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/chats_images%2Fmb05JDt06hedvvAijxzn09KfbHu1%2FhE0aZSzfkRVzn26gpc1Uhfg5srF3%2F3?alt=media&token=8d47b569-e739-4a60-b74d-cffd7985187b"
-                  ></img>
+                  <img className="w-full rounded-xl" src={statusImageUrl}></img>
                   {/* Status Count Indication ------------------------- */}
                   <div className="fixed bottom-[10px] flex ">
                     {Array(3)
@@ -1542,6 +1506,707 @@ const UserList = () => {
           </>
         )}
       </div>
+
+      {/* <div className="w-full h-[80px] md:hidden lg:hidden   fixed bottom-[80px] flex items-center justify-center ">
+        {section === "All" ? (
+          <div className="w-[50px] h-[50px] rounded-full text-[black] bg-[#b8dedf] drop-shadow-md flex justify-center items-center">
+            <BsFillPersonPlusFill className="text-[23px]" />
+          </div>
+        ) : (
+          <div className="w-[50px] h-[50px] rounded-full text-[white] drop-shadow-md flex justify-center items-center">
+            <BsFillPersonPlusFill
+              className="text-[23px]"
+              onClick={() => {
+                setSearchFlag(false);
+                allUserList();
+                setSection("All");
+                setStatusModal(false);
+              }}
+            />
+          </div>
+        )}
+
+        {section === "Group" ? (
+          <div className="w-[50px] h-[50px] rounded-full text-[black] bg-[#b8dedf] drop-shadow-md flex justify-center items-center">
+            <TiGroup className="text-[23px]" />
+          </div>
+        ) : (
+          <div className="w-[50px] h-[50px] rounded-full text-[white] drop-shadow-md flex justify-center items-center">
+            <TiGroup
+              className="text-[23px]"
+              onClick={() => {
+                setSearchFlag(false);
+                setSection("Group");
+                setIsSearchBar(false);
+                setStatusModal(false);
+              }}
+            />
+          </div>
+        )}
+
+        {section === "Chat" ? (
+          <div className="w-[50px] h-[50px] rounded-full text-[black] bg-[#b8dedf] drop-shadow-md flex justify-center items-center">
+            <PiChatCircleTextFill className="text-[23px]" />
+          </div>
+        ) : (
+          <div className="w-[50px] h-[50px] rounded-full text-[white] drop-shadow-md flex justify-center items-center">
+            <PiChatCircleTextFill
+              className="text-[23px]"
+              onClick={() => {
+                setSearchFlag(false);
+                fetchUserList();
+                setSection("Chat");
+                setIsSearchBar(false);
+                setStatusModal(false);
+              }}
+            />
+          </div>
+        )}
+
+        {section === "Status" ? (
+          <div className="w-[50px] h-[50px] rounded-full text-[black] bg-[#b8dedf] drop-shadow-md flex justify-center items-center">
+            <TbPlaystationCircle className="text-[23px]" />
+          </div>
+        ) : (
+          <div className="w-[50px] h-[50px] rounded-full text-[white] drop-shadow-md flex justify-center items-center">
+            <TbPlaystationCircle
+              className="text-[23px]"
+              onClick={() => {
+                setSearchFlag(false);
+                setSection("Status");
+                setIsSearchBar(false);
+              }}
+            />
+          </div>
+        )}
+
+        {section === "Setting" ? (
+          <div className="w-[50px] h-[50px] rounded-full text-[white] drop-shadow-md flex justify-center items-center">
+            <MdSettings className="text-[23px]" />
+          </div>
+        ) : (
+          <div className="w-[50px] h-[50px] rounded-full text-[white] drop-shadow-md flex justify-center items-center">
+            <MdSettings
+              className="text-[23px]"
+              onClick={() => {
+                setSearchFlag(false);
+                setSection("Setting");
+                setIsSearchBar(false);
+              }}
+            />
+          </div>
+        )}
+      </div> */}
+
+      <div className="w-full h-[80px] md:hidden lg:hidden  overflow-hidden fixed bottom-0 flex items-center justify-center bg-[#d9e1e4] text-[black]">
+        <div className="fixed w-[50px] h-[50px] rounded-full text-[black] bg-[#1f3239] drop-shadow-md"></div>
+        {section === "All" ? (
+          <div
+            className="w-full h-full  flex  items-center ml-[0]"
+            style={{ transition: ".5s" }}
+          >
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TbPlaystationCircle
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Status");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <MdSettings
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Setting");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div
+              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[white]"
+              style={{ transitionDelay: ".25s" }}
+            >
+              <BsFillPersonPlusFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  allUserList();
+                  setSection("All");
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TiGroup
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Group");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <PiChatCircleTextFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  fetchUserList();
+                  setSection("Chat");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+
+            {/*  */}
+
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TbPlaystationCircle
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Status");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <MdSettings
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Setting");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <BsFillPersonPlusFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  allUserList();
+                  setSection("All");
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TiGroup
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Group");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <PiChatCircleTextFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  fetchUserList();
+                  setSection("Chat");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+          </div>
+        ) : section === "Group" ? (
+          <div
+            className="w-full h-full  flex  items-center ml-[-40%] "
+            style={{ transition: ".5s" }}
+          >
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TbPlaystationCircle
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Status");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <MdSettings
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Setting");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <BsFillPersonPlusFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  allUserList();
+                  setSection("All");
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div
+              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[white]"
+              style={{ transitionDelay: ".25s" }}
+            >
+              <TiGroup
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Group");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <PiChatCircleTextFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  fetchUserList();
+                  setSection("Chat");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+
+            {/*  */}
+
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TbPlaystationCircle
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Status");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <MdSettings
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Setting");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <BsFillPersonPlusFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  allUserList();
+                  setSection("All");
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TiGroup
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Group");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <PiChatCircleTextFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  fetchUserList();
+                  setSection("Chat");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+          </div>
+        ) : section === "Chat" ? (
+          <div
+            className="w-full h-full  flex  items-center ml-[-80%] "
+            style={{ transition: ".5s" }}
+          >
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TbPlaystationCircle
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Status");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <MdSettings
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Setting");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <BsFillPersonPlusFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  allUserList();
+                  setSection("All");
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TiGroup
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Group");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div
+              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[white]"
+              style={{ transitionDelay: ".25s" }}
+            >
+              <PiChatCircleTextFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  fetchUserList();
+                  setSection("Chat");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+
+            {/*  */}
+
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TbPlaystationCircle
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Status");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <MdSettings
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Setting");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <BsFillPersonPlusFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  allUserList();
+                  setSection("All");
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TiGroup
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Group");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <PiChatCircleTextFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  fetchUserList();
+                  setSection("Chat");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+          </div>
+        ) : section === "Status" ? (
+          <div
+            className="w-full h-full  flex  items-center ml-[-120%] "
+            style={{ transition: ".5s" }}
+          >
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TbPlaystationCircle
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Status");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <MdSettings
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Setting");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <BsFillPersonPlusFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  allUserList();
+                  setSection("All");
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TiGroup
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Group");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <PiChatCircleTextFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  fetchUserList();
+                  setSection("Chat");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+
+            {/*  */}
+
+            <div
+              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[white]"
+              style={{ transitionDelay: ".25s" }}
+            >
+              <TbPlaystationCircle
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Status");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <MdSettings
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Setting");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <BsFillPersonPlusFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  allUserList();
+                  setSection("All");
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TiGroup
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Group");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <PiChatCircleTextFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  fetchUserList();
+                  setSection("Chat");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+          </div>
+        ) : (
+          <div
+            className="w-full h-full  flex  items-center ml-[-160%] "
+            style={{ transition: ".5s" }}
+          >
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TbPlaystationCircle
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Status");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <MdSettings
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Setting");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <BsFillPersonPlusFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  allUserList();
+                  setSection("All");
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TiGroup
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Group");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <PiChatCircleTextFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  fetchUserList();
+                  setSection("Chat");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+
+            {/*  */}
+
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TbPlaystationCircle
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Status");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div
+              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[white]"
+              style={{ transitionDelay: ".25s" }}
+            >
+              <MdSettings
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Setting");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <BsFillPersonPlusFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  allUserList();
+                  setSection("All");
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <TiGroup
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  setSection("Group");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+              <PiChatCircleTextFill
+                className="text-[23px]"
+                onClick={() => {
+                  setSearchFlag(false);
+                  fetchUserList();
+                  setSection("Chat");
+                  setIsSearchBar(false);
+                  setStatusModal(false);
+                }}
+              />
+            </div>
+          </div>
+        )}
+        {/* <div className="w-full h-full bg-slate-800"></div> */}
+      </div>
+      {/* import {TbPlaystationCircle} from "react-icons/tb"; import {MdGroups} from
+      "react-icons/md"; import {BsFillChatSquareTextFill} from "react-icons/bs";
+      // import {FaPlus} from "react-icons/fa6"; import {MdSettings} from
+      "react-icons/md"; */}
     </>
   );
 };

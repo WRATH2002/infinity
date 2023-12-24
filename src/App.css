@@ -16,19 +16,44 @@ font-family: 'Rubik', sans-serif; */
   color: white;
 }
 
+.back {
+  background-image: url(./assets/img/bg1.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.borr > .bor {
+  border-top: 1px solid #c3c8ce;
+  /* border-top: 0px solid;
+  border-t-[1px] border-[#c3c8ce] */
+}
+.borr :nth-child(2) {
+  border-top: 0px solid transparent;
+  /* border-top: 0px solid;
+  border-t-[1px] border-[#c3c8ce] */
+}
+
+.borr > .borrr {
+  border-top: 1px solid #c3c8ce;
+  /* border-top: 0px solid;
+  border-t-[1px] border-[#c3c8ce] */
+}
+.borr :nth-child(1) {
+  border-top: 0px solid transparent;
+  /* border-top: 0px solid;
+  border-t-[1px] border-[#c3c8ce] */
+}
+
 .input::placeholder {
-  color: rgb(84, 84, 84);
+  color: rgb(206, 206, 206);
   font-family: work;
   font-weight: 500;
   /* letter-spacing: 5px; */
 }
 
 ::-webkit-scrollbar {
-  height: 3px;
-  width: 2px;
-}
-::-webkit-scrollbar {
-  height: 3px;
+  /* height: 3px; */
   width: 2px;
 }
 
@@ -43,7 +68,7 @@ font-family: 'Rubik', sans-serif; */
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: white;
+  background: black;
   border-radius: 10px;
 }
 
@@ -124,6 +149,16 @@ em-emoji-picker {
 }
 
 @font-face {
+  font-family: rubikone;
+  src: url(./assets/font/RubikDoodleTriangles-Regular.ttf);
+}
+
+@font-face {
+  font-family: rubiktwo;
+  src: url(./assets/font/RubikMaps-Regular.ttf);
+}
+
+@font-face {
   font-family: nunitosans;
   src: url(./assets/font/Onest-VariableFont_wght.ttf);
 }
@@ -152,19 +187,15 @@ em-emoji-picker {
 }
 
 .gradient {
-  background-image: linear-gradient(to left, #b8dedf, #8db9aa);
+  background-image: linear-gradient(to top, #fce9ed, #d9e1e4);
 }
 
-.gradientss:hover {
-  background-image: linear-gradient(to left, #b8dedf, #8db9aa);
+.gradientss {
+  background-image: linear-gradient(to bottom, #fce9ed, #d9e1e4);
 }
 
 .gradintss:hover {
   background-image: linear-gradient(to right, #b8dedf, #8db9aa);
-}
-
-.gradientsss {
-  background-image: linear-gradient(to right, #b8dedf 55%, #8db9aa);
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Noto+Sans+JP:wght@100;200;300;400;500;600&family=Noto+Sans:wght@100;200;300;400&family=Ubuntu:wght@300;400;500;700&family=Work+Sans:wght@100;200;300;400;500&display=swap");
@@ -183,7 +214,17 @@ input::placeholder {
   /* font-family: "Noto Sans", sans-serif; */
   /* font-family: "Noto Sans JP", sans-serif; */
   /* font-family: "Ubuntu", sans-serif; */
-  font-family: "Work Sans", sans-serif;
+  /* font-family: "Work Sans", sans-serif; */
+  font-weight: 400;
+}
+
+.log::placeholder {
+  color: #d8d8d8;
+  /* font-family: "Montserrat", sans-serif; */
+  /* font-family: "Noto Sans", sans-serif; */
+  /* font-family: "Noto Sans JP", sans-serif; */
+  /* font-family: "Ubuntu", sans-serif; */
+  /* font-family: "Work Sans", sans-serif; */
   font-weight: 400;
 }
 
@@ -332,7 +373,7 @@ input::placeholder {
 
   height: 3px;
   border-radius: 50px;
-  background: #3d737d;
+  background: #b8dedf;
   position: absolute;
   top: 0;
   left: 0;

@@ -102,15 +102,15 @@ const Signup = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-lg h-[70%] bg-[#ffffff] flex flex-col justify-center items-center">
+      <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-lg h-[70%] bg-[#3d737d] flex flex-col justify-center items-center">
         <div className="w-full flex flex-col">
-          <span className="text-[32px] text-[#000000] font-[rubik] font-medium">
+          <span className="text-[32px] text-[white] font-[rubik] font-medium">
             Signup{" "}
           </span>
-          <span className="text-[14px] font-normal font-[rubik] text-[#5e5e5e] ">
+          <span className="text-[14px] font-normal font-[rubik] text-[black] ">
             already a user
             <span
-              className="text-[#000000] hover:text-[#343434] cursor-pointer font-medium"
+              className="text-[white] hover:text-[#9aa0a2] cursor-pointer font-normal"
               style={{ transition: ".3s" }}
               onClick={() => changeModeTwo()}
             >
@@ -121,14 +121,14 @@ const Signup = () => {
         </div>
         {/* <div>Signup</div> */}
         <input
-          className="input outline-none  mt-[40px]  w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-black bg-[#dadada]"
+          className="input outline-none  mt-[40px]  w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#538f99] log"
           placeholder="Name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         ></input>
         <input
-          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-black bg-[#dadada]"
+          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#538f99] log"
           placeholder="Phone Number"
           type="tel"
           value={number}
@@ -140,14 +140,14 @@ const Signup = () => {
           }}
         ></input>
         <input
-          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-black bg-[#dadada]"
+          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#538f99] log"
           placeholder="Email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
         <input
-          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-black bg-[#dadada]"
+          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#538f99] log"
           placeholder="Password"
           type="password"
           value={password}
@@ -161,7 +161,7 @@ const Signup = () => {
           Signup
         </button> */}
         <button
-          className="w-full h-[40px] text-[#ffffff] font-medium font-[rubik] outline-none flex justify-center items-center bg-[#000000] hover:bg-[#4e4e4e] rounded-md mt-[30px]"
+          className="w-full h-[40px] text-[#ffffff] font-medium font-[rubik] outline-none flex justify-center items-center bg-[#09161c] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signUp}

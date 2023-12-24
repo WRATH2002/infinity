@@ -106,7 +106,7 @@ const Messagess = (props) => {
           <div className="w-full  my-[4px] flex text-[14px] justify-start drop-shadow-sm pl-[10px]">
             {props.data.Message.length != 0 ? (
               <>
-                <div className="w-auto bg-[#19303b] text-[white] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
+                <div className="w-auto bg-[#fce9ed] text-[black] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
                   <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[rubik] font-light">
                     {props?.data?.Message}
                   </pre>
@@ -218,7 +218,7 @@ const Messagess = (props) => {
         <>
           <div className="w-full  my-[4px] flex text-[14px] justify-end drop-shadow-sm pr-[10px]">
             {props.data.Message.length != 0 ? (
-              <div className="w-auto bg-[#3e727d] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex text-[white] flex-wrap justify-between">
+              <div className="w-auto bg-[#1f3239] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex text-[white] flex-wrap justify-between">
                 <pre className="max-w-[calc(100%)] whitespace-pre-wrap  font-[rubik] font-light">
                   {props?.data?.Message}
                 </pre>
@@ -227,7 +227,7 @@ const Messagess = (props) => {
                 </div>
               </div>
             ) : props.data.Image.length != 0 ? (
-              <div className="group w-auto  max-w-[75%] lg:max-w-[32%] bg-[#3e727d] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex items-center text-[white] flex-wrap justify-center hover:bg-[#1f201f]">
+              <div className="group w-auto  max-w-[75%] lg:max-w-[32%] bg-[#1f3239] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex items-center text-[white] flex-wrap justify-center hover:bg-[#1f201f]">
                 {/* <img
                   loading="lazy"
                   src={props.data.Image}
@@ -317,16 +317,16 @@ const Messagess = (props) => {
               </div>
             ) : (
               <>
-                <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[2px] bg-[#ffffff] rounded-lg  flex justify-center items-center">
-                  <div className="w-full h-full  rounded-lg bg-[#ffffff] flex justify-start items-center ">
+                <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[2px] bg-[#1f3239] rounded-lg  flex justify-center items-center drop-shadow-md">
+                  <div className="w-full h-full  rounded-lg bg-[#1f3239] flex justify-start items-center ">
                     <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
                       <img src={doccc} className="w-[40px]"></img>
                     </div>
                     <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
-                      <span className="w-full  font-[rubik] font-light text-[14px] text-[black] whitespace-nowrap text-ellipsis overflow-hidden">
+                      <span className="w-full  font-[rubik] font-light text-[14px] text-[#ffffff] whitespace-nowrap text-ellipsis overflow-hidden">
                         {props.data.docName}
                       </span>
-                      <span className=" font-[rubik] font-light text-[11px] text-[black]">
+                      <span className=" font-[rubik] font-light text-[11px] text-[#ffffff]">
                         {props.data.docSize > 1024 ? (
                           <>{(props.data.docSize / 1024).toFixed(2)} mB</>
                         ) : (
@@ -336,7 +336,7 @@ const Messagess = (props) => {
                     </div>
                     <div className="w-[40px] h-full flex justify-start items-center">
                       <a href={props.data.Document} download>
-                        <div className="w-[30px] h-[30px] rounded-full hover:bg-[#99b6b8] flex justify-center items-center cursor-pointer">
+                        <div className="w-[30px] h-[30px] rounded-full hover:bg-[#d9e1e4] flex justify-center items-center cursor-pointer">
                           <img src={download} className="w-[20px]"></img>
                         </div>
                       </a>
@@ -779,7 +779,7 @@ export const MessageBody = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-full h-[calc(100%-135px)] lg:h-[calc(100%-150px)] md:h-[calc(100%-150px)] overflow-y-scroll bg-[#0b0c0b] z-20 ">
+      <div className="w-full h-[calc(100%-140px)] overflow-y-scroll bg-[#d9e1e4] z-20 ">
         <div
           ref={listRef}
           className="w-full h-full  flex flex-col   font-[rubik] font-normal"
@@ -794,13 +794,13 @@ export const MessageBody = () => {
             </>
           ) : (
             <>
-              <div className="fixed flex lg:hidden md:hidden w-full h-[calc(100%-135px)] lg:h-[calc(100%-150px)] md:h-[calc(100%-150px)]  justify-center items-center ">
+              {/* <div className="fixed flex lg:hidden md:hidden w-full h-[calc(100%-135px)] lg:h-[calc(100%-150px)] md:h-[calc(100%-150px)]  justify-center items-center ">
                 <img src={ww} className="h-full w-full object-cover"></img>
-              </div>
+              </div> */}
               <div className="w-full min-h-[40px]  rounded-lg flex justify-center items-center drop-shadow-sm px-[10px]">
-                <span className="w-full h-full flex justify-center items-center ml-[10px] font-[rubik] font-light text-[14px] text-[#c37eff]">
-                  <BiSolidLockAlt className="text-[#c37eff] mr-[10px]" />{" "}
-                  Messages are end-to-end encrypted.
+                <span className="w-full h-full flex justify-center items-center ml-[10px] font-[rubik] font-light text-[14px] text-[black] drop-shadow-md">
+                  <BiSolidLockAlt className="text-[black] mr-[10px]" /> Messages
+                  are end-to-end encrypted.
                 </span>
               </div>
               {chatMessage?.map((msg) => {
@@ -1384,55 +1384,47 @@ export const MessageBody = () => {
         </>
       )}
 
-      <div className="w-full h-[60px]   flex flex-col justify-center items-start bg-[#0b0c0b]">
+      <div className="w-full h-[60px] fixed bottom-0 flex flex-col justify-center items-start gradient">
         {ActiveChatUser.length === 0 ? (
           <></>
         ) : (
           <div className="w-full h-full flex justify-center items-center ">
-            {/* <EmojiPicker /> */}
             {emoji === true ? (
               <div
-                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer   rounded-full  z-10 text-[#c5c5c5]"
+                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer   rounded-full  z-10 text-[#c5c5c5] drop-shadow-md"
                 onClick={() => setEmoji(!emoji)}
               >
-                {/* <BsFillEmojiLaughingFill className="text-[20px] " /> */}
-                {/* <img src={smiley} className="w-[25px]"></img> */}
                 <MdEmojiEmotions className="text-[25px]" />
               </div>
             ) : (
               <div
-                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer  hover:text-[#c5c5c5] rounded-full  z-10 text-[white]"
+                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer hover:bg-[#21323a] hover:text-[white] rounded-full  z-10 text-[#000000] drop-shadow-md"
                 onClick={() => {
                   setEmoji(!emoji);
                   setDocument(false);
                 }}
               >
-                {/* <BsFillEmojiLaughingFill className="text-[20px] " /> */}
-                {/* <img src={smiley} className="w-[25px] drop-shadow-md"></img> */}
                 <MdEmojiEmotions className="text-[25px]" />
               </div>
             )}
             {document === true ? (
               <>
                 <div
-                  className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer   rounded-full  z-10 text-[#c5c5c5]"
+                  className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer   rounded-full  z-10 text-[#c5c5c5] drop-shadow-md"
                   onClick={() => {
                     setImage();
                     setVideo();
-                    // setDocument();
+
                     setDocument(!document);
                   }}
                 >
-                  {/* <TiAttachment className="text-[23px] " /> */}
-                  {/* <img src={attach} className="w-[25px] drop-shadow-md"></img> */}
-
                   <TiAttachment className="text-[25px]" />
                 </div>
               </>
             ) : (
               <>
                 <div
-                  className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer  hover:text-[#c5c5c5] rounded-full  z-10 text-[white]"
+                  className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer hover:bg-[#21323a] hover:text-[white] rounded-full  z-10 text-[#000000] drop-shadow-md"
                   onClick={() => {
                     setImage();
                     setVideo();
@@ -1441,9 +1433,6 @@ export const MessageBody = () => {
                     setEmoji(false);
                   }}
                 >
-                  {/* <TiAttachment className="text-[23px] " /> */}
-                  {/* <img src={attach} className="w-[25px] drop-shadow-md"></img> */}
-
                   <TiAttachment className="text-[25px]" />
                 </div>
               </>
@@ -1465,20 +1454,17 @@ export const MessageBody = () => {
                       DocSize
                     );
                     setSend(true);
-                    // sendMessage(Messages);
-                    setMessages("");
 
-                    // dispatch(toggleSendFlag(true));
+                    setMessages("");
                   }
                 }
               }}
               onChange={(e) => setMessages(e.target.value)}
               value={Messages}
               placeholder="Write Something .."
-              className="input bg-[white] w-[calc(100%-135px)] ml-[10px]  text-black px-[20px] pr-[50px] h-[45px] outline-none text-[17px] font-[work] font-medium tracking-[.4px] rounded-full drop-shadow-sm resize-none "
+              className="input bg-[#000000] w-[calc(100%-135px)] ml-[10px]  text-[white] px-[20px] pr-[50px] h-[40px] outline-none text-[15px] font-[work] font-medium tracking-[.4px] rounded-full  resize-none  drop-shadow-md"
             ></input>
 
-            {/* <EmojiPicker /> */}
             <button
               className="ml-[-43px] mr-[8px] z-10 h-[35px]   w-[35px] flex justify-center items-center cursor-pointer text-[black]  hover:bg-[black] rounded-full hover:text-[white]"
               onClick={() => {
@@ -1494,25 +1480,19 @@ export const MessageBody = () => {
                     DocSize
                   );
                   setSend(true);
-                  // sendMessage(Messages);
                   setMessages("");
-                  // sendMessage(Messages);
-                  // dispatch(toggleSendFlag(true));
                 }
               }}
             >
               {Messages.length === 0 ? (
                 <BiSolidSend className="text-[20px] text-[#828282]" />
               ) : (
-                // <img src={sendd} className="w-[25px] z-20 drop-shadow-md"></img>
                 <BiSolidSend className="text-[20px] " />
-                // <img src={sendd} className="w-[25px] z-20 drop-shadow-md"></img>
               )}
             </button>
-            <div className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer rounded-full  hover:text-[#c5c5c5] z-10  ml-[10px] mr-[10px] text-[white]  ">
-              <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full  ">
+            <div className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer rounded-full  hover:bg-[#21323a] hover:text-[white] z-10  ml-[10px] mr-[10px] text-[black]  ">
+              <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full  drop-shadow-md ">
                 <BiSolidMicrophone className="text-[25px]  " />
-                {/* <img src={mic} className="w-[25px] drop-shadow-md"></img> */}
               </div>
             </div>
           </div>

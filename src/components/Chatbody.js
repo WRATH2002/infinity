@@ -167,140 +167,41 @@ const Chatbody = () => {
 
   return (
     <>
-      <div className="font-bold w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-full bg-white flex flex-col justify-center items-center">
+      <div className="font-bold w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[100svh] bg-white flex flex-col justify-center items-center">
         {/* Chatbody */}
         {userInfoSidebar === false ? (
           <>
             <div
-              className="w-full h-full flex justify-between items-center"
+              className="w-full h-[100svh] flex justify-between items-center bg-[#d9e1e4]"
               style={{ transition: ".5s" }}
             >
-              <div className="w-full h-full">
-                <div
-                  className="w-full  "
-                  // onClick={() => {
-                  //   toggleUserInfoSidebar();
-                  // }}
-                >
+              <div className="w-full h-[100svh]">
+                <div className="w-full  ">
                   <UserInfo />
                 </div>
                 <MessageBody />
-                {/* <div className="w-full h-[100px] px-[20px] flex justify-center items-center">
-                  <div className="w-full h-full flex justify-center items-center ">
-                    <input
-                      onKeyDown={(e) => {
-                        if (e.nativeEvent.key === "Enter") {
-                          dispatch(
-                            addFlagOneMessage({
-                              id: 10,
-                              Message: Messages,
-                              Flag: 1,
-                            })
-                          );
-                          dispatch(
-                            addFlagTwoMessage({
-                              id: 10,
-                              Message: Messages,
-                              Flag: 2,
-                            })
-                          );
-                          setMessages("");
-                          sendMessage(Messages);
-                          // dispatch(toggleSendFlag(true));
-                        }
-                      }}
-                      onChange={(e) => setMessages(e.target.value)}
-                      value={Messages}
-                      placeholder="Write Something .."
-                      className="bg-[#f8fafc] w-full px-[14px] h-[50px] outline-none font-normal rounded-lg"
-                    ></input>
-                    <button
-                      onClick={() => {
-                        dispatch(
-                          addFlagOneMessage({
-                            id: 10,
-                            Message: Messages,
-                            Flag: 1,
-                          })
-                        );
-                        dispatch(
-                          addFlagTwoMessage({
-                            id: 10,
-                            Message: Messages,
-                            Flag: 2,
-                          })
-                        );
-                        setMessages("");
-                        sendMessage(Messages);
-                        // dispatch(toggleSendFlag(true));
-                      }}
-                    >
-                      Send
-                    </button>
-                  </div>
-                </div> */}
               </div>
-              {/* <div className="w-0 h-full" style={{ transition: ".5s" }}>
-                <UserInfoSidebar data={true} />
-              </div> */}
-              {/* <div
-                className="w-0  bg-[#f8fafc] h-full fixed lg:flex md:flex overflow-hidden"
-                style={{ transition: ".5s" }}
-              >
-                hello
-              </div> */}
             </div>
           </>
         ) : (
           <>
-            <div className="w-full h-full flex justify-between items-center">
+            <div className="w-full h-[100svh] flex justify-between items-center bg-[#d9e1e4]">
               <div
-                className="w-full lg:w-[calc(100%-350px)] md:w-[calc(100%-350px)] h-full overflow-y-scroll"
+                className="w-full lg:w-[calc(100%-350px)] md:w-[calc(100%-350px)] h-[100svh] "
                 style={{ transition: ".5s" }}
               >
-                <div
-                  className="w-full cursor-pointer"
-                  // onClick={() => {
-                  //   toggleUserInfoSidebar();
-                  // }}
-                >
+                <div className="w-full cursor-pointer">
                   <UserInfo />
                 </div>
                 <MessageBody />
-                {/* <div className="w-full h-[100px] px-[20px] flex justify-center items-center">
-                  <div className="w-full h-full flex justify-center items-center ">
-                    <input
-                      onKeyDown={(e) => {
-                        if (e.nativeEvent.key === "Enter") {
-                          setMessages("");
-                          sendMessage("GqC1MfHsLVZU4DsD52cObQClai32", Messages);
-                        }
-                      }}
-                      onChange={(e) => setMessages(e.target.value)}
-                      value={Messages}
-                      placeholder="Write Something .."
-                      className="bg-[#f8fafc] w-full px-[14px] h-[50px] outline-none font-normal rounded-lg"
-                    ></input>
-                    <button
-                      onClick={() => {
-                        setMessages("");
-                        sendMessage("GqC1MfHsLVZU4DsD52cObQClai32", Messages);
-                      }}
-                    >
-                      Send
-                    </button>
-                  </div>
-                </div> */}
               </div>
-              {/* <div className="w-[350px] h-full" style={{ transition: ".5s" }}>
-                <UserInfoSidebar data={false} />
-              </div> */}
-              <div
+
+              {/* <div
                 className="w-full lg:w-[350px] md:w-[350px] bg-[#f8fafc] h-full fixed lg:flex md:flex"
                 style={{ transition: ".5s" }}
               >
                 <span>hello</span>
-              </div>
+              </div> */}
             </div>
           </>
         )}

@@ -77,7 +77,7 @@ const Loading = (props) => {
                 x="50%"
                 y="50%"
                 textAnchor="middle"
-                className="text-[120px] lg:text-[50px] md:text-[50px] text-center stroke-[#3d737d] stroke-[2px] lg:stroke-[.7px] md:stroke-[.7px]"
+                className="text-[120px] lg:text-[50px] md:text-[50px] text-center stroke-[#b8dedf] stroke-[2px] lg:stroke-[.7px] md:stroke-[.7px]"
               >
                 CHAT-X
               </text>
@@ -89,204 +89,9 @@ const Loading = (props) => {
         </>
       ) : (
         <>
-          <div className="w-full flex  justify-between items-center">
+          <div className="w-full flex h-[100svh] justify-between items-center">
             <Sidebar />
-            {/* <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => console.log(e.target.files[0])}
-            ></input> */}
-            {/* <span onChange={}>Send</span> */}
-            {/* <div className="flex flex-col justify-center items-center">
-              <Login />
-              <Signup />
-            </div> */}
 
-            {/* {authUser ? <>Loged In</> : <>Loged Out</>} */}
-
-            {/* <button className="font-bold" onClick={userSignOut}>
-                Sign Out
-              </button> */}
-            {/* <div className="flex flex-col justify-center items-center">
-              <button
-                className="font-bold"
-                onClick={() =>
-                  createUserFriendCollection(
-                    "Xoc9DGMYGYT2Lw91WZB09laqfD12",
-                    "Sourav Poddar"
-                  )
-                }
-              >
-                Sourav
-              </button>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage("Xoc9DGMYGYT2Lw91WZB09laqfD12", "Hello 1")
-                }
-              >
-                Hello 1
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage("Xoc9DGMYGYT2Lw91WZB09laqfD12", "How Are you 1")
-                }
-              >
-                How Are you 1
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage("Xoc9DGMYGYT2Lw91WZB09laqfD12", " Who are you 1")
-                }
-              >
-                Who are you 1
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage(
-                    "Xoc9DGMYGYT2Lw91WZB09laqfD12",
-                    "You will Get best job 1"
-                  )
-                }
-              >
-                You will Get best job 1
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage("Xoc9DGMYGYT2Lw91WZB09laqfD12", "Hello 2")
-                }
-              >
-                Hello 2
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage("Xoc9DGMYGYT2Lw91WZB09laqfD12", "How Are you 2")
-                }
-              >
-                How Are you 2
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage("Xoc9DGMYGYT2Lw91WZB09laqfD12", " Who are you 2")
-                }
-              >
-                Who are you 2
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage(
-                    "Xoc9DGMYGYT2Lw91WZB09laqfD12",
-                    "You will Get best job 2"
-                  )
-                }
-              >
-                You will Get best job 2
-              </span>
-            </div>
-
-            <div className="flex flex-col justify-center items-center">
-              <button
-                className="font-bold"
-                onClick={() =>
-                  createUserFriendCollection(
-                    "GqC1MfHsLVZU4DsD52cObQClai32",
-                    "Himadri Purkait"
-                  )
-                }
-              >
-                Himadri
-              </button>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage(
-                    "GqC1MfHsLVZU4DsD52cObQClai32",
-                    "Can you give your number 3"
-                  )
-                }
-              >
-                Can you give your number 3
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage("GqC1MfHsLVZU4DsD52cObQClai32", "Who is She 3")
-                }
-              >
-                Who is She 3
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage(
-                    "GqC1MfHsLVZU4DsD52cObQClai32",
-                    " What is your income 3"
-                  )
-                }
-              >
-                What is your income 3
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage(
-                    "GqC1MfHsLVZU4DsD52cObQClai32",
-                    "prime minister 3"
-                  )
-                }
-              >
-                prime minister 3
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage(
-                    "GqC1MfHsLVZU4DsD52cObQClai32",
-                    "Can you give your number 4"
-                  )
-                }
-              >
-                Can you give your number 4
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage("GqC1MfHsLVZU4DsD52cObQClai32", "Who is She 4")
-                }
-              >
-                Who is She 4
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage(
-                    "GqC1MfHsLVZU4DsD52cObQClai32",
-                    " What is your income 4"
-                  )
-                }
-              >
-                What is your income 4
-              </span>
-              <span
-                className="cursor-pointer hover:bg-slate-400"
-                onClick={() =>
-                  sendMessage(
-                    "GqC1MfHsLVZU4DsD52cObQClai32",
-                    "prime minister 4"
-                  )
-                }
-              >
-                prime minister 4
-              </span>
-            </div> */}
-            {/* <Login /> */}
             <Chatbody />
           </div>
         </>
@@ -447,7 +252,7 @@ const AuthDetails = () => {
         </>
       ) : (
         <>
-          <div className="w-full h-[100dvh] flex flex-col justify-center items-center bg-[#0b0c0b]">
+          <div className="w-full h-[100dvh] flex flex-col justify-center items-center bg-[#d9e1e4]">
             {mode === 1 ? <Login /> : <Signup />}
           </div>
         </>

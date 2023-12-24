@@ -8,16 +8,17 @@ const Sidebar = () => {
     <>
       {ActiveChatUser.length === 0 ? (
         <div
-          className=" w-full lg:w-[400px] md:w-[400px] p-[20px] lg:p-[20px] md:p-[20px] h-[100dvh] bg-[#09161c] fixed lg:relative md:relative flex flex-col justify-start items-end z-20"
+          className=" w-full lg:w-[400px] md:w-[400px] h-full bg-[#d9e1e4] overflow-y-scroll fixed lg:relative md:relative flex flex-col justify-start items-end z-20"
           // style={{ transition: ".5s" }}
         >
           {/* Sidebar */}
           <OwnerDetails />
           <UserList />
+          {/* <div className="w-full h-full fixed flex md:hidden lg:hidden back z-0"></div> */}
         </div>
       ) : (
         <div
-          className=" w-0 lg:w-[400px] md:w-[400px] p-[0] py-[20px] lg:p-[20px] md:p-[20px] h-[100dvh] bg-[#09161c] fixed lg:relative md:relative flex flex-col justify-start items-end z-[8]"
+          className=" w-0 lg:w-[400px] md:w-[400px] h-full bg-[#d9e1e4] overflow-y-scroll fixed lg:relative md:relative flex flex-col justify-start items-end z-[8]"
           // style={{ transition: ".5s" }}
         >
           {/* Sidebar */}
