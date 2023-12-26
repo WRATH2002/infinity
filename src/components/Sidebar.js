@@ -8,7 +8,7 @@ const Sidebar = () => {
     <>
       {ActiveChatUser.length === 0 ? (
         <div
-          className=" w-full lg:w-[400px] md:w-[400px] h-full bg-[#d9e1e4] overflow-y-scroll fixed lg:relative md:relative flex flex-col justify-start items-end z-20"
+          className=" w-full lg:w-[400px] md:w-[400px] h-full bg-[#1d2031]  fixed lg:relative md:relative flex flex-col justify-start items-center z-20"
           // style={{ transition: ".5s" }}
         >
           {/* Sidebar */}
@@ -18,7 +18,7 @@ const Sidebar = () => {
         </div>
       ) : (
         <div
-          className=" w-0 lg:w-[400px] md:w-[400px] h-full bg-[#d9e1e4] overflow-y-scroll fixed lg:relative md:relative flex flex-col justify-start items-end z-[8]"
+          className=" w-0 lg:w-[400px] md:w-[400px] h-full bg-[#1d2031]  fixed lg:relative md:relative flex flex-col justify-start items-end z-[8]"
           // style={{ transition: ".5s" }}
         >
           {/* Sidebar */}

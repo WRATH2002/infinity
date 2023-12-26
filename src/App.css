@@ -23,12 +23,17 @@ font-family: 'Rubik', sans-serif; */
   background-size: cover;
 }
 
-.borr > .bor {
-  border-top: 1px solid #c3c8ce;
+.borr > .bor > .borrrr {
+  border-top: 1px solid #35384a;
   /* border-top: 0px solid;
   border-t-[1px] border-[#c3c8ce] */
 }
-.borr :nth-child(2) {
+.borr > .bor > .borrrr:hover {
+  border-top: 1px solid transparent;
+  /* border-top: 0px solid;
+  border-t-[1px] border-[#c3c8ce] */
+}
+.borr > .bor :nth-child(2) {
   border-top: 0px solid transparent;
   /* border-top: 0px solid;
   border-t-[1px] border-[#c3c8ce] */
@@ -64,11 +69,13 @@ font-family: 'Rubik', sans-serif; */
   width: 2px;
   border-radius: 50px;
   margin: 0px 550px;
+  max-height: 50%;
+  height: 50%;
   /* padding-left: 300px; */
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: black;
+  background: transparent;
   border-radius: 10px;
 }
 

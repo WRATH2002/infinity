@@ -1384,7 +1384,7 @@ export const MessageBody = () => {
         </>
       )}
 
-      <div className="w-full h-[60px] fixed bottom-0 flex flex-col justify-center items-start gradient">
+      <div className="w-full h-[60px] fixed bottom-0 flex flex-col justify-center items-start bg-[#d9e1e4]">
         {ActiveChatUser.length === 0 ? (
           <></>
         ) : (

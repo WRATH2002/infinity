@@ -240,10 +240,10 @@ export const UserInfo = () => {
                 className="w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-0 fixed bg-slate-500 text-white z-30 overflow-hidden"
                 // style={{ transition: ".5s" }}
               ></div>
-              <div className="w-full px-[10px] pt-[20px] h-[80px]  bg-[#d9e1e4] text-[black]">
+              <div className="w-full px-[10px] pt-[20px] h-[70px] rounded-b-[20px] bg-[#1f3239] text-[black]">
                 <div className="w-full h-full pb-[20px] flex justify-center items-center">
                   <div
-                    className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full hover:bg-[white]   text-black drop-shadow-md flex justify-center items-center cursor-pointer"
+                    className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full hover:bg-[white]   text-white drop-shadow-md flex justify-center items-center cursor-pointer"
                     onClick={() => {
                       dispatch(addActiveUser(""));
                     }}
@@ -253,7 +253,7 @@ export const UserInfo = () => {
                   </div>
 
                   <div
-                    className="w-[50px] h-[50px]  rounded-full cursor-pointer bg-[#21323a] ml-[10px] lg:ml-0 md:ml-0 text-black drop-shadow-md"
+                    className="w-[50px] h-[50px]  rounded-full cursor-pointer bg-[#21323a] ml-[10px] lg:ml-0 md:ml-0 text-white drop-shadow-md"
                     onClick={() => {
                       setUserSidebar(!userSidebar);
                     }}
@@ -271,7 +271,7 @@ export const UserInfo = () => {
                     )}
                   </div>
                   <div className="w-[calc(100%-160px)] lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                    <span className="text-[16px]  font-[rubik] font-normal text-black drop-shadow-md">
+                    <span className="text-[16px]  font-[rubik] font-normal text-white drop-shadow-md">
                       {chatUserName}
                     </span>
                     <span className="text-[14px]  font-[rubik] font-light text-[#5d5d5d] drop-shadow-md">
@@ -291,7 +291,7 @@ export const UserInfo = () => {
                       <div className="hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px] font-[work] font-normal bg-[#505050]">
                         Delete Chats
                       </div>
-                      <MdDelete className="text-[20px] text-black group-hover:text-[white] drop-shadow-md" />
+                      <MdDelete className="text-[20px] text-white group-hover:text-[white] drop-shadow-md" />
                       {/* <img
                         src={del}
                         className=" w-[25px] drop-shadow-lg "
