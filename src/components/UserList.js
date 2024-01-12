@@ -58,6 +58,12 @@ import { PiChatCircleTextFill } from "react-icons/pi";
 import { MdSettings } from "react-icons/md";
 import { BsFillPersonPlusFill } from "react-icons/bs";
 import { TiGroup } from "react-icons/ti";
+import { MdOutlinePassword } from "react-icons/md";
+import { IoTrailSignOutline } from "react-icons/io5";
+import { TiDelete } from "react-icons/ti";
+import { TiDeleteOutline } from "react-icons/ti";
+import { RiDeleteBack2Fill } from "react-icons/ri";
+import { MdPermContactCalendar } from "react-icons/md";
 
 // const Hello = () => {
 //   const [userName, setUserName] = useState("");
@@ -242,7 +248,7 @@ const Friends = (props) => {
       {ActiveChatUser === UserUid && UserUid != "" ? (
         <>
           <div
-            className="w-full h-[70px] py-[10px] flex justify-center cursor-pointer  bg-[#3d737d]  px-[10px] border-t-[1px] border-[#404040] "
+            className="w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center cursor-pointer  bg-[#3d737d]  px-[10px]"
             onClick={() => {
               activerChatUser();
               // dispatch(toggleSendFlag(true));
@@ -263,11 +269,11 @@ const Friends = (props) => {
             </div>
             <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-white  font-[rubik] font-normal  ">
+                <span className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-white  font-[rubik] font-normal  ">
                   {/* {props.data.user} */}
                   {userName}
                 </span>
-                <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-white   font-[rubik] font-light">
+                <span className="w-[70px] h-full text-[13px]  flex justify-end items-center text-white   font-[rubik] font-light">
                   {/* {props.data.time} */}
                   {Time}
                 </span>
@@ -360,9 +366,9 @@ const Friends = (props) => {
           </div>
         </>
       ) : (
-        <div className="px-[10px] bor group w-full h-[75px] py-[10px] flex justify-center items-center bg-transparent  cursor-pointer   hover:bg-[#1f3239] hover:border-t-transparent  ">
+        <div className="px-[10px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center bg-transparent  cursor-pointer   hover:bg-[#1f3239] hover:border-t-transparent  ">
           <div
-            className=" borrrr w-full h-[75px] py-[10px] flex justify-center items-center bg-transparent  cursor-pointer     "
+            className="  w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px] border-[#35384a] flex justify-center items-center bg-transparent  cursor-pointer     "
             onClick={() => activerChatUser()}
           >
             <div className="w-[50px] h-[50px]  rounded-full">
@@ -381,14 +387,14 @@ const Friends = (props) => {
             <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
                 <span
-                  className="w-[calc(100%-70px)] text-[15px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]    font-[rubik] font-light group-hover:text-[white] "
+                  className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]    font-[rubik] font-normal group-hover:text-[white] "
                   // style={{ transition: ".9s" }}
                 >
                   {/* {props.data.user} */}
                   {userName}
                 </span>
                 <span
-                  className="w-[70px] h-full text-[11px] flex justify-end items-center text-[#8e9396]   font-[rubik] font-light"
+                  className="w-[70px] h-full text-[13px] flex justify-end items-center text-[#8e9396]   font-[rubik] font-light"
                   // style={{ transition: ".9s" }}
                 >
                   {/* {props.data.time} */}
@@ -401,7 +407,7 @@ const Friends = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[35px] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]   group-hover:text-[#8e9396]  font-[rubik] font-light"
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]   group-hover:text-[#8e9396]  font-[rubik] font-light"
                           // style={{ transition: ".5s" }}
                         >
                           you:
@@ -415,7 +421,7 @@ const Friends = (props) => {
                       // style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-105px)] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
                       // style={{ transition: ".5s" }}
                     >
                       {lastMsg}
@@ -426,7 +432,7 @@ const Friends = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[35px] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
                           // style={{ transition: ".5s" }}
                         >
                           you:
@@ -440,7 +446,7 @@ const Friends = (props) => {
                       // style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-105px)] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
                       // style={{ transition: ".5s" }}
                     >
                       {lastMsg}
@@ -451,7 +457,7 @@ const Friends = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[35px] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
                           // style={{ transition: ".5s" }}
                         >
                           you:
@@ -465,7 +471,7 @@ const Friends = (props) => {
                       // style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-105px)] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
                       // style={{ transition: ".5s" }}
                     >
                       {docName}
@@ -476,27 +482,24 @@ const Friends = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[30px] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
+                          className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
                           // style={{ transition: ".5s" }}
                         >
                           you:
                         </span>
                       </>
                     ) : (
-                      <>
-                        <span
-                          className="w-[100%] text-[13px]  leading-[13px] whitespace-nowrap  text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
-                          // style={{ transition: ".5s" }}
-                        >
-                          Messages are end-to-end encrypted.
-                        </span>
-                      </>
+                      <></>
                     )}
                     <span
-                      className="w-[calc(100%-100px)] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
                       // style={{ transition: ".5s" }}
                     >
-                      {lastMsg}
+                      {!lastMsg ? (
+                        <>Messages are end-to-end encrypted.</>
+                      ) : (
+                        <>{lastMsg}</>
+                      )}
                     </span>
                   </>
                 )}
@@ -508,7 +511,7 @@ const Friends = (props) => {
                     <></>
                   ) : (
                     <>
-                      <span className="w-[18px] h-[18px] text-[11px] flex justify-center items-center rounded-full bg-[#6946c2] text-[white]">
+                      <span className="w-[20px] h-[20px] text-[11px] flex justify-center items-center rounded-full bg-[#ffb6b5] text-[#000000]">
                         {unreadMessages}
                       </span>
                     </>
@@ -717,7 +720,7 @@ const UserList = () => {
   const [statusTimestamp, setStatusTimestamp] = useState("");
 
   const [isSearchBar, setIsSearchBar] = useState(false);
-
+  const [ownerInfo, setOwnerInfo] = useState("");
   const [statusImage, setStatusImage] = useState();
   const [statusTextModal, setStatusTextModal] = useState(false);
   const [statusImageUrl, setStatusImageUrl] = useState("");
@@ -738,11 +741,12 @@ const UserList = () => {
     onSnapshot(userDoc, (snapshot) => {
       // console.log("snapshot.docssssssssssssss");
       // console.log(snapshot.data());
-      setOwnerName(snapshot?.data()?.Name);
+      // setOwnerName(snapshot?.data()?.Name);
+      // setOwnerInfo(snapshot?.data()?.Info);
       setIsStatus(snapshot?.data()?.Status);
       setStatusImageUrl(snapshot?.data()?.Status);
       setStatusCount(snapshot?.data()?.Status.length);
-      setProfileURL(snapshot?.data()?.Photo);
+      // setProfileURL(snapshot?.data()?.Photo);
       setStatusTimestamp(snapshot?.data()?.LastStatus);
     });
   }
@@ -923,14 +927,82 @@ const UserList = () => {
     );
   };
 
+  // ------------------------------
+
+  const [tempProfileImage, setTempProfileImage] = useState();
+
+  function profileImage(e) {
+    console.log(e.target.files[0]);
+    setTempProfileImage(e.target.files[0]);
+    uploadProfileImage();
+    //  setImageLength(e.target.files.length);
+  }
+
+  const uploadProfileImageGetUrl = async (fileRef) => {
+    const user = firebase.auth().currentUser;
+    var geturl = await uploadBytes(fileRef, tempProfileImage).then(
+      (snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          console.log(url);
+          db.collection("Chat Record").doc(user.uid).update({ Photo: url });
+
+          geturl = url;
+        });
+        console.log("Uploaded a blob or file!");
+      }
+    );
+    return geturl;
+  };
+
+  const uploadProfileImage = async () => {
+    const user = firebase.auth().currentUser;
+    const fileRef = ref(storage, `/users/${user.uid}/Profile Photo`);
+    const myPromise = uploadProfileImageGetUrl(fileRef);
+    toast.promise(
+      myPromise,
+      {
+        loading: "Updating Photo",
+        success: "Photo Updated",
+        error: "Error",
+      },
+      {
+        style: {
+          backgroundColor: "#333333",
+          color: "#fff",
+          font: "work",
+          fontWeight: "400",
+        },
+      }
+    );
+  };
+
+  useEffect(() => {
+    fetchownerInfoSecond();
+  }, []);
+
+  function fetchownerInfoSecond() {
+    const user = firebase.auth().currentUser;
+
+    const collectionRef = db
+      .collection("Chat Record")
+      .doc(user.uid)
+      .collection("Chat Friends");
+    const userDoc = db.collection("Chat Record").doc(user.uid);
+    onSnapshot(userDoc, (snapshot) => {
+      setOwnerName(snapshot?.data()?.Name);
+      // setOwnerInfo(snapshot?.data()?.Info);
+      setProfileURL(snapshot?.data()?.Photo);
+    });
+  }
+
   // function set
 
   return (
     <>
-      <div className="w-[calc(100%-20px)] bg-[#2c2f42] rounded-[30px] h-[calc(100%-140px)] md:h-[calc(100%-70px)] lg:h-[calc(100%-70px)]  flex flex-col items-end  pt-[0px] drop-shadow-md overflow-y-scroll">
+      <div className="w-[calc(100%-20px)]  h-[calc(100%-140px)] flex flex-col items-end  pt-[0px] drop-shadow-md overflow-y-scroll">
         {/* yserlist */}
 
-        <div className="w-full min-h-[40px] hidden md:flex lg:flex font-semibold text-[white] justify-evenly items-center font-[work] text-[15px] overflow-hidden">
+        {/* <div className="w-full min-h-[40px] hidden md:flex lg:flex font-semibold text-[white] justify-evenly items-center font-[work] text-[15px] overflow-hidden">
           {section === "All" ? (
             <span className="px-[10px] w-[25%] flex justify-center items-center border-b-[2.5px] h-full text-white border-[#a93cee]">
               All
@@ -999,7 +1071,7 @@ const UserList = () => {
               Status
             </span>
           )}
-        </div>
+        </div> */}
         {searchFlag === true ? (
           <>
             <div className="min-h-[70px] w-full  flex justify-center items-center">
@@ -1633,73 +1705,104 @@ const UserList = () => {
           </>
         ) : (
           <>
-            <div className="h-[calc(100%-100px)] w-full px-[10px] pt-[10px] flex flex-col justify-start items-center">
-              <div className="w-[130px] h-[130px] rounded-full bg-slate-500">
-                <img
-                  src={profile2}
-                  className="w-full h-full rounded-full object-cover"
-                ></img>
-              </div>
-              <div className="mt-[50px]">
-                <input
-                  disabled
-                  style={{ transition: ".5s" }}
-                  // value={searchUser}
-                  // onKeyDown={(e) => {
-                  //   if (
-                  //     e.nativeEvent.key === "Enter" &&
-                  //     searchUser.length !== 0
-                  //   ) {
-                  //     searchUserFriend();
-                  //     setSearchFlag(true);
-                  //   }
-                  // }}
-                  // onChange={(e) => setSearchUser(e.target.value)}
-                  // onClick={() => {
-                  //   // setIsSearchBar(!isSearchBar);
-                  // }}
-                  placeholder="Name"
-                  className="w-[full] h-[40px] text-[black] px-[20px] bg-[#1d2031] font-[work] font-semibold border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-full"
-                ></input>
-              </div>
-              <div className="mt-[10px]">
-                <input
-                  disabled
-                  style={{ transition: ".5s" }}
-                  // value={searchUser}
-                  // onKeyDown={(e) => {
-                  //   if (
-                  //     e.nativeEvent.key === "Enter" &&
-                  //     searchUser.length !== 0
-                  //   ) {
-                  //     searchUserFriend();
-                  //     setSearchFlag(true);
-                  //   }
-                  // }}
-                  // onChange={(e) => setSearchUser(e.target.value)}
-                  // onClick={() => {
-                  //   // setIsSearchBar(!isSearchBar);
-                  // }}
-                  placeholder="Name"
-                  className="w-[full] h-[40px] text-[black] px-[20px] bg-[#1d2031] font-[work] font-semibold border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-full"
-                ></input>
-              </div>
-            </div>
-            <div className="fixed bottom-[10px] h-[90px] w-full flex flex-col justify-between items-center ">
-              <div className="w-full  px-[10px] h-[40px] flex justify-between items-center">
-                <div className="w-[calc(100%/2-5px)] h-full rounded-full flex justify-center items-center text-white font-[rubik] font-light bg-[#1d2031] drop-shadow-md text-[14px]">
-                  Change Number
+            <div className="w-full h-full p-[10px] flex justify-center items-center ">
+              <div className="w-full h-full  rounded-3xl flex flex-col justify-center items-center">
+                <div className="group w-[130px] h-[130px] rounded-full bg-slate-500 flex justify-center items-center">
+                  {/* <img
+                    src={profileURL}
+                    className="w-full h-full rounded-full object-cover"
+                  ></img> */}
+                  {profileURL === "nophoto" ? (
+                    <img
+                      src={profile2}
+                      className="w-full h-full rounded-full object-cover"
+                    ></img>
+                  ) : (
+                    <img
+                      src={profileURL}
+                      className="w-full h-full rounded-full object-cover"
+                    ></img>
+                  )}
+                  <input
+                    type="file"
+                    id="getFile"
+                    accept="image/*"
+                    className="hidden fixed opacity-0 text-white bg-transparent w-[35px] h-[35px] rounded-full z-30 cursor-pointer"
+                    onChange={(e) => profileImage(e)}
+                  ></input>
+                  <label
+                    for="getFile"
+                    // onclick={document.getElementById("getFile").click()}
+                    className="group-hover:opacity-100 opacity-0 w-[35px] h-[35px] flex justify-center items-center bg-[#0b0c0b94] fixed rounded-full cursor-pointer z-10"
+                  >
+                    <BsCameraFill className="text-white" />
+                  </label>
                 </div>
-                <div className="w-[calc(100%/2-5px)] h-full rounded-full flex justify-center items-center text-white font-[rubik] font-light bg-[#1d2031] drop-shadow-md text-[14px]">
-                  Change Password
+                <div className="mt-[50px] w-[250px] flex justify-center items-center">
+                  <input
+                    disabled
+                    style={{ transition: ".5s" }}
+                    // value={searchUser}
+                    // onKeyDown={(e) => {
+                    //   if (
+                    //     e.nativeEvent.key === "Enter" &&
+                    //     searchUser.length !== 0
+                    //   ) {
+                    //     searchUserFriend();
+                    //     setSearchFlag(true);
+                    //   }
+                    // }}
+                    // onChange={(e) => setSearchUser(e.target.value)}
+                    // onClick={() => {
+                    //   // setIsSearchBar(!isSearchBar);
+                    // }}
+                    placeholder="Name"
+                    className="w-[calc(100%-40px)] h-[40px] text-[black] px-[20px] bg-[#1d2031] font-[work] font-semibold border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-full"
+                  ></input>
                 </div>
-              </div>
-              <div className="w-full px-[10px] h-[40px] mt-[10px] flex justify-between items-center">
-                <div className="w-[calc(100%/2-5px)] h-full rounded-full flex justify-center items-center text-white font-[rubik] font-light bg-[#1d2031] drop-shadow-md text-[14px]">
-                  Change Password
+                <div className="mt-[10px] w-[250px] flex justify-center items-center">
+                  <input
+                    disabled
+                    style={{ transition: ".5s" }}
+                    // value={searchUser}
+                    // onKeyDown={(e) => {
+                    //   if (
+                    //     e.nativeEvent.key === "Enter" &&
+                    //     searchUser.length !== 0
+                    //   ) {
+                    //     searchUserFriend();
+                    //     setSearchFlag(true);
+                    //   }
+                    // }}
+                    // onChange={(e) => setSearchUser(e.target.value)}
+                    // onClick={() => {
+                    //   // setIsSearchBar(!isSearchBar);
+                    // }}
+                    placeholder="Name"
+                    className="w-[calc(100%-40px)] h-[40px] text-[black] px-[20px] bg-[#1d2031] font-[work] font-semibold border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-full"
+                  ></input>
                 </div>
-                <div className="w-[calc(100%/2-5px)] h-full rounded-full flex justify-center items-center text-[white] font-[rubik] fonfont-lightal bg-[#f76d32] drop-shadow-md text-[14px]">
-                  Delete Account
+                <div className=" h-[190px] mt-[30px] w-full flex flex-col justify-between items-center ">
+                  <div className="w-full  px-[10px] h-[190px] flex flex-col justify-evenly items-center">
+                    <div className="w-[200px] h-[40px] rounded-full bg-[#1d2031] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[14px]">
+                      <MdPermContactCalendar className="mr-[10px] text-[20px] text-[orange]" />{" "}
+                      Change Number
+                    </div>
+                    <div className="w-[200px] h-[40px] rounded-full bg-[#1d2031] mt-[10px] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[14px]">
+                      <MdOutlinePassword className="mr-[10px] text-[20px] text-[gray]" />{" "}
+                      Change Password
+                    </div>
+                    {/* </div> */}
+                    {/* <div className="w-full px-[10px] h-[40px] mt-[10px] flex justify-evenly items-center"> */}
+                    <div className="w-[200px] h-[40px] rounded-full bg-[#1d2031] mt-[10px] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[14px]">
+                      <TiDelete className="mr-[10px] text-[20px] text-[red]" />{" "}
+                      Delete Account
+                    </div>
+                    <div className="w-[200px] h-[40px] rounded-full bg-[#1d2031] mt-[10px] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[14px]">
+                      <IoTrailSignOutline className="mr-[10px] text-[20px] text-[#3ef23e]" />{" "}
+                      Log Out
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1707,99 +1810,8 @@ const UserList = () => {
         )}
       </div>
 
-      {/* <div className="w-full h-[80px] md:hidden lg:hidden   fixed bottom-[80px] flex items-center justify-center ">
-        {section === "All" ? (
-          <div className="w-[50px] h-[50px] rounded-full text-[black] bg-[#b8dedf] drop-shadow-md flex justify-center items-center">
-            <BsFillPersonPlusFill className="text-[23px]" />
-          </div>
-        ) : (
-          <div className="w-[50px] h-[50px] rounded-full text-[white] drop-shadow-md flex justify-center items-center">
-            <BsFillPersonPlusFill
-              className="text-[23px]"
-              onClick={() => {
-                setSearchFlag(false);
-                allUserList();
-                setSection("All");
-                setStatusModal(false);
-              }}
-            />
-          </div>
-        )}
-
-        {section === "Group" ? (
-          <div className="w-[50px] h-[50px] rounded-full text-[black] bg-[#b8dedf] drop-shadow-md flex justify-center items-center">
-            <TiGroup className="text-[23px]" />
-          </div>
-        ) : (
-          <div className="w-[50px] h-[50px] rounded-full text-[white] drop-shadow-md flex justify-center items-center">
-            <TiGroup
-              className="text-[23px]"
-              onClick={() => {
-                setSearchFlag(false);
-                setSection("Group");
-                setIsSearchBar(false);
-                setStatusModal(false);
-              }}
-            />
-          </div>
-        )}
-
-        {section === "Chat" ? (
-          <div className="w-[50px] h-[50px] rounded-full text-[black] bg-[#b8dedf] drop-shadow-md flex justify-center items-center">
-            <PiChatCircleTextFill className="text-[23px]" />
-          </div>
-        ) : (
-          <div className="w-[50px] h-[50px] rounded-full text-[white] drop-shadow-md flex justify-center items-center">
-            <PiChatCircleTextFill
-              className="text-[23px]"
-              onClick={() => {
-                setSearchFlag(false);
-                fetchUserList();
-                setSection("Chat");
-                setIsSearchBar(false);
-                setStatusModal(false);
-              }}
-            />
-          </div>
-        )}
-
-        {section === "Status" ? (
-          <div className="w-[50px] h-[50px] rounded-full text-[black] bg-[#b8dedf] drop-shadow-md flex justify-center items-center">
-            <TbPlaystationCircle className="text-[23px]" />
-          </div>
-        ) : (
-          <div className="w-[50px] h-[50px] rounded-full text-[white] drop-shadow-md flex justify-center items-center">
-            <TbPlaystationCircle
-              className="text-[23px]"
-              onClick={() => {
-                setSearchFlag(false);
-                setSection("Status");
-                setIsSearchBar(false);
-              }}
-            />
-          </div>
-        )}
-
-        {section === "Setting" ? (
-          <div className="w-[50px] h-[50px] rounded-full text-[white] drop-shadow-md flex justify-center items-center">
-            <MdSettings className="text-[23px]" />
-          </div>
-        ) : (
-          <div className="w-[50px] h-[50px] rounded-full text-[white] drop-shadow-md flex justify-center items-center">
-            <MdSettings
-              className="text-[23px]"
-              onClick={() => {
-                setSearchFlag(false);
-                setSection("Setting");
-                setIsSearchBar(false);
-              }}
-            />
-          </div>
-        )}
-      </div> */}
-
-      <div className="w-full h-[70px] md:hidden lg:hidden  overflow-hidden fixed bottom-0 flex items-center justify-center bg-[#1c1f2f] text-[white]">
-        <div className="fixed w-[50px] h-[50px] rounded-full text-[white] bg-[#2c2f42] drop-shadow-md"></div>
+      <div className="w-full md:w-[400px] lg:w-[400px] h-[70px]   overflow-hidden fixed bottom-0 flex items-center justify-center bg-[#1c1f2f] text-[white]">
+        <div className="fixed w-[50px] h-[50px] rounded-full text-[white] bg-[#ffb6b5] drop-shadow-md"></div>
         {section === "All" ? (
           <div
             className="w-full h-full  flex  items-center ml-[0]"
@@ -2403,10 +2415,6 @@ const UserList = () => {
         )}
         {/* <div className="w-full h-full bg-slate-800"></div> */}
       </div>
-      {/* import {TbPlaystationCircle} from "react-icons/tb"; import {MdGroups} from
-      "react-icons/md"; import {BsFillChatSquareTextFill} from "react-icons/bs";
-      // import {FaPlus} from "react-icons/fa6"; import {MdSettings} from
-      "react-icons/md"; */}
     </>
   );
 };

@@ -34,7 +34,7 @@ const Loading = (props) => {
     <>
       {isLoading === true ? (
         <>
-          <div className="w-full bg-[black] flex flex-col justify-center items-center h-[100dvh]">
+          <div className="w-full bg-[#1b202d] flex flex-col justify-center items-center h-[100dvh]">
             {/* <div class="col-3">
               <div class="snippet" data-title="dot-gathering">
                 <div class="stage filter-contrast">
@@ -68,16 +68,16 @@ const Loading = (props) => {
         </>
       ) : isSubLoading === true ? (
         <>
-          <div className="w-full bg-[black] flex flex-col justify-center items-center h-[100dvh]">
+          <div className="w-full bg-[#1b202d] flex flex-col justify-center items-center h-[100dvh]">
             <svg
               viewBox="0 0 1236 600"
-              className="  m-auto flex justify-center items-center"
+              className="  m-auto flex justify-center items-center text-[#ffb6b5]"
             >
               <text
                 x="50%"
                 y="50%"
                 textAnchor="middle"
-                className="text-[120px] lg:text-[50px] md:text-[50px] text-center stroke-[#b8dedf] stroke-[2px] lg:stroke-[.7px] md:stroke-[.7px]"
+                className="text-[120px] lg:text-[50px] md:text-[50px] text-center stroke-[#ffb6b5] text-[#ffb6b5] stroke-[2px] lg:stroke-[.7px] md:stroke-[.7px]"
               >
                 CHAT-X
               </text>
@@ -243,7 +243,7 @@ const AuthDetails = () => {
 
   return (
     <>
-      {authUser ? (
+      {!authUser ? (
         <>
           <Loading />
           {/* <button className="font-bold" onClick={userSignOut}>

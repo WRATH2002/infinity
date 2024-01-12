@@ -240,10 +240,10 @@ export const UserInfo = () => {
                 className="w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-0 fixed bg-slate-500 text-white z-30 overflow-hidden"
                 // style={{ transition: ".5s" }}
               ></div>
-              <div className="w-full px-[10px] pt-[20px] h-[70px] rounded-b-[20px] bg-[#1f3239] text-[black]">
+              <div className="w-full px-[10px] pt-[20px] h-[70px]  bg-[#1b202d] text-[black]">
                 <div className="w-full h-full pb-[20px] flex justify-center items-center">
                   <div
-                    className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full hover:bg-[white]   text-white drop-shadow-md flex justify-center items-center cursor-pointer"
+                    className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full text-[#ffb6b5] drop-shadow-md flex justify-center items-center cursor-pointer"
                     onClick={() => {
                       dispatch(addActiveUser(""));
                     }}
@@ -271,10 +271,10 @@ export const UserInfo = () => {
                     )}
                   </div>
                   <div className="w-[calc(100%-160px)] lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                    <span className="text-[16px]  font-[rubik] font-normal text-white drop-shadow-md">
+                    <span className="text-[17px]  font-[rubik] font-normal text-white drop-shadow-md">
                       {chatUserName}
                     </span>
-                    <span className="text-[14px]  font-[rubik] font-light text-[#5d5d5d] drop-shadow-md">
+                    <span className="text-[14px]  font-[rubik] font-light text-[#b1b1b1] drop-shadow-md">
                       +91 {chatUserNumber}
                     </span>
                   </div>
@@ -288,10 +288,10 @@ export const UserInfo = () => {
                   >
                     {/* <MdDelete className="text-[20px] text-[white] hover:text-[#b54848]" /> */}
                     <div className="group flex justify-end items-center">
-                      <div className="hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px] font-[work] font-normal bg-[#505050]">
+                      <div className="hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px] font-[work] font-normal bg-[#292f3f] text-[white]">
                         Delete Chats
                       </div>
-                      <MdDelete className="text-[20px] text-white group-hover:text-[white] drop-shadow-md" />
+                      <MdDelete className="text-[20px] text-[#ffb6b5] drop-shadow-md" />
                       {/* <img
                         src={del}
                         className=" w-[25px] drop-shadow-lg "
@@ -301,8 +301,14 @@ export const UserInfo = () => {
                 </div>
               </div>
               {delConfirmation === true ? (
-                <div className="fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[calc(100%-80px)] lg:h-[calc(100%-170px)] md:h-[calc(100%-170px)]  flex justify-center items-center z-30 bg-[#d9e1e463]   backdrop-blur-sm">
-                  <div className="bg-[white] text-black w-[320px] lg:w-[450px] md:w-[450px] h-[190px] rounded-xl flex flex-col">
+                <div
+                  className="fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[calc(100%-80px)] lg:h-[calc(100%-80px)] md:h-[calc(100%-80px)]  flex justify-center items-center z-30   backdrop-blur-sm"
+                  onClick={() => {
+                    // console.log("clicked");
+                    setDelConfirmation(false);
+                  }}
+                >
+                  <div className="bg-[#292f3f] text-white text-[15px] w-[320px] lg:w-[450px] md:w-[450px] h-[190px] rounded-xl flex flex-col drop-shadow-md">
                     <div className="w-full h-[110px] rounded-xl  flex justify-center items-center px-[30px]">
                       <span className=" font-[rubik] font-light ">
                         ⚠️ Are you sure? you want to delete all chats!
@@ -310,7 +316,7 @@ export const UserInfo = () => {
                     </div>
                     <div className=" h-[80px] w-full flex justify-between items-center px-[30px] rounded-xl">
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-[black] hover:text-[white]  cursor-pointer  font-[rubik] font-light bg-[#fce9ed] hover:bg-[#36515e] rounded-xl"
+                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-[#ffffff]   cursor-pointer  font-[rubik] font-light bg-[#1b202d]  rounded-xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -319,7 +325,7 @@ export const UserInfo = () => {
                         Cancel
                       </button>
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-[black] hover:text-[white]  cursor-pointer  font-[rubik] font-light bg-[#fce9ed] hover:bg-[#36515e] rounded-xl"
+                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-[black]   cursor-pointer  font-[rubik] font-light bg-[#ffb6b5]  rounded-xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -340,12 +346,12 @@ export const UserInfo = () => {
       ) : (
         <>
           <div
-            className="w-full lg:w-[40%] md:w-[40%] h-[100svh] fixed bg-[#d9e1e463]   backdrop-blur-lg drop-shadow-md  text-white z-30 overflow-hidden flex flex-col justify-center items-center px-[10px] right-0 "
+            className="w-full lg:w-[40%] md:w-[40%] h-[100svh] fixed bg-[#1b202d]   backdrop-blur-lg drop-shadow-md  text-white z-30 overflow-hidden flex flex-col justify-center items-center px-[10px] right-0 border-l-[0px] md:border-l-[2px] lg:border-l-[2px] border-[#383e4f]"
             // style={{ transition: ".5s" }}
           >
-            <div className="w-full h-[80px] flex justify-start items-center ">
+            <div className="w-full h-[70px] flex justify-start items-center ">
               <div
-                className="w-[35px] h-[35px] rounded-full hover:bg-white hover:text-black text-black flex justify-center items-center cursor-pointer"
+                className="w-[35px] h-[35px] rounded-full  text-[#ffb6b5] flex justify-center items-center cursor-pointer"
                 onClick={() => {
                   setUserSidebar(!userSidebar);
                 }}
@@ -354,7 +360,7 @@ export const UserInfo = () => {
                 {/* <img src={back} className="w-[25px] drop-shadow-lg"></img> */}
               </div>
             </div>
-            <div className="w-full h-[calc(100%-80px)]  flex flex-col justify-center items-center">
+            <div className="w-full h-[calc(100%-70px)]  flex flex-col justify-center items-center">
               <div className="w-[150px] lg:w-[200px] md:w-[200px] h-[150px] lg:h-[200px] md:h-[200px] rounded-full bg-[#cdd8dd]  drop-shadow-lg">
                 {/* <span>Photo</span> */}
                 {chatUserPhoto === "nophoto" ? (
@@ -370,39 +376,39 @@ export const UserInfo = () => {
                 )}
               </div>
               <div className="flex flex-col justify-center items-center mt-[20px]">
-                <span className="text-[22px] font-[rubik] font-normal text-[#000000] drop-shadow-lg">
+                <span className="text-[20px] font-[rubik] font-normal text-[#ffffff] drop-shadow-lg">
                   {chatUserName}
                 </span>
-                <span className="text-[17px]  font-[rubik] font-light text-[#2d2d2d] drop-shadow-lg">
+                <span className="text-[15px]  font-[rubik] font-light text-[#b1b1b1] drop-shadow-lg">
                   +91 {chatUserNumber}
                 </span>
               </div>
               <div className="mt-[20px] w-full flex justify-center items-start h-[26px] overflow-hidden text-ellipsis">
-                <span className="text-[16px]   font-[rubik] font-extralight text-[#2d2d2d] drop-shadow-lg">
+                <span className="text-[15px]   font-[rubik] font-extralight text-[#b1b1b1] drop-shadow-lg">
                   ~ {chatUserAbout}
                 </span>
               </div>
 
               <div className="w-full flex justify-center items-center mt-[20px] ">
-                <span className="w-[50px] h-[50px] drop-shadow-md rounded-full hover:bg-[white] hover:text-[black] text-[#000000] flex justify-center items-center mx-[10px]">
+                <span className="w-[50px] h-[50px] drop-shadow-md rounded-full hover:bg-[#383e4f] text-[#ffb6b5] flex justify-center items-center mx-[10px]">
                   <MdCall className="text-[30px]" />
                   {/* <img src={call} className="w-[35px] drop-shadow-lg"></img> */}
                 </span>
-                <span className="w-[50px] h-[50px] drop-shadow-md rounded-full hover:bg-[white] hover:text-[black] text-[#000000] flex justify-center items-center mx-[10px]">
+                <span className="w-[50px] h-[50px] drop-shadow-md rounded-full hover:bg-[#383e4f] text-[#ffb6b5] flex justify-center items-center mx-[10px]">
                   <IoMdVideocam className="text-[30px]" />
                   {/* <img
                     src={videocall}
                     className="w-[35px] drop-shadow-lg"
                   ></img> */}
                 </span>
-                <span className="w-[50px] h-[50px] drop-shadow-md rounded-full hover:bg-[white] hover:text-[black] text-[#000000] flex justify-center items-center mx-[10px]">
+                <span className="w-[50px] h-[50px] drop-shadow-md rounded-full hover:bg-[#383e4f] text-[#ffb6b5] flex justify-center items-center mx-[10px]">
                   <RiMessage2Fill className="text-[30px]" />
                   {/* <img src={chat} className="w-[35px] drop-shadow-lg "></img> */}
                 </span>
               </div>
-              <span className=" font-[rubik] font-light text-[16px] w-full flex justify-start items-center mt-[20px] text-[black] px-[10px]">
+              <span className=" font-[rubik] font-light text-[16px] w-full flex justify-start items-center mt-[20px] text-[white] px-[10px]">
                 Media, Links & Docs{" "}
-                <div className="ml-[10px]  w-[20px] h-[20px] flex justify-center items-center text-[13px] font-[rubik] font-light text-white rounded-full bg-[#6346bd]">
+                <div className="ml-[10px]  w-[20px] h-[20px] flex justify-center items-center text-[13px] font-[rubik] font-light text-black rounded-full bg-[#ffb6b5]">
                   {ImageMediaLink.length}{" "}
                 </div>
                 <MdChevronRight className="text-[#a0a0a0] text-[25px] ml-[5px]" />
@@ -417,8 +423,11 @@ export const UserInfo = () => {
                 })}
               </div>
             </div>
+            {/* <div className="w-[calc(100%-40px)] h-[50px] bg-[#ffb6b5] rounded-xl fixed flex justify-center items-center text-black bottom-[20px]">
+              Delete Chats
+            </div> */}
           </div>
-          <div className="w-full px-[10px] pt-[20px] h-[80px]  bg-[#d9e1e4] text-[black]">
+          <div className="w-full px-[10px] pt-[20px] h-[70px]  bg-[#1b202d] text-[black]">
             <div className="w-full h-full pb-[20px] flex justify-center items-center">
               <div
                 className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full  text-black flex justify-center items-center cursor-pointer"
@@ -448,10 +457,10 @@ export const UserInfo = () => {
                 )}
               </div>
               <div className="w-[calc(100%-160px)] lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                <span className="text-[16px]  font-[rubik] font-normal text-[#ffffff]">
+                <span className="text-[17px]  font-[rubik] font-normal text-white drop-shadow-md">
                   {chatUserName}
                 </span>
-                <span className="text-[14px]  font-[rubik] font-light text-[#9fa5a7]">
+                <span className="text-[14px]  font-[rubik] font-light text-[#b1b1b1] drop-shadow-md">
                   +91 {chatUserNumber}
                 </span>
               </div>

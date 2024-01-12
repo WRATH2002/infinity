@@ -114,7 +114,7 @@ const OwnerDetails = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-full h-[70px]  fixed top-0 flex md:hidden lg:hidden bg-[#1d2031] justify-between items-center px-[20px]">
+      <div className="w-full md:w-[400px] lg:w-[400px] h-[70px]  fixed top-0 flex  bg-[#1c1f2f] justify-between items-center px-[20px]">
         <div className="text-[18px] font-[rubik] font-medium text-[#ffffff] flex flex-col justify-center items-start">
           <span>Message's ({totalChats})</span>
           {/* <span className="text-[13px] font-[rubik] font-normal">RECENT</span> */}
@@ -123,8 +123,8 @@ const OwnerDetails = () => {
           <FiSearch className="text-[23px]" />
         </div>
       </div>
-      <div className="w-full h-[70px] top-0 flex md:hidden lg:hidden bg-transparent justify-between items-center px-[20px]"></div>
-      <div className="w-full px-[30px] pt-[20px] h-[50px] mb-[20px] hidden md:flex lg:flex justify-center items-center">
+      <div className="w-full md:w-[400px] lg:w-[400px] h-[70px] top-0 flex  bg-transparent justify-between items-center px-[20px]"></div>
+      {/* <div className="w-full px-[30px] pt-[20px] h-[50px] mb-[20px] hidden md:flex lg:flex justify-center items-center">
         <div className="w-[50px] h-[50px]  rounded-full">
           {profileURL === "nophoto" ? (
             <img
@@ -159,7 +159,6 @@ const OwnerDetails = () => {
             }}
           >
             <RxCross2 className="text-[20px]" />
-            {/* <img src={cross} className="w-[25px]"></img> */}
           </div>
         ) : (
           <div
@@ -169,12 +168,10 @@ const OwnerDetails = () => {
             }}
           >
             <PiDotsThreeOutlineVerticalFill className="text-[20px]" />
-            {/* <img src={three} className="w-[25px]"></img> */}
           </div>
         )}
 
-        {/* <AiTwotoneEdit className="text-white" /> */}
-      </div>
+      </div> */}
       {isMenu === true ? (
         <>
           {isProfileMenu === true ? (

@@ -29,6 +29,7 @@ import { MdContactPage } from "react-icons/md";
 import { PiStickerFill } from "react-icons/pi";
 import { FcImageFile } from "react-icons/fc";
 import { FcDocument } from "react-icons/fc";
+import { MdDownload } from "react-icons/md";
 // import { TiAttachment } from "react-icons/ti";
 // import { TiAttachment } from "react-icons/ti";
 import chat from "../assets/img/chat.png";
@@ -106,7 +107,7 @@ const Messagess = (props) => {
           <div className="w-full  my-[4px] flex text-[14px] justify-start drop-shadow-sm pl-[10px]">
             {props.data.Message.length != 0 ? (
               <>
-                <div className="w-auto bg-[#fce9ed] text-[black] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
+                <div className="w-auto bg-[#383e4f] text-[white] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
                   <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[rubik] font-light">
                     {props?.data?.Message}
                   </pre>
@@ -116,7 +117,7 @@ const Messagess = (props) => {
                 </div>
               </>
             ) : props.data.Image.length != 0 ? (
-              <div className="group w-auto bg-[#19303b] max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[0px] rounded-lg flex text-black flex-wrap justify-end items-center">
+              <div className="group w-auto bg-[#383e4f] max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex text-black flex-wrap justify-end items-center">
                 {/* <a href={props.data.Image} download> */}
                 <img
                   loading="lazy"
@@ -148,10 +149,11 @@ const Messagess = (props) => {
                     });
                   }}
                 >
-                  <img
+                  {/* <img
                     src={download}
                     className="w-[25px]   z-20 drop-shadow-md"
-                  ></img>
+                  ></img> */}
+                  <MdDownload className="text-[25px] text-[#ffb6b5]" />
                 </div>
 
                 {isImageLoaded === true ? (
@@ -186,7 +188,7 @@ const Messagess = (props) => {
               </div>
             ) : (
               <>
-                <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[0px] bg-[#19303b] rounded-lg  flex justify-center items-center">
+                <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[0px] bg-[#383e4f] rounded-lg  flex justify-center items-center">
                   <div className="w-full h-full  rounded-lg  flex justify-start items-center ">
                     <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
                       <img src={doccc} className="w-[40px]"></img>
@@ -204,8 +206,9 @@ const Messagess = (props) => {
                       </span>
                     </div>
                     <div className="w-[40px] h-full flex justify-start items-center">
-                      <div className="w-[30px] h-[30px] rounded-full hover:bg-[#0b0c0b] flex justify-center items-center cursor-pointer">
-                        <img src={download} className="w-[20px]"></img>
+                      <div className="w-[30px] h-[30px] rounded-full hover:bg-[#1b202d] flex justify-center items-center cursor-pointer">
+                        {/* <img src={download} className="w-[20px]"></img> */}
+                        <MdDownload className="text-[25px] text-[#ffb6b5]" />
                       </div>
                     </div>
                   </div>
@@ -218,7 +221,7 @@ const Messagess = (props) => {
         <>
           <div className="w-full  my-[4px] flex text-[14px] justify-end drop-shadow-sm pr-[10px]">
             {props.data.Message.length != 0 ? (
-              <div className="w-auto bg-[#1f3239] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex text-[white] flex-wrap justify-between">
+              <div className="w-auto bg-[#292f3f] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex text-[white] flex-wrap justify-between">
                 <pre className="max-w-[calc(100%)] whitespace-pre-wrap  font-[rubik] font-light">
                   {props?.data?.Message}
                 </pre>
@@ -227,7 +230,7 @@ const Messagess = (props) => {
                 </div>
               </div>
             ) : props.data.Image.length != 0 ? (
-              <div className="group w-auto  max-w-[75%] lg:max-w-[32%] bg-[#1f3239] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex items-center text-[white] flex-wrap justify-center hover:bg-[#1f201f]">
+              <div className="group w-auto  max-w-[75%] lg:max-w-[32%] bg-[#292f3f] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex items-center text-[white] flex-wrap justify-center hover:bg-[#1f201f]">
                 {/* <img
                   loading="lazy"
                   src={props.data.Image}
@@ -282,10 +285,11 @@ const Messagess = (props) => {
                     });
                   }}
                 >
-                  <img
+                  {/* <img
                     src={download}
                     className="w-[25px]  z-20 drop-shadow-md"
-                  ></img>
+                  ></img> */}
+                  <MdDownload className="text-[25px] text-[#ffb6b5]" />
                 </div>
                 {isImageLoaded === true ? (
                   <div className="w-[60px]  right-[10px] bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#bcbcbc] py-[8px] px-[14px] drop-shadow-md  font-[rubik] font-light">
@@ -317,8 +321,8 @@ const Messagess = (props) => {
               </div>
             ) : (
               <>
-                <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[2px] bg-[#1f3239] rounded-lg  flex justify-center items-center drop-shadow-md">
-                  <div className="w-full h-full  rounded-lg bg-[#1f3239] flex justify-start items-center ">
+                <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[2px] bg-[#292f3f] rounded-lg  flex justify-center items-center drop-shadow-md">
+                  <div className="w-full h-full  rounded-lg bg-[#292f3f] flex justify-start items-center ">
                     <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
                       <img src={doccc} className="w-[40px]"></img>
                     </div>
@@ -336,8 +340,9 @@ const Messagess = (props) => {
                     </div>
                     <div className="w-[40px] h-full flex justify-start items-center">
                       <a href={props.data.Document} download>
-                        <div className="w-[30px] h-[30px] rounded-full hover:bg-[#d9e1e4] flex justify-center items-center cursor-pointer">
-                          <img src={download} className="w-[20px]"></img>
+                        <div className="w-[30px] h-[30px] rounded-full hover:bg-[#1b202d] flex justify-center items-center cursor-pointer">
+                          {/* <img src={download} className="w-[20px]"></img> */}
+                          <MdDownload className="text-[25px] text-[#ffb6b5]" />
                         </div>
                       </a>
                     </div>
@@ -381,6 +386,8 @@ export const MessageBody = () => {
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
   const ChatOne = useSelector((store) => store.chat.FlagOneMessage);
   const ChatTwo = useSelector((store) => store.chat.FlagTwoMessage);
+
+  const textAreaRef = useRef(null);
 
   // -------------------------------------------------------------------------- Send Message to Firebase Firestore
 
@@ -776,10 +783,22 @@ export const MessageBody = () => {
 
   // --------------------------------------------------------------------------
 
+  // useEffect(() => {
+  //   if (ActiveChatUser) {
+  //     // textAreaRef.current.style.height = "auto";
+  //     console.log("textAreaRef.current.style.height");
+  //     console.log(textAreaRef.current.style.height);
+  //     // if (textAreaRef.current.scrollHeight <= "300px") {
+  //     textAreaRef.current.style.height =
+  //       textAreaRef.current.scrollHeight + "px";
+  //     // }
+  //   }
+  // }, [Messages]);
+
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-full h-[calc(100%-140px)] overflow-y-scroll bg-[#d9e1e4] z-20 ">
+      <div className="w-full h-[calc(100%-130px)] overflow-y-scroll bg-[#1b202d] z-20 ">
         <div
           ref={listRef}
           className="w-full h-full  flex flex-col   font-[rubik] font-normal"
@@ -798,9 +817,9 @@ export const MessageBody = () => {
                 <img src={ww} className="h-full w-full object-cover"></img>
               </div> */}
               <div className="w-full min-h-[40px]  rounded-lg flex justify-center items-center drop-shadow-sm px-[10px]">
-                <span className="w-full h-full flex justify-center items-center ml-[10px] font-[rubik] font-light text-[14px] text-[black] drop-shadow-md">
-                  <BiSolidLockAlt className="text-[black] mr-[10px]" /> Messages
-                  are end-to-end encrypted.
+                <span className="w-full h-full flex justify-center items-center ml-[10px] font-[rubik] font-light text-[14px] text-[#ffb6b5] drop-shadow-md">
+                  <BiSolidLockAlt className="text-[#ffb6b5] mr-[10px]" />{" "}
+                  Messages are end-to-end encrypted.
                 </span>
               </div>
               {chatMessage?.map((msg) => {
@@ -814,7 +833,7 @@ export const MessageBody = () => {
           )}
         </div>
       </div>
-      <div className="w-full px-[10px] fixed mt-[-435px] drop-shadow-lg">
+      <div className="w-full px-[12px] fixed mt-[-443px] drop-shadow-lg">
         {emoji === true ? (
           <Picker
             // className="w-[100%]"
@@ -832,11 +851,11 @@ export const MessageBody = () => {
       {document === true ? (
         <>
           <div
-            className="w-[208px] px-[10px] fixed mt-[-338px] "
+            className="w-[208px] pl-[12px] fixed mt-[-346px] "
             style={{ transition: ".5s" }}
           >
             <div
-              className="w-[170px] h-[338px] text-[white] bg-[#3d737d] border border-transparent  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[rubik] font-normal text-[14px] flex flex-col justify-between drop-shadow-lg"
+              className="w-[170px] h-[338px] text-[white] bg-[#292f3f] border border-transparent  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[rubik] font-normal text-[14px] flex flex-col justify-between drop-shadow-lg"
               style={{ transition: ".5s" }}
             >
               <div className="w-full flex flex-col items-center">
@@ -845,7 +864,7 @@ export const MessageBody = () => {
                   for="document-file-input"
                   style={{ transition: "2s", transitionDelay: ".2s" }}
                 >
-                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#b8dedf] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
+                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#ffb6b5] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
                     <input
                       id="document-file-input"
                       type="file"
@@ -865,7 +884,7 @@ export const MessageBody = () => {
                   style={{ transition: "2s", transitionDelay: ".4s" }}
                   for="image-file-input"
                 >
-                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#b8dedf] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
+                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#ffb6b5] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
                     <input
                       id="image-file-input"
                       type="file"
@@ -885,7 +904,7 @@ export const MessageBody = () => {
                   style={{ transition: "2s", transitionDelay: ".6s" }}
                   for="video-file-input"
                 >
-                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#b8dedf] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
+                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#ffb6b5] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
                     <input
                       id="video-file-input"
                       type="file"
@@ -905,7 +924,7 @@ export const MessageBody = () => {
                   style={{ transition: "2s", transitionDelay: ".8s" }}
                   for="gif-file-input"
                 >
-                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#b8dedf] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
+                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#ffb6b5] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
                     <input
                       id="gif-file-input"
                       type="file"
@@ -926,7 +945,7 @@ export const MessageBody = () => {
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
                   <div
-                    className="w-full h-full px-[10px] flex items-center  hover:bg-[#b8dedf] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md"
+                    className="w-full h-full px-[10px] flex items-center  hover:bg-[#ffb6b5] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md"
                     onClick={() => {
                       toast("Sticker Sharing not Supported", {
                         icon: "⚠️",
@@ -950,7 +969,7 @@ export const MessageBody = () => {
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
                   <div
-                    className="w-full h-full px-[10px] flex items-center  hover:bg-[#b8dedf] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md"
+                    className="w-full h-full px-[10px] flex items-center  hover:bg-[#ffb6b5] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md"
                     onClick={() => {
                       toast("Contact Sharing not Supported", {
                         icon: "⚠️",
@@ -984,7 +1003,7 @@ export const MessageBody = () => {
                 style={{ transition: "2s", transitionDelay: "1.4s" }}
               >
                 {image ? (
-                  <div className="w-full h-full hover:bg-[#b8dedf]  hover:text-[black] px-[10px]  cursor-pointer rounded-lg ">
+                  <div className="w-full h-full hover:bg-[#ffb6b5]  hover:text-[black] px-[10px]  cursor-pointer rounded-lg ">
                     <button
                       className="w-full h-full opacity cursor-pointer flex justify-between items-center"
                       onClick={() => {
@@ -1042,7 +1061,7 @@ export const MessageBody = () => {
                     </button>
                   </div>
                 ) : video ? (
-                  <div className="w-full h-full hover:bg-[#b8dedf]  hover:text-[black] px-[10px] rounded-lg  cursor-pointer ">
+                  <div className="w-full h-full hover:bg-[#ffb6b5]  hover:text-[black] px-[10px] rounded-lg  cursor-pointer ">
                     <button
                       className="w-full h-full opacity cursor-pointer flex justify-between items-center"
                       onClick={() => {
@@ -1081,7 +1100,7 @@ export const MessageBody = () => {
                     </button>
                   </div>
                 ) : Doc ? (
-                  <div className="w-full h-full hover:bg-[#b8dedf]  hover:text-[black] px-[10px] rounded-lg  cursor-pointer ">
+                  <div className="w-full h-full hover:bg-[#ffb6b5]  hover:text-[black] px-[10px] rounded-lg  cursor-pointer ">
                     <div
                       className="w-full h-full opacity cursor-pointer flex justify-between items-center"
                       onClick={() => {
@@ -1188,7 +1207,7 @@ export const MessageBody = () => {
                       ></img>
                       Send
                       <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[white] text-[black]   flex justify-center items-center">
-                        1
+                        0
                       </span>
                     </div>
                   </div>
@@ -1200,7 +1219,7 @@ export const MessageBody = () => {
       ) : (
         <>
           <div
-            className="w-[0] px-[19px] fixed mt-[0] "
+            className="w-[0] pl-[50px] fixed mt-[0] "
             style={{ transition: ".5s" }}
           >
             <div
@@ -1384,21 +1403,21 @@ export const MessageBody = () => {
         </>
       )}
 
-      <div className="w-full h-[60px] fixed bottom-0 flex flex-col justify-center items-start bg-[#d9e1e4]">
+      <div className="w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] h-[60px] fixed bottom-0 flex flex-col justify-center items-start bg-[#1b202d]">
         {ActiveChatUser.length === 0 ? (
           <></>
         ) : (
-          <div className="w-full h-full flex justify-center items-center ">
+          <div className="w-full h-full flex justify-center items-end  py-[5px] ">
             {emoji === true ? (
               <div
-                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer   rounded-full  z-10 text-[#c5c5c5] drop-shadow-md"
+                className="w-[30px] h-full ml-[8px] flex justify-center items-center cursor-pointer   rounded-full  z-10 text-[#ffffff] drop-shadow-md"
                 onClick={() => setEmoji(!emoji)}
               >
                 <MdEmojiEmotions className="text-[25px]" />
               </div>
             ) : (
               <div
-                className="w-[35px] h-[35px] ml-[8px] flex justify-center items-center cursor-pointer hover:bg-[#21323a] hover:text-[white] rounded-full  z-10 text-[#000000] drop-shadow-md"
+                className="w-[30px] h-full ml-[8px] flex justify-center items-center cursor-pointer  hover:text-[white] rounded-full  z-10 text-[#ffb6b5] drop-shadow-md"
                 onClick={() => {
                   setEmoji(!emoji);
                   setDocument(false);
@@ -1410,7 +1429,7 @@ export const MessageBody = () => {
             {document === true ? (
               <>
                 <div
-                  className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer   rounded-full  z-10 text-[#c5c5c5] drop-shadow-md"
+                  className="w-[30px] h-full flex justify-center items-center cursor-pointer   rounded-full  z-10 text-[#ffffff] drop-shadow-md"
                   onClick={() => {
                     setImage();
                     setVideo();
@@ -1424,7 +1443,7 @@ export const MessageBody = () => {
             ) : (
               <>
                 <div
-                  className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer hover:bg-[#21323a] hover:text-[white] rounded-full  z-10 text-[#000000] drop-shadow-md"
+                  className="w-[30px] h-full flex justify-center items-center cursor-pointer  hover:text-[white] rounded-full  z-10 text-[#ffb6b5] drop-shadow-md"
                   onClick={() => {
                     setImage();
                     setVideo();
@@ -1439,34 +1458,36 @@ export const MessageBody = () => {
             )}
 
             <input
-              type="text"
-              onKeyDown={(e) => {
-                if (e.nativeEvent.key === "Enter") {
-                  if (Messages.length !== 0) {
-                    var temp = formatAMPM(new Date());
-                    storeToReactStore(
-                      Messages,
-                      temp,
-                      imageUrl,
-                      videoUrl,
-                      documentUrl,
-                      DocName,
-                      DocSize
-                    );
-                    setSend(true);
+              // type="text"
+              // onKeyDown={(e) => {
+              //   if (e.nativeEvent.key === "Enter") {
+              //     if (Messages.length !== 0) {
+              //       var temp = formatAMPM(new Date());
+              //       storeToReactStore(
+              //         Messages,
+              //         temp,
+              //         imageUrl,
+              //         videoUrl,
+              //         documentUrl,
+              //         DocName,
+              //         DocSize
+              //       );
+              //       setSend(true);
 
-                    setMessages("");
-                  }
-                }
-              }}
+              //       setMessages("");
+              //     }
+              //   }
+              // }}
               onChange={(e) => setMessages(e.target.value)}
               value={Messages}
+              // ref={textAreaRef}
+              rows="1"
               placeholder="Write Something .."
-              className="input bg-[#000000] w-[calc(100%-135px)] ml-[10px]  text-[white] px-[20px] pr-[50px] h-[40px] outline-none text-[15px] font-[work] font-medium tracking-[.4px] rounded-full  resize-none  drop-shadow-md"
+              className="input bg-[#292F3F] w-[calc(100%-135px)] ml-[10px]  text-[white] px-[20px] pr-[50px]  outline-none text-[15px] font-[work] font-medium tracking-[.4px] rounded-[15px]   h-[50px]  drop-shadow-md"
             ></input>
 
             <button
-              className="ml-[-43px] mr-[8px] z-10 h-[35px]   w-[35px] flex justify-center items-center cursor-pointer text-[black]  hover:bg-[black] rounded-full hover:text-[white]"
+              className="ml-[-43px] mr-[8px] z-10 h-full   w-[35px] flex justify-center items-center cursor-pointer text-[#ffb6b5]  rounded-full hover:text-[white]"
               onClick={() => {
                 if (Messages.length !== 0) {
                   var temp = formatAMPM(new Date());
@@ -1485,12 +1506,12 @@ export const MessageBody = () => {
               }}
             >
               {Messages.length === 0 ? (
-                <BiSolidSend className="text-[20px] text-[#828282]" />
+                <BiSolidSend className="text-[20px] text-[#795857]" />
               ) : (
                 <BiSolidSend className="text-[20px] " />
               )}
             </button>
-            <div className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer rounded-full  hover:bg-[#21323a] hover:text-[white] z-10  ml-[10px] mr-[10px] text-[black]  ">
+            <div className="w-[35px] h-full flex justify-center items-center cursor-pointer rounded-full   hover:text-[white] z-10  ml-[10px] mr-[10px] text-[#ffb6b5]  ">
               <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full  drop-shadow-md ">
                 <BiSolidMicrophone className="text-[25px]  " />
               </div>

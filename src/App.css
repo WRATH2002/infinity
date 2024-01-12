@@ -410,6 +410,7 @@ input::placeholder {
 svg text {
   font-family: "Roboto", sans-serif;
   stroke: white;
+  color: #ffb6b5;
   font-size: 70px;
   /* stroke-width: 2px; */
   animation: textanimation 5s infinite alternate;
@@ -441,7 +442,7 @@ em-emoji-picker {
   --font-family: "Comic Sans MS", "Chalkboard SE", cursive;
   --font-size: 20px;
   --rgb-accent: 52, 151, 169;
-  --rgb-background: 61, 115, 125;
+  --rgb-background: 41, 48, 64;
   --rgb-color: 255, 255, 255;
   --rgb-input: 58, 109, 119;
   /* --shadow: 5px 5px 15px -8px black; */
