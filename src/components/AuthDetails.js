@@ -243,7 +243,7 @@ const AuthDetails = () => {
 
   return (
     <>
-      {!authUser ? (
+      {authUser ? (
         <>
           <Loading />
           {/* <button className="font-bold" onClick={userSignOut}>
