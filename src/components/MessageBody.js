@@ -80,6 +80,7 @@ import vid6 from "../assets/video/video6.mp4";
 import vid8 from "../assets/video/video8.mp4";
 import bb from "../assets/doc/bb.pdf";
 import { MdEmojiEmotions } from "react-icons/md";
+import OutsideClickHandler from "react-outside-click-handler";
 
 const Messagess = (props) => {
   const [url, setUrl] = useState("");
@@ -1428,6 +1429,16 @@ export const MessageBody = () => {
             )}
             {document === true ? (
               <>
+                {/* <OutsideClickHandler
+                  onOutsideClick={() => {
+                    // alert("You clicked outside of this component!!!");
+                    setImage();
+                    setVideo();
+                    // setDocument();
+                    setDocument(!document);
+                    setEmoji(false);
+                  }}
+                > */}
                 <div
                   className="w-[30px] h-full flex justify-center items-center cursor-pointer   rounded-full  z-10 text-[#ffffff] drop-shadow-md"
                   onClick={() => {
@@ -1439,9 +1450,21 @@ export const MessageBody = () => {
                 >
                   <TiAttachment className="text-[25px]" />
                 </div>
+                {/* </OutsideClickHandler> */}
               </>
             ) : (
               <>
+                {/* <OutsideClickHandler
+                  className="w-[30px] h-full flex justify-center items-center"
+                  onOutsideClick={() => {
+                    // alert("You clicked outside of this component!!!");
+                    setImage();
+                    setVideo();
+                    // setDocument();
+                    setDocument(!document);
+                    setEmoji(false);
+                  }}
+                > */}
                 <div
                   className="w-[30px] h-full flex justify-center items-center cursor-pointer  hover:text-[white] rounded-full  z-10 text-[#ffb6b5] drop-shadow-md"
                   onClick={() => {
@@ -1454,6 +1477,7 @@ export const MessageBody = () => {
                 >
                   <TiAttachment className="text-[25px]" />
                 </div>
+                {/* </OutsideClickHandler> */}
               </>
             )}
 

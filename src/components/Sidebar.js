@@ -18,7 +18,7 @@ const Sidebar = () => {
         </div>
       ) : (
         <div
-          className=" w-0 lg:w-[400px] md:w-[400px] h-full bg-[#1B202D]  fixed lg:relative md:relative flex flex-col justify-start items-end z-[8]"
+          className=" w-0 lg:w-[400px] md:w-[400px] h-full bg-[#1B202D]  fixed lg:relative md:relative flex flex-col justify-start items-center z-0"
           // style={{ transition: ".5s" }}
         >
           {/* Sidebar */}

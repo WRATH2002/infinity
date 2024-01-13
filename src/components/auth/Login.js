@@ -12,9 +12,13 @@ import { useDispatch } from "react-redux";
 import { toggleStateMode } from "../../utils/chatSlice";
 import toast, { Toaster } from "react-hot-toast";
 
+import { IoEye } from "react-icons/io5";
+import { IoEyeOff } from "react-icons/io5";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [show, setShow] = useState("false");
 
   const dispatch = useDispatch();
 
@@ -37,16 +41,16 @@ const Login = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-lg h-[70%] bg-[#fce9ed] flex flex-col justify-center items-center">
+      <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-xl h-[70%] bg-[#292f3f] flex flex-col justify-center items-center">
         {/* <span className="in  font-bold text-[40px] mb-[30px]">INFINITY</span> */}
         <div className="w-full flex flex-col ">
-          <span className="text-[32px] text-[black] font-[rubik] font-medium ">
+          <span className="text-[32px] text-[white] font-[rubik] font-medium ">
             Login{" "}
           </span>
-          <span className="text-[14px] font-normal text-[black] font-[rubik] ">
+          <span className="text-[14px] font-normal text-[white] font-[rubik] ">
             new user
             <span
-              className="text-[black] hover:text-[#9aa0a2] cursor-pointer  font-normal"
+              className="text-[#ffb6b5] hover:text-[#fe9c9a] cursor-pointer  font-normal"
               style={{ transition: ".3s" }}
               onClick={() => changeMode()}
             >
@@ -76,19 +80,49 @@ const Login = () => {
           }}
         ></input> */}
         <input
-          className="log outline-none font-[rubik] mt-[40px] bg   w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-[white] bg-[#d9e1e4]"
+          className="log outline-none font-[rubik] mt-[40px] bg   w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-[white] bg-[#1b202d]"
           placeholder="Email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
-        <input
-          className="log outline-none font-[rubik]    w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-[white] bg-[#d9e1e4]"
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
+        {show === true ? (
+          <div className="w-full flex justify-center items-center">
+            <input
+              className="log outline-none font-[rubik]    w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-[white] bg-[#1b202d]"
+              placeholder="Password"
+              type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+            <div
+              className="w-[30px] h-[40px] ml-[-30px] flex justify-center items-center"
+              onClick={() => {
+                setShow(!show);
+              }}
+            >
+              <IoEyeOff className="text-[#ffb6b5]" />
+            </div>
+          </div>
+        ) : (
+          <div className="w-full flex justify-center items-center">
+            <input
+              className="log outline-none font-[rubik]    w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-[white] bg-[#1b202d]"
+              placeholder="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+            <div
+              className="w-[30px] h-[40px] ml-[-30px] flex justify-center items-center"
+              onClick={() => {
+                setShow(!show);
+              }}
+            >
+              <IoEye className="text-[#ffb6b5]" />
+            </div>
+          </div>
+        )}
         {/* <button
           type="submit"
           onClick={signUp}
@@ -97,7 +131,7 @@ const Login = () => {
           Signup
         </button> */}
         <button
-          className="w-full h-[40px] text-[#ffffff] font-[rubik] font-medium outline-none flex justify-center items-center bg-[#09161c] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
+          className="w-full h-[40px] text-[#000000] font-[rubik] font-medium outline-none flex justify-center items-center bg-[#ffb6b5] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signIn}

@@ -6,6 +6,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleStateMode } from "../../utils/chatSlice";
 import toast, { Toaster } from "react-hot-toast";
+
+import { IoEye } from "react-icons/io5";
+import { IoEyeOff } from "react-icons/io5";
 // import { auth } from "../firebase";
 // import { onAuthStateChanged, signOut } from "firebase/auth";
 // import { db } from "../firebase";
@@ -16,6 +19,7 @@ const Signup = () => {
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [show, setShow] = useState("false");
 
   const dispatch = useDispatch();
 
@@ -102,15 +106,15 @@ const Signup = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-lg h-[70%] bg-[#3d737d] flex flex-col justify-center items-center">
+      <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-lg h-[70%] bg-[#292f3f] flex flex-col justify-center items-center">
         <div className="w-full flex flex-col">
           <span className="text-[32px] text-[white] font-[rubik] font-medium">
             Signup{" "}
           </span>
-          <span className="text-[14px] font-normal font-[rubik] text-[black] ">
+          <span className="text-[14px] font-normal font-[rubik] text-[white] ">
             already a user
             <span
-              className="text-[white] hover:text-[#9aa0a2] cursor-pointer font-normal"
+              className="text-[#ffb6b5] hover:text-[#fe9c9a] cursor-pointer font-normal"
               style={{ transition: ".3s" }}
               onClick={() => changeModeTwo()}
             >
@@ -121,14 +125,14 @@ const Signup = () => {
         </div>
         {/* <div>Signup</div> */}
         <input
-          className="input outline-none  mt-[40px]  w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#538f99] log"
+          className="input outline-none  mt-[40px]  w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#1b202d] log"
           placeholder="Name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         ></input>
         <input
-          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#538f99] log"
+          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#1b202d] log"
           placeholder="Phone Number"
           type="tel"
           value={number}
@@ -140,19 +144,50 @@ const Signup = () => {
           }}
         ></input>
         <input
-          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#538f99] log"
+          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#1b202d] log"
           placeholder="Email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
-        <input
-          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#538f99] log"
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
+        {show === true ? (
+          <div className="w-full flex justify-center items-center">
+            <input
+              className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#1b202d] log"
+              placeholder="Password"
+              type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+            <div
+              className="w-[30px] h-[40px] ml-[-30px] flex justify-center items-center"
+              onClick={() => {
+                setShow(!show);
+              }}
+            >
+              <IoEyeOff className="text-[#ffb6b5]" />
+            </div>
+          </div>
+        ) : (
+          <div className="w-full flex justify-center items-center">
+            <input
+              className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#1b202d] log"
+              placeholder="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+            <div
+              className="w-[30px] h-[40px] ml-[-30px] flex justify-center items-center"
+              onClick={() => {
+                setShow(!show);
+              }}
+            >
+              <IoEye className="text-[#ffb6b5]" />
+            </div>
+          </div>
+        )}
+
         {/* <button
           type="submit"
           onClick={signUp}
@@ -161,7 +196,7 @@ const Signup = () => {
           Signup
         </button> */}
         <button
-          className="w-full h-[40px] text-[#ffffff] font-medium font-[rubik] outline-none flex justify-center items-center bg-[#09161c] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
+          className="w-full h-[40px] text-[#000000] font-medium font-[rubik] outline-none flex justify-center items-center bg-[#ffb6b5] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signUp}

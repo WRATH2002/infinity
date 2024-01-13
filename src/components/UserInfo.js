@@ -240,7 +240,7 @@ export const UserInfo = () => {
                 className="w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-0 fixed bg-slate-500 text-white z-30 overflow-hidden"
                 // style={{ transition: ".5s" }}
               ></div>
-              <div className="w-full px-[10px] pt-[20px] h-[70px]  bg-[#1b202d] text-[black]">
+              <div className="w-full px-[10px] pt-[20px] h-[70px]  bg-[#1b202d] text-[black] z-20">
                 <div className="w-full h-full pb-[20px] flex justify-center items-center">
                   <div
                     className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full text-[#ffb6b5] drop-shadow-md flex justify-center items-center cursor-pointer"
@@ -270,11 +270,11 @@ export const UserInfo = () => {
                       ></img>
                     )}
                   </div>
-                  <div className="w-[calc(100%-160px)] lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                    <span className="text-[17px]  font-[rubik] font-normal text-white drop-shadow-md">
+                  <div className="w-[calc(100%-160px)] lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start z-20">
+                    <span className="text-[17px]  font-[rubik] font-normal text-white drop-shadow-md  z-20">
                       {chatUserName}
                     </span>
-                    <span className="text-[14px]  font-[rubik] font-light text-[#b1b1b1] drop-shadow-md">
+                    <span className="text-[14px]  font-[rubik] font-light text-[#b1b1b1] drop-shadow-md  z-20">
                       +91 {chatUserNumber}
                     </span>
                   </div>

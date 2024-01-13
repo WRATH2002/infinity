@@ -23,6 +23,8 @@ import {
   clearAllGroupMembers,
 } from "../utils/chatSlice";
 import {
+  deleteDoc,
+  doc,
   onSnapshot,
   serverTimestamp,
   snapshotEqual,
@@ -64,7 +66,11 @@ import { TiDelete } from "react-icons/ti";
 import { TiDeleteOutline } from "react-icons/ti";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { MdPermContactCalendar } from "react-icons/md";
-
+import { IoChevronDownOutline } from "react-icons/io5";
+import { MdDelete } from "react-icons/md";
+import { signOut } from "firebase/auth";
+import { RiEditFill } from "react-icons/ri";
+import { MdOutlineDone } from "react-icons/md";
 // const Hello = () => {
 //   const [userName, setUserName] = useState("");
 //   const [photoURL, setPhotoURL] = useState("");
@@ -242,286 +248,333 @@ const Friends = (props) => {
     dispatch(addActiveUser(props.data.UserId));
   }
 
+  function deleteChatUser() {
+    const user = firebase.auth().currentUser;
+    console.log(user.uid);
+    console.log(UserUid);
+    // var docRef = doc(db,"")
+    var delRef = db
+      .collection("Chat Record")
+      .doc(user.uid)
+      .collection("Chat Friends")
+      .doc(UserUid)
+      .delete();
+    // deleteDoc(delRef).then(() => {
+    //   console.log("chat deleted");
+    // });
+    // dispatch(addActiveUser(""));
+  }
+
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
       {ActiveChatUser === UserUid && UserUid != "" ? (
         <>
-          <div
-            className="w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center cursor-pointer  bg-[#3d737d]  px-[10px]"
-            onClick={() => {
-              activerChatUser();
-              // dispatch(toggleSendFlag(true));
-            }}
-          >
-            <div className="w-[50px] h-[50px]  rounded-full">
-              {photoURL === "nophoto" ? (
-                <img
-                  src={profile2}
-                  className="w-full h-full rounded-full object-cover "
-                ></img>
-              ) : (
-                <img
-                  src={photoURL}
-                  className="w-full h-full rounded-full object-cover "
-                ></img>
-              )}
-            </div>
-            <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
-              <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-white  font-[rubik] font-normal  ">
-                  {/* {props.data.user} */}
-                  {userName}
-                </span>
-                <span className="w-[70px] h-full text-[13px]  flex justify-end items-center text-white   font-[rubik] font-light">
-                  {/* {props.data.time} */}
-                  {Time}
-                </span>
-              </div>
-              <div className="w-full flex h-[23px] justify-between items-center">
-                {/* {props.data.msg} */}
-
-                {lastMsg === "Image" ? (
-                  <>
-                    {chatFlag === 1 ? (
-                      <>
-                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
-                          you:
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-
-                    <BsFillCameraFill className="mr-[5px] text-[#bcbcbc] " />
-                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
-                      {lastMsg}
-                    </span>
-                  </>
-                ) : lastMsg === "Video" ? (
-                  <>
-                    {chatFlag === 1 ? (
-                      <>
-                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
-                          you:
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-
-                    <TiVideo className="mr-[5px] text-[#bcbcbc] " />
-                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
-                      {lastMsg}
-                    </span>
-                  </>
-                ) : lastMsg === "Document" ? (
-                  <>
-                    {chatFlag === 1 ? (
-                      <>
-                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
-                          you:
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-
-                    <IoMdDocument className="mr-[5px] text-[#bcbcbc] " />
-                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
-                      {docName}
-                    </span>
-                  </>
+          <div className="group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center bg-[#292f3f]  cursor-pointer   border-b-[1px] border-[#35384a]   ">
+            <div
+              className="group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center cursor-pointer  "
+              onClick={() => {
+                activerChatUser();
+                // dispatch(toggleSendFlag(true));
+              }}
+            >
+              <div className="w-[50px] h-[50px]  rounded-full">
+                {photoURL === "nophoto" ? (
+                  <img
+                    src={profile2}
+                    className="w-full h-full rounded-full object-cover "
+                  ></img>
                 ) : (
-                  <>
-                    {chatFlag === 1 ? (
-                      <>
-                        <span className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
-                          you:
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <span className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
-                      {lastMsg}
-                    </span>
-                  </>
+                  <img
+                    src={photoURL}
+                    className="w-full h-full rounded-full object-cover "
+                  ></img>
                 )}
-                {/* </span> */}
-                <span className="w-[70px] text-[15px] h-full font-normal  text-[white] flex justify-end items-center">
-                  {unreadMessages === 0 ? (
-                    <></>
+              </div>
+              <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
+                <div className="w-full font-semibold flex h-[23px]">
+                  <span className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-white  font-[rubik] font-normal  ">
+                    {/* {props.data.user} */}
+                    {userName}
+                  </span>
+                  <span
+                    className="w-[70px] group-hover:mr-[25px] h-full text-[13px]  flex justify-end items-center text-white   font-[rubik] font-light"
+                    onClick={() => {
+                      deleteChatUser();
+                    }}
+                  >
+                    {/* {props.data.time} */}
+                    {Time}
+                  </span>
+                </div>
+                <div className="w-full flex h-[23px] justify-between items-center">
+                  {/* {props.data.msg} */}
+
+                  {lastMsg === "Image" ? (
+                    <>
+                      {chatFlag === 1 ? (
+                        <>
+                          <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
+                            you:
+                          </span>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+
+                      <BsFillCameraFill className="mr-[5px] text-[#bcbcbc] " />
+                      <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
+                        {lastMsg}
+                      </span>
+                    </>
+                  ) : lastMsg === "Video" ? (
+                    <>
+                      {chatFlag === 1 ? (
+                        <>
+                          <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
+                            you:
+                          </span>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+
+                      <TiVideo className="mr-[5px] text-[#bcbcbc] " />
+                      <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
+                        {lastMsg}
+                      </span>
+                    </>
+                  ) : lastMsg === "Document" ? (
+                    <>
+                      {chatFlag === 1 ? (
+                        <>
+                          <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
+                            you:
+                          </span>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+
+                      <IoMdDocument className="mr-[5px] text-[#bcbcbc] " />
+                      <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
+                        {docName}
+                      </span>
+                    </>
                   ) : (
                     <>
-                      <span className="w-[18px] h-[18px] text-[11px] flex justify-center items-center rounded-full bg-[#000000] text-[#ffffff]">
-                        {unreadMessages}
+                      {chatFlag === 1 ? (
+                        <>
+                          <span className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
+                            you:
+                          </span>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                      <span className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
+                        {lastMsg}
                       </span>
                     </>
                   )}
-                </span>
+                  {/* </span> */}
+                  <span className="w-[70px] text-[15px] h-full font-normal  text-[white] flex justify-end items-center">
+                    {unreadMessages === 0 ? (
+                      <></>
+                    ) : (
+                      <>
+                        <span className="w-[18px] h-[18px] text-[11px] flex justify-center items-center rounded-full bg-[#000000] text-[#ffffff]">
+                          {unreadMessages}
+                        </span>
+                      </>
+                    )}
+                  </span>
+                </div>
+                {/* <span className="text-[15px]">Hello! How Are you</span> */}
               </div>
-              {/* <span className="text-[15px]">Hello! How Are you</span> */}
             </div>
+            <span
+              className="group-hover:flex hidden justify-center items-start pt-[10px] md:pt-[5px] lg:pt-[5px] h-full w-[20px] ml-[-20px] z-40"
+              onClick={() => {
+                deleteChatUser();
+                console.log("clickeddddddd");
+              }}
+            >
+              <MdDelete className="text-[20px] text-[#ffb6b5]" />
+            </span>
           </div>
         </>
       ) : (
-        <div className="px-[10px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center bg-transparent  cursor-pointer   hover:bg-[#1f3239] hover:border-t-transparent  ">
-          <div
-            className="  w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px] border-[#35384a] flex justify-center items-center bg-transparent  cursor-pointer     "
-            onClick={() => activerChatUser()}
-          >
-            <div className="w-[50px] h-[50px]  rounded-full">
-              {photoURL === "nophoto" ? (
-                <img
-                  src={profile2}
-                  className="w-full h-full rounded-full object-cover "
-                ></img>
-              ) : (
-                <img
-                  src={photoURL}
-                  className="w-full h-full rounded-full object-cover "
-                ></img>
-              )}
-            </div>
-            <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
-              <div className="w-full font-semibold flex h-[23px]">
-                <span
-                  className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]    font-[rubik] font-normal group-hover:text-[white] "
-                  // style={{ transition: ".9s" }}
-                >
-                  {/* {props.data.user} */}
-                  {userName}
-                </span>
-                <span
-                  className="w-[70px] h-full text-[13px] flex justify-end items-center text-[#8e9396]   font-[rubik] font-light"
-                  // style={{ transition: ".9s" }}
-                >
-                  {/* {props.data.time} */}
-                  {Time}
-                </span>
-              </div>
-              <div className="w-full  flex h-[23px] justify-between items-center">
-                {lastMsg === "Image" ? (
-                  <>
-                    {chatFlag === 1 ? (
-                      <>
-                        <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]   group-hover:text-[#8e9396]  font-[rubik] font-light"
-                          // style={{ transition: ".5s" }}
-                        >
-                          you:
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <BsFillCameraFill
-                      className="mr-[5px] text-[#8e9396] group-hover:text-[#8e9396] "
-                      // style={{ transition: ".5s" }}
-                    />
-                    <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
-                      // style={{ transition: ".5s" }}
-                    >
-                      {lastMsg}
-                    </span>
-                  </>
-                ) : lastMsg === "Video" ? (
-                  <>
-                    {chatFlag === 1 ? (
-                      <>
-                        <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
-                          // style={{ transition: ".5s" }}
-                        >
-                          you:
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <TiVideo
-                      className="mr-[5px] text-[#8e9396] group-hover:text-[#8e9396] "
-                      // style={{ transition: ".5s" }}
-                    />
-                    <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
-                      // style={{ transition: ".5s" }}
-                    >
-                      {lastMsg}
-                    </span>
-                  </>
-                ) : lastMsg === "Document" ? (
-                  <>
-                    {chatFlag === 1 ? (
-                      <>
-                        <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
-                          // style={{ transition: ".5s" }}
-                        >
-                          you:
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <IoMdDocument
-                      className="mr-[5px] text-[#8e9396] group-hover:text-[#8e9396] "
-                      // style={{ transition: ".5s" }}
-                    />
-                    <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
-                      // style={{ transition: ".5s" }}
-                    >
-                      {docName}
-                    </span>
-                  </>
+        <>
+          <div className="group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center bg-transparent  cursor-pointer    z-10 ">
+            <div
+              className=" group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px] border-[#35384a] flex justify-center items-center bg-transparent  cursor-pointer   z-10  "
+              onClick={() => activerChatUser()}
+            >
+              <div className="w-[50px] h-[50px]  rounded-full">
+                {photoURL === "nophoto" ? (
+                  <img
+                    src={profile2}
+                    className="w-full h-full rounded-full object-cover "
+                  ></img>
                 ) : (
-                  <>
-                    {chatFlag === 1 ? (
-                      <>
-                        <span
-                          className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
-                          // style={{ transition: ".5s" }}
-                        >
-                          you:
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
-                      // style={{ transition: ".5s" }}
-                    >
-                      {!lastMsg ? (
-                        <>Messages are end-to-end encrypted.</>
-                      ) : (
-                        <>{lastMsg}</>
-                      )}
-                    </span>
-                  </>
+                  <img
+                    src={photoURL}
+                    className="w-full h-full rounded-full object-cover "
+                  ></img>
                 )}
-                {/* <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
-                  {lastMsg}
-                </span> */}
-                <span className="w-[70px] text-[15px] h-full font-normal  flex justify-end items-center">
-                  {unreadMessages === 0 ? (
-                    <></>
+              </div>
+              <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
+                <div className="w-full font-semibold flex h-[23px]">
+                  <span
+                    className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]    font-[rubik] font-normal group-hover:text-[white] "
+                    // style={{ transition: ".9s" }}
+                  >
+                    {/* {props.data.user} */}
+                    {userName}
+                  </span>
+                  <span
+                    className="w-[70px] h-full group-hover:mr-[25px] text-[13px] flex justify-end items-center text-[#8e9396] font-[rubik] font-light z-50"
+
+                    // style={{ transition: ".9s" }}
+                  >
+                    {/* {props.data.time} */}
+                    {Time}
+                  </span>
+                </div>
+                <div className="w-full  flex h-[23px] justify-between items-center">
+                  {lastMsg === "Image" ? (
+                    <>
+                      {chatFlag === 1 ? (
+                        <>
+                          <span
+                            className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]   group-hover:text-[#8e9396]  font-[rubik] font-light"
+                            // style={{ transition: ".5s" }}
+                          >
+                            you:
+                          </span>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                      <BsFillCameraFill
+                        className="mr-[5px] text-[#8e9396] group-hover:text-[#8e9396] "
+                        // style={{ transition: ".5s" }}
+                      />
+                      <span
+                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                        // style={{ transition: ".5s" }}
+                      >
+                        {lastMsg}
+                      </span>
+                    </>
+                  ) : lastMsg === "Video" ? (
+                    <>
+                      {chatFlag === 1 ? (
+                        <>
+                          <span
+                            className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
+                            // style={{ transition: ".5s" }}
+                          >
+                            you:
+                          </span>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                      <TiVideo
+                        className="mr-[5px] text-[#8e9396] group-hover:text-[#8e9396] "
+                        // style={{ transition: ".5s" }}
+                      />
+                      <span
+                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                        // style={{ transition: ".5s" }}
+                      >
+                        {lastMsg}
+                      </span>
+                    </>
+                  ) : lastMsg === "Document" ? (
+                    <>
+                      {chatFlag === 1 ? (
+                        <>
+                          <span
+                            className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
+                            // style={{ transition: ".5s" }}
+                          >
+                            you:
+                          </span>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                      <IoMdDocument
+                        className="mr-[5px] text-[#8e9396] group-hover:text-[#8e9396] "
+                        // style={{ transition: ".5s" }}
+                      />
+                      <span
+                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                        // style={{ transition: ".5s" }}
+                      >
+                        {docName}
+                      </span>
+                    </>
                   ) : (
                     <>
-                      <span className="w-[20px] h-[20px] text-[11px] flex justify-center items-center rounded-full bg-[#ffb6b5] text-[#000000]">
-                        {unreadMessages}
+                      {chatFlag === 1 ? (
+                        <>
+                          <span
+                            className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
+                            // style={{ transition: ".5s" }}
+                          >
+                            you:
+                          </span>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                      <span
+                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                        // style={{ transition: ".5s" }}
+                      >
+                        {!lastMsg ? (
+                          <>Messages are end-to-end encrypted.</>
+                        ) : (
+                          <>{lastMsg}</>
+                        )}
                       </span>
                     </>
                   )}
-                </span>
+                  {/* <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
+                  {lastMsg}
+                </span> */}
+                  <span className="w-[70px] text-[15px] h-full font-normal  flex justify-end items-center">
+                    {unreadMessages === 0 ? (
+                      <></>
+                    ) : (
+                      <>
+                        <span className="w-[20px] h-[20px] text-[11px] flex justify-center items-center rounded-full bg-[#ffb6b5] text-[#000000]">
+                          {unreadMessages}
+                        </span>
+                      </>
+                    )}
+                  </span>
+                </div>
+                {/* <span className="text-[15px]">Hello! How Are you</span> */}
               </div>
-              {/* <span className="text-[15px]">Hello! How Are you</span> */}
             </div>
+            <span
+              className="group-hover:flex hidden justify-center items-start pt-[10px] md:pt-[5px] lg:pt-[5px] h-full w-[20px] ml-[-20px] z-40"
+              onClick={() => {
+                deleteChatUser();
+                console.log("clickeddddddd");
+              }}
+            >
+              <MdDelete className="text-[20px] text-[#ffb6b5]" />
+            </span>
           </div>
-        </div>
+
+          {/* <div className="w-full h-[100svh] backdrop-blur-md fixed"></div> */}
+        </>
       )}
     </>
   );
@@ -598,9 +651,9 @@ const SearchFriends = (props) => {
 
   return (
     <>
-      <div className="bor group w-[100%] h-[75px] px-[10px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent ">
+      <div className=" group w-[100%] h-[85px] px-[10px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent ">
         <div
-          className="borrrr w-[100%] h-[75px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent   "
+          className="border-b-[1px] border-[#35384a] w-[100%] h-[85px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent   "
           onClick={() => {
             activerChatUser();
             addToFriendList();
@@ -627,7 +680,7 @@ const SearchFriends = (props) => {
           <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
             <div className="w-full font-semibold flex h-[23px]">
               <span
-                className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]   drop-shadow-sm  font-[rubik] font-normal"
+                className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]   drop-shadow-sm  font-[rubik] font-normal"
                 // style={{ transition: ".9s" }}
               >
                 {/* {props.data.user} */}
@@ -640,7 +693,7 @@ const SearchFriends = (props) => {
             </div>
             <div className="w-full flex h-[23px]">
               <span
-                className="w-[calc(100%-70px)] text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] drop-shadow-sm  font-[rubik] font-light"
+                className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] drop-shadow-sm  font-[rubik] font-light"
                 // style={{ transition: ".9s" }}
               >
                 {/* {props.data.msg} */}
@@ -724,6 +777,8 @@ const UserList = () => {
   const [statusImage, setStatusImage] = useState();
   const [statusTextModal, setStatusTextModal] = useState(false);
   const [statusImageUrl, setStatusImageUrl] = useState("");
+  const [nameChangeFlag, setNameChangeFlag] = useState(false);
+  const [aboutChangeFlag, setAboutChangeFlag] = useState(false);
   // addFriendList;
   console.log("UserList");
   console.log(UserList);
@@ -741,8 +796,8 @@ const UserList = () => {
     onSnapshot(userDoc, (snapshot) => {
       // console.log("snapshot.docssssssssssssss");
       // console.log(snapshot.data());
-      // setOwnerName(snapshot?.data()?.Name);
-      // setOwnerInfo(snapshot?.data()?.Info);
+      setOwnerName(snapshot?.data()?.Name);
+      setOwnerInfo(snapshot?.data()?.Info);
       setIsStatus(snapshot?.data()?.Status);
       setStatusImageUrl(snapshot?.data()?.Status);
       setStatusCount(snapshot?.data()?.Status.length);
@@ -995,11 +1050,28 @@ const UserList = () => {
     });
   }
 
+  const userSignOut = () => {
+    signOut(auth)
+      .then(() => console.log("Signed Out Successfully"))
+      .catch((error) => console.log(error));
+  };
+
+  function updateUserInfo() {
+    const user = firebase.auth().currentUser;
+    db.collection("Chat Record").doc(user.uid).update({ Info: ownerInfo });
+    toast.success("Name Changed");
+  }
+  function updateUserName() {
+    const user = firebase.auth().currentUser;
+    db.collection("Chat Record").doc(user.uid).update({ Name: ownerName });
+    toast.success("Info Changed");
+  }
+
   // function set
 
   return (
     <>
-      <div className="w-[calc(100%-20px)]  h-[calc(100%-140px)] flex flex-col items-end  pt-[0px] drop-shadow-md overflow-y-scroll">
+      <div className="w-[calc(100%-20px)] md:w-full lg:w-full  h-[calc(100%-140px)] flex flex-col items-end  pt-[0px] drop-shadow-md overflow-y-scroll">
         {/* yserlist */}
 
         {/* <div className="w-full min-h-[40px] hidden md:flex lg:flex font-semibold text-[white] justify-evenly items-center font-[work] text-[15px] overflow-hidden">
@@ -1152,10 +1224,10 @@ const UserList = () => {
                       // setIsSearchBar(!isSearchBar);
                     }}
                     // placeholder="Search Friends"
-                    className="w-[0] h-[40px] opacity-0 text-[black] bg-[#1d2031] font-[work] font-semibold border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-full"
+                    className="w-[0] h-[50px] opacity-0 text-[black] bg-[#292f3f] font-[work] font-semibold border-none  z-0 outline-none  text-[14px]  rounded-full"
                   ></input>
                   <div
-                    className="w-[40px] h-[40px] ml-[-40px]  bg-[#1d2031] rounded-full flex justify-center items-center z-5 drop-shadow-md  text-white cursor-pointer z-[100]"
+                    className="w-[50px] h-[50px] ml-[-40px]  bg-[#292f3f] rounded-full flex justify-center items-center z-5  text-white cursor-pointer z-[100]"
                     onClick={() => {
                       // if (searchUser.length !== 0) {
                       //   searchUserFriend();
@@ -1165,7 +1237,7 @@ const UserList = () => {
                     }}
                   >
                     <div className="w-[35px] h-[35px] rounded-full flex justify-center items-center  z-[100]">
-                      <RiSearch2Line className="text-[20px]  drop-shadow-md z-[100]" />
+                      <RiSearch2Line className="text-[20px]  z-[100] text-[#ffb6b5]" />
                     </div>
                   </div>
                 </div>
@@ -1190,10 +1262,10 @@ const UserList = () => {
                       // setIsSearchBar(!isSearchBar);
                     }}
                     placeholder="Search Friends"
-                    className=" w-full h-[40px] opacity-100  text-[black] bg-[#1d2031] font-[rubik] font-normal text-[14px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px]  drop-shadow-md rounded-full "
+                    className="input w-full h-[50px] opacity-100  text-[white] bg-[#292f3f] font-[work] font-normal text-[15px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px]   rounded-full "
                   ></input>
                   <div
-                    className="w-[35px] h-[35px] ml-[-35px]  rounded-full flex justify-center items-center z-5 drop-shadow-md  text-white cursor-pointer z-[100]"
+                    className="w-[50px] h-[50px] ml-[-50px]  rounded-full flex justify-center items-center z-5   text-white cursor-pointer z-[100]"
                     onClick={() => {
                       // if (searchUser.length !== 0) {
                       //   searchUserFriend();
@@ -1203,8 +1275,8 @@ const UserList = () => {
                       setIsSearchBar(false);
                     }}
                   >
-                    <div className="w-[35px] h-[35px] rounded-full flex justify-center items-center z-[100]">
-                      <FaPlus className="text-[20px] rotate-45 drop-shadow-md z-[100]" />
+                    <div className="w-[50px] h-[50px] rounded-full flex justify-center items-center z-[100]">
+                      <FaPlus className="text-[20px] rotate-45  z-[100] text-[#ffb6b5]" />
                     </div>
                   </div>
                 </div>
@@ -1224,10 +1296,10 @@ const UserList = () => {
             </div>
           </>
         ) : section === "Chat" ? (
-          <div className="borr w-full lg:w-full md:w-full h-[(100%-110px)] ">
+          <div className="w-full lg:w-full md:w-full h-[(100%-110px)] ">
             {UserList.length === 0 ? (
               <>
-                <div className=" group w-full h-[70px] py-[10px] flex justify-center items-center cursor-pointer font-[work]   px-[10px]  text-[white] ">
+                <div className=" group w-full h-[70px] py-[10px] flex justify-center items-center cursor-pointer font-[work]   px-[10px]  text-[#ffb6b5] ">
                   <span>No Friends Yet</span>
                 </div>
               </>
@@ -1739,67 +1811,169 @@ const UserList = () => {
                   </label>
                 </div>
                 <div className="mt-[50px] w-[250px] flex justify-center items-center">
-                  <input
-                    disabled
-                    style={{ transition: ".5s" }}
-                    // value={searchUser}
-                    // onKeyDown={(e) => {
-                    //   if (
-                    //     e.nativeEvent.key === "Enter" &&
-                    //     searchUser.length !== 0
-                    //   ) {
-                    //     searchUserFriend();
-                    //     setSearchFlag(true);
-                    //   }
-                    // }}
-                    // onChange={(e) => setSearchUser(e.target.value)}
-                    // onClick={() => {
-                    //   // setIsSearchBar(!isSearchBar);
-                    // }}
-                    placeholder="Name"
-                    className="w-[calc(100%-40px)] h-[40px] text-[black] px-[20px] bg-[#1d2031] font-[work] font-semibold border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-full"
-                  ></input>
+                  {nameChangeFlag === true ? (
+                    <>
+                      <input
+                        style={{ transition: ".5s" }}
+                        value={ownerName}
+                        // onKeyDown={(e) => {
+                        //   if (
+                        //     e.nativeEvent.key === "Enter" &&
+                        //     searchUser.length !== 0
+                        //   ) {
+                        //     searchUserFriend();
+                        //     setSearchFlag(true);
+                        //   }
+                        // }}
+                        onChange={(e) => setOwnerName(e.target.value)}
+                        // onClick={() => {
+                        //   // setIsSearchBar(!isSearchBar);
+                        // }}
+                        placeholder="Name"
+                        className="w-[calc(100%-40px)] h-[50px] text-[white] font-normal px-[20px] bg-[#292f3f] input tracking-[.4px] font-[work]  border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-xl pr-[50px]"
+                      ></input>
+                      <span
+                        className="w-[20px] h-[30px] flex justify-center items-center ml-[-45px]  z-20"
+                        onClick={() => {
+                          setNameChangeFlag(false);
+                        }}
+                      >
+                        <RxCross2 className="text-[18px] text-[#ffb6b5]" />
+                      </span>
+                      <span
+                        className="w-[20px] h-[30px] flex justify-center items-center mr-[5px]  z-20"
+                        onClick={() => {
+                          setNameChangeFlag(false);
+                          updateUserName();
+                        }}
+                      >
+                        <MdOutlineDone className="text-[18px] text-[#ffb6b5]" />
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        disabled
+                        style={{ transition: ".5s" }}
+                        value={ownerName}
+                        // onKeyDown={(e) => {
+                        //   if (
+                        //     e.nativeEvent.key === "Enter" &&
+                        //     searchUser.length !== 0
+                        //   ) {
+                        //     searchUserFriend();
+                        //     setSearchFlag(true);
+                        //   }
+                        // }}
+                        onChange={(e) => setOwnerName(e.target.value)}
+                        // onClick={() => {
+                        //   // setIsSearchBar(!isSearchBar);
+                        // }}
+                        placeholder="Name"
+                        className="w-[calc(100%-40px)] h-[50px] text-[#bababa] font-normal px-[20px] bg-[#292f3f] input tracking-[.4px] font-[work]  border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-xl pr-[30px]"
+                      ></input>
+                      <span
+                        className="w-[20px] h-[30px] flex justify-center items-center ml-[-25px] mr-[5px] z-20"
+                        onClick={() => {
+                          setNameChangeFlag(true);
+                        }}
+                      >
+                        <RiEditFill className="text-[18px] text-[#ffb6b5]" />
+                      </span>
+                    </>
+                  )}
                 </div>
                 <div className="mt-[10px] w-[250px] flex justify-center items-center">
-                  <input
-                    disabled
-                    style={{ transition: ".5s" }}
-                    // value={searchUser}
-                    // onKeyDown={(e) => {
-                    //   if (
-                    //     e.nativeEvent.key === "Enter" &&
-                    //     searchUser.length !== 0
-                    //   ) {
-                    //     searchUserFriend();
-                    //     setSearchFlag(true);
-                    //   }
-                    // }}
-                    // onChange={(e) => setSearchUser(e.target.value)}
-                    // onClick={() => {
-                    //   // setIsSearchBar(!isSearchBar);
-                    // }}
-                    placeholder="Name"
-                    className="w-[calc(100%-40px)] h-[40px] text-[black] px-[20px] bg-[#1d2031] font-[work] font-semibold border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-full"
-                  ></input>
+                  {aboutChangeFlag === true ? (
+                    <>
+                      <input
+                        style={{ transition: ".5s" }}
+                        value={ownerInfo}
+                        // onKeyDown={(e) => {
+                        //   if (
+                        //     e.nativeEvent.key === "Enter" &&
+                        //     searchUser.length !== 0
+                        //   ) {
+                        //     searchUserFriend();
+                        //     setSearchFlag(true);
+                        //   }
+                        // }}
+                        onChange={(e) => setOwnerInfo(e.target.value)}
+                        placeholder="About"
+                        className="w-[calc(100%-40px)] h-[50px] text-[white] px-[20px] bg-[#292f3f] input tracking-[.4px] font-[work] font-normal border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-xl pr-[50px]"
+                      ></input>
+                      <span
+                        className="w-[20px] h-[30px] flex justify-center items-center ml-[-45px] z-20"
+                        onClick={() => {
+                          setAboutChangeFlag(false);
+                        }}
+                      >
+                        <RxCross2 className="text-[18px] text-[#ffb6b5]" />
+                      </span>
+                      <span
+                        className="w-[20px] h-[30px] flex justify-center items-center mr-[5px] z-20"
+                        onClick={() => {
+                          setAboutChangeFlag(false);
+                          updateUserInfo();
+                        }}
+                      >
+                        <MdOutlineDone className="text-[18px] text-[#ffb6b5]" />
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        disabled
+                        style={{ transition: ".5s" }}
+                        value={ownerInfo}
+                        // onKeyDown={(e) => {
+                        //   if (
+                        //     e.nativeEvent.key === "Enter" &&
+                        //     searchUser.length !== 0
+                        //   ) {
+                        //     searchUserFriend();
+                        //     setSearchFlag(true);
+                        //   }
+                        // }}
+                        onChange={(e) => setOwnerInfo(e.target.value)}
+                        placeholder="About"
+                        className="w-[calc(100%-40px)] h-[50px] text-[#bababa] px-[20px] bg-[#292f3f] input tracking-[.4px] font-[work] font-normal border-none  z-0 outline-none  text-[14px] drop-shadow-md rounded-xl pr-[30px]"
+                      ></input>
+
+                      <span
+                        className="w-[20px] h-[30px] flex justify-center items-center ml-[-25px] mr-[5px] z-20"
+                        onClick={() => {
+                          setAboutChangeFlag(true);
+                        }}
+                      >
+                        <RiEditFill className="text-[18px] text-[#ffb6b5]" />
+                      </span>
+                    </>
+                  )}
                 </div>
-                <div className=" h-[190px] mt-[30px] w-full flex flex-col justify-between items-center ">
-                  <div className="w-full  px-[10px] h-[190px] flex flex-col justify-evenly items-center">
-                    <div className="w-[200px] h-[40px] rounded-full bg-[#1d2031] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[14px]">
-                      <MdPermContactCalendar className="mr-[10px] text-[20px] text-[orange]" />{" "}
+                <div className=" h-[230px]  mt-[50px] w-[250px] flex flex-col justify-between items-center ">
+                  <div className="w-full   h-[230px] flex flex-col justify-evenly items-center">
+                    <div className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[13px] cursor-pointer">
+                      <MdPermContactCalendar className="mr-[10px] text-[20px] text-[#ce9835]" />{" "}
                       Change Number
                     </div>
-                    <div className="w-[200px] h-[40px] rounded-full bg-[#1d2031] mt-[10px] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[14px]">
+                    <div className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] mt-[10px] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[13px] cursor-pointer">
                       <MdOutlinePassword className="mr-[10px] text-[20px] text-[gray]" />{" "}
                       Change Password
                     </div>
                     {/* </div> */}
                     {/* <div className="w-full px-[10px] h-[40px] mt-[10px] flex justify-evenly items-center"> */}
-                    <div className="w-[200px] h-[40px] rounded-full bg-[#1d2031] mt-[10px] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[14px]">
-                      <TiDelete className="mr-[10px] text-[20px] text-[red]" />{" "}
+                    <div className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] mt-[10px] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[13px] cursor-pointer">
+                      <TiDelete className="mr-[10px] text-[25px] text-[#bc3232]" />{" "}
                       Delete Account
                     </div>
-                    <div className="w-[200px] h-[40px] rounded-full bg-[#1d2031] mt-[10px] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[14px]">
-                      <IoTrailSignOutline className="mr-[10px] text-[20px] text-[#3ef23e]" />{" "}
+                    <div
+                      className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#ffb6b5] mt-[10px] flex justify-center items-center text-black font-[rubik] font-light drop-shadow-md text-[13px] cursor-pointer"
+                      onClick={() => {
+                        userSignOut();
+                      }}
+                    >
+                      <IoTrailSignOutline className="mr-[10px] text-[20px] text-[black]" />{" "}
                       Log Out
                     </div>
                   </div>
@@ -1838,7 +2012,7 @@ const UserList = () => {
               />
             </div>
             <div
-              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[white]"
+              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[black]"
               style={{ transitionDelay: ".25s" }}
             >
               <BsFillPersonPlusFill
@@ -1969,7 +2143,7 @@ const UserList = () => {
               />
             </div>
             <div
-              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[white]"
+              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[black]"
               style={{ transitionDelay: ".25s" }}
             >
               <TiGroup
@@ -2100,7 +2274,7 @@ const UserList = () => {
               />
             </div>
             <div
-              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[white]"
+              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[black]"
               style={{ transitionDelay: ".25s" }}
             >
               <PiChatCircleTextFill
@@ -2235,7 +2409,7 @@ const UserList = () => {
             {/*  */}
 
             <div
-              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[white]"
+              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[black]"
               style={{ transitionDelay: ".25s" }}
             >
               <TbPlaystationCircle
@@ -2365,7 +2539,7 @@ const UserList = () => {
               />
             </div>
             <div
-              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[white]"
+              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[black]"
               style={{ transitionDelay: ".25s" }}
             >
               <MdSettings

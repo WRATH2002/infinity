@@ -114,13 +114,13 @@ const OwnerDetails = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-full md:w-[400px] lg:w-[400px] h-[70px]  fixed top-0 flex  bg-[#1c1f2f] justify-between items-center px-[20px]">
-        <div className="text-[18px] font-[rubik] font-medium text-[#ffffff] flex flex-col justify-center items-start">
+      <div className="w-full md:w-[400px] lg:w-[400px] h-[70px]  fixed top-0 flex  bg-[#1c1f2f] justify-between items-center px-[20px] overflow-hidden">
+        <div className="text-[18px] w-[90%] font-[rubik] font-medium text-[#ffffff] flex flex-col justify-center items-start">
           <span>Message's ({totalChats})</span>
           {/* <span className="text-[13px] font-[rubik] font-normal">RECENT</span> */}
         </div>
-        <div className="w-[40px] h-[40px] text-[#ffffff] rounded-full flex justify-end items-center ">
-          <FiSearch className="text-[23px]" />
+        <div className="w-[10%] h-[40px] text-[#ffffff] rounded-full flex justify-end items-center overflow-hidden">
+          {/* <FiSearch className="text-[23px]" /> */}
         </div>
       </div>
       <div className="w-full md:w-[400px] lg:w-[400px] h-[70px] top-0 flex  bg-transparent justify-between items-center px-[20px]"></div>

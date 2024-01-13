@@ -252,7 +252,7 @@ const AuthDetails = () => {
         </>
       ) : (
         <>
-          <div className="w-full h-[100dvh] flex flex-col justify-center items-center bg-[#d9e1e4]">
+          <div className="w-full h-[100dvh] flex flex-col justify-center items-center bg-[#1b202d]">
             {mode === 1 ? <Login /> : <Signup />}
           </div>
         </>
