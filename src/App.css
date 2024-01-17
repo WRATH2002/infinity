@@ -370,7 +370,7 @@ input::placeholder {
   border-radius: 50px;
   position: relative;
 
-  background: rgba(255, 255, 255, 0.15);
+  background: #292f3f;
   overflow: hidden;
 }
 .loader::after {
@@ -380,7 +380,7 @@ input::placeholder {
 
   height: 3px;
   border-radius: 50px;
-  background: #b8dedf;
+  background: #ffb6b5;
   position: absolute;
   top: 0;
   left: 0;
