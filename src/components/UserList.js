@@ -292,12 +292,12 @@ const Friends = (props) => {
               </div>
               <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
                 <div className="w-full font-semibold flex h-[23px]">
-                  <span className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-white  font-[rubik] font-normal  ">
+                  <span className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-white  font-[google] font-normal  ">
                     {/* {props.data.user} */}
                     {userName}
                   </span>
                   <span
-                    className="w-[70px] group-hover:mr-[25px] h-full text-[13px]  flex justify-end items-center text-white   font-[rubik] font-light"
+                    className="w-[70px] group-hover:mr-[25px] h-full text-[13px]  flex justify-end items-center text-white   font-[google] font-light"
                     onClick={() => {
                       deleteChatUser();
                     }}
@@ -313,7 +313,7 @@ const Friends = (props) => {
                     <>
                       {chatFlag === 1 ? (
                         <>
-                          <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
+                          <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[google] font-light">
                             you:
                           </span>
                         </>
@@ -322,7 +322,7 @@ const Friends = (props) => {
                       )}
 
                       <BsFillCameraFill className="mr-[5px] text-[#bcbcbc] " />
-                      <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
+                      <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[google] font-light">
                         {lastMsg}
                       </span>
                     </>
@@ -330,7 +330,7 @@ const Friends = (props) => {
                     <>
                       {chatFlag === 1 ? (
                         <>
-                          <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
+                          <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[google] font-light">
                             you:
                           </span>
                         </>
@@ -339,7 +339,7 @@ const Friends = (props) => {
                       )}
 
                       <TiVideo className="mr-[5px] text-[#bcbcbc] " />
-                      <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
+                      <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[google] font-light">
                         {lastMsg}
                       </span>
                     </>
@@ -347,7 +347,7 @@ const Friends = (props) => {
                     <>
                       {chatFlag === 1 ? (
                         <>
-                          <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
+                          <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[google] font-light">
                             you:
                           </span>
                         </>
@@ -356,7 +356,7 @@ const Friends = (props) => {
                       )}
 
                       <IoMdDocument className="mr-[5px] text-[#bcbcbc] " />
-                      <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
+                      <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[google] font-light">
                         {docName}
                       </span>
                     </>
@@ -364,14 +364,14 @@ const Friends = (props) => {
                     <>
                       {chatFlag === 1 ? (
                         <>
-                          <span className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[rubik] font-light">
+                          <span className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[google] font-light">
                             you:
                           </span>
                         </>
                       ) : (
                         <></>
                       )}
-                      <span className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[rubik] font-light">
+                      <span className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[google] font-light">
                         {lastMsg}
                       </span>
                     </>
@@ -426,14 +426,14 @@ const Friends = (props) => {
               <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
                 <div className="w-full font-semibold flex h-[23px]">
                   <span
-                    className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]    font-[rubik] font-normal group-hover:text-[white] "
+                    className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]    font-[google] font-normal group-hover:text-[white] "
                     // style={{ transition: ".9s" }}
                   >
                     {/* {props.data.user} */}
                     {userName}
                   </span>
                   <span
-                    className="w-[70px] h-full group-hover:mr-[25px] text-[13px] flex justify-end items-center text-[#8e9396] font-[rubik] font-light z-50"
+                    className="w-[70px] h-full group-hover:mr-[25px] text-[13px] flex justify-end items-center text-[#8e9396] font-[google] font-light z-50"
 
                     // style={{ transition: ".9s" }}
                   >
@@ -447,7 +447,7 @@ const Friends = (props) => {
                       {chatFlag === 1 ? (
                         <>
                           <span
-                            className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]   group-hover:text-[#8e9396]  font-[rubik] font-light"
+                            className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]   group-hover:text-[#8e9396]  font-[google] font-light"
                             // style={{ transition: ".5s" }}
                           >
                             you:
@@ -461,7 +461,7 @@ const Friends = (props) => {
                         // style={{ transition: ".5s" }}
                       />
                       <span
-                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[google] font-light"
                         // style={{ transition: ".5s" }}
                       >
                         {lastMsg}
@@ -472,7 +472,7 @@ const Friends = (props) => {
                       {chatFlag === 1 ? (
                         <>
                           <span
-                            className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
+                            className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[google] font-light group-hover:text-[#8e9396]"
                             // style={{ transition: ".5s" }}
                           >
                             you:
@@ -486,7 +486,7 @@ const Friends = (props) => {
                         // style={{ transition: ".5s" }}
                       />
                       <span
-                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[google] font-light"
                         // style={{ transition: ".5s" }}
                       >
                         {lastMsg}
@@ -497,7 +497,7 @@ const Friends = (props) => {
                       {chatFlag === 1 ? (
                         <>
                           <span
-                            className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
+                            className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[google] font-light group-hover:text-[#8e9396]"
                             // style={{ transition: ".5s" }}
                           >
                             you:
@@ -511,7 +511,7 @@ const Friends = (props) => {
                         // style={{ transition: ".5s" }}
                       />
                       <span
-                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[google] font-light"
                         // style={{ transition: ".5s" }}
                       >
                         {docName}
@@ -522,7 +522,7 @@ const Friends = (props) => {
                       {chatFlag === 1 ? (
                         <>
                           <span
-                            className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[rubik] font-light group-hover:text-[#8e9396]"
+                            className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[google] font-light group-hover:text-[#8e9396]"
                             // style={{ transition: ".5s" }}
                           >
                             you:
@@ -532,7 +532,7 @@ const Friends = (props) => {
                         <></>
                       )}
                       <span
-                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[rubik] font-light"
+                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[google] font-light"
                         // style={{ transition: ".5s" }}
                       >
                         {!lastMsg ? (
@@ -679,7 +679,7 @@ const SearchFriends = (props) => {
           <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
             <div className="w-full font-semibold flex h-[23px]">
               <span
-                className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]   drop-shadow-sm  font-[rubik] font-normal"
+                className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]   drop-shadow-sm  font-[google] font-normal"
                 // style={{ transition: ".9s" }}
               >
                 {/* {props.data.user} */}
@@ -692,7 +692,7 @@ const SearchFriends = (props) => {
             </div>
             <div className="w-full flex h-[23px]">
               <span
-                className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] drop-shadow-sm  font-[rubik] font-light"
+                className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] drop-shadow-sm  font-[google] font-light"
                 // style={{ transition: ".9s" }}
               >
                 {/* {props.data.msg} */}
@@ -1370,7 +1370,7 @@ const UserList = () => {
                 </div>
                 {/* <div className="w-[65%]">
                   <input
-                    className="input w-full  mt-[20px] flex justify-start items-start border-b-[2px] font-[rubik] font-normal text-[15px] py-[5px] border-b-black outline-none"
+                    className="input w-full  mt-[20px] flex justify-start items-start border-b-[2px] font-[google] font-normal text-[15px] py-[5px] border-b-black outline-none"
                     placeholder="Community Descritption"
                   ></input>
                 </div> */}
@@ -1394,7 +1394,7 @@ const UserList = () => {
               <></>
             )}
 
-            {/* <div className=" group w-full h-[70px] py-[10px] flex justify-start items-center cursor-pointer font-[rubik] font-normal hover:bg-[#8171f3] px-[10px]  text-[#ffffff] hover:text-[white]">
+            {/* <div className=" group w-full h-[70px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal hover:bg-[#8171f3] px-[10px]  text-[#ffffff] hover:text-[white]">
               <div className="w-[50px] h-[50px] rounded-full flex justify-center items-center mr-[15px]">
                 <MdGroups2 className="  text-[25px]" />
               </div>
@@ -1424,9 +1424,9 @@ const UserList = () => {
           <>
             {showStatus === true ? (
               // <div className="fixed">
-              <div className=" z-30 fixed bottom-0 h-[100svh] w-[400px] lg:w-[400px] md:w-[360px] mr-0 md:mr-[-20px] lg:mr-[-20px] bg-[#1f201f] drop-shadow-lg flex-col flex justify-center items-center">
+              <div className=" z-30 fixed bottom-0 h-[100svh] w-full  flex-col flex justify-center items-center">
                 {/* Cross ------------------------- */}
-                <div
+                {/* <div
                   className="fixed right-0 top-[25px] w-[40px] h-[40px]  rounded-full hover:bg-[white] hover:text-black text-white flex justify-center items-center  cursor-pointer rotate-45 z-40"
                   onClick={() => {
                     setShowStatus(false);
@@ -1434,10 +1434,10 @@ const UserList = () => {
                   style={{ transition: ".4s" }}
                 >
                   <FaPlus className="text-[17px]" />
-                </div>
+                </div> */}
                 {/* Profile ---------------------- */}
                 <div
-                  className=" group w-full h-[90px] py-[10px] flex justify-start items-center cursor-pointer font-[rubik] font-normal  px-[20px]  text-[#ffffff]  fixed top-0 border-b-[1px] border-[#404040]"
+                  className=" group w-full h-[90px] py-[10px] flex justify-start items-center bg-[#1c1f2f] cursor-pointer font-[google] font-normal  px-[20px]  text-[#ffffff]  fixed top-0 border-b-[1px] border-[#404040]"
                   onClick={() => {
                     // setShowStatus(true);
                   }}
@@ -1457,35 +1457,43 @@ const UserList = () => {
                   </div>
                   <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
                     <div className="w-full font-semibold flex h-[23px]">
-                      <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[rubik] font-normal  ">
+                      <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
                         {/* {props.data.user} */}
                         {/* {ownerName} */}
                         My Status
                       </span>
-                      <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[rubik] font-light">
+                      <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light">
                         {/* {props.data.time} */}
                         {/* {Time} */}
                         {/* {statusCount} */}
                       </span>
                     </div>
-                    <div className="w-full flex h-[23px] justify-between items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[rubik] font-light">
+                    <div className="w-full flex h-[23px] justify-between items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[google] font-light">
                       {statusTimestamp}
                     </div>
                     {/* <span className="text-[15px]">Hello! How Are you</span> */}
                   </div>
                 </div>
-                <div className=" z-30 fixed bottom-0 h-[calc(100svh-90px)] w-full lg:w-[360px] md:w-[360px] bg-[#1f201f] rounded-lg drop-shadow-lg flex-col flex justify-center items-center">
+                <div className=" z-30 fixed bottom-0 h-[calc(100svh-90px)] w-full lg:w-[360px] md:w-[360px] bg-[#1c1f2f] rounded-lg  flex-col flex justify-center items-center">
                   {/* Left Arrow ------------------------- */}
-                  <div className="fixed w-[40px] h-[40px] rounded-full bg-[#00000083] hover:bg-[black] cursor-pointer text-[white] flex justify-center items-center left-0">
+                  <div className="fixed w-[40px] h-[40px] rounded-full bg-[#00000083] hover:bg-[black] cursor-pointer text-[#ffb6b5] flex justify-center items-center left-0">
                     <FaAngleLeft className="text-[17px]" />
                   </div>
                   {/* Right Arrow ------------------------- */}
-                  <div className="fixed w-[40px] h-[40px] rounded-full bg-[#00000083] hover:bg-[black] cursor-pointer text-[white] flex justify-center items-center right-0">
+                  <div className="fixed w-[40px] h-[40px] rounded-full bg-[#00000083] hover:bg-[black] cursor-pointer text-[#ffb6b5] flex justify-center items-center right-0">
                     <FaAngleRight className="text-[17px]" />
                   </div>
 
                   {/* Status ------------------------- */}
-                  <img className="w-full rounded-xl" src={statusImageUrl}></img>
+                  {statusImageUrl ? (
+                    <img
+                      className="w-full rounded-xl"
+                      src={statusImageUrl}
+                    ></img>
+                  ) : (
+                    <></>
+                  )}
+
                   {/* Status Count Indication ------------------------- */}
                   <div className="fixed bottom-[10px] flex ">
                     {Array(3)
@@ -1598,7 +1606,7 @@ const UserList = () => {
             {statusTextModal === true ? (
               <>
                 <textarea
-                  className="h-[120px] resize-none py-[10px] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] bottom-[70px] fixed opacity-100 bg-[white] rounded-3xl outline-none px-[20px] font-[rubik] font-normal text-[14px] input"
+                  className="h-[120px] resize-none py-[10px] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] bottom-[70px] fixed opacity-100 bg-[white] rounded-3xl outline-none px-[20px] font-[google] font-normal text-[14px] input"
                   placeholder="Enter Text"
                   // type="textarea"
                   style={{ transition: ".4s" }}
@@ -1627,7 +1635,7 @@ const UserList = () => {
               // </div>
               <>
                 <textarea
-                  className="h-[40px] resize-none py-[10px] w-0 bottom-[70px] fixed opacity-0 bg-[white] rounded-3xl outline-none px-[20px] font-[rubik] font-normal text-[14px] input"
+                  className="h-[40px] resize-none py-[10px] w-0 bottom-[70px] fixed opacity-0 bg-[white] rounded-3xl outline-none px-[20px] font-[google] font-normal text-[14px] input"
                   placeholder="Enter Text"
                   // type="textarea"
                   style={{ transition: ".4s" }}
@@ -1657,7 +1665,7 @@ const UserList = () => {
 
             {isStatus ? (
               <div
-                className=" group w-full h-[70px] py-[10px] flex justify-start items-center cursor-pointer font-[rubik] font-normal hover:bg-[#ffffffe1] px-[10px]  text-[#ffffff] hover:text-[#000000] border-t-[1px] border-b-[1px] border-[#404040]"
+                className=" group w-full h-[70px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal hover:bg-[#ffffffe1] px-[10px]  text-[#ffffff] hover:text-[#000000] border-t-[1px] border-b-[1px] border-[#404040]"
                 onClick={() => {
                   setShowStatus(true);
                 }}
@@ -1677,25 +1685,25 @@ const UserList = () => {
                 </div>
                 <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
                   <div className="w-full font-semibold flex h-[23px]">
-                    <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[rubik] font-normal  ">
+                    <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
                       {/* {props.data.user} */}
                       {/* {ownerName} */}
                       My Status
                     </span>
-                    <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[rubik] font-light">
+                    <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light">
                       {/* {props.data.time} */}
                       {/* {Time} */}
                       {/* {statusCount} */}
                     </span>
                   </div>
-                  <div className="w-full flex h-[23px] justify-between items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[rubik] font-light">
+                  <div className="w-full flex h-[23px] justify-between items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[google] font-light">
                     {statusTimestamp}
                   </div>
                   {/* <span className="text-[15px]">Hello! How Are you</span> */}
                 </div>
               </div>
             ) : (
-              <div className=" group w-full h-[70px] py-[10px] flex justify-start items-center cursor-pointer font-[rubik] font-normal hover:bg-[#ffffffe1] px-[10px]  text-[#ffffff] hover:text-[#000000] border-t-[1px] border-b-[1px] border-[#404040]">
+              <div className=" group w-full h-[70px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal hover:bg-[#ffffffe1] px-[10px]  text-[#ffffff] hover:text-[#000000] border-t-[1px] border-b-[1px] border-[#404040]">
                 <div className="w-[50px] h-[50px]  rounded-full">
                   {profileURL === "nophoto" ? (
                     <img
@@ -1711,12 +1719,12 @@ const UserList = () => {
                 </div>
                 <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
                   <div className="w-full font-semibold flex h-[23px]">
-                    <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-[#ffffff]  font-[rubik] font-normal  ">
+                    <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-[#ffffff]  font-[google] font-normal  ">
                       {/* {props.data.user} */}
                       {/* {ownerName} */}
                       My Status
                     </span>
-                    <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[rubik] font-light">
+                    <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light">
                       {/* {props.data.time} */}
                       {/* {Time} */}
                     </span>
@@ -1905,22 +1913,22 @@ const UserList = () => {
                 </div>
                 <div className=" h-[230px]  mt-[50px] w-[250px] flex flex-col justify-between items-center ">
                   <div className="w-full   h-[230px] flex flex-col justify-evenly items-center">
-                    <div className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[13px] cursor-pointer">
+                    <div className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] flex justify-center items-center text-white font-[google] font-light drop-shadow-md text-[13px] cursor-pointer">
                       <MdPermContactCalendar className="mr-[10px] text-[20px] text-[#ce9835]" />{" "}
                       Change Number
                     </div>
-                    {/* <div className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] mt-[10px] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[13px] cursor-pointer">
+                    {/* <div className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] mt-[10px] flex justify-center items-center text-white font-[google] font-light drop-shadow-md text-[13px] cursor-pointer">
                       <MdOutlinePassword className="mr-[10px] text-[20px] text-[gray]" />{" "}
                       Change Password
                     </div> */}
                     {/* </div> */}
                     {/* <div className="w-full px-[10px] h-[40px] mt-[10px] flex justify-evenly items-center"> */}
-                    <div className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] mt-[10px] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[13px] cursor-pointer">
+                    <div className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] mt-[10px] flex justify-center items-center text-white font-[google] font-light drop-shadow-md text-[13px] cursor-pointer">
                       <TiDelete className="mr-[10px] text-[25px] text-[#bc3232]" />{" "}
                       Delete Account
                     </div>
                     <div
-                      className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#ffb6b5] mt-[10px] flex justify-center items-center text-black font-[rubik] font-light drop-shadow-md text-[13px] cursor-pointer"
+                      className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#ffb6b5] mt-[10px] flex justify-center items-center text-black font-[google] font-light drop-shadow-md text-[13px] cursor-pointer"
                       onClick={() => {
                         userSignOut();
                       }}
@@ -1929,13 +1937,14 @@ const UserList = () => {
                       Log Out
                     </div>
                     <div
-                      className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] mt-[10px] flex justify-center items-center text-white font-[rubik] font-light drop-shadow-md text-[13px] cursor-pointer"
+                      className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] mt-[10px] flex justify-center items-center text-white font-[google] font-light drop-shadow-md text-[13px] cursor-pointer"
                       onClick={() => {
                         changeAccountStatus();
                       }}
                     >
                       <RiRadioButtonLine className="mr-[10px] text-[20px] text-[gray]" />{" "}
-                      Status :
+                      Status :{" "}
+                      {accountStatus === true ? <>Visible</> : <>Hidden</>}
                     </div>
                   </div>
                 </div>

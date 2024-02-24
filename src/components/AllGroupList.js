@@ -31,11 +31,11 @@ export const AllGroupList = (props) => {
             </div>
             <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black  font-[rubik] font-normal  ">
+                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-black  font-[google] font-normal  ">
                   {/* {props.data.user} */}
                   {props.data.name}
                 </span>
-                <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[rubik] font-light">
+                <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light">
                   {/* {props.data.time} */}
                   {/* {Time} */}
                 </span>
@@ -47,7 +47,7 @@ export const AllGroupList = (props) => {
                   <>
                     {chatFlag === 1 ? (
                       <>
-                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020]  font-[rubik] font-light">
+                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020]  font-[google] font-light">
                           you:
                         </span>
                       </>
@@ -56,7 +56,7 @@ export const AllGroupList = (props) => {
                     )}
 
                     <BsFillCameraFill className="mr-[5px] text-[#474747] " />
-                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]   font-[rubik] font-light">
+                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]   font-[google] font-light">
             
                     </span>
                   </>
@@ -64,7 +64,7 @@ export const AllGroupList = (props) => {
                   <>
                     {chatFlag === 1 ? (
                       <>
-                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020]  font-[rubik] font-light">
+                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020]  font-[google] font-light">
                           you:
                         </span>
                       </>
@@ -73,7 +73,7 @@ export const AllGroupList = (props) => {
                     )}
 
                     <TiVideo className="mr-[5px] text-[#474747] " />
-                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]   font-[rubik] font-light">
+                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]   font-[google] font-light">
                     
                     </span>
                   </>
@@ -81,7 +81,7 @@ export const AllGroupList = (props) => {
                   <>
                     {chatFlag === 1 ? (
                       <>
-                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020]  font-[rubik] font-light">
+                        <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020]  font-[google] font-light">
                           you:
                         </span>
                       </>
@@ -90,7 +90,7 @@ export const AllGroupList = (props) => {
                     )}
 
                     <IoMdDocument className="mr-[5px] text-[#474747] " />
-                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]   font-[rubik] font-light">
+                    <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]   font-[google] font-light">
                      
                     </span>
                   </>
@@ -98,14 +98,14 @@ export const AllGroupList = (props) => {
                   <>
                     {chatFlag === 1 ? (
                       <>
-                        <span className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020]  font-[rubik] font-light">
+                        <span className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#202020]  font-[google] font-light">
                           you:
                         </span>
                       </>
                     ) : (
                       <></>
                     )}
-                    <span className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]   font-[rubik] font-light">
+                    <span className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#474747]   font-[google] font-light">
                       
                     </span>
                   </>
@@ -150,14 +150,14 @@ export const AllGroupList = (props) => {
             <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
               <div className="w-full font-semibold flex h-[23px]">
                 <span
-                  className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]  group-hover:text-[black]   font-[rubik] font-normal "
+                  className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]  group-hover:text-[black]   font-[google] font-normal "
                   // style={{ transition: ".9s" }}
                 >
                   {/* {props.data.user} */}
                   {props.data.GroupName}
                 </span>
                 <span
-                  className="w-[70px] h-full text-[11px] flex justify-end items-center text-[white] group-hover:text-[black]  font-[rubik] font-light"
+                  className="w-[70px] h-full text-[11px] flex justify-end items-center text-[white] group-hover:text-[black]  font-[google] font-light"
                   // style={{ transition: ".9s" }}
                 >
                   {/* {props.data.time} */}
@@ -170,7 +170,7 @@ export const AllGroupList = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]   group-hover:text-[#202020]  font-[rubik] font-light"
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]   group-hover:text-[#202020]  font-[google] font-light"
                           // style={{ transition: ".5s" }}
                         >
                           you:
@@ -184,7 +184,7 @@ export const AllGroupList = (props) => {
                       // style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]   font-[rubik] font-light"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]   font-[google] font-light"
                       // style={{ transition: ".5s" }}
                     >
                       
@@ -195,7 +195,7 @@ export const AllGroupList = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[rubik] font-light group-hover:text-[#202020]"
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[google] font-light group-hover:text-[#202020]"
                           // style={{ transition: ".5s" }}
                         >
                           you:
@@ -209,7 +209,7 @@ export const AllGroupList = (props) => {
                       // style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]   font-[rubik] font-light"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]   font-[google] font-light"
                       // style={{ transition: ".5s" }}
                     >
                    
@@ -220,7 +220,7 @@ export const AllGroupList = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[rubik] font-light group-hover:text-[#202020]"
+                          className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[google] font-light group-hover:text-[#202020]"
                           // style={{ transition: ".5s" }}
                         >
                           you:
@@ -234,7 +234,7 @@ export const AllGroupList = (props) => {
                       // style={{ transition: ".5s" }}
                     />
                     <span
-                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]   font-[rubik] font-light"
+                      className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]   font-[google] font-light"
                       // style={{ transition: ".5s" }}
                     >
            
@@ -246,7 +246,7 @@ export const AllGroupList = (props) => {
                     {chatFlag === 1 ? (
                       <>
                         <span
-                          className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[rubik] font-light group-hover:text-[#202020]"
+                          className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7]  font-[google] font-light group-hover:text-[#202020]"
                           // style={{ transition: ".5s" }}
                         >
                           you:
@@ -256,7 +256,7 @@ export const AllGroupList = (props) => {
                       <></>
                     )}
                     <span
-                      className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]   font-[rubik] font-light"
+                      className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]   font-[google] font-light"
                       // style={{ transition: ".5s" }}
                     >
                     

@@ -69,7 +69,7 @@ import download2 from "../assets/img/download2.png";
 import loading from "../assets/img/loading.png";
 import { Blurhash } from "react-blurhash";
 import { saveAs } from "file-saver";
-
+import { BsFillStopFill } from "react-icons/bs";
 // ---------------------------------------------------------- Test Videos
 
 import vid from "../assets/video/video2.mp4";
@@ -82,9 +82,28 @@ import bb from "../assets/doc/bb.pdf";
 import { MdEmojiEmotions } from "react-icons/md";
 import OutsideClickHandler from "react-outside-click-handler";
 
+import { IoCameraOutline } from "react-icons/io5";
+import { IoDocumentOutline } from "react-icons/io5";
+import { HiOutlinePhoto } from "react-icons/hi2";
+import { MdOutlineGif } from "react-icons/md";
+import { TbGif } from "react-icons/tb";
+import { PiSticker } from "react-icons/pi";
+import { LuContact2 } from "react-icons/lu";
+import { MdOutlineInsertPhoto } from "react-icons/md";
+import { RiVideoLine } from "react-icons/ri";
+import { FiUser } from "react-icons/fi";
+import { AiOutlineSend } from "react-icons/ai";
+import { IoMdDocument } from "react-icons/io";
+import { MdFileDownload } from "react-icons/md";
+
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 const Messagess = (props) => {
   const [url, setUrl] = useState("");
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  const [zoomImage, setZoomImage] = useState(false);
 
   // useEffect(() => {
   //   g();
@@ -103,16 +122,19 @@ const Messagess = (props) => {
   };
   return (
     <>
+      {/* <div className="w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] right-0 h-[100svh] fixed bg-[#0000003a] z-50 mt-[-70px] flex justify-center items-center">
+        <img src={props.data.Image} className=" w-full"></img>
+      </div> */}
       {props?.data?.Flag === 2 ? (
         <>
-          <div className="w-full  my-[4px] flex text-[14px] justify-start drop-shadow-sm pl-[10px]">
+          <div className="w-full  my-[4px] flex text-[15px] justify-start drop-shadow-sm pl-[10px]">
             {props.data.Message.length != 0 ? (
               <>
                 <div className="w-auto bg-[#383e4f] text-[white] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between">
-                  <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[rubik] font-light">
+                  <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[google] font-light">
                     {props?.data?.Message}
                   </pre>
-                  <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[rubik] font-light  text-[10px]  mb-[-5px] text-[#9fa5a7] ">
+                  <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[google] font-light  text-[10px]  mb-[-5px] text-[#9fa5a7] ">
                     {props?.data?.Time}
                   </div>{" "}
                 </div>
@@ -131,7 +153,7 @@ const Messagess = (props) => {
 
                   // onClick={() => {}}
                 ></img>
-                <span className="fixed text-transparent overflow-hidden">
+                <span className="fixed text-transparent overflow-hidden w-full select-none right-0">
                   {props.data.Image}
                 </span>
                 <div
@@ -158,7 +180,7 @@ const Messagess = (props) => {
                 </div>
 
                 {isImageLoaded === true ? (
-                  <div className="w-auto bottom-0 drop-shadow-md h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px] font-[rubik] font-light">
+                  <div className="w-auto bottom-0 drop-shadow-md h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#ffffff] py-[8px] px-[14px] font-[google] font-light">
                     {props?.data?.Time}
                   </div>
                 ) : (
@@ -183,7 +205,7 @@ const Messagess = (props) => {
                 >
                   <source src={props.data.Video}></source>
                 </video>
-                <span className="fixed text-transparent overflow-hidden">
+                <span className="fixed text-transparent overflow-hidden w-full select-none right-0">
                   {props.data.Video}
                 </span>
               </div>
@@ -192,13 +214,14 @@ const Messagess = (props) => {
                 <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[0px] bg-[#383e4f] rounded-lg  flex justify-center items-center">
                   <div className="w-full h-full  rounded-lg  flex justify-start items-center ">
                     <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
-                      <img src={doccc} className="w-[40px]"></img>
+                      {/* <img src={doccc} className="w-[40px]"></img> */}
+                      <IoMdDocument className="text-white text-[35px]" />
                     </div>
                     <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
-                      <span className="w-full text-[14px]  text-[white] whitespace-nowrap text-ellipsis overflow-hidden  font-[rubik] font-light ">
+                      <span className="w-full text-[14px]  text-[white] whitespace-nowrap text-ellipsis overflow-hidden  font-[google] font-light ">
                         {props.data.docName}
                       </span>
-                      <span className=" font-[rubik] font-light text-[11px]  text-[white]">
+                      <span className=" font-[google] font-light text-[11px]  text-[white]">
                         {props.data.docSize > 1024 ? (
                           <>{(props.data.docSize / 1024).toFixed(2)} mB</>
                         ) : (
@@ -220,13 +243,13 @@ const Messagess = (props) => {
         </>
       ) : (
         <>
-          <div className="w-full  my-[4px] flex text-[14px] justify-end drop-shadow-sm pr-[10px]">
+          <div className="w-full  my-[4px] flex text-[15px] justify-end drop-shadow-sm pr-[10px]">
             {props.data.Message.length != 0 ? (
               <div className="w-auto bg-[#292f3f] max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex text-[white] flex-wrap justify-between">
-                <pre className="max-w-[calc(100%)] whitespace-pre-wrap  font-[rubik] font-light">
+                <pre className="max-w-[calc(100%)] whitespace-pre-wrap   font-[google] font-light">
                   {props?.data?.Message}
                 </pre>
-                <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[rubik] font-light  text-[10px]  mb-[-5px] text-[#bcbcbc]">
+                <div className="ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[google] font-light  text-[10px]  mb-[-5px] text-[#bcbcbc]">
                   {props?.data?.Time}
                 </div>
               </div>
@@ -264,10 +287,13 @@ const Messagess = (props) => {
                     setIsImageLoaded(true);
                     console.log("Loaded Image");
                   }}
+                  onClick={() => {
+                    setZoomImage(true);
+                  }}
                   src={props.data.Image}
                   className="rounded-lg w-full h-full object-cover  group-hover:opacity-60"
                 ></img>
-                <span className="fixed text-transparent overflow-hidden">
+                <span className="fixed text-transparent overflow-hidden w-full select-none left-0">
                   {props.data.Image}
                 </span>
                 <div
@@ -293,7 +319,7 @@ const Messagess = (props) => {
                   <MdDownload className="text-[25px] text-[#ffb6b5]" />
                 </div>
                 {isImageLoaded === true ? (
-                  <div className="w-[60px]  right-[10px] bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#bcbcbc] py-[8px] px-[14px] drop-shadow-md  font-[rubik] font-light">
+                  <div className="w-[60px]  right-[10px] bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#bcbcbc] py-[8px] px-[14px] drop-shadow-md  font-[google] font-light">
                     {props?.data?.Time}
                   </div>
                 ) : (
@@ -314,9 +340,9 @@ const Messagess = (props) => {
                   className="w-auto  h-full rounded-lg 
               "
                 >
-                  <source src={props.data.Video}></source>
+                  <source src={props.data.Video} className="z-50"></source>
                 </video>
-                <span className="fixed text-transparent overflow-hidden ">
+                <span className="fixed text-transparent overflow-hidden w-full select-none left-0">
                   {props.data.Video}
                 </span>
               </div>
@@ -325,13 +351,14 @@ const Messagess = (props) => {
                 <div className="w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[2px] bg-[#292f3f] rounded-lg  flex justify-center items-center drop-shadow-md">
                   <div className="w-full h-full  rounded-lg bg-[#292f3f] flex justify-start items-center ">
                     <div className="w-[55px] h-[55px]  rounded-lg flex justify-center items-center">
-                      <img src={doccc} className="w-[40px]"></img>
+                      <IoMdDocument className="text-white text-[35px]" />
+                      {/* <img src={doccc} className="w-[40px]"></img> */}
                     </div>
                     <div className="w-[calc(100%-95px)]  h-full flex flex-col justify-center items-start px-[10px]">
-                      <span className="w-full  font-[rubik] font-light text-[14px] text-[#ffffff] whitespace-nowrap text-ellipsis overflow-hidden">
+                      <span className="w-full  font-[google] font-light text-[14px] text-[#ffffff] whitespace-nowrap text-ellipsis overflow-hidden">
                         {props.data.docName}
                       </span>
-                      <span className=" font-[rubik] font-light text-[11px] text-[#ffffff]">
+                      <span className=" font-[google] font-light text-[11px] text-[#ffffff]">
                         {props.data.docSize > 1024 ? (
                           <>{(props.data.docSize / 1024).toFixed(2)} mB</>
                         ) : (
@@ -389,6 +416,19 @@ export const MessageBody = () => {
   const ChatTwo = useSelector((store) => store.chat.FlagTwoMessage);
 
   const textAreaRef = useRef(null);
+
+  const [isListening, setIsListening] = useState(false);
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  if (!browserSupportsSpeechRecognition) {
+    console.log("Browser doesn't support speech recognition.");
+  }
 
   // -------------------------------------------------------------------------- Send Message to Firebase Firestore
 
@@ -796,13 +836,35 @@ export const MessageBody = () => {
   //   }
   // }, [Messages]);
 
+  function Mes() {
+    console.log("Clicked");
+    let chattt = {
+      Document: "",
+      Flag: 1,
+      Image: "",
+      Message: "Hello",
+      Time: "20:30 PM",
+      Video: "",
+      docName: "",
+      docSize: "",
+      id: 2,
+    };
+    const user = firebase.auth().currentUser;
+    const ref = db
+      .collection("Chat Record")
+      .doc(user.uid)
+      .collection("Chat Friends")
+      .doc(ActiveChatUser)
+      .update({ ChatHistory: chattt });
+  }
+
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
       <div className="w-full h-[calc(100%-130px)] overflow-y-scroll bg-[#1b202d] z-20 ">
         <div
           ref={listRef}
-          className="w-full h-full  flex flex-col   font-[rubik] font-normal"
+          className="w-full h-full  flex flex-col   font-[google] font-normal"
         >
           {ActiveChatUser.length === 0 ? (
             <>
@@ -818,11 +880,20 @@ export const MessageBody = () => {
                 <img src={ww} className="h-full w-full object-cover"></img>
               </div> */}
               <div className="w-full min-h-[40px]  rounded-lg flex justify-center items-center drop-shadow-sm px-[10px]">
-                <span className="w-full h-full flex justify-center items-center ml-[10px] font-[rubik] font-light text-[14px] text-[#ffb6b5] drop-shadow-md">
+                <span className="w-full h-full flex justify-center items-center ml-[10px] font-[google] font-light text-[14px] text-[#ffb6b5] drop-shadow-md">
                   <BiSolidLockAlt className="text-[#ffb6b5] mr-[10px]" />{" "}
                   Messages are end-to-end encrypted.
                 </span>
               </div>
+              {/* <div className="w-full h-full flex justify-center items-center ml-[10px] font-[google] font-light text-[14px] text-[#ffffff] drop-shadow-md">
+                <button
+                  onClick={() => {
+                    Mes();
+                  }}
+                >
+                  Click Me
+                </button>
+              </div> */}
               {chatMessage?.map((msg) => {
                 return (
                   <>
@@ -849,6 +920,7 @@ export const MessageBody = () => {
           <></>
         )}
       </div>
+
       {document === true ? (
         <>
           <div
@@ -856,7 +928,7 @@ export const MessageBody = () => {
             style={{ transition: ".5s" }}
           >
             <div
-              className="w-[170px] h-[338px] text-[white] bg-[#292f3f] border border-transparent  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[rubik] font-normal text-[14px] flex flex-col justify-between drop-shadow-lg"
+              className="w-[170px] h-[338px] text-[white] bg-[#292f3f] border border-transparent  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[google] font-normal text-[14px] flex flex-col justify-between drop-shadow-lg"
               style={{ transition: ".5s" }}
             >
               <div className="w-full flex flex-col items-center">
@@ -876,7 +948,8 @@ export const MessageBody = () => {
                       }}
                       className="hidden"
                     ></input>
-                    <img src={docc} className="w-[25px] mr-[8px]"></img>{" "}
+                    <IoDocumentOutline className="text-[22px] mr-[8px]" />
+                    {/* <img src={docc} className="w-[25px] mr-[8px]"></img>{" "} */}
                     Documents
                   </div>
                 </label>
@@ -893,8 +966,8 @@ export const MessageBody = () => {
                       onChange={(e) => Image(e)}
                       className="hidden"
                     ></input>
-                    {/* <IoMdPhotos className="text-[24px] mr-[8px]" /> */}
-                    <img src={phot} className="w-[25px] mr-[8px]"></img>
+                    <MdOutlineInsertPhoto className="text-[22px] mr-[8px]" />
+                    {/* <img src={phot} className="w-[25px] mr-[8px]"></img> */}
                     {/* <FcImageFile className="text-[24px] mr-[8px]" /> */}
                     Photos
                   </div>
@@ -913,8 +986,8 @@ export const MessageBody = () => {
                       onChange={(e) => Video(e)}
                       className="hidden"
                     ></input>
-                    {/* <IoMdPhotos className="text-[24px] mr-[8px]" /> */}
-                    <img src={vide} className="w-[25px] mr-[8px]"></img>
+                    <RiVideoLine className="text-[22px] mr-[8px]" />
+                    {/* <img src={vide} className="w-[25px] mr-[8px]"></img> */}
                     {/* <FcImageFile className="text-[24px] mr-[8px]" /> */}
                     Videos
                   </div>
@@ -933,9 +1006,9 @@ export const MessageBody = () => {
                       onChange={(e) => Image(e)}
                       className="hidden"
                     ></input>
-                    {/* <IoMdPhotos className="text-[24px] mr-[8px]" /> */}
-                    <img src={giff} className="w-[25px] mr-[8px]"></img>
-                    {/* <FcImageFile className="text-[24px] mr-[8px]" /> */}
+                    <TbGif className="text-[22px] mr-[8px]" />
+                    {/* <img src={giff} className="w-[25px] mr-[8px]"></img> */}
+                    {/* <PiSticker className="text-[24px] mr-[8px]" /> */}
                     Gif's
                   </div>
                 </label>
@@ -959,7 +1032,8 @@ export const MessageBody = () => {
                       });
                     }}
                   >
-                    <img src={sticker} className="w-[25px] mr-[8px]"></img>{" "}
+                    <PiSticker className="text-[22px] mr-[8px]" />
+                    {/* <img src={sticker} className="w-[25px] mr-[8px]"></img>{" "} */}
                     Sticker
                   </div>
                 </div>
@@ -983,7 +1057,11 @@ export const MessageBody = () => {
                       });
                     }}
                   >
-                    <img src={contacts} className="w-[25px] mr-[8px]"></img>{" "}
+                    <FiUser className="text-[22px] mr-[8px]" />
+                    {/* <img
+                      src={contacts}
+                      className="w-[25px] mr-[8px]"
+                    ></img>{" "} */}
                     Contact
                   </div>
                 </div>
@@ -992,7 +1070,7 @@ export const MessageBody = () => {
                   className="w-full flex items-center  opacity-100 rounded-lg   cursor-pointer my-[10px]"
                   style={{ transition: "2s", transitionDelay: "1.125s" }}
                 >
-                  {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
+                  {/* <AiOutlineSend className="text-[24px] mr-[8px]" /> */}
 
                   <div className="w-full border border-[#ccd7dc1f] px-[10px] flex items-center  "></div>
                 </div>
@@ -1051,10 +1129,11 @@ export const MessageBody = () => {
                       //   }
                       // }}
                     >
-                      <img
+                      <AiOutlineSend className="text-[22px] mr-[8px]" />
+                      {/* <img
                         src={sendd}
                         className="w-[25px] mr-[10px] z-20"
-                      ></img>
+                      ></img> */}
                       Send
                       <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[white] text-[black]   flex justify-center items-center">
                         {imageLength}
@@ -1090,10 +1169,11 @@ export const MessageBody = () => {
                         }
                       }}
                     >
-                      <img
+                      <AiOutlineSend className="text-[22px] mr-[8px]" />
+                      {/* <img
                         src={sendd}
                         className="w-[25px] mr-[10px] z-20"
-                      ></img>
+                      ></img> */}
                       Send
                       <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[white] text-[black]   flex justify-center items-center">
                         1
@@ -1146,10 +1226,11 @@ export const MessageBody = () => {
                       //   }
                       // }}
                     >
-                      <img
+                      <AiOutlineSend className="text-[22px] mr-[8px]" />
+                      {/* <img
                         src={sendd}
                         className="w-[25px] mr-[10px] z-20"
-                      ></img>
+                      ></img> */}
                       Send
                       <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[white] text-[black]   flex justify-center items-center">
                         1
@@ -1202,10 +1283,11 @@ export const MessageBody = () => {
                       //   }
                       // }}
                     >
-                      <img
+                      <AiOutlineSend className="text-[22px] mr-[8px]" />
+                      {/* <img
                         src={sendd}
                         className="w-[25px] mr-[10px] z-20"
-                      ></img>
+                      ></img> */}
                       Send
                       <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] bg-[white] text-[black]   flex justify-center items-center">
                         0
@@ -1245,7 +1327,8 @@ export const MessageBody = () => {
                       }}
                       className="hidden"
                     ></input>
-                    <img src={docc} className="w-[25px] mr-[8px]"></img>{" "}
+                    <IoDocumentOutline className="text-[22px] mr-[8px]" />
+                    {/* <img src={docc} className="w-[25px] mr-[8px]"></img>{" "} */}
                     Documents
                   </div>
                 </label>
@@ -1263,8 +1346,9 @@ export const MessageBody = () => {
                       className="hidden"
                       // style={{ transition: ".2s" }}
                     ></input>
+                    <MdOutlineInsertPhoto className="text-[22px] mr-[8px]" />
                     {/* <IoMdPhotos className="text-[24px] mr-[8px]" /> */}
-                    <img src={phot} className="w-[25px] mr-[8px]"></img>
+                    {/* <img src={phot} className="w-[25px] mr-[8px]"></img> */}
                     {/* <FcImageFile className="text-[24px] mr-[8px]" /> */}
                     Photos
                   </div>
@@ -1283,8 +1367,9 @@ export const MessageBody = () => {
                       className="hidden"
                       // style={{ transition: ".2s" }}
                     ></input>
+                    <RiVideoLine className="text-[22px] mr-[8px]" />
                     {/* <IoMdPhotos className="text-[24px] mr-[8px]" /> */}
-                    <img src={vide} className="w-[25px] mr-[8px]"></img>
+                    {/* <img src={vide} className="w-[25px] mr-[8px]"></img> */}
                     {/* <FcImageFile className="text-[24px] mr-[8px]" /> */}
                     Videos
                   </div>
@@ -1303,8 +1388,9 @@ export const MessageBody = () => {
                       className="hidden"
                       // style={{ transition: ".2s" }}
                     ></input>
+                    <TbGif className="text-[22px] mr-[8px]" />
                     {/* <IoMdPhotos className="text-[24px] mr-[8px]" /> */}
-                    <img src={giff} className="w-[25px] mr-[8px]"></img>
+                    {/* <img src={giff} className="w-[25px] mr-[8px]"></img> */}
                     {/* <FcImageFile className="text-[24px] mr-[8px]" /> */}
                     Gif's
                   </div>
@@ -1316,7 +1402,8 @@ export const MessageBody = () => {
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
                   <div className="w-full h-full px-[10px] flex items-center">
-                    <img src={sticker} className="w-[25px] mr-[8px]"></img>{" "}
+                    <PiSticker className="text-[22px] mr-[8px]" />
+                    {/* <img src={sticker} className="w-[25px] mr-[8px]"></img>{" "} */}
                     Sticker
                   </div>
                 </div>
@@ -1327,7 +1414,11 @@ export const MessageBody = () => {
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
                   <div className="w-full h-full px-[10px] flex items-center">
-                    <img src={contacts} className="w-[25px] mr-[8px]"></img>{" "}
+                    <FiUser className="text-[22px] mr-[8px]" />
+                    {/* <img
+                      src={contacts}
+                      className="w-[25px] mr-[8px]"
+                    ></img>{" "} */}
                     Contact
                   </div>
                 </div>
@@ -1391,7 +1482,8 @@ export const MessageBody = () => {
                     //   }
                     // }}
                   >
-                    <img src={sendd} className="w-[25px] mr-[0] z-0 "></img>
+                    <sen className="text-[22px] mr-[8px]" />
+                    {/* <img src={sendd} className="w-[25px] mr-[0] z-0 "></img> */}
                     Send
                     <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] opacity-0 text-[black]   flex justify-center items-center">
                       {imageLength}
@@ -1403,7 +1495,6 @@ export const MessageBody = () => {
           </div>
         </>
       )}
-
       <div className="w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] h-[60px] fixed bottom-0 flex flex-col justify-center items-start bg-[#1b202d]">
         {ActiveChatUser.length === 0 ? (
           <></>
@@ -1418,7 +1509,7 @@ export const MessageBody = () => {
               </div>
             ) : (
               <div
-                className="w-[30px] h-full ml-[8px] flex justify-center items-center cursor-pointer  hover:text-[white] rounded-full  z-10 text-[#ffb6b5] drop-shadow-md"
+                className="w-[30px] h-full ml-[8px] flex justify-center items-center cursor-pointer  hover:text-[white] rounded-full  z-10 text-[#ffffff] drop-shadow-md"
                 onClick={() => {
                   setEmoji(!emoji);
                   setDocument(false);
@@ -1466,7 +1557,7 @@ export const MessageBody = () => {
                   }}
                 > */}
                 <div
-                  className="w-[30px] h-full flex justify-center items-center cursor-pointer  hover:text-[white] rounded-full  z-10 text-[#ffb6b5] drop-shadow-md"
+                  className="w-[30px] h-full flex justify-center items-center cursor-pointer  hover:text-[white] rounded-full  z-10 text-[#ffffff] drop-shadow-md"
                   onClick={() => {
                     setImage();
                     setVideo();
@@ -1511,7 +1602,7 @@ export const MessageBody = () => {
             ></input>
 
             <button
-              className="ml-[-43px] mr-[8px] z-10 h-full   w-[35px] flex justify-center items-center cursor-pointer text-[#ffb6b5]  rounded-full hover:text-[white]"
+              className="ml-[-43px] mr-[8px] z-10 h-full   w-[35px] flex justify-center items-center cursor-pointer text-[#ffffff]  rounded-full hover:text-[white]"
               onClick={() => {
                 if (Messages.length !== 0) {
                   var temp = formatAMPM(new Date());
@@ -1530,15 +1621,37 @@ export const MessageBody = () => {
               }}
             >
               {Messages.length === 0 ? (
-                <BiSolidSend className="text-[20px] text-[#795857]" />
+                <BiSolidSend className="text-[20px] text-[#898989]" />
               ) : (
                 <BiSolidSend className="text-[20px] " />
               )}
             </button>
-            <div className="w-[35px] h-full flex justify-center items-center cursor-pointer rounded-full   hover:text-[white] z-10  ml-[10px] mr-[10px] text-[#ffb6b5]  ">
-              <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full  drop-shadow-md ">
-                <BiSolidMicrophone className="text-[25px]  " />
-              </div>
+            <div className="w-[35px] h-full flex justify-center items-center cursor-pointer rounded-full   hover:text-[white] z-10  ml-[10px] mr-[10px] text-[#ffffff]  ">
+              {isListening === true ? (
+                <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full  drop-shadow-md pullse">
+                  <BsFillStopFill
+                    className="text-[25px]"
+                    onClick={() => {
+                      setIsListening(false);
+                      SpeechRecognition.stopListening();
+                      setMessages(transcript);
+                      resetTranscript();
+                    }}
+                  />
+                </div>
+              ) : (
+                <div className="w-[35px] h-[35px] flex justify-center items-center rounded-full  drop-shadow-md">
+                  <BiSolidMicrophone
+                    className="text-[25px]  "
+                    onClick={() => {
+                      setIsListening(true);
+                      SpeechRecognition.startListening({
+                        continuous: true,
+                      });
+                    }}
+                  />
+                </div>
+              )}
             </div>
           </div>
         )}

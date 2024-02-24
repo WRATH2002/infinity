@@ -184,9 +184,33 @@ em-emoji-picker {
   font-family: rubik;
   src: url(./assets/font/Rubik/Rubik-VariableFont_wght.ttf);
 }
+
+@font-face {
+  font-family: google;
+  src: url(./assets/font/Product\ Sans\ Regular.ttf);
+}
 /* input[type="file"] {
   opacity: 0;
 } */
+
+.pullse {
+  background-color: #222;
+  animation-name: color;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes color {
+  0% {
+    background-color: #1b202d;
+  }
+  50% {
+    background-color: #ffb6b5;
+  }
+  100% {
+    background-color: #1b202d;
+  }
+}
 
 .gradients {
   /* background-image: linear-gradient(to right, #b8dedf 30px, #8db9aa); */

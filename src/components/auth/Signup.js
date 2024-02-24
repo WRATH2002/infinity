@@ -70,6 +70,7 @@ const Signup = () => {
       Info: "Hi folks! I am new to infinity.",
       Phone: number,
       Photo: "nophoto",
+      AccountStatus: true,
     });
     console.log("done");
   }
@@ -81,7 +82,7 @@ const Signup = () => {
       toast.error("Enter your Phone Number");
     } else if (email.length === 0 || !email.includes("@gmail.com")) {
       toast.error("Enter valid Email id");
-    } else if (password.length <= 6) {
+    } else if (password.length < 6) {
       toast.error("Password must be atleast 6 digits");
     } else {
       createUserWithEmailAndPassword(auth, email, password)
@@ -108,10 +109,10 @@ const Signup = () => {
       <Toaster position="bottom-center" reverseOrder={false} />
       <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-lg h-[70%] bg-[#292f3f] flex flex-col justify-center items-center">
         <div className="w-full flex flex-col">
-          <span className="text-[32px] text-[white] font-[rubik] font-medium">
+          <span className="text-[32px] text-[white] font-[google] font-medium">
             Signup{" "}
           </span>
-          <span className="text-[14px] font-normal font-[rubik] text-[white] ">
+          <span className="text-[14px] font-normal font-[google] text-[white] ">
             already a user
             <span
               className="text-[#ffb6b5] hover:text-[#fe9c9a] cursor-pointer font-normal"
@@ -125,14 +126,14 @@ const Signup = () => {
         </div>
         {/* <div>Signup</div> */}
         <input
-          className="input outline-none  mt-[40px]  w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#1b202d] log"
+          className="input outline-none  mt-[40px]  w-full h-[40px] my-[6px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[white] bg-[#1b202d] log"
           placeholder="Name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         ></input>
         <input
-          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#1b202d] log"
+          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[white] bg-[#1b202d] log"
           placeholder="Phone Number"
           type="tel"
           value={number}
@@ -144,7 +145,7 @@ const Signup = () => {
           }}
         ></input>
         <input
-          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#1b202d] log"
+          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[white] bg-[#1b202d] log"
           placeholder="Email"
           type="email"
           value={email}
@@ -153,7 +154,7 @@ const Signup = () => {
         {show === true ? (
           <div className="w-full flex justify-center items-center">
             <input
-              className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#1b202d] log"
+              className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[white] bg-[#1b202d] log"
               placeholder="Password"
               type="text"
               value={password}
@@ -171,7 +172,7 @@ const Signup = () => {
         ) : (
           <div className="w-full flex justify-center items-center">
             <input
-              className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[rubik] font-normal text-[14px] text-[white] bg-[#1b202d] log"
+              className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[white] bg-[#1b202d] log"
               placeholder="Password"
               type="password"
               value={password}
@@ -196,7 +197,7 @@ const Signup = () => {
           Signup
         </button> */}
         <button
-          className="w-full h-[40px] text-[#000000] font-medium font-[rubik] outline-none flex justify-center items-center bg-[#ffb6b5] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
+          className="w-full h-[40px] text-[#000000] font-medium font-[google] outline-none flex justify-center items-center bg-[#ffb6b5] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signUp}

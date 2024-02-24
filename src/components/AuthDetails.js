@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 const Loading = (props) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isSubLoading, setIsSubLoading] = useState(true);
+  const [isSubLoading, setIsSubLoading] = useState(false);
   useEffect(() => {
     // Creating a timeout within the useEffect hook
     const timer = setTimeout(() => {
