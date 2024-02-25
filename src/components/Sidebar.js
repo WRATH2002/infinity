@@ -1,9 +1,11 @@
+import { useState } from "react";
 import OwnerDetails from "./OwnerDetails";
 import UserList from "./UserList";
 import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar = () => {
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
+  const [section, setSection] = useState("Chat");
   return (
     <>
       {ActiveChatUser.length === 0 ? (
@@ -12,8 +14,8 @@ const Sidebar = () => {
           // style={{ transition: ".5s" }}
         >
           {/* Sidebar */}
-          <OwnerDetails />
-          <UserList />
+          <OwnerDetails data={section} setData={setSection} />
+          <UserList data={section} setData={setSection} />
           {/* <div className="w-full h-full fixed flex md:hidden lg:hidden back z-0"></div> */}
         </div>
       ) : (

@@ -302,7 +302,7 @@ export const UserInfo = () => {
               </div>
               {delConfirmation === true ? (
                 <div
-                  className="fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[calc(100%-80px)] lg:h-[calc(100%-80px)] md:h-[calc(100%-80px)]  flex justify-center items-center z-30   backdrop-blur-sm"
+                  className="fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[calc(100%-70px)] lg:h-[calc(100%-80px)] md:h-[calc(100%-80px)]  flex justify-center items-center z-30 bg-[#000000a2]  backdrop-blur-sm"
                   onClick={() => {
                     // console.log("clicked");
                     setDelConfirmation(false);

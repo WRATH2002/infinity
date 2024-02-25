@@ -23,6 +23,9 @@ import {
   clearAllGroupMembers,
 } from "../utils/chatSlice";
 import {
+  FieldValue,
+  Firestore,
+  arrayUnion,
   deleteDoc,
   doc,
   onSnapshot,
@@ -746,11 +749,11 @@ const SearchFriends = (props) => {
 //   },
 // ];
 
-const UserList = () => {
+const UserList = (props) => {
   // const [SearchUserList, setSearchUserList] = useState([]);
   const [searchUser, setSearchUser] = useState("");
   const [searchFlag, setSearchFlag] = useState(false);
-  const [section, setSection] = useState("Chat");
+  // const [section, setSection] = useState("Chat");
 
   const dispatch = useDispatch();
   const UserList = useSelector((store) => store.chat.FriendList);
@@ -775,10 +778,13 @@ const UserList = () => {
   const [ownerInfo, setOwnerInfo] = useState("");
   const [statusImage, setStatusImage] = useState();
   const [statusTextModal, setStatusTextModal] = useState(false);
-  const [statusImageUrl, setStatusImageUrl] = useState("");
+  const [statusImageUrl, setStatusImageUrl] = useState();
   const [nameChangeFlag, setNameChangeFlag] = useState(false);
   const [aboutChangeFlag, setAboutChangeFlag] = useState(false);
   const [accountStatus, setAccountStatus] = useState(false);
+
+  const [statusPosition, setStatusPosition] = useState(0);
+  // const [left, setRight] = useState(0);
   // addFriendList;
   console.log("UserList");
   console.log(UserList);
@@ -800,7 +806,7 @@ const UserList = () => {
       setOwnerInfo(snapshot?.data()?.Info);
       setIsStatus(snapshot?.data()?.Status);
       setStatusImageUrl(snapshot?.data()?.Status);
-      setStatusCount(snapshot?.data()?.Status.length);
+      setStatusCount(snapshot?.data()?.Status?.length);
       setAccountStatus(snapshot?.data()?.AccountStatus);
       // setProfileURL(snapshot?.data()?.Photo);
       setStatusTimestamp(snapshot?.data()?.LastStatus);
@@ -937,7 +943,9 @@ const UserList = () => {
   }
 
   useEffect(() => {
-    uploadImage();
+    if (statusImage?.length != 0) {
+      uploadImage();
+    }
   }, [statusImage]);
 
   const uploadImageGetUrl = async (fileRef) => {
@@ -946,9 +954,12 @@ const UserList = () => {
       getDownloadURL(snapshot.ref).then((url) => {
         console.log(url);
         setTempUrl(url);
-        const statusRef = db.collection("Chat Record").doc(user.uid).update({
-          Status: url,
-        });
+        const statusRef = db
+          .collection("Chat Record")
+          .doc(user.uid)
+          .update({
+            Status: arrayUnion(url),
+          });
         // var temp = formatAMPM(new Date());
         // storeToReactStore(
         //   Messages,
@@ -1091,7 +1102,7 @@ const UserList = () => {
 
   return (
     <>
-      <div className="w-[calc(100%-20px)] md:w-full lg:w-full  h-[calc(100%-140px)] flex flex-col items-end  pt-[0px] drop-shadow-md overflow-y-scroll">
+      <div className="w-[calc(100%-20px)] md:w-full lg:w-full  h-[calc(100%-140px)] flex flex-col items-end  pt-[0px] overflow-y-scroll">
         {searchFlag === true ? (
           <>
             <div className="min-h-[70px] w-full  flex justify-center items-center">
@@ -1149,11 +1160,11 @@ const UserList = () => {
               )}
             </div>
           </>
-        ) : section === "All" ? (
+        ) : props.data === "All" ? (
           <>
             {isSearchBar === false ? (
               <>
-                <div className="fixed bottom-[10px]  mr-[10px]  md:mr-[20px] lg:mr-[20px]   w-[calc(100%-20px)] md:w-[calc(100%-40px)] lg:w-[calc(100%-40px)] flex justify-end items-center min-h-[45px]  overflow-hidden z-[100] ">
+                <div className="fixed bottom-[90px]  mr-[10px]  md:mr-[20px] lg:mr-[20px]   w-[calc(100%-20px)] md:w-[calc(100%-40px)] lg:w-[calc(100%-40px)] flex justify-end items-center min-h-[45px]  overflow-hidden z-[100] ">
                   <input
                     disabled
                     style={{ transition: ".5s" }}
@@ -1192,7 +1203,7 @@ const UserList = () => {
               </>
             ) : (
               <>
-                <div className="fixed bottom-[10px]  mr-[10px]  md:mr-[20px] lg:mr-[20px]  w-[calc(100%-20px)] md:w-[calc(100%-40px)] lg:w-[calc(100%-40px)] flex justify-end items-center min-h-[45px]  overflow-hidden z-[100] ">
+                <div className="fixed bottom-[90px]  mr-[10px]  md:mr-[20px] lg:mr-[20px]  w-[calc(100%-20px)] md:w-[calc(100%-40px)] lg:w-[calc(100%-40px)] flex justify-end items-center min-h-[45px]  overflow-hidden z-[100] ">
                   <input
                     style={{ transition: ".5s", zIndex: "60" }}
                     value={searchUser}
@@ -1247,7 +1258,7 @@ const UserList = () => {
               )}
             </div>
           </>
-        ) : section === "Chat" ? (
+        ) : props.data === "Chat" ? (
           <div className="w-full lg:w-full md:w-full h-[(100%-110px)] ">
             {UserList.length === 0 ? (
               <>
@@ -1263,7 +1274,7 @@ const UserList = () => {
               </>
             )}
           </div>
-        ) : section === "Group" ? (
+        ) : props.data === "Group" ? (
           <>
             {groupModal === true ? (
               <div
@@ -1420,24 +1431,24 @@ const UserList = () => {
               <span>No Friends Yet</span>
             </div> */}
           </>
-        ) : section === "Status" ? (
+        ) : props.data === "Status" ? (
           <>
             {showStatus === true ? (
               // <div className="fixed">
-              <div className=" z-30 fixed bottom-0 h-[100svh] w-full  flex-col flex justify-center items-center">
+              <div className=" z-30 fixed bottom-0 h-[100svh] bg-[#1b202d] w-full md:w-[400px] lg:w-[400px] left-0 flex-col flex justify-center items-center">
                 {/* Cross ------------------------- */}
-                {/* <div
-                  className="fixed right-0 top-[25px] w-[40px] h-[40px]  rounded-full hover:bg-[white] hover:text-black text-white flex justify-center items-center  cursor-pointer rotate-45 z-40"
+                <div
+                  className="fixed top-[25px] left-[calc(100%-60px)] md:left-[calc(400px-60px)]  lg:left-[calc(400px-60px)]  w-[40px] h-[40px]  rounded-full bg-[#455172] drop-shadow-none text-white flex justify-center items-center  cursor-pointer rotate-45 z-40"
                   onClick={() => {
                     setShowStatus(false);
                   }}
                   style={{ transition: ".4s" }}
                 >
                   <FaPlus className="text-[17px]" />
-                </div> */}
+                </div>
                 {/* Profile ---------------------- */}
                 <div
-                  className=" group w-full h-[90px] py-[10px] flex justify-start items-center bg-[#1c1f2f] cursor-pointer font-[google] font-normal  px-[20px]  text-[#ffffff]  fixed top-0 border-b-[1px] border-[#404040]"
+                  className=" group w-full md:w-[400px] lg:w-[400px] h-[90px] py-[10px] flex justify-start items-center bg-[#1c1f2f] cursor-pointer font-[google] font-normal  px-[20px]  text-[#ffffff]  fixed top-0 border-b-[1px] border-[#404040]  drop-shadow-none"
                   onClick={() => {
                     // setShowStatus(true);
                   }}
@@ -1458,49 +1469,77 @@ const UserList = () => {
                   <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
                     <div className="w-full font-semibold flex h-[23px]">
                       <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
-                        {/* {props.data.user} */}
-                        {/* {ownerName} */}
                         My Status
                       </span>
-                      <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light">
-                        {/* {props.data.time} */}
-                        {/* {Time} */}
-                        {/* {statusCount} */}
-                      </span>
+                      <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light"></span>
                     </div>
                     <div className="w-full flex h-[23px] justify-between items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[google] font-light">
                       {statusTimestamp}
                     </div>
-                    {/* <span className="text-[15px]">Hello! How Are you</span> */}
                   </div>
                 </div>
-                <div className=" z-30 fixed bottom-0 h-[calc(100svh-90px)] w-full lg:w-[360px] md:w-[360px] bg-[#1c1f2f] rounded-lg  flex-col flex justify-center items-center">
+                <div className=" z-30 fixed bottom-0 h-[calc(100svh-90px)] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] left-[20px] md:left-[20px] lg:left-[20px] rounded-lg  flex-col flex justify-center items-center  drop-shadow-none">
                   {/* Left Arrow ------------------------- */}
-                  <div className="fixed w-[40px] h-[40px] rounded-full bg-[#00000083] hover:bg-[black] cursor-pointer text-[#ffb6b5] flex justify-center items-center left-0">
-                    <FaAngleLeft className="text-[17px]" />
-                  </div>
-                  {/* Right Arrow ------------------------- */}
-                  <div className="fixed w-[40px] h-[40px] rounded-full bg-[#00000083] hover:bg-[black] cursor-pointer text-[#ffb6b5] flex justify-center items-center right-0">
-                    <FaAngleRight className="text-[17px]" />
-                  </div>
 
-                  {/* Status ------------------------- */}
-                  {statusImageUrl ? (
-                    <img
-                      className="w-full rounded-xl"
-                      src={statusImageUrl}
-                    ></img>
-                  ) : (
+                  {statusPosition === 0 ? (
                     <></>
+                  ) : (
+                    <>
+                      <div className="fixed w-[40px] h-[60px] rounded-r-xl bg-[#000000a6] cursor-pointer text-[#ffb6b5] flex justify-center items-center left-0">
+                        <FaAngleLeft
+                          className="text-[19px]"
+                          onClick={() => {
+                            if (statusPosition > 0) {
+                              setStatusPosition(statusPosition - 1);
+                            }
+                          }}
+                        />
+                      </div>
+                    </>
                   )}
 
+                  {/* Right Arrow ------------------------- */}
+                  {statusPosition === statusCount - 1 ? (
+                    <></>
+                  ) : (
+                    <>
+                      <div className="fixed w-[40px] h-[60px] rounded-l-xl bg-[#000000a6] cursor-pointer text-[#ffb6b5] flex justify-center items-center right-0">
+                        <FaAngleRight
+                          className="text-[19px]"
+                          onClick={() => {
+                            if (statusPosition < statusCount - 1) {
+                              setStatusPosition(statusPosition + 1);
+                            }
+                          }}
+                        />
+                      </div>
+                    </>
+                  )}
+
+                  {/* Status ------------------------- */}
+                  {/* {statusImageUrl ? ( */}
+                  <img
+                    className="w-full rounded-xl object-cover"
+                    src={statusImageUrl[statusPosition]}
+                    // onError={styl}
+                  ></img>
+                  {/* ) : ( */}
+                  {/* <></> */}
+                  {/* )} */}
+
                   {/* Status Count Indication ------------------------- */}
-                  <div className="fixed bottom-[10px] flex ">
-                    {Array(3)
+                  <div className="fixed bottom-[20px] flex ">
+                    {Array(statusCount)
                       .fill()
-                      .map((count) => {
+                      .map((item, index) => {
                         return (
-                          <div className="w-[10px] mx-[2px] h-[4px] bg-white rounded-full"></div>
+                          <>
+                            {index === statusPosition ? (
+                              <div className="w-[4px] mx-[2px] h-[4px] bg-white rounded-full"></div>
+                            ) : (
+                              <div className="w-[4px] mx-[2px] h-[4px] bg-[#8d8d8d] rounded-full"></div>
+                            )}
+                          </>
                         );
                       })}
                   </div>
@@ -1513,14 +1552,14 @@ const UserList = () => {
             {statusModal === true ? (
               <>
                 <div
-                  className="fixed z-20 bottom-[20px] w-[40px] h-[40px]  rounded-full bg-[white] text-black  flex justify-center items-center rotate-[135deg] cursor-pointer"
+                  className="fixed z-20 bottom-[20px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f] text-white  flex justify-center items-center rotate-[135deg] cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                     setStatusTextModal(false);
                   }}
                   style={{ transition: ".4s" }}
                 >
-                  <FaPlus className="text-[17px]" />
+                  <FaPlus className="text-[19px]" />
                 </div>
                 {/* Camera ---------------------- */}
 
@@ -1534,7 +1573,7 @@ const UserList = () => {
                   }}
                 ></input>
                 <label
-                  className="fixed z-20 opacity-100 bottom-[20px] mr-[50px] w-[40px] h-[40px]  rounded-full bg-white hover:bg-[white] hover:text-black text-black flex justify-center items-center  cursor-pointer"
+                  className="fixed z-20 opacity-100 bottom-[20px] mr-[70px] md:mr-[80px] lg:mr-[80px] w-[50px] h-[50px]  rounded-full bg-[#292f3f]   text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     // setStatusModal(!statusModal);
                     setStatusTextModal(false);
@@ -1542,13 +1581,13 @@ const UserList = () => {
                   style={{ transition: ".4s" }}
                   for="groupDp"
                 >
-                  <BsCameraFill className="text-[17px]" />
+                  <BsCameraFill className="text-[19px]" />
                 </label>
 
                 {/* write ---------------------- */}
 
                 <div
-                  className="fixed z-20 opacity-100 bottom-[70px] mr-[0] w-[40px] h-[40px]  rounded-full bg-white hover:bg-[white] hover:text-black text-black flex justify-center items-center  cursor-pointer"
+                  className="fixed z-20 opacity-100 bottom-[80px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f]  text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     setStatusTextModal(!statusTextModal);
                   }}
@@ -1557,20 +1596,20 @@ const UserList = () => {
                   {statusTextModal === true ? (
                     <img src={tick} className="w-full"></img>
                   ) : (
-                    <FaPen className="text-[17px]" />
+                    <FaPen className="text-[19px]" />
                   )}
                 </div>
               </>
             ) : (
               <>
                 <div
-                  className="fixed z-20 bottom-[20px] w-[40px] h-[40px]  rounded-full hover:bg-[white] hover:text-black text-white flex justify-center items-center  cursor-pointer"
+                  className="fixed z-20 bottom-[20px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f] text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                   }}
                   style={{ transition: ".4s" }}
                 >
-                  <FaPlus className="text-[17px]" />
+                  <FaPlus className="text-[19px]" />
                 </div>
 
                 {/* Camera ---------------------- */}
@@ -1581,7 +1620,7 @@ const UserList = () => {
                   accept="image/*"
                 ></input>
                 <label
-                  className="fixed z-20 opacity-0 bottom-[20px] mr-[0] w-[40px] h-[40px]  rounded-full bg-white hover:bg-[white] hover:text-black text-black flex justify-center items-center  cursor-pointer"
+                  className="fixed z-20 opacity-0 bottom-[20px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f]   text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                   }}
@@ -1593,7 +1632,7 @@ const UserList = () => {
                 {/* write ---------------------- */}
 
                 <div
-                  className="fixed z-10 opacity-0 bottom-[20px] mr-[0] w-[40px] h-[40px]  rounded-full bg-white hover:bg-[white] hover:text-black text-black flex justify-center items-center  cursor-pointer"
+                  className="fixed z-10 opacity-0 bottom-[20px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]   rounded-full bg-[#292f3f] text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                   }}
@@ -1664,42 +1703,45 @@ const UserList = () => {
             )}
 
             {isStatus ? (
-              <div
-                className=" group w-full h-[70px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal hover:bg-[#ffffffe1] px-[10px]  text-[#ffffff] hover:text-[#000000] border-t-[1px] border-b-[1px] border-[#404040]"
-                onClick={() => {
-                  setShowStatus(true);
-                }}
-              >
-                <div className="w-[50px] h-[50px] border-[2.4px] border-[#a7ff2e] rounded-full">
-                  {profileURL === "nophoto" ? (
-                    <img
-                      src={profile2}
-                      className="w-full h-full rounded-full object-cover "
-                    ></img>
-                  ) : (
-                    <img
-                      src={profileURL}
-                      className="w-full h-full rounded-full object-cover "
-                    ></img>
-                  )}
-                </div>
-                <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                  <div className="w-full font-semibold flex h-[23px]">
-                    <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
-                      {/* {props.data.user} */}
-                      {/* {ownerName} */}
-                      My Status
-                    </span>
-                    <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light">
-                      {/* {props.data.time} */}
-                      {/* {Time} */}
-                      {/* {statusCount} */}
-                    </span>
+              <div className="group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center bg-transparent  cursor-pointer    z-10 select-none">
+                {" "}
+                <div
+                  className=" group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px] border-[#35384a] flex justify-center items-center bg-transparent  cursor-pointer   z-10 select-none"
+                  onClick={() => {
+                    setShowStatus(true);
+                  }}
+                >
+                  <div className="w-[50px] h-[50px] border-[1.4px] border-[#a7ff2e] rounded-full">
+                    {profileURL === "nophoto" ? (
+                      <img
+                        src={profile2}
+                        className="w-full h-full rounded-full object-cover "
+                      ></img>
+                    ) : (
+                      <img
+                        src={profileURL}
+                        className="w-full h-full rounded-full object-cover "
+                      ></img>
+                    )}
                   </div>
-                  <div className="w-full flex h-[23px] justify-between items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[google] font-light">
-                    {statusTimestamp}
+                  <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
+                    <div className="w-full font-semibold flex h-[23px]">
+                      <span className="w-[calc(100%-70px)] text-[16px] h-full text-[white]  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
+                        {/* {props.data.user} */}
+                        {/* {ownerName} */}
+                        My Status
+                      </span>
+                      <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light">
+                        {/* {props.data.time} */}
+                        {/* {Time} */}
+                        {/* {statusCount} */}
+                      </span>
+                    </div>
+                    <div className="w-full flex h-[23px] justify-between items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[google] font-light">
+                      {statusTimestamp}07:34 pm
+                    </div>
+                    {/* <span className="text-[15px]">Hello! How Are you</span> */}
                   </div>
-                  {/* <span className="text-[15px]">Hello! How Are you</span> */}
                 </div>
               </div>
             ) : (
@@ -1956,7 +1998,7 @@ const UserList = () => {
 
       <div className="w-full md:w-[400px] lg:w-[400px] h-[70px]   overflow-hidden fixed bottom-0 flex items-center justify-center bg-[#1c1f2f] text-[white]">
         <div className="fixed w-[50px] h-[50px] rounded-full text-[white] bg-[#ffb6b5] drop-shadow-md"></div>
-        {section === "All" ? (
+        {props.data === "All" ? (
           <div
             className="w-full h-full  flex  items-center ml-[0]"
             style={{ transition: ".5s" }}
@@ -1966,7 +2008,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Status");
+                  props.setData("Status");
                   setIsSearchBar(false);
                 }}
               />
@@ -1976,7 +2018,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Setting");
+                  props.setData("Setting");
                   setIsSearchBar(false);
                 }}
               />
@@ -1990,7 +2032,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   allUserList();
-                  setSection("All");
+                  props.setData("All");
                   setStatusModal(false);
                 }}
               />
@@ -2000,7 +2042,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Group");
+                  props.setData("Group");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2012,7 +2054,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
-                  setSection("Chat");
+                  props.setData("Chat");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2026,7 +2068,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Status");
+                  props.setData("Status");
                   setIsSearchBar(false);
                 }}
               />
@@ -2036,7 +2078,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Setting");
+                  props.setData("Setting");
                   setIsSearchBar(false);
                 }}
               />
@@ -2047,7 +2089,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   allUserList();
-                  setSection("All");
+                  props.setData("All");
                   setStatusModal(false);
                 }}
               />
@@ -2057,7 +2099,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Group");
+                  props.setData("Group");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2069,14 +2111,14 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
-                  setSection("Chat");
+                  props.setData("Chat");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
               />
             </div>
           </div>
-        ) : section === "Group" ? (
+        ) : props.data === "Group" ? (
           <div
             className="w-full h-full  flex  items-center ml-[-40%] "
             style={{ transition: ".5s" }}
@@ -2086,7 +2128,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Status");
+                  props.setData("Status");
                   setIsSearchBar(false);
                 }}
               />
@@ -2096,7 +2138,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Setting");
+                  props.setData("Setting");
                   setIsSearchBar(false);
                 }}
               />
@@ -2107,7 +2149,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   allUserList();
-                  setSection("All");
+                  props.setData("All");
                   setStatusModal(false);
                 }}
               />
@@ -2120,7 +2162,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Group");
+                  props.setData("Group");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2132,7 +2174,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
-                  setSection("Chat");
+                  props.setData("Chat");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2146,7 +2188,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Status");
+                  props.setData("Status");
                   setIsSearchBar(false);
                 }}
               />
@@ -2156,7 +2198,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Setting");
+                  props.setData("Setting");
                   setIsSearchBar(false);
                 }}
               />
@@ -2167,7 +2209,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   allUserList();
-                  setSection("All");
+                  props.setData("All");
                   setStatusModal(false);
                 }}
               />
@@ -2177,7 +2219,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Group");
+                  props.setData("Group");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2189,14 +2231,14 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
-                  setSection("Chat");
+                  props.setData("Chat");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
               />
             </div>
           </div>
-        ) : section === "Chat" ? (
+        ) : props.data === "Chat" ? (
           <div
             className="w-full h-full  flex  items-center ml-[-80%] "
             style={{ transition: ".5s" }}
@@ -2206,7 +2248,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Status");
+                  props.setData("Status");
                   setIsSearchBar(false);
                 }}
               />
@@ -2216,7 +2258,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Setting");
+                  props.setData("Setting");
                   setIsSearchBar(false);
                 }}
               />
@@ -2227,7 +2269,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   allUserList();
-                  setSection("All");
+                  props.setData("All");
                   setStatusModal(false);
                 }}
               />
@@ -2237,7 +2279,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Group");
+                  props.setData("Group");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2252,7 +2294,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
-                  setSection("Chat");
+                  props.setData("Chat");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2266,7 +2308,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Status");
+                  props.setData("Status");
                   setIsSearchBar(false);
                 }}
               />
@@ -2276,7 +2318,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Setting");
+                  props.setData("Setting");
                   setIsSearchBar(false);
                 }}
               />
@@ -2287,7 +2329,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   allUserList();
-                  setSection("All");
+                  props.setData("All");
                   setStatusModal(false);
                 }}
               />
@@ -2297,7 +2339,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Group");
+                  props.setData("Group");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2309,14 +2351,14 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
-                  setSection("Chat");
+                  props.setData("Chat");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
               />
             </div>
           </div>
-        ) : section === "Status" ? (
+        ) : props.data === "Status" ? (
           <div
             className="w-full h-full  flex  items-center ml-[-120%] "
             style={{ transition: ".5s" }}
@@ -2326,7 +2368,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Status");
+                  props.setData("Status");
                   setIsSearchBar(false);
                 }}
               />
@@ -2336,7 +2378,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Setting");
+                  props.setData("Setting");
                   setIsSearchBar(false);
                 }}
               />
@@ -2347,7 +2389,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   allUserList();
-                  setSection("All");
+                  props.setData("All");
                   setStatusModal(false);
                 }}
               />
@@ -2357,7 +2399,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Group");
+                  props.setData("Group");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2369,7 +2411,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
-                  setSection("Chat");
+                  props.setData("Chat");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2386,7 +2428,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Status");
+                  props.setData("Status");
                   setIsSearchBar(false);
                 }}
               />
@@ -2396,7 +2438,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Setting");
+                  props.setData("Setting");
                   setIsSearchBar(false);
                 }}
               />
@@ -2407,7 +2449,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   allUserList();
-                  setSection("All");
+                  props.setData("All");
                   setStatusModal(false);
                 }}
               />
@@ -2417,7 +2459,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Group");
+                  props.setData("Group");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2429,7 +2471,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
-                  setSection("Chat");
+                  props.setData("Chat");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2446,7 +2488,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Status");
+                  props.setData("Status");
                   setIsSearchBar(false);
                 }}
               />
@@ -2456,7 +2498,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Setting");
+                  props.setData("Setting");
                   setIsSearchBar(false);
                 }}
               />
@@ -2467,7 +2509,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   allUserList();
-                  setSection("All");
+                  props.setData("All");
                   setStatusModal(false);
                 }}
               />
@@ -2477,7 +2519,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Group");
+                  props.setData("Group");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2489,7 +2531,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
-                  setSection("Chat");
+                  props.setData("Chat");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2503,7 +2545,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Status");
+                  props.setData("Status");
                   setIsSearchBar(false);
                 }}
               />
@@ -2516,7 +2558,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Setting");
+                  props.setData("Setting");
                   setIsSearchBar(false);
                 }}
               />
@@ -2527,7 +2569,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   allUserList();
-                  setSection("All");
+                  props.setData("All");
                   setStatusModal(false);
                 }}
               />
@@ -2537,7 +2579,7 @@ const UserList = () => {
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
-                  setSection("Group");
+                  props.setData("Group");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}
@@ -2549,7 +2591,7 @@ const UserList = () => {
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
-                  setSection("Chat");
+                  props.setData("Chat");
                   setIsSearchBar(false);
                   setStatusModal(false);
                 }}

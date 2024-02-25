@@ -41,14 +41,14 @@ const Login = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-xl h-[70%] bg-[#292f3f] flex flex-col justify-center items-center">
+      <div className="w-full lg:w-[350px] md:w-[350px] p-[40px] rounded-none md:rounded-xl lg:rounded-xl h-[100svh] md:h-[70%] lg:h-[70%]  flex flex-col justify-center items-center">
         {/* <span className="in  font-bold text-[40px] mb-[30px]">INFINITY</span> */}
         <div className="w-full flex flex-col ">
-          <span className="text-[32px] text-[white] font-[google] font-medium ">
+          <span className="text-[40px] text-[white] font-[google] font-bold tracking-wider ">
             Login{" "}
           </span>
-          <span className="text-[14px] font-normal text-[white] font-[google] ">
-            new user
+          <span className="text-[15px] font-normal text-[#cacaca] font-[google] ">
+            new user ?
             <span
               className="text-[#ffb6b5] hover:text-[#fe9c9a] cursor-pointer  font-normal"
               style={{ transition: ".3s" }}
@@ -80,7 +80,7 @@ const Login = () => {
           }}
         ></input> */}
         <input
-          className="log outline-none font-[google] mt-[40px] bg   w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-[white] bg-[#1b202d]"
+          className="log outline-none font-[google] mt-[40px] bg  text-[16px] w-full h-[50px] my-[10px] rounded-md px-[15px] font-normal  text-[white] bg-[#292f3f]"
           placeholder="Email"
           type="email"
           value={email}
@@ -89,37 +89,37 @@ const Login = () => {
         {show === true ? (
           <div className="w-full flex justify-center items-center">
             <input
-              className="log outline-none font-[google]    w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-[white] bg-[#1b202d]"
+              className=" log outline-none font-[google]  text-[16px]  w-full h-[50px] my-[10px] rounded-md px-[15px] font-normal  text-[white] bg-[#292f3f]"
               placeholder="Password"
               type="text"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></input>
             <div
-              className="w-[30px] h-[40px] ml-[-30px] flex justify-center items-center"
+              className="w-[50px] h-[40px] ml-[-50px] flex justify-center items-center"
               onClick={() => {
                 setShow(!show);
               }}
             >
-              <IoEyeOff className="text-[#ffb6b5]" />
+              <IoEyeOff className="text-[#ffb6b5] text-[20px]" />
             </div>
           </div>
         ) : (
           <div className="w-full flex justify-center items-center">
             <input
-              className="log outline-none font-[google]    w-full h-[40px] my-[6px] rounded-md px-[15px] font-normal text-[14px] text-[white] bg-[#1b202d]"
+              className="log outline-none font-[google] text-[16px]   w-full h-[50px] my-[10px] rounded-md px-[15px] font-normal  text-[white] bg-[#292f3f]"
               placeholder="Password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></input>
             <div
-              className="w-[30px] h-[40px] ml-[-30px] flex justify-center items-center"
+              className="w-[50px] h-[40px] ml-[-50px] flex justify-center items-center"
               onClick={() => {
                 setShow(!show);
               }}
             >
-              <IoEye className="text-[#ffb6b5]" />
+              <IoEye className="text-[#ffb6b5] text-[20px]" />
             </div>
           </div>
         )}
@@ -131,7 +131,7 @@ const Login = () => {
           Signup
         </button> */}
         <button
-          className="w-full h-[40px] text-[#000000] font-[google] font-medium outline-none flex justify-center items-center bg-[#ffb6b5] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
+          className="w-full h-[50px] text-[19px] text-[#000000] font-[google] font-medium outline-none flex justify-center items-center bg-[#ffb6b5] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signIn}

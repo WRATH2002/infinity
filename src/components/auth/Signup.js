@@ -107,13 +107,13 @@ const Signup = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-[300px] lg:w-[350px] md:w-[350px] p-[40px] rounded-lg h-[70%] bg-[#292f3f] flex flex-col justify-center items-center">
+      <div className="w-full lg:w-[350px] md:w-[350px] p-[40px] rounded-none md:rounded-xl lg:rounded-xl h-[100svh] md:h-[70%] lg:h-[70%]  flex flex-col justify-center items-center">
         <div className="w-full flex flex-col">
-          <span className="text-[32px] text-[white] font-[google] font-medium">
+          <span className="text-[40px] text-[white] font-[google] font-bold tracking-wider">
             Signup{" "}
           </span>
-          <span className="text-[14px] font-normal font-[google] text-[white] ">
-            already a user
+          <span className="text-[15px] font-normal font-[google] text-[#cacaca] ">
+            already a user ?
             <span
               className="text-[#ffb6b5] hover:text-[#fe9c9a] cursor-pointer font-normal"
               style={{ transition: ".3s" }}
@@ -126,14 +126,14 @@ const Signup = () => {
         </div>
         {/* <div>Signup</div> */}
         <input
-          className="input outline-none  mt-[40px]  w-full h-[40px] my-[6px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[white] bg-[#1b202d] log"
+          className="input outline-none  mt-[40px]  w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[white] bg-[#292f3f] log"
           placeholder="Name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         ></input>
         <input
-          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[white] bg-[#1b202d] log"
+          className="input outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[white] bg-[#292f3f] log"
           placeholder="Phone Number"
           type="tel"
           value={number}
@@ -145,7 +145,7 @@ const Signup = () => {
           }}
         ></input>
         <input
-          className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[white] bg-[#1b202d] log"
+          className="input outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[white] bg-[#292f3f] log"
           placeholder="Email"
           type="email"
           value={email}
@@ -154,37 +154,37 @@ const Signup = () => {
         {show === true ? (
           <div className="w-full flex justify-center items-center">
             <input
-              className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[white] bg-[#1b202d] log"
+              className="input outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[white] bg-[#292f3f] log"
               placeholder="Password"
               type="text"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></input>
             <div
-              className="w-[30px] h-[40px] ml-[-30px] flex justify-center items-center"
+              className="w-[50px] h-[40px] ml-[-50px] flex justify-center items-center"
               onClick={() => {
                 setShow(!show);
               }}
             >
-              <IoEyeOff className="text-[#ffb6b5]" />
+              <IoEyeOff className="text-[#ffb6b5] text-[20px]" />
             </div>
           </div>
         ) : (
           <div className="w-full flex justify-center items-center">
             <input
-              className="input outline-none    w-full h-[40px] my-[6px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[white] bg-[#1b202d] log"
+              className="input outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[white] bg-[#292f3f] log"
               placeholder="Password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></input>
             <div
-              className="w-[30px] h-[40px] ml-[-30px] flex justify-center items-center"
+              className="w-[50px] h-[40px] ml-[-50px] flex justify-center items-center"
               onClick={() => {
                 setShow(!show);
               }}
             >
-              <IoEye className="text-[#ffb6b5]" />
+              <IoEye className="text-[#ffb6b5] text-[20px]" />
             </div>
           </div>
         )}
@@ -197,7 +197,7 @@ const Signup = () => {
           Signup
         </button> */}
         <button
-          className="w-full h-[40px] text-[#000000] font-medium font-[google] outline-none flex justify-center items-center bg-[#ffb6b5] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
+          className="w-full h-[50px] text-[#000000] text-[19px] font-medium font-[google] outline-none flex justify-center items-center bg-[#ffb6b5] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signUp}

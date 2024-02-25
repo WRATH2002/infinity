@@ -30,7 +30,7 @@ import uploadd from "../assets/img/upload.png";
 import { GrFormUpload } from "react-icons/gr";
 import { FiSearch } from "react-icons/fi";
 
-const OwnerDetails = () => {
+const OwnerDetails = (props) => {
   const [ownerInfo, setOwnerInfo] = useState("");
   const [changeOwnerInfo, setChangeOwnerInfo] = useState("");
   const [ownerName, setOwnerName] = useState("");
@@ -43,6 +43,7 @@ const OwnerDetails = () => {
   const [image, setImage] = useState();
   const [profileURL, setProfileURL] = useState("");
   const [totalChats, setTotalChats] = useState(0);
+  const [totalUsers, setTotalUsers] = useState(0);
 
   useEffect(() => {
     fetchownerInfo();
@@ -56,8 +57,14 @@ const OwnerDetails = () => {
       .doc(user.uid)
       .collection("Chat Friends");
 
+    const usersRef = db.collection("Chat Record");
+
     onSnapshot(collectionRef, (snapshot) => {
       setTotalChats(snapshot.size);
+    });
+
+    onSnapshot(usersRef, (snapshot) => {
+      setTotalUsers(snapshot.size);
     });
 
     const userDoc = db.collection("Chat Record").doc(user.uid);
@@ -116,7 +123,15 @@ const OwnerDetails = () => {
       <Toaster position="bottom-center" reverseOrder={false} />
       <div className="w-full md:w-[400px] lg:w-[400px] h-[70px]  fixed top-0 flex  bg-[#1c1f2f] justify-between items-center px-[20px] overflow-hidden">
         <div className="text-[18px] w-[90%] font-[google] font-medium text-[#ffffff] flex flex-col justify-center items-start">
-          <span>Message's ( {totalChats} )</span>
+          {props.data === "Chat" ? (
+            <span>Message's ( {totalChats} )</span>
+          ) : props.data === "All" ? (
+            <span>Total User's ( {totalUsers} )</span>
+          ) : props.data === "Status" ? (
+            <span>Status's</span>
+          ) : (
+            <></>
+          )}
           {/* <span className="text-[13px] font-[google] font-normal">RECENT</span> */}
         </div>
         <div className="w-[10%] h-[40px] text-[#ffffff] rounded-full flex justify-end items-center overflow-hidden">
