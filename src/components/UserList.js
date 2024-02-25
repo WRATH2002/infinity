@@ -75,6 +75,12 @@ import { signOut } from "firebase/auth";
 import { RiEditFill } from "react-icons/ri";
 import { MdOutlineDone } from "react-icons/md";
 import { RiRadioButtonLine } from "react-icons/ri";
+import StatusUserList from "./StatusUserList";
+
+import { LuSettings2 } from "react-icons/lu";
+// import { MdGroups2 } from "react-icons/md";
+import { MdGroupAdd } from "react-icons/md";
+// import { BsFillChatSquareTextFill } from "react-icons/bs";
 // const Hello = () => {
 //   const [userName, setUserName] = useState("");
 //   const [photoURL, setPhotoURL] = useState("");
@@ -1278,7 +1284,7 @@ const UserList = (props) => {
           <>
             {groupModal === true ? (
               <div
-                className="fixed  bottom-[10px] mr-[10px] md:mr-[20px] lg:mr-[20px]  w-[50px] h-[50px] z-30 rounded-full bg-[#292f3f] text-[#ffb6b5]  flex justify-center items-center rotate-[135deg] cursor-pointer"
+                className="fixed  bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px]  w-[50px] h-[50px] z-30 rounded-full bg-[#292f3f] text-[white]  flex justify-center items-center rotate-[135deg] cursor-pointer"
                 onClick={() => {
                   setGroupModal(!groupModal);
                 }}
@@ -1288,7 +1294,7 @@ const UserList = (props) => {
               </div>
             ) : (
               <div
-                className="fixed  bottom-[10px] w-[50px] h-[50px] z-30 bg-[#292f3f] mr-[10px] md:mr-[20px] lg:mr-[20px]  rounded-full  text-[#ffb6b5] flex justify-center items-center  cursor-pointer"
+                className="fixed  bottom-[90px] w-[50px] h-[50px] z-30 bg-[#292f3f] mr-[10px] md:mr-[20px] lg:mr-[20px]  rounded-full  text-[white] flex justify-center items-center  cursor-pointer"
                 onClick={() => {
                   setGroupModal(!groupModal);
                 }}
@@ -1300,15 +1306,19 @@ const UserList = (props) => {
 
             {groupModal === true ? (
               <div
-                className="fixed bottom-[70px] mr-[10px] md:mr-[20px] lg:mr-[20px] h-[500px] rounded-xl w-[calc(100%-20px)] lg:w-[360px] md:w-[360px] bg-[#292f3f]   flex flex-col justify-center items-center"
+                className="fixed bottom-[150px] mr-[10px] md:mr-[20px] lg:mr-[20px] h-[500px] rounded-xl w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] bg-[#292f3f]   flex flex-col justify-center items-center"
                 style={{ transition: ".4s" }}
               >
                 {/* hello */}
-                <div className="group w-[110px] h-[110px] rounded-full bg-slate-500 flex  justify-center items-center ">
-                  <img
-                    src={tempUrl}
-                    className="w-[110px] h-[110px] z-10 rounded-full fixed object-cover"
-                  ></img>
+                <div className="group w-[110px] h-[110px] rounded-full bg-[#1b202d] flex  justify-center items-center ">
+                  {tempUrl.length != 0 ? (
+                    <img
+                      src={tempUrl}
+                      className="w-[110px] h-[110px] z-10 rounded-full fixed object-cover"
+                    ></img>
+                  ) : (
+                    <></>
+                  )}
                   <input
                     className="hidden"
                     type="file"
@@ -1329,12 +1339,12 @@ const UserList = (props) => {
                     onChange={(e) => {
                       setGroupName(e.target.value);
                     }}
-                    className="input bg-[#1b202d] h-[50px] rounded-xl mt-[30px] w-[80%] border-b-[2px] font-[work] tracking-[.4px] font-normal text-[14px] py-[5px] border-none px-[20px] outline-none"
-                    placeholder="Community Name"
+                    className="input bg-[#1b202d] h-[50px] rounded-xl mt-[30px] w-[80%] border-b-[2px] font-[work] tracking-[.4px] font-normal text-[15px] text-white py-[5px] border-none px-[20px] outline-none"
+                    placeholder="Group Name"
                   ></input>
                   <input
-                    className="input bg-[#1b202d] h-[50px] rounded-xl w-[80%]  mt-[10px] flex justify-start items-start border-b-[2px] font-[work] tracking-[.4px] font-normal text-[14px] py-[5px] border-none px-[20px] outline-none"
-                    placeholder="Community Descritption"
+                    className="input bg-[#1b202d] h-[50px] rounded-xl w-[80%]  mt-[10px] flex justify-start items-start border-b-[2px] font-[work] tracking-[.4px] font-normal text-[15px] text-white py-[5px] border-none px-[20px] outline-none"
+                    placeholder="Group Descritption"
                   ></input>
                 </div>
                 <div className="w-full h-[70px]  flex justify-center items-start overflow-x-scroll">
@@ -1385,7 +1395,7 @@ const UserList = (props) => {
                     placeholder="Community Descritption"
                   ></input>
                 </div> */}
-                {/* {groupName.length === 0 ? (
+                {groupName.length === 0 ? (
                   <div className="w-[40px] opacity-50 h-[40px] mt-[40px] rounded-full bg-[#2db82d] ">
                     <img src={tick} className="w-full"></img>
                   </div>
@@ -1399,7 +1409,7 @@ const UserList = (props) => {
                   >
                     <img src={tick} className="w-full"></img>
                   </div>
-                )} */}
+                )}
               </div>
             ) : (
               <></>
@@ -1415,7 +1425,9 @@ const UserList = (props) => {
             </div> */}
             <div className=" w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll overflow-x-hidden">
               {GroupList.length === 0 ? (
-                <>No Groups Yet</>
+                <div className=" group w-full h-[70px] py-[10px] flex justify-center items-center cursor-pointer font-[work]   px-[10px]  text-[#ffb6b5] ">
+                  <span>No Groups Yet</span>
+                </div>
               ) : (
                 <>
                   {GroupList?.map((friends) => {
@@ -1478,6 +1490,7 @@ const UserList = (props) => {
                     </div>
                   </div>
                 </div>
+
                 <div className=" z-30 fixed bottom-0 h-[calc(100svh-90px)] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] left-[20px] md:left-[20px] lg:left-[20px] rounded-lg  flex-col flex justify-center items-center  drop-shadow-none">
                   {/* Left Arrow ------------------------- */}
 
@@ -1552,7 +1565,7 @@ const UserList = (props) => {
             {statusModal === true ? (
               <>
                 <div
-                  className="fixed z-20 bottom-[20px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f] text-white  flex justify-center items-center rotate-[135deg] cursor-pointer"
+                  className="fixed z-20 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f] text-white  flex justify-center items-center rotate-[135deg] cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                     setStatusTextModal(false);
@@ -1573,7 +1586,7 @@ const UserList = (props) => {
                   }}
                 ></input>
                 <label
-                  className="fixed z-20 opacity-100 bottom-[20px] mr-[70px] md:mr-[80px] lg:mr-[80px] w-[50px] h-[50px]  rounded-full bg-[#292f3f]   text-white flex justify-center items-center  cursor-pointer"
+                  className="fixed z-20 opacity-100 bottom-[90px] mr-[70px] md:mr-[80px] lg:mr-[80px] w-[50px] h-[50px]  rounded-full bg-[#292f3f]   text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     // setStatusModal(!statusModal);
                     setStatusTextModal(false);
@@ -1587,14 +1600,14 @@ const UserList = (props) => {
                 {/* write ---------------------- */}
 
                 <div
-                  className="fixed z-20 opacity-100 bottom-[80px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f]  text-white flex justify-center items-center  cursor-pointer"
+                  className="fixed z-20 opacity-100 bottom-[150px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f]  text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     setStatusTextModal(!statusTextModal);
                   }}
                   style={{ transition: ".4s", transitionDelay: ".1s" }}
                 >
                   {statusTextModal === true ? (
-                    <img src={tick} className="w-full"></img>
+                    <img src={tick} className="w-[30px] "></img>
                   ) : (
                     <FaPen className="text-[19px]" />
                   )}
@@ -1603,7 +1616,7 @@ const UserList = (props) => {
             ) : (
               <>
                 <div
-                  className="fixed z-20 bottom-[20px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f] text-white flex justify-center items-center  cursor-pointer"
+                  className="fixed z-20 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f] text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                   }}
@@ -1620,7 +1633,7 @@ const UserList = (props) => {
                   accept="image/*"
                 ></input>
                 <label
-                  className="fixed z-20 opacity-0 bottom-[20px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f]   text-white flex justify-center items-center  cursor-pointer"
+                  className="fixed z-20 opacity-0 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f]   text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                   }}
@@ -1632,7 +1645,7 @@ const UserList = (props) => {
                 {/* write ---------------------- */}
 
                 <div
-                  className="fixed z-10 opacity-0 bottom-[20px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]   rounded-full bg-[#292f3f] text-white flex justify-center items-center  cursor-pointer"
+                  className="fixed z-10 opacity-0 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]   rounded-full bg-[#292f3f] text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                   }}
@@ -1645,7 +1658,7 @@ const UserList = (props) => {
             {statusTextModal === true ? (
               <>
                 <textarea
-                  className="h-[120px] resize-none py-[10px] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] bottom-[70px] fixed opacity-100 bg-[white] rounded-3xl outline-none px-[20px] font-[google] font-normal text-[14px] input"
+                  className="h-[120px] resize-none py-[10px] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] bottom-[150px] fixed mr-[10px] md:mr-[20px] lg:mr-[20px] opacity-100 bg-[#292f3f] rounded-lg outline-none px-[20px] font-[google] font-normal text-[15px] text-[white] input"
                   placeholder="Enter Text"
                   // type="textarea"
                   style={{ transition: ".4s" }}
@@ -1674,7 +1687,7 @@ const UserList = (props) => {
               // </div>
               <>
                 <textarea
-                  className="h-[40px] resize-none py-[10px] w-0 bottom-[70px] fixed opacity-0 bg-[white] rounded-3xl outline-none px-[20px] font-[google] font-normal text-[14px] input"
+                  className="h-[40px] resize-none py-[10px] w-0 bottom-[150px] fixed opacity-0 bg-[#292f3f] rounded-lg mr-[10px] md:mr-[20px] lg:mr-[20px] outline-none px-[20px] font-[google] font-normal text-[15px] text-[white] input"
                   placeholder="Enter Text"
                   // type="textarea"
                   style={{ transition: ".4s" }}
@@ -1745,7 +1758,7 @@ const UserList = (props) => {
                 </div>
               </div>
             ) : (
-              <div className=" group w-full h-[70px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal hover:bg-[#ffffffe1] px-[10px]  text-[#ffffff] hover:text-[#000000] border-t-[1px] border-b-[1px] border-[#404040]">
+              <div className=" group w-full h-[70px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal hover:bg-[#ffffffe1] px-[10px]  md:px-[20px] lg:px-[20px]  text-[#ffffff] hover:text-[#000000] border-t-[1px] border-b-[1px] border-[#404040]">
                 <div className="w-[50px] h-[50px]  rounded-full">
                   {profileURL === "nophoto" ? (
                     <img
@@ -1776,6 +1789,10 @@ const UserList = (props) => {
                 </div>
               </div>
             )}
+
+            {UserList?.map((friends) => {
+              return <StatusUserList data={friends} />;
+            })}
           </>
         ) : (
           <>
@@ -2014,7 +2031,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdSettings
+              <LuSettings2
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2027,7 +2044,7 @@ const UserList = (props) => {
               className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[black]"
               style={{ transitionDelay: ".25s" }}
             >
-              <BsFillPersonPlusFill
+              <MdGroupAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2049,7 +2066,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <PiChatCircleTextFill
+              <BsFillChatSquareTextFill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2074,7 +2091,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdSettings
+              <LuSettings2
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2084,7 +2101,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillPersonPlusFill
+              <MdGroupAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2106,7 +2123,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <PiChatCircleTextFill
+              <BsFillChatSquareTextFill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2134,7 +2151,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdSettings
+              <LuSettings2
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2144,7 +2161,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillPersonPlusFill
+              <MdGroupAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2169,7 +2186,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <PiChatCircleTextFill
+              <BsFillChatSquareTextFill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2194,7 +2211,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdSettings
+              <LuSettings2
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2204,7 +2221,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillPersonPlusFill
+              <MdGroupAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2226,7 +2243,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <PiChatCircleTextFill
+              <BsFillChatSquareTextFill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2254,7 +2271,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdSettings
+              <LuSettings2
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2264,7 +2281,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillPersonPlusFill
+              <MdGroupAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2289,7 +2306,7 @@ const UserList = (props) => {
               className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[black]"
               style={{ transitionDelay: ".25s" }}
             >
-              <PiChatCircleTextFill
+              <BsFillChatSquareTextFill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2314,7 +2331,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdSettings
+              <LuSettings2
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2324,7 +2341,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillPersonPlusFill
+              <MdGroupAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2346,7 +2363,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <PiChatCircleTextFill
+              <BsFillChatSquareTextFill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2374,7 +2391,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdSettings
+              <LuSettings2
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2384,7 +2401,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillPersonPlusFill
+              <MdGroupAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2406,7 +2423,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <PiChatCircleTextFill
+              <BsFillChatSquareTextFill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2434,7 +2451,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdSettings
+              <LuSettings2
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2444,7 +2461,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillPersonPlusFill
+              <MdGroupAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2466,7 +2483,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <PiChatCircleTextFill
+              <BsFillChatSquareTextFill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2494,7 +2511,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdSettings
+              <LuSettings2
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2504,7 +2521,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillPersonPlusFill
+              <MdGroupAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2526,7 +2543,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <PiChatCircleTextFill
+              <BsFillChatSquareTextFill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2554,7 +2571,7 @@ const UserList = (props) => {
               className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[black]"
               style={{ transitionDelay: ".25s" }}
             >
-              <MdSettings
+              <LuSettings2
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2564,7 +2581,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillPersonPlusFill
+              <MdGroupAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2586,7 +2603,7 @@ const UserList = (props) => {
               />
             </div>
             <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <PiChatCircleTextFill
+              <BsFillChatSquareTextFill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);

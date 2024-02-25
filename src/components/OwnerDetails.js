@@ -128,7 +128,9 @@ const OwnerDetails = (props) => {
           ) : props.data === "All" ? (
             <span>Total User's ( {totalUsers} )</span>
           ) : props.data === "Status" ? (
-            <span>Status's</span>
+            <span>Status's ( 3 )</span>
+          ) : props.data === "Group" ? (
+            <span>Group's ( 0 )</span>
           ) : (
             <></>
           )}
