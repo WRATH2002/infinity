@@ -59,6 +59,7 @@ import { TbPlaystationCircle } from "react-icons/tb";
 import { MdGroups } from "react-icons/md";
 import { BsFillChatSquareTextFill } from "react-icons/bs";
 import { PiChatCircleTextFill } from "react-icons/pi";
+import { MdPersonSearch } from "react-icons/md";
 // import { FaPlus } from "react-icons/fa6";
 import { MdSettings } from "react-icons/md";
 import { BsFillPersonPlusFill } from "react-icons/bs";
@@ -1202,7 +1203,7 @@ const UserList = (props) => {
                     }}
                   >
                     <div className="w-[35px] h-[35px] rounded-full flex justify-center items-center  z-[100]">
-                      <RiSearch2Line className="text-[20px]  z-[100] text-[#ffb6b5]" />
+                      <MdPersonSearch className="text-[25px]  z-[100] text-[#ffffff]" />
                     </div>
                   </div>
                 </div>
