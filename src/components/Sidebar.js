@@ -10,22 +10,22 @@ const Sidebar = () => {
     <>
       {ActiveChatUser.length === 0 ? (
         <div
-          className=" w-full lg:w-[400px] md:w-[400px] h-full bg-[#1B202D]  fixed lg:relative md:relative flex flex-col justify-start items-center z-20"
+          className=" w-full lg:w-[400px] md:w-[400px] h-full bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f]  fixed lg:relative md:relative flex flex-col justify-start items-center z-10"
           // style={{ transition: ".5s" }}
         >
           {/* Sidebar */}
-          <OwnerDetails data={section} setData={setSection} />
+          <OwnerDetails data={section} />
           <UserList data={section} setData={setSection} />
           {/* <div className="w-full h-full fixed flex md:hidden lg:hidden back z-0"></div> */}
         </div>
       ) : (
         <div
-          className=" w-0 lg:w-[400px] md:w-[400px] h-full bg-[#1B202D]  fixed lg:relative md:relative flex flex-col justify-start items-center z-0"
+          className=" w-0 lg:w-[400px] md:w-[400px] h-full bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f]  fixed lg:relative md:relative flex flex-col justify-start items-center z-0"
           // style={{ transition: ".5s" }}
         >
           {/* Sidebar */}
-          <OwnerDetails />
-          <UserList />
+          <OwnerDetails data={section} />
+          <UserList data={section} setData={setSection} />
         </div>
       )}
     </>

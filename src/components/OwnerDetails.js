@@ -29,7 +29,14 @@ import cross from "../assets/img/cross.png";
 import uploadd from "../assets/img/upload.png";
 import { GrFormUpload } from "react-icons/gr";
 import { FiSearch } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import { BsFillChatSquareTextFill } from "react-icons/bs";
+import { RiSettings3Fill } from "react-icons/ri";
 
+import { TiGroup } from "react-icons/ti";
+import { LuSettings2 } from "react-icons/lu";
+import { MdGroupAdd } from "react-icons/md";
+import { TbPlaystationCircle } from "react-icons/tb";
 const OwnerDetails = (props) => {
   const [ownerInfo, setOwnerInfo] = useState("");
   const [changeOwnerInfo, setChangeOwnerInfo] = useState("");
@@ -44,10 +51,48 @@ const OwnerDetails = (props) => {
   const [profileURL, setProfileURL] = useState("");
   const [totalChats, setTotalChats] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
-
+  const [isOnline, setIsOnline] = useState(true);
+  const [isAni, setIsAni] = useState();
+  const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
   useEffect(() => {
     fetchownerInfo();
   }, []);
+
+  useEffect(() => {
+    UpdateIsOnline();
+  }, [isOnline]);
+
+  useEffect(() => {
+    window.addEventListener("offline", function (e) {
+      console.log("offline");
+
+      setIsOnline(false);
+      setIsAni(true);
+      setTimeout(() => {
+        // console.log("Hello, World!");
+        setIsAni(false);
+      }, 2000);
+    });
+    window.addEventListener("online", function (e) {
+      console.log("online");
+      setIsOnline(true);
+      setIsAni(true);
+      setTimeout(() => {
+        // console.log("Hello, World!");
+        setIsAni(false);
+      }, 2000);
+    });
+    // console.log("navigator.onLine");
+    // console.log(navigator.onLine);
+  }, []);
+
+  function Transition() {
+    setIsAni(true);
+    setTimeout(() => {
+      // console.log("Hello, World!");
+      setIsAni(false);
+    }, 2000);
+  }
 
   function fetchownerInfo() {
     const user = firebase.auth().currentUser;
@@ -118,27 +163,248 @@ const OwnerDetails = (props) => {
       .catch((error) => console.log(error));
   };
 
+  const UpdateIsOnline = () => {
+    const user = firebase.auth().currentUser;
+    const statusRef = db.collection("Chat Record").doc(user.uid).update({
+      Online: isOnline,
+    });
+  };
+
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-full md:w-[400px] lg:w-[400px] h-[70px]  fixed top-0 flex  bg-[#1c1f2f] justify-between items-center px-[20px] overflow-hidden">
-        <div className="text-[18px] w-[90%] font-[google] font-medium text-[#ffffff] flex flex-col justify-center items-start">
-          {props.data === "Chat" ? (
-            <span>Message's ( {totalChats} )</span>
-          ) : props.data === "All" ? (
-            <span>Total User's ( {totalUsers} )</span>
-          ) : props.data === "Status" ? (
-            <span>Status's ( 3 )</span>
-          ) : props.data === "Group" ? (
-            <span>Group's ( 0 )</span>
-          ) : (
-            <></>
-          )}
-          {/* <span className="text-[13px] font-[google] font-normal">RECENT</span> */}
-        </div>
-        <div className="w-[10%] h-[40px] text-[#ffffff] rounded-full flex justify-end items-center overflow-hidden">
-          {/* <FiSearch className="text-[23px]" /> */}
-        </div>
+      <div className="w-full md:w-[400px] lg:w-[400px] h-[80px] bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f] fixed top-0 flex   justify-between items-center px-[10px] overflow-hidden py-[10px] z-0">
+        {ActiveChatUser.length === 0 ? (
+          <>
+            <div className="text-[18px] font-[google] font-medium text-[#ffffff] bg-[#292f3f] md:bg-[#1B202D] lg:bg-[#1B202D] w-full h-full flex justify-between items-center px-[10px] rounded-xl z-0">
+              <div>
+                {props.data === "Chat" ? (
+                  <span className="flex justify-start items-center">
+                    <BsFillChatSquareTextFill className="text-[20px]  text-white mr-[10px]" />
+                    Message's ( {totalChats} )
+                  </span>
+                ) : props.data === "All" ? (
+                  <span className="flex justify-start items-center">
+                    <MdGroupAdd className="text-[20px]  text-white mr-[10px]" />
+                    Total User's ( {totalUsers} )
+                  </span>
+                ) : props.data === "Status" ? (
+                  <span className="flex justify-start items-center">
+                    <TbPlaystationCircle className="text-[20px]  text-white mr-[10px]" />
+                    Status's ( 1 )
+                  </span>
+                ) : props.data === "Group" ? (
+                  <span className="flex justify-start items-center">
+                    <TiGroup className="text-[20px]  text-white mr-[10px]" />
+                    Group's ( 0 )
+                  </span>
+                ) : (
+                  <span className="flex justify-start items-center">
+                    <LuSettings2 className="text-[20px] mt-[-1px] text-white mr-[10px]" />
+                    Settings
+                  </span>
+                )}
+              </div>
+              <div className="w-[160px]  h-full   flex justify-end items-center pr-[21px] z-0">
+                {isOnline == true ? (
+                  <>
+                    {isAni == true ? (
+                      <>
+                        <div
+                          className="w-[105px] h-[28px] rounded-full bg-[#96df73] z-0 flex justify-center items-center overflow-visible text-black text-[15px] whitespace-nowrap "
+                          style={{ transition: ".4s" }}
+                        >
+                          <span
+                            className="opacity-100"
+                            style={{
+                              transition: ".2s",
+                              transitionDelay: ".2s",
+                            }}
+                          >
+                            Back Online
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          className="w-[8px] h-[8px] rounded-full bg-[#96df73] z-0 flex justify-end items-center overflow-hidden text-transparent text-black text-[15px] whitespace-nowrap cursor-pointer"
+                          onClick={() => {
+                            Transition();
+                          }}
+                          style={{ transition: ".4s", transitionDelay: ".4s" }}
+                        >
+                          <span
+                            className="opacity-0 text-transparent"
+                            style={{ transition: ".1s" }}
+                          >
+                            {/* Back Online */}
+                          </span>
+                        </div>
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {isAni == true ? (
+                      <>
+                        <div
+                          className="w-[105px] h-[28px] rounded-full bg-[#ffd557] z-0 flex justify-center items-center overflow-visible text-black text-[15px] whitespace-nowrap "
+                          style={{ transition: ".4s" }}
+                        >
+                          <span
+                            className="opacity-100"
+                            style={{
+                              transition: ".2s",
+                              transitionDelay: ".2s",
+                            }}
+                          >
+                            Oh! Offline
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          className="w-[8px] h-[8px] rounded-full bg-[#ffd557] z-0 flex justify-end items-center overflow-hidden text-transparent text-black text-[15px] whitespace-nowrap  cursor-pointer"
+                          style={{ transition: ".4s", transitionDelay: ".4s" }}
+                          onClick={() => {
+                            Transition();
+                          }}
+                        >
+                          <span
+                            className="opacity-0 text-transparent"
+                            style={{ transition: ".1s" }}
+                          >
+                            {/* Oh! Offline */}
+                          </span>
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="text-[18px] font-[google] font-medium text-[#ffffff] bg-[#292f3f] md:bg-[#1B202D] lg:bg-[#1B202D] w-full h-full hidden md:flex lg:flex justify-between items-center px-[10px] rounded-xl z-0">
+              <div>
+                {props.data === "Chat" ? (
+                  <span className="flex justify-start items-center">
+                    <BsFillChatSquareTextFill className="text-[20px]  text-white mr-[10px]" />
+                    Message's ( {totalChats} )
+                  </span>
+                ) : props.data === "All" ? (
+                  <span className="flex justify-start items-center">
+                    <MdGroupAdd className="text-[20px]  text-white mr-[10px]" />
+                    Total User's ( {totalUsers} )
+                  </span>
+                ) : props.data === "Status" ? (
+                  <span className="flex justify-start items-center">
+                    <TbPlaystationCircle className="text-[20px]  text-white mr-[10px]" />
+                    Status's ( 0 )
+                  </span>
+                ) : props.data === "Group" ? (
+                  <span className="flex justify-start items-center">
+                    <TiGroup className="text-[20px]  text-white mr-[10px]" />
+                    Group's ( 0 )
+                  </span>
+                ) : (
+                  <span className="flex justify-start items-center">
+                    <LuSettings2 className="text-[20px] mt-[-1px] text-white mr-[10px]" />
+                    Settings
+                  </span>
+                )}
+              </div>
+              <div className="w-[160px]  h-full hidden md:flex lg:flex   justify-end items-center pr-[21px] z-0">
+                {isOnline == true ? (
+                  <>
+                    {isAni == true ? (
+                      <>
+                        <div
+                          className="w-[105px] h-[28px] rounded-full bg-[#96df73] z-0 flex justify-center items-center overflow-visible text-black text-[15px] whitespace-nowrap "
+                          style={{ transition: ".4s" }}
+                        >
+                          <span
+                            className="opacity-100"
+                            style={{
+                              transition: ".2s",
+                              transitionDelay: ".2s",
+                            }}
+                          >
+                            Back Online
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          className="w-[8px] h-[8px] rounded-full bg-[#96df73] z-0 flex justify-end items-center overflow-hidden text-transparent text-black text-[15px] whitespace-nowrap cursor-pointer"
+                          onClick={() => {
+                            Transition();
+                          }}
+                          style={{ transition: ".4s", transitionDelay: ".4s" }}
+                        >
+                          <span
+                            className="opacity-0 text-transparent"
+                            style={{ transition: ".1s" }}
+                          >
+                            {/* Back Online */}
+                          </span>
+                        </div>
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {isAni == true ? (
+                      <>
+                        <div
+                          className="w-[105px] h-[28px] rounded-full bg-[#ffd557] z-0 flex justify-center items-center overflow-visible text-black text-[15px] whitespace-nowrap "
+                          style={{ transition: ".4s" }}
+                        >
+                          <span
+                            className="opacity-100"
+                            style={{
+                              transition: ".2s",
+                              transitionDelay: ".2s",
+                            }}
+                          >
+                            Oh! Offline
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          className="w-[8px] h-[8px] rounded-full bg-[#ffd557] z-0 flex justify-end items-center overflow-hidden text-transparent text-black text-[15px] whitespace-nowrap  cursor-pointer"
+                          style={{ transition: ".4s", transitionDelay: ".4s" }}
+                          onClick={() => {
+                            Transition();
+                          }}
+                        >
+                          <span
+                            className="opacity-0 text-transparent"
+                            style={{ transition: ".1s" }}
+                          >
+                            {/* Oh! Offline */}
+                          </span>
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* <span className="text-[13px] font-[google] font-normal">RECENT</span> */}
+
+        {/* <div className="w-[10%] h-[40px] text-[#ffffff] rounded-full flex justify-end items-center overflow-hidden">
+          <FiSearch className="text-[23px]" /> 
+        </div> */}
       </div>
       <div className="w-full md:w-[400px] lg:w-[400px] h-[70px] top-0 flex  bg-transparent justify-between items-center px-[20px]"></div>
     </>

@@ -66,6 +66,7 @@ import back from "../assets/img/back.png";
 import download from "../assets/img/download.png";
 import download1 from "../assets/img/download1.png";
 import download2 from "../assets/img/download2.png";
+import logo from "../assets/img/logo.png";
 import loading from "../assets/img/loading.png";
 import { Blurhash } from "react-blurhash";
 import { saveAs } from "file-saver";
@@ -176,7 +177,7 @@ const Messagess = (props) => {
                     src={download}
                     className="w-[25px]   z-20 drop-shadow-md"
                   ></img> */}
-                  <MdDownload className="text-[25px] text-[#ffb6b5]" />
+                  <MdDownload className="text-[25px] text-[#4b93b9]" />
                 </div>
 
                 {isImageLoaded === true ? (
@@ -232,7 +233,7 @@ const Messagess = (props) => {
                     <div className="w-[40px] h-full flex justify-start items-center">
                       <div className="w-[30px] h-[30px] rounded-full hover:bg-[#1b202d] flex justify-center items-center cursor-pointer">
                         {/* <img src={download} className="w-[20px]"></img> */}
-                        <MdDownload className="text-[25px] text-[#ffb6b5]" />
+                        <MdDownload className="text-[25px] text-[#4b93b9]" />
                       </div>
                     </div>
                   </div>
@@ -316,7 +317,7 @@ const Messagess = (props) => {
                     src={download}
                     className="w-[25px]  z-20 drop-shadow-md"
                   ></img> */}
-                  <MdDownload className="text-[25px] text-[#ffb6b5]" />
+                  <MdDownload className="text-[25px] text-[#4b93b9]" />
                 </div>
                 {isImageLoaded === true ? (
                   <div className="w-[60px]  right-[10px] bottom-0 h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px] text-[#bcbcbc] py-[8px] px-[14px] drop-shadow-md  font-[google] font-light">
@@ -370,7 +371,7 @@ const Messagess = (props) => {
                       <a href={props.data.Document} download>
                         <div className="w-[30px] h-[30px] rounded-full hover:bg-[#1b202d] flex justify-center items-center cursor-pointer">
                           {/* <img src={download} className="w-[20px]"></img> */}
-                          <MdDownload className="text-[25px] text-[#ffb6b5]" />
+                          <MdDownload className="text-[25px] text-[#4b93b9]" />
                         </div>
                       </a>
                     </div>
@@ -861,15 +862,24 @@ export const MessageBody = () => {
   return (
     <>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-full h-[calc(100%-130px)] overflow-y-scroll bg-[#1b202d] z-20 ">
+      <div className="w-full h-[calc(100%-130px)] mt-[80px] overflow-y-scroll bg-[#1b202d] z-20 ">
         <div
           ref={listRef}
           className="w-full h-full  flex flex-col   font-[google] font-normal"
         >
           {ActiveChatUser.length === 0 ? (
             <>
-              <div className="w-full h-full bg-[#0b0c0b] rounded-lg flex justify-center items-center drop-shadow-sm">
-                <img src={chat} className="w-full h-full"></img>
+              <div className="w-[calc(100%-400px)] right-0 top-[0] h-[100svh] fixed  bg-[#1b202d]  flex flex-col justify-center items-center drop-shadow-sm font-[google] text-white ">
+                <img src={logo} className="w-[150px] opacity-50"></img>
+                <span className="text-[30px] tracking-wide">
+                  Welcome to Infinity
+                </span>
+                <span className="text-[14px] font-light tracking-wider mt-[10px] text-[#b3b3b3]">
+                  Send and recieve messages with end-to-end encryption
+                </span>
+                <span className="text-[14px] font-light tracking-wider text-[#b3b3b3]">
+                  Invite your friends and start chatting with them
+                </span>
               </div>
 
               {console.log("zero ")}
@@ -880,8 +890,8 @@ export const MessageBody = () => {
                 <img src={ww} className="h-full w-full object-cover"></img>
               </div> */}
               <div className="w-full min-h-[40px]  rounded-lg flex justify-center items-center drop-shadow-sm px-[10px]">
-                <span className="w-full h-full flex justify-center items-center ml-[10px] font-[google] font-light text-[14px] text-[#ffb6b5] drop-shadow-md">
-                  <BiSolidLockAlt className="text-[#ffb6b5] mr-[10px]" />{" "}
+                <span className="w-full h-full flex justify-center items-center ml-[10px] font-[google] font-light text-[14px] text-[#4b93b9] drop-shadow-md">
+                  <BiSolidLockAlt className="text-[#4b93b9] mr-[10px]" />{" "}
                   Messages are end-to-end encrypted.
                 </span>
               </div>
@@ -937,7 +947,7 @@ export const MessageBody = () => {
                   for="document-file-input"
                   style={{ transition: "2s", transitionDelay: ".2s" }}
                 >
-                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#ffb6b5] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
+                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#4b93b9] hover:text-[ffffff] border-transparent hover:drop-shadow-xl rounded-md">
                     <input
                       id="document-file-input"
                       type="file"
@@ -958,7 +968,7 @@ export const MessageBody = () => {
                   style={{ transition: "2s", transitionDelay: ".4s" }}
                   for="image-file-input"
                 >
-                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#ffb6b5] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
+                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#4b93b9] hover:text-[ffffff] border-transparent hover:drop-shadow-xl rounded-md">
                     <input
                       id="image-file-input"
                       type="file"
@@ -978,7 +988,7 @@ export const MessageBody = () => {
                   style={{ transition: "2s", transitionDelay: ".6s" }}
                   for="video-file-input"
                 >
-                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#ffb6b5] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
+                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#4b93b9] hover:text-[ffffff] border-transparent hover:drop-shadow-xl rounded-md">
                     <input
                       id="video-file-input"
                       type="file"
@@ -998,7 +1008,7 @@ export const MessageBody = () => {
                   style={{ transition: "2s", transitionDelay: ".8s" }}
                   for="gif-file-input"
                 >
-                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#ffb6b5] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md">
+                  <div className="w-full h-full px-[10px] flex items-center  hover:bg-[#4b93b9] hover:text-[#ffffff] border-transparent hover:drop-shadow-xl rounded-md">
                     <input
                       id="gif-file-input"
                       type="file"
@@ -1019,7 +1029,7 @@ export const MessageBody = () => {
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
                   <div
-                    className="w-full h-full px-[10px] flex items-center  hover:bg-[#ffb6b5] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md"
+                    className="w-full h-full px-[10px] flex items-center  hover:bg-[#4b93b9] hover:text-[ffffff] border-transparent hover:drop-shadow-xl rounded-md"
                     onClick={() => {
                       toast("Sticker Sharing not Supported", {
                         icon: "⚠️",
@@ -1044,7 +1054,7 @@ export const MessageBody = () => {
                   {/* <MdContactPage className="text-[24px] mr-[8px]" /> */}
 
                   <div
-                    className="w-full h-full px-[10px] flex items-center  hover:bg-[#ffb6b5] hover:text-[black] border-transparent hover:drop-shadow-xl rounded-md"
+                    className="w-full h-full px-[10px] flex items-center  hover:bg-[#4b93b9] hover:text-[ffffff] border-transparent hover:drop-shadow-xl rounded-md"
                     onClick={() => {
                       toast("Contact Sharing not Supported", {
                         icon: "⚠️",
@@ -1082,7 +1092,7 @@ export const MessageBody = () => {
                 style={{ transition: "2s", transitionDelay: "1.4s" }}
               >
                 {image ? (
-                  <div className="w-full h-full hover:bg-[#ffb6b5]  hover:text-[black] px-[10px]  cursor-pointer rounded-lg ">
+                  <div className="w-full h-full hover:bg-[#4b93b9]  hover:text-[ffffff] px-[10px]  cursor-pointer rounded-lg ">
                     <button
                       className="w-full h-full opacity cursor-pointer flex justify-between items-center"
                       onClick={() => {
@@ -1141,7 +1151,7 @@ export const MessageBody = () => {
                     </button>
                   </div>
                 ) : video ? (
-                  <div className="w-full h-full hover:bg-[#ffb6b5]  hover:text-[black] px-[10px] rounded-lg  cursor-pointer ">
+                  <div className="w-full h-full hover:bg-[#4b93b9]  hover:text-[ffffff] px-[10px] rounded-lg  cursor-pointer ">
                     <button
                       className="w-full h-full opacity cursor-pointer flex justify-between items-center"
                       onClick={() => {
@@ -1181,7 +1191,7 @@ export const MessageBody = () => {
                     </button>
                   </div>
                 ) : Doc ? (
-                  <div className="w-full h-full hover:bg-[#ffb6b5]  hover:text-[black] px-[10px] rounded-lg  cursor-pointer ">
+                  <div className="w-full h-full hover:bg-[#4b93b9]  hover:text-[ffffff] px-[10px] rounded-lg  cursor-pointer ">
                     <div
                       className="w-full h-full opacity cursor-pointer flex justify-between items-center"
                       onClick={() => {
