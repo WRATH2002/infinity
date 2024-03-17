@@ -861,8 +861,7 @@ export const MessageBody = () => {
 
   return (
     <>
-      <Toaster position="bottom-center" reverseOrder={false} />
-      <div className="w-full h-[calc(100%-130px)] mt-[80px] overflow-y-scroll bg-[#1b202d] z-20 ">
+      <div className="w-full h-[calc(100%-140px)] pb-[10px] mt-[80px] overflow-y-scroll bg-[#1b202d] z-20 ">
         <div
           ref={listRef}
           className="w-full h-full  flex flex-col   font-[google] font-normal"
@@ -1654,6 +1653,7 @@ export const MessageBody = () => {
                   <BiSolidMicrophone
                     className="text-[25px]  "
                     onClick={() => {
+                      resetTranscript();
                       setIsListening(true);
                       SpeechRecognition.startListening({
                         continuous: true,

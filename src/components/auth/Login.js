@@ -40,7 +40,6 @@ const Login = () => {
   }
   return (
     <>
-      <Toaster position="bottom-center" reverseOrder={false} />
       <div className="w-full lg:w-[350px] md:w-[350px] p-[40px] rounded-none md:rounded-xl lg:rounded-xl h-[100svh] md:h-[70%] lg:h-[70%]  flex flex-col justify-center items-center">
         {/* <span className="in  font-bold text-[40px] mb-[30px]">INFINITY</span> */}
         <div className="w-full flex flex-col ">
@@ -50,7 +49,7 @@ const Login = () => {
           <span className="text-[15px] font-normal text-[#cacaca] font-[google] ">
             new user ?
             <span
-              className="text-[#ffb6b5] hover:text-[#fe9c9a] cursor-pointer  font-normal"
+              className="text-[#4b93b9] hover:text-[#fe9c9a] cursor-pointer  font-normal"
               style={{ transition: ".3s" }}
               onClick={() => changeMode()}
             >
@@ -80,7 +79,7 @@ const Login = () => {
           }}
         ></input> */}
         <input
-          className="log outline-none font-[google] mt-[40px] bg  text-[16px] w-full h-[50px] my-[10px] rounded-md px-[15px] font-normal  text-[white] bg-[#292f3f]"
+          className="log outline-none font-[google] mt-[40px] bg  text-[16px] w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[white] bg-[#292f3f]"
           placeholder="Email"
           type="email"
           value={email}
@@ -89,7 +88,7 @@ const Login = () => {
         {show === true ? (
           <div className="w-full flex justify-center items-center">
             <input
-              className=" log outline-none font-[google]  text-[16px]  w-full h-[50px] my-[10px] rounded-md px-[15px] font-normal  text-[white] bg-[#292f3f]"
+              className=" log outline-none font-[google]  text-[16px]  w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[white] bg-[#292f3f]"
               placeholder="Password"
               type="text"
               value={password}
@@ -101,13 +100,13 @@ const Login = () => {
                 setShow(!show);
               }}
             >
-              <IoEyeOff className="text-[#ffb6b5] text-[20px]" />
+              <IoEyeOff className="text-[#4b93b9] text-[20px]" />
             </div>
           </div>
         ) : (
           <div className="w-full flex justify-center items-center">
             <input
-              className="log outline-none font-[google] text-[16px]   w-full h-[50px] my-[10px] rounded-md px-[15px] font-normal  text-[white] bg-[#292f3f]"
+              className="log outline-none font-[google] text-[16px]   w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[white] bg-[#292f3f]"
               placeholder="Password"
               type="password"
               value={password}
@@ -119,7 +118,7 @@ const Login = () => {
                 setShow(!show);
               }}
             >
-              <IoEye className="text-[#ffb6b5] text-[20px]" />
+              <IoEye className="text-[#4b93b9] text-[20px]" />
             </div>
           </div>
         )}
@@ -131,7 +130,7 @@ const Login = () => {
           Signup
         </button> */}
         <button
-          className="w-full h-[50px] text-[19px] text-[#000000] font-[google] font-medium outline-none flex justify-center items-center bg-[#ffb6b5] hover:bg-[#b8dedf] hover:text-[black] rounded-md mt-[30px]"
+          className="w-full h-[50px] text-[19px] text-[#000000] font-[google] font-medium outline-none flex justify-center items-center bg-[#4b93b9] hover:bg-[#b8dedf] hover:text-[black] rounded-xl mt-[30px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signIn}

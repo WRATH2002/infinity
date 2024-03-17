@@ -231,6 +231,17 @@ export const UserInfo = () => {
 
   return (
     <>
+      {/* <div
+        className="w-full h-[80px] flex justify-center items-center px-[10px] fixed top-[10px]"
+        // style={{ zIndex: "9999" }}
+      >
+        <div className="w-full h-full bg-slate-400 rounded-xl flex justify-center items-center p-[10px]">
+          <div className="w-[60px] h-[60px] bg-white rounded-full mr-[10px]">
+            <img className="w-full h-full rounded-full object-cover"></img>
+          </div>
+          <div className="w-[calc(100%-70px)] h-full bg-slate-500"></div>
+        </div>
+      </div> */}
       {userSidebar === false ? (
         <>
           {ActiveChatUser.length === 0 ? (

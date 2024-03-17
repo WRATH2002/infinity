@@ -12,6 +12,7 @@ function App() {
         <div className="w-full h-[100dvh] flex">
           {/* <Sidebar /> */}
           {/* <Chatbody /> */}
+
           <AuthDetails />
         </div>
       </Provider>

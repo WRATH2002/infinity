@@ -172,7 +172,6 @@ const OwnerDetails = (props) => {
 
   return (
     <>
-      <Toaster position="bottom-center" reverseOrder={false} />
       <div className="w-full md:w-[400px] lg:w-[400px] h-[80px] bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f] fixed top-0 flex   justify-between items-center px-[10px] overflow-hidden py-[10px] z-0">
         {ActiveChatUser.length === 0 ? (
           <>

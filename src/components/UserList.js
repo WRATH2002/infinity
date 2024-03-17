@@ -151,6 +151,8 @@ const Friends = (props) => {
   const [chatLength, setChatlength] = useState(0);
   const [chatFlag, setChatFlag] = useState("");
   const [docName, setDocName] = useState("");
+  const [id, setId] = useState();
+  const [not, setNot] = useState(true);
 
   const dispatch = useDispatch();
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
@@ -159,6 +161,67 @@ const Friends = (props) => {
     setUserUid(props.data.UserId);
     fetchUserName();
   });
+
+  useEffect(() => {
+    if (
+      lastMsg !== "" &&
+      chatFlag == 2 &&
+      props.data.UserId !== ActiveChatUser
+    ) {
+      console.log(
+        "Incominggggggggggggggggggggggg------------------------------------------------------"
+      );
+      // toast.dismiss();
+      setNot(true);
+      toast.remove();
+      // const toastId =
+      //     toast.custom((t) => (
+
+      //       <div
+      //       style={{zIndex:"10000"}}
+      //         className={`${
+      //           t.visible ? "animate-enter" : "animate-leave"
+      //         } max-w-md z-50 w-full bg-[#292f3f] border border-[#797979] shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+      //       >
+      //         <div className="flex-1 w-0 p-4">
+      //           <div className="flex items-start">
+      //             <div className="flex-shrink-0 pt-0.5">
+      //               {photoURL === "nophoto" ? (
+      //                 <img
+      //                 className="h-10 w-10 rounded-full object-cover"
+      //                 src={profile2}
+      //                 alt=""
+      //               />
+
+      //                 ) : (
+      // <img
+      //                 className="h-10 w-10 rounded-full  object-cover"
+      //                 src={photoURL}
+      //                 alt=""
+      //               />
+
+      //                 )}
+
+      //             </div>
+      //             <div className="ml-3 flex-1">
+      //               <p className="text-sm font-medium text-[white]">{userName}</p>
+      //               <p className="mt-1 text-sm text-[#b3b3b3]">{lastMsg}</p>
+      //             </div>
+      //           </div>
+      //         </div>
+      //         {/* <div className="flex border-l ">
+      //           <button
+      //             onClick={() => toast.dismiss(t.id)}
+      //             className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      //           >
+      //             Close
+      //           </button>
+      //         </div> */}
+      //       </div>
+      //     ));
+      // setId(toastId)
+    }
+  }, [lastMsg]);
 
   function fetchUserName() {
     const user = firebase.auth().currentUser;
@@ -276,7 +339,7 @@ const Friends = (props) => {
 
   return (
     <>
-      {/* <Toaster position="bottom-center" reverseOrder={false} /> */}
+      <Toaster position="top-center" reverseOrder={false} />
       {ActiveChatUser === UserUid && UserUid != "" ? (
         <>
           <div className="group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center bg-[#292f3f]  cursor-pointer   border-b-[1px] border-[#35384a]   ">
@@ -1150,7 +1213,7 @@ const UserList = (props) => {
         {searchFlag === true ? (
           <>
             {/* <div className="min-h-[70px] w-full  flex justify-center items-center"> */}
-            <div className=" mt-[20px]   w-[100%] px-[0] md:px-[10px] lg:px-[10px] flex justify-end items-center h-[60px] pb-[10px] bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]   overflow-hidden  ">
+            <div className=" mt-[10px]   w-[100%] px-[0] md:px-[10px] lg:px-[10px] flex justify-end items-center h-[60px] pb-[10px] bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]   overflow-hidden  ">
               <input
                 style={{ transition: ".5s" }}
                 value={searchUser}
@@ -1208,7 +1271,7 @@ const UserList = (props) => {
           </>
         ) : props.data === "All" ? (
           <>
-            <div className=" mt-[20px]   w-[100%] px-[0] md:px-[10px] lg:px-[10px] flex justify-end items-center min-h-[60px] pb-[10px] bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]   overflow-hidden z-[100] ">
+            <div className=" mt-[10px]   w-[100%] px-[0] md:px-[10px] lg:px-[10px] flex justify-end items-center min-h-[60px] pb-[10px] bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]   overflow-hidden z-[100] ">
               <input
                 style={{ transition: ".5s", zIndex: "60" }}
                 value={searchUser}
