@@ -104,10 +104,115 @@ export const UserInfo = () => {
   const [media, setMedia] = useState();
   const [delConfirmation, setDelConfirmation] = useState(false);
 
+  const [userName, setUserName] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
+  const [lastMsg, setLastMsg] = useState("");
+  const [UserUid, setUserUid] = useState("");
+  const [Time, setTime] = useState("");
+  const [unreadMessages, setUnreadMessages] = useState(0);
+  const [chatLength, setChatlength] = useState(0);
+  const [chatFlag, setChatFlag] = useState("");
+  const [docName, setDocName] = useState("");
+
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
   const ImageMediaLink = useSelector((store) => store.chat.imageMediaLink);
 
   const dispatch = useDispatch();
+
+  const allFriends = useSelector((store) => store.chat.FriendList);
+
+  const [arr, setArr] = useState([]);
+  const [timer, setTimer] = useState(false);
+
+  useEffect(() => {
+    fetchNotification();
+  }, []);
+
+  function fetchNotification() {
+    const user = firebase.auth().currentUser;
+    allFriends.map((item) => {
+      if (item.UserId !== ActiveChatUser) {
+        const userMsg = db
+          .collection("Chat Record")
+          .doc(user.uid)
+          .collection("Chat Friends")
+          .doc(item.UserId);
+
+        var tt = "";
+        var t = "";
+        onSnapshot(userMsg, (snapshot) => {
+          setChatFlag(
+            snapshot?.data()?.ChatHistory[
+              snapshot?.data()?.ChatHistory?.length - 1
+            ]?.Flag
+          );
+          if (
+            snapshot?.data()?.ChatHistory[
+              snapshot?.data()?.ChatHistory?.length - 1
+            ]?.Message.length === 0
+          ) {
+            if (
+              snapshot?.data()?.ChatHistory[
+                snapshot?.data()?.ChatHistory?.length - 1
+              ]?.Image.length === 0
+            ) {
+              if (
+                snapshot?.data()?.ChatHistory[
+                  snapshot?.data()?.ChatHistory?.length - 1
+                ]?.Video.length === 0
+              ) {
+                if (
+                  snapshot?.data()?.ChatHistory[
+                    snapshot?.data()?.ChatHistory?.length - 1
+                  ]?.Document.length === 0
+                ) {
+                } else {
+                  setLastMsg("Document");
+                  setDocName(
+                    snapshot?.data()?.ChatHistory[
+                      snapshot?.data()?.ChatHistory?.length - 1
+                    ]?.docName
+                  );
+                }
+              } else {
+                setLastMsg("Video");
+              }
+            } else {
+              setLastMsg("Image");
+            }
+          } else {
+            setLastMsg(
+              snapshot?.data()?.ChatHistory[
+                snapshot?.data()?.ChatHistory?.length - 1
+              ]?.Message
+            );
+
+            const ref = db.collection("Chat Record").doc(item.UserId);
+            onSnapshot(ref, (snapshot) => {
+              tt = snapshot.data().Name;
+              t = snapshot.data().Photo;
+            });
+
+            setTimer(true);
+            setTimeout(() => {
+              setTimer(false);
+              setArr([]);
+            }, 4000);
+
+            setArr([
+              {
+                last: snapshot?.data()?.ChatHistory[
+                  snapshot?.data()?.ChatHistory?.length - 1
+                ]?.Message,
+                name: tt,
+                photo: t,
+              },
+            ]);
+          }
+        });
+      }
+    });
+  }
 
   useEffect(() => {
     fetchChatUserInfo();
@@ -248,9 +353,108 @@ export const UserInfo = () => {
             <></>
           ) : (
             <>
-              {" "}
+              {ActiveChatUser.length !== 0 && chatFlag == 2 ? (
+                <>
+                  {/* {arr.map((item) => {
+                        return (
+                          <> */}
+                  {arr.length != 0 && timer == true ? (
+                    <>
+                      <div
+                        className="w-full h-auto flex mt-[0]  justify-center items-center px-[10px] fixed top-[10px]"
+                        style={{ zIndex: "9999", transition: ".4s" }}
+                      >
+                        <div className="w-full h-full bg-[#292f3f8a] font-[google] text-[14px] text-white backdrop-blur-md rounded-xl flex flex-col justify-center items-center px-[20px] py-[5px]">
+                          <div className="w-full h-[70px]  flex justify-center items-center">
+                            <div
+                              className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]"
+                              style={{ transition: ".4s" }}
+                            >
+                              <img
+                                className="w-full h-full rounded-full object-cover"
+                                src={arr[0]?.photo}
+                              ></img>
+                            </div>
+                            <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start">
+                              <span className="text-[16px]">
+                                {arr[0]?.name}
+                              </span>
+                              <span className="text-[#b3b3b3] font-light">
+                                {arr[0]?.last}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="w-[60px] h-[4px] bg-[#939393] border border-[#939393] rounded-xl flex justify-center items-center mt-[15px] px-[10px] my-[5px]"></div>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div
+                        className="w-full h-auto flex mt-[-120px] justify-center items-center px-[10px] fixed top-[10px]"
+                        style={{ zIndex: "9999", transition: ".4s" }}
+                      >
+                        <div className="w-full h-full bg-[#292f3f8a] font-[google] text-[14px] text-white backdrop-blur-md rounded-xl flex flex-col justify-center items-center px-[20px] overflow-hidden py-[0]">
+                          <div className="w-full h-[70px]  flex justify-center items-center border-b-[.5px] border-[#696969]">
+                            <div className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]">
+                              <img
+                                className="w-full h-full rounded-full object-cover"
+                                src={arr[0]?.photo}
+                              ></img>
+                            </div>
+                            <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start">
+                              <span className="text-[16px]">
+                                {arr[0]?.name}
+                              </span>
+                              <span className="text-[#b3b3b3] font-light">
+                                {arr[0]?.last}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="w-[60px] h-[4px] bg-[#939393] border border-[#939393] rounded-xl flex justify-center items-center mt-[15px] px-[10px] my-[5px]"></div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  {/* </>
+                        );
+                      })} */}
+
+                  {/* <div className="w-full h-[70px] flex justify-center items-center  border-b-[.5px] border-[#696969]">
+                        <div className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]">
+                          <img
+                            className="w-full h-full rounded-full object-cover"
+                            src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/users%2FUbP9mzfzYOgr5Z9ivbHdAjxQ2Sf2%2FProfile%20Photo?alt=media&token=c30bf2b7-26ee-4074-aaf8-8c5c7e61e1c9"
+                          ></img>
+                        </div>
+                        <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start">
+                          <span className="text-[16px]">Niladri Purkait</span>
+                          <span className="text-[#b3b3b3] font-light">
+                            Hello Brp !!
+                          </span>
+                        </div>
+                      </div>
+                      <div className="w-full h-[70px] flex justify-center items-center  ">
+                        <div className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]">
+                          <img
+                            className="w-full h-full rounded-full object-cover"
+                            src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/users%2FP9RvCXpI86UBTywtRFDUSvPjxn22%2FProfile%20Photo?alt=media&token=b030ecbe-106f-4ca6-a93f-35c6373281b9"
+                          ></img>
+                        </div>
+
+                        <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start ">
+                          <span className="text-[16px]">Random Purkait</span>
+                          <span className="text-[#b3b3b3] font-light">
+                            YOu have won an mercedes
+                          </span>
+                        </div>
+                      </div> */}
+                </>
+              ) : (
+                <></>
+              )}
               <div
-                className="w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[0] fixed bg-[#1b202d] text-[white] z-30 overflow-hidden"
+                className="w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[0] fixed bg-[#1b202d] text-[white]  overflow-hidden"
                 // style={{ transition: ".5s" }}
               ></div>
               {/* <div

@@ -89,62 +89,6 @@ const Loading = (props) => {
         </>
       ) : (
         <>
-          {ActiveChatUser.length !== 0 ? (
-            <>
-              {" "}
-              {/* <div
-                className="w-full h-auto flex  justify-center items-center px-[10px] fixed top-[10px]"
-                style={{ zIndex: "9999" }}
-              >
-                <div className="w-full h-full bg-[#292f3f8a] font-[google] text-[14px] text-white backdrop-blur-md rounded-xl flex flex-col justify-center items-center px-[20px] py-[5px]">
-                  <div className="w-full h-[70px]  flex justify-center items-center border-b-[.5px] border-[#696969]">
-                    <div className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]">
-                      <img
-                        className="w-full h-full rounded-full object-cover"
-                        src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/users%2FmQWgSxyplBPSi1iTXfybzmoIQOr1%2FProfile%20Photo?alt=media&token=63d7a766-2417-46a4-9150-29711c10f835"
-                      ></img>
-                    </div>
-                    <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start">
-                      <span className="text-[16px]">Hmadri Purkait</span>
-                      <span className="text-[#b3b3b3]">
-                        Hey! whats up?? where you been
-                      </span>
-                    </div>
-                  </div>
-                  <div className="w-full h-[70px] flex justify-center items-center  border-b-[.5px] border-[#696969]">
-                    <div className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]">
-                      <img
-                        className="w-full h-full rounded-full object-cover"
-                        src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/users%2FUbP9mzfzYOgr5Z9ivbHdAjxQ2Sf2%2FProfile%20Photo?alt=media&token=c30bf2b7-26ee-4074-aaf8-8c5c7e61e1c9"
-                      ></img>
-                    </div>
-                    <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start">
-                      <span className="text-[16px]">Niladri Purkait</span>
-                      <span className="text-[#b3b3b3]">Hello Brp !!</span>
-                    </div>
-                  </div>
-                  <div className="w-full h-[70px] flex justify-center items-center  ">
-                    <div className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]">
-                      <img
-                        className="w-full h-full rounded-full object-cover"
-                        src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/users%2FP9RvCXpI86UBTywtRFDUSvPjxn22%2FProfile%20Photo?alt=media&token=b030ecbe-106f-4ca6-a93f-35c6373281b9"
-                      ></img>
-                    </div>
-
-                    <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start ">
-                      <span className="text-[16px]">Random Purkait</span>
-                      <span className="text-[#b3b3b3]">
-                        YOu have won an mercedes
-                      </span>
-                    </div>
-                  </div>
-                  <div className="w-[60px] h-[4px] bg-[#939393] border border-[#939393] rounded-xl flex justify-center items-center mt-[15px] px-[10px] my-[5px]"></div>
-                </div>
-              </div> */}
-            </>
-          ) : (
-            <></>
-          )}
           {/* <div
             className="w-full h-[80px] flex justify-center items-center px-[10px] fixed top-[10px]"
             style={{ zIndex: "9999" }}

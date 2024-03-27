@@ -81,6 +81,7 @@ import StatusUserList from "./StatusUserList";
 import { LuSettings2 } from "react-icons/lu";
 // import { MdGroups2 } from "react-icons/md";
 import { MdGroupAdd } from "react-icons/md";
+import { IoIosApps } from "react-icons/io";
 // import { BsFillChatSquareTextFill } from "react-icons/bs";
 // const Hello = () => {
 //   const [userName, setUserName] = useState("");
@@ -94,7 +95,14 @@ import { MdGroupAdd } from "react-icons/md";
 //   });
 //   return(<></>)
 // }
-
+import { IoIosHelpCircleOutline } from "react-icons/io";
+import { IoMdMoon } from "react-icons/io";
+import { IoMoonOutline } from "react-icons/io5";
+import { PiMoon } from "react-icons/pi";
+import { TbLogout } from "react-icons/tb";
+import { AiOutlineDelete } from "react-icons/ai";
+import { MdNoAccounts } from "react-icons/md";
+import { FaAppStoreIos } from "react-icons/fa";
 const AddFriend = (props) => {
   const [userName, setUserName] = useState("");
   const [photoURL, setPhotoURL] = useState("");
@@ -340,6 +348,61 @@ const Friends = (props) => {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
+      {/* {ActiveChatUser.length !== 0 ? (
+        <>
+          <div
+            className="w-full h-auto flex  justify-center items-center px-[10px] fixed top-[10px] z-50"
+            style={{ zIndex: "999999" }}
+          >
+            <div className="w-full h-full bg-[#292f3f8a] font-[google] text-[14px] text-white backdrop-blur-md rounded-xl flex flex-col justify-center items-center px-[20px] py-[5px]">
+              <div className="w-full h-[70px]  flex justify-center items-center border-b-[.5px] border-[#696969]">
+                <div className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]">
+                  <img
+                    className="w-full h-full rounded-full object-cover"
+                    src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/users%2FmQWgSxyplBPSi1iTXfybzmoIQOr1%2FProfile%20Photo?alt=media&token=63d7a766-2417-46a4-9150-29711c10f835"
+                  ></img>
+                </div>
+                <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start">
+                  <span className="text-[16px]">Hmadri Purkait</span>
+                  <span className="text-[#b3b3b3]">
+                    Hey! whats up?? where you been
+                  </span>
+                </div>
+              </div>
+              <div className="w-full h-[70px] flex justify-center items-center  border-b-[.5px] border-[#696969]">
+                <div className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]">
+                  <img
+                    className="w-full h-full rounded-full object-cover"
+                    src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/users%2FUbP9mzfzYOgr5Z9ivbHdAjxQ2Sf2%2FProfile%20Photo?alt=media&token=c30bf2b7-26ee-4074-aaf8-8c5c7e61e1c9"
+                  ></img>
+                </div>
+                <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start">
+                  <span className="text-[16px]">Niladri Purkait</span>
+                  <span className="text-[#b3b3b3]">Hello Brp !!</span>
+                </div>
+              </div>
+              <div className="w-full h-[70px] flex justify-center items-center  ">
+                <div className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]">
+                  <img
+                    className="w-full h-full rounded-full object-cover"
+                    src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/users%2FP9RvCXpI86UBTywtRFDUSvPjxn22%2FProfile%20Photo?alt=media&token=b030ecbe-106f-4ca6-a93f-35c6373281b9"
+                  ></img>
+                </div>
+
+                <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start ">
+                  <span className="text-[16px]">Random Purkait</span>
+                  <span className="text-[#b3b3b3]">
+                    YOu have won an mercedes
+                  </span>
+                </div>
+              </div>
+              <div className="w-[60px] h-[4px] bg-[#939393] border border-[#939393] rounded-xl flex justify-center items-center mt-[15px] px-[10px] my-[5px]"></div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <></>
+      )} */}
       {ActiveChatUser === UserUid && UserUid != "" ? (
         <>
           <div className="group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center bg-[#292f3f]  cursor-pointer   border-b-[1px] border-[#35384a]   ">
@@ -891,6 +954,8 @@ const UserList = (props) => {
   const [accountStatus, setAccountStatus] = useState(false);
 
   const [statusPosition, setStatusPosition] = useState(0);
+  const [stTime, setStTime] = useState("");
+  const [stText, setStText] = useState("");
   // const [left, setRight] = useState(0);
   // addFriendList;
   console.log("UserList");
@@ -916,6 +981,7 @@ const UserList = (props) => {
       setStatusCount(snapshot?.data()?.Status?.length);
       setAccountStatus(snapshot?.data()?.AccountStatus);
       // setProfileURL(snapshot?.data()?.Photo);
+      setStTime(snapshot?.data()?.StTime);
       setStatusTimestamp(snapshot?.data()?.LastStatus);
     });
   }
@@ -928,17 +994,6 @@ const UserList = (props) => {
       .collection("Chat Friends")
       .orderBy("LastUpdated", "desc");
 
-    // userDoc.get().then((snapshot) => {
-    //   console.log("snapshot.docs");
-    //   console.log(snapshot);
-    //   // setUserList(snapshot.docs);
-    //   dispatch(clearFriendList());
-    //   snapshot.docs?.map((user) => {
-    //     console.log(user.id);
-
-    //     dispatch(addFriendList({ UserId: user.id }));
-    //   });
-    // });
     onSnapshot(userDoc, (snapshot) => {
       console.log("Last Updated User Message");
       console.log(snapshot.docs);
@@ -1050,13 +1105,35 @@ const UserList = (props) => {
   }
 
   useEffect(() => {
-    if (statusImage?.length != 0) {
+    if (statusImage) {
       uploadImage();
     }
   }, [statusImage]);
 
+  function deleteStatus() {
+    const user = firebase.auth().currentUser;
+    db.collection("Chat Record").doc(user.uid).update({
+      Status: "",
+    });
+  }
+
   const uploadImageGetUrl = async (fileRef) => {
     const user = firebase.auth().currentUser;
+    const now = new Date();
+
+    // Get hours, minutes, and AM/PM
+    let hours = now.getHours();
+    const minutes = now.getMinutes();
+    const amPM = hours >= 12 ? "pm" : "am";
+
+    // Convert hours to 12-hour format
+    hours = hours % 12 || 12;
+
+    // Format the time as "hh:mm am/pm"
+    const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")} ${amPM}`;
+
     var geturl = await uploadBytes(fileRef, statusImage).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         console.log(url);
@@ -1065,7 +1142,11 @@ const UserList = (props) => {
           .collection("Chat Record")
           .doc(user.uid)
           .update({
-            Status: arrayUnion(url),
+            Status: arrayUnion({
+              url: url,
+              text: "",
+            }),
+            StTime: formattedTime,
           });
         // var temp = formatAMPM(new Date());
         // storeToReactStore(
@@ -1082,12 +1163,47 @@ const UserList = (props) => {
       });
       console.log("Uploaded a blob or file!");
     });
+    setStatusImage();
     return geturl;
   };
 
+  function setStatusText() {
+    if (stText.length !== 0) {
+      const user = firebase.auth().currentUser;
+      const now = new Date();
+
+      // Get hours, minutes, and AM/PM
+      let hours = now.getHours();
+      const minutes = now.getMinutes();
+      const amPM = hours >= 12 ? "pm" : "am";
+
+      // Convert hours to 12-hour format
+      hours = hours % 12 || 12;
+
+      // Format the time as "hh:mm am/pm"
+      const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
+        .toString()
+        .padStart(2, "0")} ${amPM}`;
+      db.collection("Chat Record")
+        .doc(user.uid)
+        .update({
+          Status: arrayUnion({
+            url: "text",
+            text: stText,
+          }),
+          StTime: formattedTime,
+        });
+
+      setStText("");
+    }
+  }
+
   const uploadImage = async () => {
     const user = firebase.auth().currentUser;
-    const fileRef = ref(storage, `/group_profile_image/${user.uid}/`);
+    const fileRef = ref(
+      storage,
+      `/status_image/${user.uid}/${statusCount + 1}`
+    );
     const myPromise = uploadImageGetUrl(fileRef);
     toast.promise(
       myPromise,
@@ -1510,10 +1626,10 @@ const UserList = (props) => {
           <>
             {showStatus === true ? (
               // <div className="fixed">
-              <div className=" z-30 fixed bottom-0 h-[100svh] bg-[#1b202d] w-full md:w-[400px] lg:w-[400px] left-0 flex-col flex justify-center items-center">
+              <div className=" z-50 fixed bottom-0 h-[100svh] bg-[#1b202d]  md:bg-[#292f3f] lg:bg-[#292f3f] w-full md:w-[400px] lg:w-[400px] left-0 flex-col flex justify-center items-center">
                 {/* Cross ------------------------- */}
                 <div
-                  className="fixed top-[25px] left-[calc(100%-60px)] md:left-[calc(400px-60px)]  lg:left-[calc(400px-60px)]  w-[40px] h-[40px]  rounded-full bg-[#455172] drop-shadow-none text-white flex justify-center items-center  cursor-pointer rotate-45 z-40"
+                  className="fixed top-[25px] left-[calc(100%-60px)] md:left-[calc(400px-60px)]  lg:left-[calc(400px-60px)]  w-[40px] h-[40px]  rounded-full bg-[#292f3f] drop-shadow-none text-white flex justify-center items-center  cursor-pointer rotate-45 z-40"
                   onClick={() => {
                     setShowStatus(false);
                   }}
@@ -1523,7 +1639,7 @@ const UserList = (props) => {
                 </div>
                 {/* Profile ---------------------- */}
                 <div
-                  className=" group w-full md:w-[400px] lg:w-[400px] h-[90px] py-[10px] flex justify-start items-center bg-[#1c1f2f] cursor-pointer font-[google] font-normal  px-[20px]  text-[#ffffff]  fixed top-0 border-b-[1px] border-[#404040]  drop-shadow-none"
+                  className=" group w-full md:w-[400px]  lg:w-[400px] h-[90px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal  px-[20px]  text-[#ffffff]  fixed top-0  drop-shadow-none"
                   onClick={() => {
                     // setShowStatus(true);
                   }}
@@ -1541,7 +1657,7 @@ const UserList = (props) => {
                       ></img>
                     )}
                   </div>
-                  <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
+                  <div className="w-[calc(100%-65px)] h-[50px] ml-[15px] bg-transparent  flex flex-col justify-center items-start ">
                     <div className="w-full font-semibold flex h-[23px]">
                       <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
                         My Status
@@ -1549,27 +1665,27 @@ const UserList = (props) => {
                       <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light"></span>
                     </div>
                     <div className="w-full flex h-[23px] justify-between items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[google] font-light">
-                      {statusTimestamp}
+                      {stTime}
                     </div>
                   </div>
                 </div>
 
-                <div className=" z-30 fixed bottom-0 h-[calc(100svh-90px)] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] left-[20px] md:left-[20px] lg:left-[20px] rounded-lg  flex-col flex justify-center items-center  drop-shadow-none">
+                <div className=" z-30 fixed bottom-0 h-[100svh] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] left-[20px] md:left-[20px] lg:left-[20px] rounded-lg  flex-col flex justify-center items-center  drop-shadow-none">
                   {/* Left Arrow ------------------------- */}
 
                   {statusPosition === 0 ? (
                     <></>
                   ) : (
                     <>
-                      <div className="fixed w-[40px] h-[60px] rounded-r-xl bg-[#000000a6] cursor-pointer text-[#4b93b9] flex justify-center items-center left-0">
-                        <FaAngleLeft
-                          className="text-[19px]"
-                          onClick={() => {
-                            if (statusPosition > 0) {
-                              setStatusPosition(statusPosition - 1);
-                            }
-                          }}
-                        />
+                      <div
+                        className="fixed w-[30px] h-[50px] rounded-r-xl bg-[#000000a6] cursor-pointer text-[#4b93b9] flex justify-center items-center left-0"
+                        onClick={() => {
+                          if (statusPosition > 0) {
+                            setStatusPosition(statusPosition - 1);
+                          }
+                        }}
+                      >
+                        <FaAngleLeft className="text-[19px]" />
                       </div>
                     </>
                   )}
@@ -1579,26 +1695,44 @@ const UserList = (props) => {
                     <></>
                   ) : (
                     <>
-                      <div className="fixed w-[40px] h-[60px] rounded-l-xl bg-[#000000a6] cursor-pointer text-[#4b93b9] flex justify-center items-center right-0">
-                        <FaAngleRight
-                          className="text-[19px]"
-                          onClick={() => {
-                            if (statusPosition < statusCount - 1) {
-                              setStatusPosition(statusPosition + 1);
-                            }
-                          }}
-                        />
+                      <div
+                        className="fixed w-[40px] h-[60px] rounded-l-xl bg-[#000000a6] cursor-pointer text-[#4b93b9] flex justify-center items-center right-0"
+                        onClick={() => {
+                          if (statusPosition < statusCount - 1) {
+                            setStatusPosition(statusPosition + 1);
+                          }
+                        }}
+                      >
+                        <FaAngleRight className="text-[19px]" />
                       </div>
                     </>
                   )}
 
                   {/* Status ------------------------- */}
                   {/* {statusImageUrl ? ( */}
-                  <img
+                  {/* <img
                     className="w-full rounded-xl object-cover"
                     src={statusImageUrl[statusPosition]}
                     // onError={styl}
-                  ></img>
+                  ></img> */}
+
+                  {statusImageUrl[statusPosition]?.url === "text" ? (
+                    <>
+                      <div className="w-full h-full flex justify-center items-center ">
+                        <pre className="w-[80%] font-[google] flex-wrap whitespace-pre-wrap font-normal text-[20px] text-white flex justify-center items-center text-center">
+                          {statusImageUrl[statusPosition]?.text}
+                        </pre>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        className="w-full rounded-xl object-cover max-h-[calc(100svh-180px)]"
+                        src={statusImageUrl[statusPosition]?.url}
+                        // onError={styl}
+                      ></img>
+                    </>
+                  )}
                   {/* ) : ( */}
                   {/* <></> */}
                   {/* )} */}
@@ -1611,9 +1745,15 @@ const UserList = (props) => {
                         return (
                           <>
                             {index === statusPosition ? (
-                              <div className="w-[4px] mx-[2px] h-[4px] bg-white rounded-full"></div>
+                              <div
+                                className="w-[8px] mx-[2px] h-[4px] bg-white rounded-full"
+                                style={{ transition: ".4s" }}
+                              ></div>
                             ) : (
-                              <div className="w-[4px] mx-[2px] h-[4px] bg-[#8d8d8d] rounded-full"></div>
+                              <div
+                                className="w-[4px] mx-[2px] h-[4px] bg-[#8d8d8d] rounded-full"
+                                style={{ transition: ".4s" }}
+                              ></div>
                             )}
                           </>
                         );
@@ -1628,7 +1768,7 @@ const UserList = (props) => {
             {statusModal === true ? (
               <>
                 <div
-                  className="fixed z-20 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f] text-white  flex justify-center items-center rotate-[135deg] cursor-pointer"
+                  className="fixed z-20 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[40px] h-[40px]  rounded-full bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] text-white  flex justify-center items-center rotate-[135deg] cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                     setStatusTextModal(false);
@@ -1649,7 +1789,7 @@ const UserList = (props) => {
                   }}
                 ></input>
                 <label
-                  className="fixed z-20 opacity-100 bottom-[90px] mr-[70px] md:mr-[80px] lg:mr-[80px] w-[50px] h-[50px]  rounded-full bg-[#292f3f]   text-white flex justify-center items-center  cursor-pointer"
+                  className="fixed z-20 opacity-100 bottom-[90px] mr-[60px] md:mr-[70px] lg:mr-[70px] w-[40px] h-[40px]  rounded-full bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]   text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     // setStatusModal(!statusModal);
                     setStatusTextModal(false);
@@ -1657,29 +1797,37 @@ const UserList = (props) => {
                   style={{ transition: ".4s" }}
                   for="groupDp"
                 >
-                  <BsCameraFill className="text-[19px]" />
+                  <BsCameraFill className="text-[16px]" />
                 </label>
 
                 {/* write ---------------------- */}
 
                 <div
-                  className="fixed z-20 opacity-100 bottom-[150px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f]  text-white flex justify-center items-center  cursor-pointer"
+                  className="fixed z-20 opacity-100 bottom-[140px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[40px] h-[40px]  rounded-full bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]  text-white flex justify-center items-center  cursor-pointer z-40"
                   onClick={() => {
                     setStatusTextModal(!statusTextModal);
                   }}
                   style={{ transition: ".4s", transitionDelay: ".1s" }}
                 >
                   {statusTextModal === true ? (
-                    <img src={tick} className="w-[30px] "></img>
+                    <img
+                      src={tick}
+                      className="w-[30px] "
+                      onClick={() => {
+                        setStatusText();
+                        setStatusModal(!statusModal);
+                        setStatusTextModal(false);
+                      }}
+                    ></img>
                   ) : (
-                    <FaPen className="text-[19px]" />
+                    <FaPen className="text-[16px]" />
                   )}
                 </div>
               </>
             ) : (
               <>
                 <div
-                  className="fixed z-20 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f] text-white flex justify-center items-center  cursor-pointer"
+                  className="fixed z-30 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[40px] h-[40px]  rounded-full bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                   }}
@@ -1696,10 +1844,10 @@ const UserList = (props) => {
                   accept="image/*"
                 ></input>
                 <label
-                  className="fixed z-20 opacity-0 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]  rounded-full bg-[#292f3f]   text-white flex justify-center items-center  cursor-pointer"
-                  onClick={() => {
-                    setStatusModal(!statusModal);
-                  }}
+                  className="fixed z-20 opacity-0 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[40px] h-[40px]  rounded-full bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]   text-white flex justify-center items-center  cursor-pointer"
+                  // onClick={() => {
+                  //   setStatusModal(!statusModal);
+                  // }}
                   style={{ transition: ".4s", transitionDelay: ".1s" }}
                 >
                   <BsCameraFill className="text-[17px]" />
@@ -1708,7 +1856,7 @@ const UserList = (props) => {
                 {/* write ---------------------- */}
 
                 <div
-                  className="fixed z-10 opacity-0 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[50px] h-[50px]   rounded-full bg-[#292f3f] text-white flex justify-center items-center  cursor-pointer"
+                  className="fixed z-10 opacity-0 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[40px] h-[40px]   rounded-full bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] text-white flex justify-center items-center  cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                   }}
@@ -1721,62 +1869,40 @@ const UserList = (props) => {
             {statusTextModal === true ? (
               <>
                 <textarea
-                  className="h-[120px] resize-none py-[10px] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] bottom-[150px] fixed mr-[10px] md:mr-[20px] lg:mr-[20px] opacity-100 bg-[#292f3f] rounded-lg outline-none px-[20px] font-[google] font-normal text-[15px] text-[white] input"
+                  className="h-[120px] resize-none py-[10px] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] bottom-[140px] fixed mr-[10px] md:mr-[20px] lg:mr-[20px] opacity-100 bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] rounded-lg outline-none px-[20px] font-[google] font-normal text-[15px] text-[white] input z-30"
                   placeholder="Enter Text"
                   // type="textarea"
+                  value={stText}
+                  onChange={(e) => {
+                    setStText(e.target.value);
+                  }}
                   style={{ transition: ".4s" }}
                 ></textarea>
               </>
             ) : (
-              // <div
-              //   className="fixed bottom-[70px]  h-[40px] w-[calc(100%-40px)] lg:w-[360px] md:w-[360px] bg-[#ffffff] rounded-full   flex justify-end items-center"
-              //   style={{ transition: ".4s" }}
-              // >
-              //   {groupName.length === 0 ? (
-              //     <div className="w-[40px] z-40 opacity-50 h-[40px] mr-0 fixed rounded-full bg-[#2db82d] ">
-              //       <img src={tick} className="w-full"></img>
-              //     </div>
-              //   ) : (
-              //     <div
-              //       className="w-[40px] z-40 h-[40px] opacity-100 mr-0 fixed cursor-pointer rounded-full bg-[#2db82d] "
-              //       onClick={() => {
-              //         createGroup();
-              //         setGroupModal(false);
-              //       }}
-              //     >
-              //       <img src={tick} className="w-full"></img>
-              //     </div>
-              //   )}
-              // </div>
               <>
                 <textarea
-                  className="h-[40px] resize-none py-[10px] w-0 bottom-[150px] fixed opacity-0 bg-[#292f3f] rounded-lg mr-[10px] md:mr-[20px] lg:mr-[20px] outline-none px-[20px] font-[google] font-normal text-[15px] text-[white] input"
+                  className="h-[40px] resize-none py-[10px] w-0 bottom-[140px] fixed opacity-0 bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] rounded-lg mr-[10px] md:mr-[20px] lg:mr-[20px] outline-none px-[20px] font-[google] font-normal text-[15px] text-[white] input"
                   placeholder="Enter Text"
                   // type="textarea"
+                  value={stText}
+                  onChange={(e) => {
+                    setStText(e.target.value);
+                  }}
                   style={{ transition: ".4s" }}
                 ></textarea>
-                {/* <div
-                  className="fixed bottom-[70px]  h-[40px] w-0 bg-[#ffffff] rounded-full   flex justify-end items-center"
-                  style={{ transition: ".4s" }}
-                >
-                  {groupName.length === 0 ? (
-                    <div className="w-[40px] z-40 opacity-50 h-[40px] mr-0 fixed rounded-full bg-[#2db82d] ">
-                      <img src={tick} className="w-full"></img>
-                    </div>
-                  ) : (
-                    <div
-                      className="w-[0] z-40 h-[40px] opacity-100 mr-0 fixed cursor-pointer rounded-full bg-[#2db82d] "
-                      onClick={() => {
-                        createGroup();
-                        setGroupModal(false);
-                      }}
-                    >
-                      <img src={tick} className="w-full"></img>
-                    </div>
-                  )}
-                </div> */}
               </>
             )}
+            {/* <div className="w-full h-auto flex justify-start items-center pl-[10px] mt-[25px]">
+              <span className="text-[28px] text-[#8b8b8b] font-[google] font-normal">
+                My{" "}
+              </span>
+              {"  "}
+              <span className="text-[28px] text-[white] font-[google] font-normal ml-[10px]">
+                {" "}
+                Status
+              </span>
+            </div> */}
 
             {isStatus ? (
               <div className="group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center bg-transparent  cursor-pointer    z-10 select-none">
@@ -1800,28 +1926,37 @@ const UserList = (props) => {
                       ></img>
                     )}
                   </div>
-                  <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                    <div className="w-full font-semibold flex h-[23px]">
-                      <span className="w-[calc(100%-70px)] text-[16px] h-full text-[white]  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
+                  <div
+                    className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex justify-center items-start z-50"
+                    style={{ zIndex: "999" }}
+                  >
+                    <div className="w-[calc(100%-70px)] font-semibold flex flex-col h-full">
+                      <span className="w-full text-[16px] h-[50%] text-[white]  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
                         {/* {props.data.user} */}
                         {/* {ownerName} */}
                         My Status
                       </span>
-                      <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light">
-                        {/* {props.data.time} */}
-                        {/* {Time} */}
-                        {/* {statusCount} */}
+                      <span className="w-full  h-[50%]  flex justify-start  items-center   text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[google] font-light">
+                        {stTime}
                       </span>
                     </div>
-                    <div className="w-full flex h-[23px] justify-between items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[google] font-light">
-                      {statusTimestamp}07:34 pm
+                    <div
+                      className="w-[70px] flex h-full justify-end  items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[google] font-light z-50"
+                      style={{ zIndex: "999" }}
+                      onClick={() => {
+                        deleteStatus();
+                        setShowStatus(false);
+                        console.log("clicked");
+                      }}
+                    >
+                      <MdDelete className="text-[20px] text-white" />
                     </div>
                     {/* <span className="text-[15px]">Hello! How Are you</span> */}
                   </div>
                 </div>
               </div>
             ) : (
-              <div className=" group w-full h-[70px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal hover:bg-[#ffffffe1] px-[10px]  md:px-[20px] lg:px-[20px]  text-[#ffffff] hover:text-[#000000] border-t-[1px] border-b-[1px] border-[#404040]">
+              <div className=" group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal  px-[10px]  md:px-[20px] lg:px-[20px]  text-[#ffffff] hover:text-[#000000] border-t-[1px] border-b-[1px] border-[#404040]">
                 <div className="w-[50px] h-[50px]  rounded-full">
                   {profileURL === "nophoto" ? (
                     <img
@@ -1835,19 +1970,31 @@ const UserList = (props) => {
                     ></img>
                   )}
                 </div>
-                <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                  <div className="w-full font-semibold flex h-[23px]">
-                    <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-[#ffffff]  font-[google] font-normal  ">
+                <div
+                  className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex justify-center items-start "
+                  // style={{ zIndex: "999" }}
+                >
+                  <div className="w-[calc(100%-70px)] font-semibold flex flex-col h-full">
+                    <span className="w-full text-[16px] h-[50%] text-[white]  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
                       {/* {props.data.user} */}
                       {/* {ownerName} */}
                       My Status
                     </span>
-                    <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light">
-                      {/* {props.data.time} */}
-                      {/* {Time} */}
+                    <span className="w-full  h-[50%]  flex justify-start  items-center   text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[google] font-light">
+                      No status yet
                     </span>
                   </div>
-                  <div className="w-full flex h-[23px] justify-between items-center"></div>
+                  <div
+                    className="w-[70px] flex h-full justify-end  items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[google] font-light z-50"
+                    // style={{ zIndex: "999" }}
+                    // onClick={() => {
+                    //   deleteStatus();
+                    //   setShowStatus(false);
+                    //   console.log("clicked");
+                    // }}
+                  >
+                    {/* <MdDelete className="text-[20px] text-white" /> */}
+                  </div>
                   {/* <span className="text-[15px]">Hello! How Are you</span> */}
                 </div>
               </div>
@@ -1859,184 +2006,213 @@ const UserList = (props) => {
           </>
         ) : (
           <>
+            {/* <div className="w-[100%] fixed h-[100svh] flex justify-center items-center">
+            <div className="w-[200px] h-[400px] bg-slate-500 rounded-xl"></div>
+          </div> */}
             <div className="w-full h-full p-[10px] flex justify-center items-center ">
-              <div className="w-full h-full  rounded-3xl flex flex-col justify-center items-center">
-                <div className="group w-[130px] h-[130px] rounded-full bg-slate-500 flex justify-center items-center">
-                  {/* <img
+              <div className="w-full h-full  rounded-3xl flex flex-col justify-start pt-[20px] items-center">
+                <div className="w-full h-auto flex justify-start items-center ml-[10px]">
+                  <span className="text-[28px] text-[#8b8b8b] font-[google] font-normal">
+                    My{" "}
+                  </span>
+                  {"  "}
+                  <span className="text-[28px] text-[white] font-[google] font-normal ml-[10px]">
+                    {" "}
+                    Profile
+                  </span>
+                </div>
+                <div className="w-full h-[100px] mt-[20px]  flex justify-start items-center px-[10px]">
+                  <div className="group w-[80px] h-[80px] rounded-full  flex justify-end items-end">
+                    {/* <img
                     src={profileURL}
                     className="w-full h-full rounded-full object-cover"
                   ></img> */}
-                  {profileURL === "nophoto" ? (
-                    <img
-                      src={profile2}
-                      className="w-full h-full rounded-full object-cover"
-                    ></img>
-                  ) : (
-                    <img
-                      src={profileURL}
-                      className="w-full h-full rounded-full object-cover"
-                    ></img>
-                  )}
-                  <input
-                    type="file"
-                    id="getFile"
-                    accept="image/*"
-                    className="hidden fixed opacity-0 text-white bg-transparent w-[45px] h-[35px] rounded-full z-30 cursor-pointer"
-                    onChange={(e) => profileImage(e)}
-                  ></input>
-                  <label
-                    for="getFile"
-                    // onclick={document.getElementById("getFile").click()}
-                    className="group-hover:opacity-100 opacity-0 w-[35px] h-[35px] flex justify-center items-center bg-[#0b0c0b94] md:bg-[#1b202d] lg:bg-[#1b202d] fixed rounded-full cursor-pointer z-10"
-                  >
-                    <BsCameraFill className="text-white" />
-                  </label>
-                </div>
-                <div className="mt-[50px] w-[250px] flex justify-center items-center">
-                  {nameChangeFlag === true ? (
-                    <>
-                      <input
-                        style={{ transition: ".5s" }}
-                        value={ownerName}
-                        // onKeyDown={(e) => {
-                        //   if (
-                        //     e.nativeEvent.key === "Enter" &&
-                        //     searchUser.length !== 0
-                        //   ) {
-                        //     searchUserFriend();
-                        //     setSearchFlag(true);
-                        //   }
-                        // }}
-                        onChange={(e) => setOwnerName(e.target.value)}
-                        // onClick={() => {
-                        //   // setIsSearchBar(!isSearchBar);
-                        // }}
-                        placeholder="Name"
-                        className="w-[calc(100%-10px)] h-[50px] text-[white] font-normal px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px] drop-shadow-md rounded-xl pr-[50px]"
-                      ></input>
-                      <span
-                        className="w-[20px] h-[30px] flex justify-center items-center ml-[-45px]  z-20"
-                        onClick={() => {
-                          setNameChangeFlag(false);
-                        }}
-                      >
-                        <RxCross2 className="text-[18px] text-[#4b93b9]" />
-                      </span>
-                      <span
-                        className="w-[20px] h-[30px] flex justify-center items-center mr-[5px]  z-20"
-                        onClick={() => {
-                          setNameChangeFlag(false);
-                          updateUserName();
-                        }}
-                      >
-                        <MdOutlineDone className="text-[18px] text-[#4b93b9]" />
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <input
-                        disabled
-                        style={{ transition: ".5s" }}
-                        value={ownerName}
-                        // onKeyDown={(e) => {
-                        //   if (
-                        //     e.nativeEvent.key === "Enter" &&
-                        //     searchUser.length !== 0
-                        //   ) {
-                        //     searchUserFriend();
-                        //     setSearchFlag(true);
-                        //   }
-                        // }}
-                        onChange={(e) => setOwnerName(e.target.value)}
-                        // onClick={() => {
-                        //   // setIsSearchBar(!isSearchBar);
-                        // }}
-                        placeholder="Name"
-                        className="w-[calc(100%-10px)] h-[50px] text-[#bababa] font-normal px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px] drop-shadow-md rounded-xl pr-[30px]"
-                      ></input>
-                      <span
-                        className="w-[20px] h-[30px] flex justify-center items-center ml-[-25px] mr-[5px] z-20"
-                        onClick={() => {
-                          setNameChangeFlag(true);
-                        }}
-                      >
-                        <RiEditFill className="text-[18px] text-[#4b93b9]" />
-                      </span>
-                    </>
-                  )}
-                </div>
-                <div className="mt-[10px] w-[250px] flex justify-center items-center">
-                  {aboutChangeFlag === true ? (
-                    <>
-                      <input
-                        style={{ transition: ".5s" }}
-                        value={ownerInfo}
-                        // onKeyDown={(e) => {
-                        //   if (
-                        //     e.nativeEvent.key === "Enter" &&
-                        //     searchUser.length !== 0
-                        //   ) {
-                        //     searchUserFriend();
-                        //     setSearchFlag(true);
-                        //   }
-                        // }}
-                        onChange={(e) => setOwnerInfo(e.target.value)}
-                        placeholder="About"
-                        className="w-[calc(100%-10px)] h-[50px] text-[#bababa]  px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google] font-normal border-none  z-0 outline-none  text-[15px] drop-shadow-md rounded-xl pr-[50px]"
-                      ></input>
-                      <span
-                        className="w-[20px] h-[30px] flex justify-center items-center ml-[-45px] z-20"
-                        onClick={() => {
-                          setAboutChangeFlag(false);
-                        }}
-                      >
-                        <RxCross2 className="text-[18px] text-[#4b93b9]" />
-                      </span>
-                      <span
-                        className="w-[20px] h-[30px] flex justify-center items-center mr-[5px] z-20"
-                        onClick={() => {
-                          setAboutChangeFlag(false);
-                          updateUserInfo();
-                        }}
-                      >
-                        <MdOutlineDone className="text-[18px] text-[#4b93b9]" />
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <input
-                        disabled
-                        style={{ transition: ".5s" }}
-                        value={ownerInfo}
-                        // onKeyDown={(e) => {
-                        //   if (
-                        //     e.nativeEvent.key === "Enter" &&
-                        //     searchUser.length !== 0
-                        //   ) {
-                        //     searchUserFriend();
-                        //     setSearchFlag(true);
-                        //   }
-                        // }}
-                        onChange={(e) => setOwnerInfo(e.target.value)}
-                        placeholder="About"
-                        className="w-[calc(100%-10px)] h-[50px] text-[#bababa] font-normal px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px] drop-shadow-md rounded-xl pr-[30px]"
-                      ></input>
+                    {profileURL === "nophoto" ? (
+                      <img
+                        src={profile2}
+                        className="w-full h-full rounded-full object-cover"
+                      ></img>
+                    ) : (
+                      <img
+                        src={profileURL}
+                        className="w-full h-full rounded-full object-cover"
+                      ></img>
+                    )}
+                    <input
+                      type="file"
+                      id="getFile"
+                      accept="image/*"
+                      className="hidden fixed opacity-0 text-white bg-transparent w-[45px] h-[35px] rounded-full z-30 cursor-pointer"
+                      onChange={(e) => profileImage(e)}
+                    ></input>
+                    <label
+                      for="getFile"
+                      // onclick={document.getElementById("getFile").click()}
+                      className=" w-[30px] h-[30px] flex justify-center items-center border-[2px] border-[#292f3f] md:border-[#1b202d] lg:border-[#1b202d] bg-[#4b565c] fixed rounded-full cursor-pointer z-10"
+                    >
+                      <BsCameraFill className="text-white text-[13px]" />
+                    </label>
+                  </div>
+                  <div className="w-[calc(100%-140px)] h-full  ml-[20px] flex flex-col justify-center  items-start">
+                    {/* <div className="mt-[50px] w-[250px] flex justify-center items-center">
+                      {nameChangeFlag === true ? (
+                        <>
+                          <input
+                            style={{ transition: ".5s" }}
+                            value={ownerName}
+                            // onKeyDown={(e) => {
+                            //   if (
+                            //     e.nativeEvent.key === "Enter" &&
+                            //     searchUser.length !== 0
+                            //   ) {
+                            //     searchUserFriend();
+                            //     setSearchFlag(true);
+                            //   }
+                            // }}
+                            onChange={(e) => setOwnerName(e.target.value)}
+                            // onClick={() => {
+                            //   // setIsSearchBar(!isSearchBar);
+                            // }}
+                            placeholder="Name"
+                            className="w-[calc(100%-10px)] h-[50px] text-[white] font-normal px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px] drop-shadow-md rounded-xl pr-[50px]"
+                          ></input>
+                          <span
+                            className="w-[20px] h-[30px] flex justify-center items-center ml-[-45px]  z-20"
+                            onClick={() => {
+                              setNameChangeFlag(false);
+                            }}
+                          >
+                            <RxCross2 className="text-[18px] text-[#4b93b9]" />
+                          </span>
+                          <span
+                            className="w-[20px] h-[30px] flex justify-center items-center mr-[5px]  z-20"
+                            onClick={() => {
+                              setNameChangeFlag(false);
+                              updateUserName();
+                            }}
+                          >
+                            <MdOutlineDone className="text-[18px] text-[#4b93b9]" />
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <input
+                            disabled
+                            style={{ transition: ".5s" }}
+                            value={ownerName}
+                            // onKeyDown={(e) => {
+                            //   if (
+                            //     e.nativeEvent.key === "Enter" &&
+                            //     searchUser.length !== 0
+                            //   ) {
+                            //     searchUserFriend();
+                            //     setSearchFlag(true);
+                            //   }
+                            // }}
+                            onChange={(e) => setOwnerName(e.target.value)}
+                            // onClick={() => {
+                            //   // setIsSearchBar(!isSearchBar);
+                            // }}
+                            placeholder="Name"
+                            className="w-[calc(100%-10px)] h-[50px] text-[#bababa] font-normal px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px] drop-shadow-md rounded-xl pr-[30px]"
+                          ></input>
+                          <span
+                            className="w-[20px] h-[30px] flex justify-center items-center ml-[-25px] mr-[5px] z-20"
+                            onClick={() => {
+                              setNameChangeFlag(true);
+                            }}
+                          >
+                            <RiEditFill className="text-[18px] text-[#4b93b9]" />
+                          </span>
+                        </>
+                      )}
+                    </div>
+                    <div className="mt-[10px] w-[250px] flex justify-center items-center">
+                      {aboutChangeFlag === true ? (
+                        <>
+                          <input
+                            style={{ transition: ".5s" }}
+                            value={ownerInfo}
+                            // onKeyDown={(e) => {
+                            //   if (
+                            //     e.nativeEvent.key === "Enter" &&
+                            //     searchUser.length !== 0
+                            //   ) {
+                            //     searchUserFriend();
+                            //     setSearchFlag(true);
+                            //   }
+                            // }}
+                            onChange={(e) => setOwnerInfo(e.target.value)}
+                            placeholder="About"
+                            className="w-[calc(100%-10px)] h-[50px] text-[#bababa]  px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google] font-normal border-none  z-0 outline-none  text-[15px] drop-shadow-md rounded-xl pr-[50px]"
+                          ></input>
+                          <span
+                            className="w-[20px] h-[30px] flex justify-center items-center ml-[-45px] z-20"
+                            onClick={() => {
+                              setAboutChangeFlag(false);
+                            }}
+                          >
+                            <RxCross2 className="text-[18px] text-[#4b93b9]" />
+                          </span>
+                          <span
+                            className="w-[20px] h-[30px] flex justify-center items-center mr-[5px] z-20"
+                            onClick={() => {
+                              setAboutChangeFlag(false);
+                              updateUserInfo();
+                            }}
+                          >
+                            <MdOutlineDone className="text-[18px] text-[#4b93b9]" />
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <input
+                            disabled
+                            style={{ transition: ".5s" }}
+                            value={ownerInfo}
+                            // onKeyDown={(e) => {
+                            //   if (
+                            //     e.nativeEvent.key === "Enter" &&
+                            //     searchUser.length !== 0
+                            //   ) {
+                            //     searchUserFriend();
+                            //     setSearchFlag(true);
+                            //   }
+                            // }}
+                            onChange={(e) => setOwnerInfo(e.target.value)}
+                            placeholder="About"
+                            className="w-[calc(100%-10px)] h-[50px] text-[#bababa] font-normal px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px] drop-shadow-md rounded-xl pr-[30px]"
+                          ></input>
 
-                      <span
-                        className="w-[20px] h-[30px] flex justify-center items-center ml-[-25px] mr-[5px] z-20"
-                        onClick={() => {
-                          setAboutChangeFlag(true);
-                        }}
-                      >
-                        <RiEditFill className="text-[18px] text-[#4b93b9]" />
-                      </span>
-                    </>
-                  )}
+                          <span
+                            className="w-[20px] h-[30px] flex justify-center items-center ml-[-25px] mr-[5px] z-20"
+                            onClick={() => {
+                              setAboutChangeFlag(true);
+                            }}
+                          >
+                            <RiEditFill className="text-[18px] text-[#4b93b9]" />
+                          </span>
+                        </>
+                      )}
+                    </div> */}
+                    <div className="text-white font-[google] text-[20px] md:text-[22px] lg:text-[22px] w-full ">
+                      {ownerName}
+                    </div>
+                    <div className="text-[#bbbbbb] font-[google] max-h-[47px] line-clamp-2 overflow-hidden text-ellipsis mt-[5px] text-[15px] w-full font-light">
+                      {ownerInfo}
+                    </div>
+                  </div>
+                  <div className="w-[30px] flex justify-end items-center">
+                    <RiEditFill className="text-[20px] text-[#ffffff]" />
+                  </div>
                 </div>
-                <div className=" h-[230px]  mt-[50px] w-[250px] flex flex-col justify-between items-center ">
-                  <div className="w-full   h-[230px] flex flex-col justify-evenly items-center">
-                    <div className="w-[calc(100%-10px)] h-[50px]  rounded-xl hover:bg-[#4b93b9] px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] flex justify-center items-center text-white font-[google] font-light drop-shadow-md text-[15px] cursor-pointer">
-                      Change Number
+                <div className="w-full px-[10px] mt-[30px]">
+                  <div className="w-full border-[1px] border-[#474747]"></div>
+                </div>
+                <div className=" h-[230px]  mt-[50px] w-full px-[10px] flex flex-col justify-between items-center ">
+                  <div className="w-full   h-auto flex flex-col justify-center items-start">
+                    <div className="w-[100%] h-[40px]  rounded-xl   flex justify-start items-center text-white font-[google] font-light drop-shadow-md text-[16px] cursor-pointer">
+                      <PiMoon className="text-[20px] mr-[16px]" /> App Theme
                     </div>
                     {/* <div className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] mt-[10px] flex justify-center items-center text-white font-[google] font-light drop-shadow-md text-[13px] cursor-pointer">
                       <MdOutlinePassword className="mr-[10px] text-[20px] text-[gray]" />{" "}
@@ -2044,28 +2220,67 @@ const UserList = (props) => {
                     </div> */}
                     {/* </div> */}
                     {/* <div className="w-full px-[10px] h-[40px] mt-[10px] flex justify-evenly items-center"> */}
-                    <div className="w-[calc(100%-10px)] h-[50px]  rounded-xl hover:bg-[#4b93b9] px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]  mt-[10px] flex justify-center items-center text-white font-[google] font-light drop-shadow-md text-[15px] cursor-pointer">
+                    <div className="w-[100%] h-[40px]  rounded-xl    mt-[10px] flex justify-start items-center text-white font-[google] font-light drop-shadow-md text-[16px] cursor-pointer">
+                      <AiOutlineDelete className="text-[20px] mr-[16px]" />{" "}
                       Delete Account
                     </div>
+
                     <div
-                      className="w-[calc(100%-10px)] h-[50px]  rounded-xl hover:bg-[#4b93b9] px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]  mt-[10px] flex justify-center items-center text-white font-[google] font-light drop-shadow-md text-[15px] cursor-pointer"
-                      onClick={() => {
-                        userSignOut();
-                      }}
-                    >
-                      Log Out
-                    </div>
-                    <div
-                      className="w-[calc(100%-10px)] h-[50px]  rounded-xl hover:bg-[#4b93b9] px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]  mt-[10px] flex justify-center items-center text-white font-[google] font-light drop-shadow-md text-[15px] cursor-pointer"
+                      className="w-[100%] h-[40px]  rounded-xl    mt-[10px] flex justify-between items-center text-white font-[google] font-light drop-shadow-md text-[16px] cursor-pointer"
                       onClick={() => {
                         changeAccountStatus();
                       }}
                     >
-                      Status :{" "}
-                      {accountStatus === true ? <>Visible</> : <>Hidden</>}
+                      <div className="flex justify-start items-center">
+                        <MdNoAccounts className="text-[20px] mr-[16px]" /> Hide
+                        Account : {accountStatus === true ? <>Off</> : <>On</>}
+                      </div>
+                      <div
+                        className={
+                          "w-[40px] h-[24px] rounded-full flex items-center justify-start " +
+                          (accountStatus ? "bg-[#ffd55753]" : "bg-[#95df734c]")
+                        }
+                      >
+                        {accountStatus ? (
+                          <div
+                            className="w-[18px] h-[18px] rounded-full ml-[4px] bg-[#ffd557] drop-shadow-lg"
+                            style={{ transition: ".4s" }}
+                          ></div>
+                        ) : (
+                          <div
+                            className="w-[18px] h-[18px] rounded-full ml-[18px] bg-[#96df73] drop-shadow-lg"
+                            style={{ transition: ".4s" }}
+                          ></div>
+                        )}
+                      </div>
+                    </div>
+                    <div
+                      className="w-[100%] h-[40px]  rounded-xl    mt-[10px] flex justify-start items-center text-white font-[google] font-light drop-shadow-md text-[16px] cursor-pointer"
+                      onClick={() => {
+                        userSignOut();
+                      }}
+                    >
+                      <IoIosHelpCircleOutline className="text-[20px] mr-[16px]" />{" "}
+                      Help
+                    </div>
+                    <div
+                      className="w-[100%] h-[40px]  rounded-xl    mt-[10px] flex justify-start items-center text-[#ff9448] font-[google] font-light drop-shadow-md text-[16px] cursor-pointer"
+                      onClick={() => {
+                        userSignOut();
+                      }}
+                    >
+                      <TbLogout className="text-[20px] mr-[16px] ml-[1.5px]" />{" "}
+                      Log Out
                     </div>
                   </div>
                 </div>
+                {/* <div className="w-full py-[40px] text-[#8b8b8b] text-[13px] flex flex-col justify-center items-center">
+                  <span>Want to use this in Android</span>
+                  <span> Click the icon below to download the app</span>
+                  <span>
+                    <FaAppStoreIos className=" text-[25px]" />
+                  </span>
+                </div> */}
               </div>
             </div>
           </>
