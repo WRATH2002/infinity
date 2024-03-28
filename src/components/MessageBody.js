@@ -1581,35 +1581,47 @@ export const MessageBody = () => {
               </>
             )}
 
-            <input
-              // type="text"
-              // onKeyDown={(e) => {
-              //   if (e.nativeEvent.key === "Enter") {
-              //     if (Messages.length !== 0) {
-              //       var temp = formatAMPM(new Date());
-              //       storeToReactStore(
-              //         Messages,
-              //         temp,
-              //         imageUrl,
-              //         videoUrl,
-              //         documentUrl,
-              //         DocName,
-              //         DocSize
-              //       );
-              //       setSend(true);
-
-              //       setMessages("");
-              //     }
-              //   }
-              // }}
-              onChange={(e) => setMessages(e.target.value)}
-              value={Messages}
-              // ref={textAreaRef}
-              rows="1"
-              placeholder="Write Something .."
-              className="input bg-[#292F3F] w-[calc(100%-135px)] ml-[10px]  text-[white] px-[20px] pr-[50px]  outline-none text-[15px] font-[work] font-medium tracking-[.4px] rounded-[15px]   h-[50px]  drop-shadow-md"
-            ></input>
-
+            {isListening == true ? (
+              <>
+                <div
+                  className="flex justify-center items-center w-[80px] h-full mr-[-80px] z-50"
+                  style={{ transition: ".4s" }}
+                >
+                  <span class="loader1"></span>
+                  <span class="loader"></span>
+                  <span class="loader1"></span>
+                </div>
+                <input
+                  onChange={(e) => setMessages(e.target.value)}
+                  value={transcript}
+                  // ref={textAreaRef}
+                  rows="1"
+                  placeholder="Write Something .."
+                  className="input bg-[#292F3F] w-[calc(100%-135px)] ml-[10px]  text-[white] px-[20px] pr-[50px]  outline-none text-[15px] font-[work] font-medium tracking-[.4px] rounded-[15px]   h-[50px]  drop-shadow-md pl-[60px]"
+                  style={{ transition: ".4s" }}
+                ></input>
+              </>
+            ) : (
+              <>
+                <div
+                  className="flex justify-center items-center w-[0] overflow-hidden h-full mr-[-20px] ml-[20px] z-50"
+                  style={{ transition: ".4s" }}
+                >
+                  <span class="loader1"></span>
+                  <span class="loader"></span>
+                  <span class="loader1"></span>
+                </div>
+                <input
+                  onChange={(e) => setMessages(e.target.value)}
+                  value={Messages}
+                  // ref={textAreaRef}
+                  rows="1"
+                  placeholder="Write Something .."
+                  className="input bg-[#292F3F] w-[calc(100%-135px)] ml-[10px]  text-[white] px-[20px] pr-[50px]  outline-none text-[15px] font-[work] font-medium tracking-[.4px] rounded-[15px]   h-[50px]  drop-shadow-md pl-[20px]"
+                  style={{ transition: ".4s" }}
+                ></input>
+              </>
+            )}
             <button
               className="ml-[-43px] mr-[8px] z-10 h-full   w-[35px] flex justify-center items-center cursor-pointer text-[#ffffff]  rounded-full hover:text-[white]"
               onClick={() => {

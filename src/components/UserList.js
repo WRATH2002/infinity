@@ -967,6 +967,14 @@ const UserList = (props) => {
     fetchAllGroups();
   }, []);
 
+  function isLink(inputString) {
+    // Regular expression to match URLs
+    const urlPattern = /^(?:https?:\/\/)?(?:www\.)?[\w.-]+\.\w{2,}(?:\/\S*)?$/i;
+
+    // Test if the input string matches the URL pattern
+    return urlPattern.test(inputString);
+  }
+
   function fetchownerInfo() {
     const user = firebase.auth().currentUser;
 
@@ -1629,7 +1637,7 @@ const UserList = (props) => {
               <div className=" z-50 fixed bottom-0 h-[100svh] bg-[#1b202d]  md:bg-[#292f3f] lg:bg-[#292f3f] w-full md:w-[400px] lg:w-[400px] left-0 flex-col flex justify-center items-center">
                 {/* Cross ------------------------- */}
                 <div
-                  className="fixed top-[25px] left-[calc(100%-60px)] md:left-[calc(400px-60px)]  lg:left-[calc(400px-60px)]  w-[40px] h-[40px]  rounded-full bg-[#292f3f] drop-shadow-none text-white flex justify-center items-center  cursor-pointer rotate-45 z-40"
+                  className="fixed top-[25px] left-[calc(100%-55px)] md:left-[calc(400px-55px)]  lg:left-[calc(400px-55px)]  w-[35px] h-[35px]  rounded-full bg-[white] md:bg-[#1c1f2f] lg:bg-[white] drop-shadow-none text-black flex justify-center items-center  cursor-pointer rotate-45 z-40"
                   onClick={() => {
                     setShowStatus(false);
                   }}
@@ -1644,16 +1652,16 @@ const UserList = (props) => {
                     // setShowStatus(true);
                   }}
                 >
-                  <div className="w-[50px] h-[50px] border-[2.4px] border-[#5bd150] rounded-full">
+                  <div className="w-[59px] h-[59px] border-[2.4px] border-[#2f9d49] flex justify-center items-center rounded-full">
                     {profileURL === "nophoto" ? (
                       <img
                         src={profile2}
-                        className="w-full h-full rounded-full object-cover "
+                        className="w-[50px] h-[50px] rounded-full object-cover "
                       ></img>
                     ) : (
                       <img
                         src={profileURL}
-                        className="w-full h-full rounded-full object-cover "
+                        className="w-[50px] h-[50px] rounded-full object-cover "
                       ></img>
                     )}
                   </div>
@@ -1678,7 +1686,7 @@ const UserList = (props) => {
                   ) : (
                     <>
                       <div
-                        className="fixed w-[30px] h-[50px] rounded-r-xl bg-[#000000a6] cursor-pointer text-[#4b93b9] flex justify-center items-center left-0"
+                        className="fixed w-[26px] h-[46px] rounded-full bg-[white] cursor-pointer text-[black] flex justify-center items-center left-0"
                         onClick={() => {
                           if (statusPosition > 0) {
                             setStatusPosition(statusPosition - 1);
@@ -1696,7 +1704,7 @@ const UserList = (props) => {
                   ) : (
                     <>
                       <div
-                        className="fixed w-[40px] h-[60px] rounded-l-xl bg-[#000000a6] cursor-pointer text-[#4b93b9] flex justify-center items-center right-0"
+                        className="fixed w-[26px] h-[46px] rounded-full bg-[white] cursor-pointer text-[black] flex justify-center items-center right-0"
                         onClick={() => {
                           if (statusPosition < statusCount - 1) {
                             setStatusPosition(statusPosition + 1);
@@ -1719,9 +1727,19 @@ const UserList = (props) => {
                   {statusImageUrl[statusPosition]?.url === "text" ? (
                     <>
                       <div className="w-full h-full flex justify-center items-center ">
-                        <pre className="w-[80%] font-[google] flex-wrap whitespace-pre-wrap font-normal text-[20px] text-white flex justify-center items-center text-center">
-                          {statusImageUrl[statusPosition]?.text}
-                        </pre>
+                        {isLink(statusImageUrl[statusPosition]?.text) ? (
+                          <a
+                            href={statusImageUrl[statusPosition]?.text}
+                            target="_blank"
+                            className="w-[80%] whitespace-pre-wrap text-center font-[google] font-normal text-[20px] cursor-pointer text-[#80ced3]"
+                          >
+                            {statusImageUrl[statusPosition]?.text}
+                          </a>
+                        ) : (
+                          <pre className="w-[80%] whitespace-pre-wrap text-center font-[google] font-normal text-[20px] text-[white]">
+                            {statusImageUrl[statusPosition]?.text}
+                          </pre>
+                        )}
                       </div>
                     </>
                   ) : (
@@ -1803,7 +1821,7 @@ const UserList = (props) => {
                 {/* write ---------------------- */}
 
                 <div
-                  className="fixed z-20 opacity-100 bottom-[140px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[40px] h-[40px]  rounded-full bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]  text-white flex justify-center items-center  cursor-pointer z-40"
+                  className="fixed  opacity-100 bottom-[140px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[40px] h-[40px]  rounded-full bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]  text-white flex justify-center items-center  cursor-pointer z-40"
                   onClick={() => {
                     setStatusTextModal(!statusTextModal);
                   }}
@@ -1913,16 +1931,16 @@ const UserList = (props) => {
                     setShowStatus(true);
                   }}
                 >
-                  <div className="w-[50px] h-[50px] border-[1.4px] border-[#a7ff2e] rounded-full">
+                  <div className="w-[59px] h-[59px] border-[2.4px] border-[#2f9d49] flex justify-center items-center rounded-full">
                     {profileURL === "nophoto" ? (
                       <img
                         src={profile2}
-                        className="w-full h-full rounded-full object-cover "
+                        className="w-[50px] h-[50px] rounded-full object-cover "
                       ></img>
                     ) : (
                       <img
                         src={profileURL}
-                        className="w-full h-full rounded-full object-cover "
+                        className="w-[50px] h-[50px] rounded-full object-cover "
                       ></img>
                     )}
                   </div>
