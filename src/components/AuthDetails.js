@@ -54,7 +54,7 @@ const Loading = (props) => {
             </svg> */}
             {/* <div class="custom-loader"></div> */}
             <div className="w-[200px] lg:w-[400px] md:w-[400px] h-[4px] rounded-full ">
-              <span class="loader"></span>
+              <span class="loader4"></span>
               {/* <span class="loader"></span> */}
             </div>
 
@@ -163,16 +163,16 @@ const AuthDetails = () => {
       ) : (
         <>
           {start == false ? (
-            <div className="w-full h-[100svh] flex flex-col justify-center items-center bg-[#292f3f]">
+            <div className="w-full h-[100svh] flex flex-col justify-center items-center bg-[#e4eaf1]">
               {/* {mode === 1 ? <Login /> : <Signup />} */}
               <span
-                className="text-white font-[google] flex text-[35px]  "
+                className="text-black font-[google] flex text-[35px]  "
                 style={{ transition: ".2s" }}
               >
                 Welcome to Infinity
               </span>
               <span
-                className="text-[#b3b3b3] mt-[20px] h-[90px]  w-[90%] md:w-[40%] lg:w-[40%] font-[google] text-[15px] px-[30px] flex justify-center items-center text-center "
+                className="text-[#4f4f4f] mt-[20px] h-[90px]  w-[90%] md:w-[40%] lg:w-[40%] font-[google] text-[15px] px-[30px] flex justify-center items-center text-center "
                 style={{ transition: ".2s" }}
               >
                 Experience seamless connections and vibrant conversations with
@@ -180,7 +180,7 @@ const AuthDetails = () => {
                 fingertips.
               </span>
               <div
-                className="px-[15px] h-[40px] w-[150px] whitespace-nowrap mt-[30px] cursor-pointer select-none outline-none  bg-[#1b202d] text-white rounded-full text-[15px] flex justify-center items-center"
+                className="px-[15px] h-[40px] w-[150px] whitespace-nowrap mt-[30px] cursor-pointer select-none outline-none drop-shadow-sm bg-[white] text-black rounded-full text-[15px] flex justify-center items-center"
                 onClick={() => {
                   setStart(!start);
                   setTimeout(() => {
@@ -197,15 +197,15 @@ const AuthDetails = () => {
               {/* <div className="w-full h-full bg-slate-500"></div> */}
             </div>
           ) : subStart === false ? (
-            <div className="w-full h-[100svh] flex flex-col justify-center items-center bg-[#292f3f]">
+            <div className="w-full h-[100svh] flex flex-col justify-center items-center bg-[#e4eaf1]">
               <span
-                className="text-white font-[google] text-[35px] hidden  "
+                className="text-black font-[google] text-[35px] hidden  "
                 style={{ transition: ".2s" }}
               >
                 Welcome to Infinity
               </span>
               <span
-                className="text-white  max-h-[90px] h-0 overflow-hidden w-full md:w-[40%] lg:w-[40%] font-[google] text-[15px] px-[30px] text-center "
+                className="text-[#4f4f4f]  max-h-[90px] h-0 overflow-hidden w-full md:w-[40%] lg:w-[40%] font-[google] text-[15px] px-[30px] text-center "
                 style={{ transition: ".2s" }}
               >
                 Experience seamless connections and vibrant conversations with
@@ -213,21 +213,21 @@ const AuthDetails = () => {
                 fingertips.
               </span>
               <div
-                className="px-[15px] h-[40px] w-[40px] animate-bounce  cursor-pointer bg-[#1b202d] text-white rounded-full text-[16px] flex justify-center  select-none outline-none items-center"
+                className="px-[15px] h-[40px] w-[40px] animate-bounce  cursor-pointer bg-[white] text-black rounded-full text-[16px] flex justify-center  select-none outline-none items-center"
                 // onClick={() => setStart(!start)}
                 style={{ transition: ".2s" }}
               ></div>
             </div>
           ) : (
-            <div className="w-full h-[100svh] flex flex-col justify-center items-center bg-[#292f3f]">
+            <div className="w-full h-[100svh] flex flex-col justify-center items-center bg-[#e4eaf1]">
               <span
-                className="text-white font-[google] text-[35px] hidden  "
+                className="text-black font-[google] text-[35px] hidden  "
                 style={{ transition: ".2s" }}
               >
                 <b>Welcome to Infinity</b>
               </span>
               <span
-                className="text-white  max-h-[90px] h-0 overflow-hidden w-full md:w-[40%] lg:w-[40%] font-[google] text-[15px] px-[30px] text-center "
+                className="text-[#4f4f4f]  max-h-[90px] h-0 overflow-hidden w-full md:w-[40%] lg:w-[40%] font-[google] text-[15px] px-[30px] text-center "
                 style={{ transition: ".2s" }}
               >
                 Experience seamless connections and vibrant conversations with
@@ -235,7 +235,7 @@ const AuthDetails = () => {
                 fingertips.
               </span>
               <div
-                className="px-[15px] h-[100svh] w-full cursor-pointer bg-[#1b202d] text-white rounded-none text-[16px] flex justify-center  select-none outline-none items-center"
+                className="px-[15px] h-[100svh] w-full cursor-pointer bg-[#ffffff] text-black rounded-none text-[16px] flex justify-center  select-none outline-none items-center"
                 onClick={() => {
                   // setStart(!start);
                   // setSubStart(false);

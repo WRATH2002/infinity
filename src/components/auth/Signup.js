@@ -108,10 +108,10 @@ const Signup = () => {
     <>
       <div className="w-full lg:w-[350px] md:w-[350px] p-[40px] rounded-none md:rounded-xl lg:rounded-xl h-[100svh] md:h-[70%] lg:h-[70%]  flex flex-col justify-center items-center">
         <div className="w-full flex flex-col">
-          <span className="text-[40px] text-[white] font-[google] font-bold tracking-wider">
+          <span className="text-[40px] text-[black] font-[google] font-bold tracking-wider">
             Signup{" "}
           </span>
-          <span className="text-[15px] font-normal font-[google] text-[#cacaca] ">
+          <span className="text-[15px] font-normal font-[google] text-[#4f4f4f] ">
             already a user ?
             <span
               className="text-[#4b93b9] hover:text-[#fe9c9a] cursor-pointer font-normal"
@@ -125,14 +125,14 @@ const Signup = () => {
         </div>
         {/* <div>Signup</div> */}
         <input
-          className="input outline-none  mt-[40px]  w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[white] bg-[#292f3f] log"
+          className="input outline-none  mt-[40px]  w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[black] bg-[#e4eaf1] log"
           placeholder="Name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         ></input>
         <input
-          className="input outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[white] bg-[#292f3f] log"
+          className="input outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[black] bg-[#e4eaf1] log"
           placeholder="Phone Number"
           type="tel"
           value={number}
@@ -144,7 +144,7 @@ const Signup = () => {
           }}
         ></input>
         <input
-          className="input outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[white] bg-[#292f3f] log"
+          className="input outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[black] bg-[#e4eaf1] log"
           placeholder="Email"
           type="email"
           value={email}
@@ -153,7 +153,7 @@ const Signup = () => {
         {show === true ? (
           <div className="w-full flex justify-center items-center">
             <input
-              className="input outline-none    w-full h-[50px] my-[10px] rounded-xl px-[15px] font-[google] font-normal text-[17px] text-[white] bg-[#292f3f] log"
+              className="input outline-none    w-full h-[50px] my-[10px] rounded-xl px-[15px] font-[google] font-normal text-[17px] text-[black] bg-[#e4eaf1] log"
               placeholder="Password"
               type="text"
               value={password}
@@ -171,7 +171,7 @@ const Signup = () => {
         ) : (
           <div className="w-full flex justify-center items-center">
             <input
-              className="input outline-none    w-full h-[50px] my-[10px] rounded-xl px-[15px] font-[google] font-normal text-[17px] text-[white] bg-[#292f3f] log"
+              className="input outline-none    w-full h-[50px] my-[10px] rounded-xl px-[15px] font-[google] font-normal text-[17px] text-[black] bg-[#e4eaf1] log"
               placeholder="Password"
               type="password"
               value={password}

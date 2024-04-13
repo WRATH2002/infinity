@@ -67,10 +67,7 @@ const Media = (props) => {
                 });
               }}
             >
-              <img
-                src={download}
-                className="w-[20px]   z-20 drop-shadow-md"
-              ></img>
+              <img src={download} className="w-[20px]   z-20 "></img>
             </div>
           </div>
         </div>
@@ -123,7 +120,15 @@ export const UserInfo = () => {
 
   const [arr, setArr] = useState([]);
   const [timer, setTimer] = useState(false);
+  const [theme, setTheme] = useState(true);
 
+  useEffect(() => {
+    const user = firebase.auth().currentUser;
+    const ref = db.collection("Chat Record").doc(user.uid);
+    onSnapshot(ref, (snapshot) => {
+      setTheme(snapshot?.data()?.theme);
+    });
+  }, []);
   useEffect(() => {
     fetchNotification();
   }, []);
@@ -463,7 +468,7 @@ export const UserInfo = () => {
               >
                 <div className="w-full h-full pb-[20px] flex justify-center items-center">
                   <div
-                    className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full text-[#ffb6b5] drop-shadow-md flex justify-center items-center cursor-pointer"
+                    className="w-[35px] lg:w-[0] md:w-[0]  h-[35px] rounded-full text-[#ffb6b5]  flex justify-center items-center cursor-pointer"
                     onClick={() => {
                       dispatch(addActiveUser(""));
                     }}
@@ -488,7 +493,7 @@ export const UserInfo = () => {
                   </div>
 
                   <div
-                    className="w-[50px] h-[50px]  rounded-full cursor-pointer bg-[#21323a] ml-[-17px]  text-white drop-shadow-md"
+                    className="w-[50px] h-[50px]  rounded-full cursor-pointer bg-[#21323a] ml-[-17px]  text-white "
                     onClick={() => {
                       setUserSidebar(!userSidebar);
                     }}
@@ -507,10 +512,10 @@ export const UserInfo = () => {
                   </div>
 
                   <div className="w-[calc(100%-160px)] lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start z-20">
-                    <span className="text-[17px]  font-[google] font-normal text-white drop-shadow-md  z-20">
+                    <span className="text-[17px]  font-[google] font-normal text-white   z-20">
                       {chatUserName}
                     </span>
-                    <span className="text-[14px]  font-[google] font-light text-[#b1b1b1] drop-shadow-md  z-20">
+                    <span className="text-[14px]  font-[google] font-light text-[#b1b1b1]   z-20">
                       +91 {chatUserNumber}
                     </span>
                   </div>
@@ -527,7 +532,7 @@ export const UserInfo = () => {
                       <div className="hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px] font-[work] font-normal bg-[#292f3f] text-[white]">
                         Delete Chats
                       </div>
-                      <MdDelete className="text-[20px] text-[#ffb6b5] drop-shadow-md" />
+                      <MdDelete className="text-[20px] text-[#ffb6b5] " />
                      
                     </div>
                   </span>
@@ -535,14 +540,24 @@ export const UserInfo = () => {
               </div> */}
               {delConfirmation === true ? (
                 <div
-                  className="fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[calc(100%-80px)]  flex justify-center items-center  bg-[#000000a2]  backdrop-blur-sm top-[80px]"
+                  className={
+                    "fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[calc(100%-80px)]  flex justify-center items-center    backdrop-blur-sm top-[80px]" +
+                    (theme ? " bg-[#e4eaf1a2]" : " bg-[#000000a2]")
+                  }
                   style={{ zIndex: "10" }}
                   onClick={() => {
                     // console.log("clicked");
                     setDelConfirmation(false);
                   }}
                 >
-                  <div className="bg-[#292f3f] text-white text-[15px] w-[320px] lg:w-[450px] md:w-[450px] h-[190px] rounded-xl flex flex-col drop-shadow-md">
+                  <div
+                    className={
+                      " text-[15px] w-[320px] lg:w-[450px] md:w-[450px] h-[190px] rounded-xl flex flex-col " +
+                      (theme
+                        ? " bg-[#ffffff] text-black"
+                        : " bg-[#292f3f] text-white")
+                    }
+                  >
                     <div className="w-full h-[110px] rounded-xl  flex justify-center items-center px-[30px]">
                       <span className=" font-[google] font-light ">
                         ⚠️ Are you sure? you want to delete all chats!
@@ -550,7 +565,12 @@ export const UserInfo = () => {
                     </div>
                     <div className=" h-[80px] w-full flex justify-between items-center px-[30px] rounded-xl">
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-[#ffffff]   cursor-pointer  font-[google] font-light bg-[#1b202d]  rounded-xl"
+                        className={
+                          "w-[115px] lg:w-[165px] md:w-[165px] h-[45px]    cursor-pointer  font-[google] font-light   rounded-xl" +
+                          (theme
+                            ? " bg-[#e4eaf1] text-[#000000]"
+                            : " bg-[#1b202d] text-[#ffffff]")
+                        }
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -559,7 +579,7 @@ export const UserInfo = () => {
                         Cancel
                       </button>
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#ffb6b5]  rounded-xl"
+                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#96df73]  rounded-xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -574,14 +594,25 @@ export const UserInfo = () => {
               ) : (
                 <></>
               )}
-              <div className="w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[80px] z-50 bg-[#1b202d] fixed top-0 flex justify-center items-start p-[10px] overflow-visible">
+              <div
+                className={
+                  "w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[80px] z-50  fixed top-0 flex justify-center items-start p-[10px] overflow-visible" +
+                  (theme ? " bg-[#e4eaf1] " : " bg-[#1b202d]")
+                }
+              >
                 {expand == true ? (
                   <div
-                    className="w-full h-[170px] z-50 bg-[#292f3f] rounded-xl  top-0 flex justify-between items-center p-[20px] drop-shadow-md"
+                    className={
+                      "w-full h-[170px] z-50  rounded-xl  top-0 flex justify-between items-center p-[20px] " +
+                      (theme ? " bg-[#ffffff]" : " bg-[#292f3f]")
+                    }
                     style={{ transition: ".4s" }}
                   >
                     <div
-                      className="w-[0] overflow-hidden lg:w-[0] md:w-[0]  h-[35px] rounded-full text-[#ffb6b5] drop-shadow-md  cursor-pointer flex justify-start items-center"
+                      className={
+                        "w-[0] overflow-hidden lg:w-[0] md:w-[0]  h-[35px] rounded-full   cursor-pointer flex justify-start items-center" +
+                        (theme ? " text-[black]" : " text-[white]")
+                      }
                       style={{
                         transition: ".4s",
                         transitionDelay: ".4s",
@@ -591,7 +622,7 @@ export const UserInfo = () => {
                         dispatch(addActiveUser(""));
                       }}
                     >
-                      <FaAngleLeft className="text-[20px]" />
+                      <FaAngleLeft className="text-[20px] " />
                     </div>
                     <div
                       className="w-[17px] opacity-0 overflow-hidden h-[55px]   flex justify-end items-end  z-10 "
@@ -603,11 +634,19 @@ export const UserInfo = () => {
                     >
                       {isOnline === true ? (
                         <div
-                          className="w-[12px] max-h-[12px] min-h-[12px] bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f]  rounded-full flex justify-center items-center   z-10 "
+                          className={
+                            "w-[12px] max-h-[12px] min-h-[12px]  rounded-full flex justify-center items-center   z-10 " +
+                            (theme
+                              ? " bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff] "
+                              : " bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f] ")
+                          }
                           // style={{ zIndex: "100" }}
                         >
                           <div
-                            className="w-[8px] max-h-[8px] min-h-[8px] bg-[#96df73]  rounded-full  z-10"
+                            className={
+                              "w-[8px] max-h-[8px] min-h-[8px]   rounded-full  z-10" +
+                              (theme ? " bg-[#469422] " : " bg-[#96df73]")
+                            }
                             // style={{ zIndex: "100" }}
                           ></div>
                         </div>
@@ -616,7 +655,10 @@ export const UserInfo = () => {
                       )}
                     </div>
                     <div
-                      className="w-[130px] h-[130px]  rounded-full cursor-pointer bg-[#21323a] ml-[-17px]  text-white "
+                      className={
+                        "w-[130px] h-[130px]  rounded-full cursor-pointer  ml-[-17px]  text-white " +
+                        (theme ? " bg-[#e4eaf1]" : " bg-[#21323a]")
+                      }
                       style={{
                         transition: ".4s",
                         transitionDelay: ".4s",
@@ -640,7 +682,10 @@ export const UserInfo = () => {
                     </div>
                     <div className="w-[calc(100%-155px)]  lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-full ml-[15px]  flex flex-col justify-center items-start z-20">
                       <span
-                        className="text-[20px]  font-[google] font-normal text-white drop-shadow-md  z-20"
+                        className={
+                          "text-[20px]  font-[google] font-normal    z-20" +
+                          (theme ? " text-black" : " text-white")
+                        }
                         style={{
                           transition: ".4s",
                           transitionDelay: ".4s",
@@ -649,7 +694,10 @@ export const UserInfo = () => {
                         {chatUserName}
                       </span>
                       <span
-                        className="text-[15px]  font-[google] font-light text-[#b1b1b1] drop-shadow-md  z-20"
+                        className={
+                          "text-[15px]  font-[google] font-light    z-20" +
+                          (theme ? " text-[#2d2d2d]" : " text-[#b1b1b1]")
+                        }
                         style={{
                           transition: ".4s",
                           transitionDelay: ".4s",
@@ -658,7 +706,10 @@ export const UserInfo = () => {
                         +91 {chatUserNumber}
                       </span>
                       <span
-                        className="text-[14px]  max-h-[50px] overflow-hidden w-full line-clamp-2 text-ellipsis font-[google] font-light text-[#8e8e8e]  z-20"
+                        className={
+                          "text-[14px]  max-h-[50px] overflow-hidden w-full line-clamp-2 text-ellipsis font-[google] font-light   z-20" +
+                          (theme ? " text-[#2d2d2d]" : " text-[#8e8e8e]")
+                        }
                         style={{ transition: ".4s", transitionDelay: ".4s" }}
                       >
                         {chatUserAbout}
@@ -674,14 +725,20 @@ export const UserInfo = () => {
                             }}
                           >
                             <span
-                              class="pulse z-50 bg-[#96df73] opacity-100 "
+                              class={
+                                "pulse z-50  opacity-100 " +
+                                (theme ? " bg-[#469422] " : " bg-[#96df73]")
+                              }
                               style={{
                                 transition: ".4s",
                                 transitionDelay: ".4s",
                               }}
                             ></span>{" "}
                             <span
-                              className="ml-[10px] text-[15px] text-[#b3b3b3] font-[google] font-normal opacity-100 "
+                              className={
+                                "ml-[10px] text-[15px]  font-[google] font-normal opacity-100 " +
+                                (theme ? " text-[#2d2d2d]" : " text-[#b3b3b3]")
+                              }
                               style={{
                                 transition: ".4s",
                                 transitionDelay: ".4s",
@@ -708,7 +765,10 @@ export const UserInfo = () => {
                               }}
                             ></span>{" "}
                             <span
-                              className="ml-[10px] text-[15px] text-[#b3b3b3] font-[google] font-normal opacity-100 "
+                              className={
+                                "ml-[10px] text-[15px]  font-[google] font-normal opacity-100 " +
+                                (theme ? " text-[#2d2d2d]" : " text-[#b3b3b3]")
+                              }
                               style={{
                                 transition: ".4s",
                                 transitionDelay: ".4s",
@@ -749,20 +809,30 @@ export const UserInfo = () => {
                         <div className="hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px] font-[work] font-normal bg-[#292f3f] text-[white]">
                           Delete Chats
                         </div>
-                        <MdDelete className="text-[20px] text-[white] drop-shadow-md" />
+                        <MdDelete
+                          className={
+                            "text-[20px] " +
+                            +(theme ? " bg-[#469422] " : " bg-[#96df73]")
+                          }
+                        />
                       </div>
                     </span>
                   </div>
                 ) : (
                   <div
-                    className="w-full h-[60px] z-50 bg-[#292f3f] rounded-xl  top-0 flex justify-between items-center px-[20px]"
+                    className={
+                      "w-full h-[60px] z-50  rounded-xl  top-0 flex justify-between items-center px-[20px]" +
+                      (theme
+                        ? " bg-[#ffffff] text-[black]"
+                        : " bg-[#292f3f] text-[white]")
+                    }
                     style={{ transition: ".4s", transitionDelay: ".4s" }}
                     // onClick={() => {
                     //   setExpand(!expand);
                     // }}
                   >
                     <div
-                      className="w-[35px]  lg:w-[0] md:w-[0]  h-[35px] rounded-full text-[white] drop-shadow-md  cursor-pointer flex justify-start items-center"
+                      className="w-[35px]  lg:w-[0] md:w-[0]  h-[35px] rounded-full    cursor-pointer flex justify-start items-center"
                       style={{
                         transition: ".4s",
                         transitionDelay: ".4s",
@@ -771,7 +841,7 @@ export const UserInfo = () => {
                         dispatch(addActiveUser(""));
                       }}
                     >
-                      <FaAngleLeft className="text-[20px]" />
+                      <FaAngleLeft className="text-[20px] " />
                     </div>
                     <div
                       className="w-[17px] h-[55px] opacity-100  flex justify-end  items-end  z-10 "
@@ -779,11 +849,19 @@ export const UserInfo = () => {
                     >
                       {isOnline === true ? (
                         <div
-                          className="w-[12px] max-h-[12px] min-h-[12px] bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f]  rounded-full flex justify-center items-center   z-10 "
+                          className={
+                            "w-[12px] max-h-[12px] min-h-[12px]   rounded-full flex justify-center items-center   z-10 " +
+                            (theme
+                              ? " bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff]"
+                              : " bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f]")
+                          }
                           // style={{ zIndex: "100" }}
                         >
                           <div
-                            className="w-[8px] max-h-[8px] min-h-[8px] bg-[#96df73]  rounded-full  z-10"
+                            className={
+                              "w-[8px] max-h-[8px] min-h-[8px]   rounded-full  z-10" +
+                              (theme ? " bg-[#469422] " : " bg-[#96df73]")
+                            }
                             // style={{ zIndex: "100" }}
                           ></div>
                         </div>
@@ -793,7 +871,12 @@ export const UserInfo = () => {
                     </div>
 
                     <div
-                      className="w-[50px] h-[50px]  rounded-full cursor-pointer bg-[#21323a] ml-[-17px]  text-white drop-shadow-md"
+                      className={
+                        "w-[50px] h-[50px]  rounded-full cursor-pointer  ml-[-17px]   " +
+                        (theme
+                          ? " bg-[#e4eaf1] text-black"
+                          : " bg-[#21323a] text-white")
+                      }
                       style={{
                         transition: ".4s",
                         // transitionDelay: ".2s",
@@ -818,9 +901,14 @@ export const UserInfo = () => {
                       )}
                     </div>
 
-                    <div className="w-[calc(100%-155px)]  lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start z-20">
+                    <div
+                      className={
+                        "w-[calc(100%-155px)]  lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start z-20" +
+                        (theme ? "  text-black" : "  text-white")
+                      }
+                    >
                       <span
-                        className="text-[17px]  font-[google] font-normal text-white drop-shadow-md  z-20"
+                        className="text-[17px]  font-[google] font-normal    z-20"
                         style={{
                           transition: ".4s",
                           transitionDelay: ".2s",
@@ -829,7 +917,10 @@ export const UserInfo = () => {
                         {chatUserName}
                       </span>
                       <span
-                        className="text-[14px]  font-[google] font-light text-[#b1b1b1] drop-shadow-md  z-20"
+                        className={
+                          "text-[14px]  font-[google] font-light   z-20" +
+                          (theme ? "  text-[#2d2d2d]" : "  text-[#b1b1b1]")
+                        }
                         style={{
                           transition: ".4s",
                           transitionDelay: ".2s",
@@ -838,7 +929,10 @@ export const UserInfo = () => {
                         +91 {chatUserNumber}
                       </span>
                       <span
-                        className="text-[14px]  max-h-[0px] overflow-hidden w-full line-clamp-2 text-ellipsis font-[google] font-light text-[#8e8e8e]  z-20"
+                        className={
+                          "text-[14px]  max-h-[0px] overflow-hidden w-full line-clamp-2 text-ellipsis font-[google] font-light  z-20" +
+                          (theme ? "  text-[#2d2d2d]" : "  text-[#8e8e8e] ")
+                        }
                         style={{ transition: ".4s", transitionDelay: ".4s" }}
                       >
                         ~ {chatUserAbout}
@@ -856,11 +950,19 @@ export const UserInfo = () => {
                             }
                           >
                             <span
-                              class="pulse z-50 bg-[#96df73] opacity-0 "
+                              class={
+                                "pulse z-50 opacity-0 " +
+                                (theme ? " bg-[#469422] " : " bg-[#96df73]")
+                              }
                               style={{ transition: ".4s" }}
                             ></span>{" "}
                             <span
-                              className="ml-[10px] text-[15px] text-[#b3b3b3] font-[google] font-normal opacity-0 "
+                              className={
+                                "ml-[10px] text-[15px] font-[google] font-normal opacity-0 " +
+                                (theme
+                                  ? "  text-[#2d2d2d]"
+                                  : "  text-[#8e8e8e] ")
+                              }
                               style={{ transition: ".4s" }}
                             >
                               Online
@@ -883,7 +985,12 @@ export const UserInfo = () => {
                               style={{ transition: ".4s" }}
                             ></span>{" "}
                             <span
-                              className="ml-[10px] text-[15px] text-[#b3b3b3] font-[google] font-normal opacity-0 "
+                              className={
+                                "ml-[10px] text-[15px]  font-[google] font-normal opacity-0 " +
+                                (theme
+                                  ? "  text-[#2d2d2d]"
+                                  : "  text-[#8e8e8e] ")
+                              }
                               style={{ transition: ".4s" }}
                             >
                               Offline
@@ -921,7 +1028,12 @@ export const UserInfo = () => {
                         <div className="hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px] font-[work] font-normal bg-[#292f3f] text-[white]">
                           Delete Chats
                         </div>
-                        <MdDelete className="text-[20px] text-[white] drop-shadow-md" />
+                        <MdDelete
+                          className={
+                            "text-[20px]  " +
+                            (theme ? "  text-[#000000]" : "  text-[#ffffff] ")
+                          }
+                        />
                       </div>
                     </span>
                   </div>
@@ -933,7 +1045,7 @@ export const UserInfo = () => {
       ) : (
         <>
           <div
-            className="w-full lg:w-[40%] md:w-[40%] h-[100svh] fixed bg-[#1b202d]   backdrop-blur-lg drop-shadow-md  text-white z-50 overflow-hidden flex flex-col justify-center items-center px-[10px] right-0 border-l-[0px] md:border-l-[2px] lg:border-l-[2px] border-[#383e4f]"
+            className="w-full lg:w-[40%] md:w-[40%] h-[100svh] fixed bg-[#1b202d]   backdrop-blur-lg   text-white z-50 overflow-hidden flex flex-col justify-center items-center px-[10px] right-0 border-l-[0px] md:border-l-[2px] lg:border-l-[2px] border-[#383e4f]"
             // style={{ transition: ".5s" }}
             style={{ zIndex: "10000" }}
           >
@@ -945,12 +1057,12 @@ export const UserInfo = () => {
                 }}
               >
                 <FaAngleLeft className="text-[20px]" />
-                {/* <img src={back} className="w-[25px] drop-shadow-lg"></img> */}
+                {/* <img src={back} className="w-[25px] "></img> */}
               </div>
             </div>
 
             <div className="w-full h-[calc(100%-70px)]  flex flex-col justify-center items-center">
-              <div className="w-[150px] lg:w-[200px] md:w-[200px] h-[150px] lg:h-[200px] md:h-[200px] rounded-full bg-[#cdd8dd]  drop-shadow-lg">
+              <div className="w-[150px] lg:w-[200px] md:w-[200px] h-[150px] lg:h-[200px] md:h-[200px] rounded-full bg-[#cdd8dd]  ">
                 {/* <span>Photo</span> */}
                 {chatUserPhoto === "nophoto" ? (
                   <img
@@ -968,10 +1080,10 @@ export const UserInfo = () => {
 
               {/* </div> */}
               <div className="flex flex-col justify-center items-center mt-[20px]">
-                <span className="text-[20px] font-[google] font-normal text-[#ffffff] drop-shadow-lg">
+                <span className="text-[20px] font-[google] font-normal text-[#ffffff] ">
                   {chatUserName}
                 </span>
-                <span className="text-[15px]  font-[google] font-light text-[#b1b1b1] drop-shadow-lg">
+                <span className="text-[15px]  font-[google] font-light text-[#b1b1b1] ">
                   +91 {chatUserNumber}
                 </span>
                 {isOnline === true ? (
@@ -995,26 +1107,26 @@ export const UserInfo = () => {
                 )}
               </div>
               <div className="mt-[20px] w-full flex justify-center items-start h-[26px] overflow-hidden text-ellipsis">
-                <span className="text-[15px]   font-[google] font-extralight text-[#b1b1b1] drop-shadow-lg">
+                <span className="text-[15px]   font-[google] font-extralight text-[#b1b1b1] ">
                   ~ {chatUserAbout}
                 </span>
               </div>
 
               <div className="w-full flex justify-center items-center mt-[20px] ">
-                <span className="w-[50px] h-[50px] drop-shadow-md rounded-full hover:bg-[#383e4f] text-[#ffb6b5] flex justify-center items-center mx-[10px]">
+                <span className="w-[50px] h-[50px]  rounded-full hover:bg-[#383e4f] text-[#ffb6b5] flex justify-center items-center mx-[10px]">
                   <MdCall className="text-[30px]" />
-                  {/* <img src={call} className="w-[35px] drop-shadow-lg"></img> */}
+                  {/* <img src={call} className="w-[35px] "></img> */}
                 </span>
-                <span className="w-[50px] h-[50px] drop-shadow-md rounded-full hover:bg-[#383e4f] text-[#ffb6b5] flex justify-center items-center mx-[10px]">
+                <span className="w-[50px] h-[50px]  rounded-full hover:bg-[#383e4f] text-[#ffb6b5] flex justify-center items-center mx-[10px]">
                   <IoMdVideocam className="text-[30px]" />
                   {/* <img
                     src={videocall}
-                    className="w-[35px] drop-shadow-lg"
+                    className="w-[35px] "
                   ></img> */}
                 </span>
-                <span className="w-[50px] h-[50px] drop-shadow-md rounded-full hover:bg-[#383e4f] text-[#ffb6b5] flex justify-center items-center mx-[10px]">
+                <span className="w-[50px] h-[50px]  rounded-full hover:bg-[#383e4f] text-[#ffb6b5] flex justify-center items-center mx-[10px]">
                   <RiMessage2Fill className="text-[30px]" />
-                  {/* <img src={chat} className="w-[35px] drop-shadow-lg "></img> */}
+                  {/* <img src={chat} className="w-[35px]  "></img> */}
                 </span>
               </div>
               <span className=" font-[google] font-light text-[16px] w-full flex justify-start items-center mt-[20px] text-[white] px-[10px]">
@@ -1047,7 +1159,7 @@ export const UserInfo = () => {
                 }}
               >
                 {/* <FaAngleLeft className="text-[20px]" /> */}
-                <img src={back} className="w-[25px] drop-shadow-lg "></img>
+                <img src={back} className="w-[25px]  "></img>
               </div>
               <div className="w-[17px] h-[55px] ml-[10px]  flex justify-end items-end  z-50 ">
                 {isOnline === true ? (
@@ -1083,10 +1195,10 @@ export const UserInfo = () => {
                 )}
               </div>
               <div className="w-[calc(100%-160px)] lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
-                <span className="text-[17px]  font-[google] font-normal text-white drop-shadow-md">
+                <span className="text-[17px]  font-[google] font-normal text-white ">
                   {chatUserName}
                 </span>
-                <span className="text-[14px]  font-[google] font-light text-[#b1b1b1] drop-shadow-md">
+                <span className="text-[14px]  font-[google] font-light text-[#b1b1b1] ">
                   +91 {chatUserNumber}
                 </span>
               </div>
@@ -1102,7 +1214,7 @@ export const UserInfo = () => {
                   <div className="hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px]  font-[work] font-normal tracking-[.4px] bg-[#505050]">
                     Delete Chats
                   </div>
-                  <img src={del} className=" w-[25px] drop-shadow-lg "></img>
+                  <img src={del} className=" w-[25px]  "></img>
                 </div>
               </span>
             </div>

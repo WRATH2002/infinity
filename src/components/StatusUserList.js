@@ -65,7 +65,7 @@ const StatusUserList = (props) => {
               // setShowStatus(true);
             }}
           >
-            <div className="w-[59px] h-[59px] border-[2.4px] border-[#2f9d49] flex justify-center items-center rounded-full">
+            <div className="w-[59px] h-[59px] border-[2.4px] border-[#96df73] flex justify-center items-center rounded-full">
               {photo === "nophoto" ? (
                 <img
                   src={profile2}
@@ -206,7 +206,7 @@ const StatusUserList = (props) => {
               // setShowStatus(true);
             }}
           >
-            <div className="w-[59px] h-[59px] border-[2.4px] border-[#2f9d49] flex justify-center items-center rounded-full">
+            <div className="w-[59px] h-[59px] border-[2.4px] border-[#96df73] flex justify-center items-center rounded-full">
               {photo === "nophoto" ? (
                 <img
                   src={profile2}

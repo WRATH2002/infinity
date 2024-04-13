@@ -34,9 +34,12 @@ import { BsFillChatSquareTextFill } from "react-icons/bs";
 import { RiSettings3Fill } from "react-icons/ri";
 
 import { TiGroup } from "react-icons/ti";
-import { LuSettings2 } from "react-icons/lu";
+import { RiSettings4Fill } from "react-icons/ri";
 import { MdGroupAdd } from "react-icons/md";
 import { TbPlaystationCircle } from "react-icons/tb";
+import { BsPersonFillAdd } from "react-icons/bs";
+import { MdGroups2 } from "react-icons/md";
+import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
 const OwnerDetails = (props) => {
   const [ownerInfo, setOwnerInfo] = useState("");
   const [changeOwnerInfo, setChangeOwnerInfo] = useState("");
@@ -54,6 +57,17 @@ const OwnerDetails = (props) => {
   const [isOnline, setIsOnline] = useState(true);
   const [isAni, setIsAni] = useState();
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
+  const [showTime, setShowTime] = useState(false);
+  const [theme, setTheme] = useState(true);
+
+  useEffect(() => {
+    const user = firebase.auth().currentUser;
+    const ref = db.collection("Chat Record").doc(user.uid);
+    onSnapshot(ref, (snapshot) => {
+      setTheme(snapshot?.data()?.theme);
+    });
+  }, []);
+
   useEffect(() => {
     fetchownerInfo();
   }, []);
@@ -172,34 +186,48 @@ const OwnerDetails = (props) => {
 
   return (
     <>
-      <div className="w-full md:w-[400px] lg:w-[400px] h-[80px] bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f] fixed top-0 flex   justify-between items-center px-[10px] overflow-hidden py-[10px] z-0">
+      <div
+        className={
+          "w-full md:w-[400px] lg:w-[400px] h-[80px] fixed top-0 flex   justify-between items-center px-[10px] overflow-hidden py-[10px] z-0" +
+          (theme
+            ? " md:bg-[#e4eaf1] lg:bg-[#e4eaf1] bg-[#e4eaf1]"
+            : "bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f] ")
+        }
+      >
         {ActiveChatUser.length === 0 ? (
           <>
-            <div className="text-[18px] font-[google] font-medium text-[#ffffff] bg-[#292f3f] md:bg-[#1B202D] lg:bg-[#1B202D] w-full h-full flex justify-between items-center px-[10px] rounded-xl z-0">
+            <div
+              className={
+                "text-[18px] font-[google] font-medium  w-full h-full flex justify-between items-center px-[10px] rounded-xl z-0 pl-[20px]" +
+                (theme
+                  ? " bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff] text-[#000000]"
+                  : " bg-[#292f3f] md:bg-[#1B202D] lg:bg-[#1B202D] text-[#ffffff]")
+              }
+            >
               <div>
                 {props.data === "Chat" ? (
                   <span className="flex justify-start items-center">
-                    <BsFillChatSquareTextFill className="text-[20px]  text-white mr-[10px]" />
+                    <HiChatBubbleBottomCenterText className="text-[22px]   mr-[10px]" />
                     Message's ( {totalChats} )
                   </span>
                 ) : props.data === "All" ? (
                   <span className="flex justify-start items-center">
-                    <MdGroupAdd className="text-[20px]  text-white mr-[10px]" />
+                    <BsPersonFillAdd className="text-[20px]   mr-[10px]" />
                     Total User's ( {totalUsers} )
                   </span>
                 ) : props.data === "Status" ? (
                   <span className="flex justify-start items-center">
-                    <TbPlaystationCircle className="text-[20px]  text-white mr-[10px]" />
+                    <TbPlaystationCircle className="text-[20px]   mr-[10px]" />
                     Status's ( 1 )
                   </span>
                 ) : props.data === "Group" ? (
                   <span className="flex justify-start items-center">
-                    <TiGroup className="text-[20px]  text-white mr-[10px]" />
+                    <MdGroups2 className="text-[25px]   mr-[10px]" />
                     Group's ( 0 )
                   </span>
                 ) : (
                   <span className="flex justify-start items-center">
-                    <LuSettings2 className="text-[20px] mt-[-1px] text-white mr-[10px]" />
+                    <RiSettings4Fill className="text-[20px] mt-[-1px]  mr-[10px]" />
                     Settings
                   </span>
                 )}
@@ -287,31 +315,38 @@ const OwnerDetails = (props) => {
           </>
         ) : (
           <>
-            <div className="text-[18px] font-[google] font-medium text-[#ffffff] bg-[#292f3f] md:bg-[#1B202D] lg:bg-[#1B202D] w-full h-full hidden md:flex lg:flex justify-between items-center px-[10px] rounded-xl z-0">
+            <div
+              className={
+                "text-[18px] font-[google] font-medium w-full h-full hidden md:flex lg:flex  justify-between items-center px-[10px] rounded-xl z-0 pl-[20px]" +
+                (theme
+                  ? "bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff] text-[#000000]"
+                  : "bg-[#292f3f] md:bg-[#1B202D] lg:bg-[#1B202D] text-[#ffffff]")
+              }
+            >
               <div>
                 {props.data === "Chat" ? (
                   <span className="flex justify-start items-center">
-                    <BsFillChatSquareTextFill className="text-[20px]  text-white mr-[10px]" />
+                    <HiChatBubbleBottomCenterText className="text-[22px]   mr-[10px]" />
                     Message's ( {totalChats} )
                   </span>
                 ) : props.data === "All" ? (
                   <span className="flex justify-start items-center">
-                    <MdGroupAdd className="text-[20px]  text-white mr-[10px]" />
+                    <BsPersonFillAdd className="text-[20px]   mr-[10px]" />
                     Total User's ( {totalUsers} )
                   </span>
                 ) : props.data === "Status" ? (
                   <span className="flex justify-start items-center">
-                    <TbPlaystationCircle className="text-[20px]  text-white mr-[10px]" />
+                    <TbPlaystationCircle className="text-[20px]   mr-[10px]" />
                     Status's ( 0 )
                   </span>
                 ) : props.data === "Group" ? (
                   <span className="flex justify-start items-center">
-                    <TiGroup className="text-[20px]  text-white mr-[10px]" />
+                    <MdGroups2 className="text-[25px]   mr-[10px]" />
                     Group's ( 0 )
                   </span>
                 ) : (
                   <span className="flex justify-start items-center">
-                    <LuSettings2 className="text-[20px] mt-[-1px] text-white mr-[10px]" />
+                    <RiSettings4Fill className="text-[20px] mt-[-1px]  mr-[10px]" />
                     Settings
                   </span>
                 )}

@@ -43,10 +43,10 @@ const Login = () => {
       <div className="w-full lg:w-[350px] md:w-[350px] p-[40px] rounded-none md:rounded-xl lg:rounded-xl h-[100svh] md:h-[70%] lg:h-[70%]  flex flex-col justify-center items-center">
         {/* <span className="in  font-bold text-[40px] mb-[30px]">INFINITY</span> */}
         <div className="w-full flex flex-col ">
-          <span className="text-[40px] text-[white] font-[google] font-bold tracking-wider ">
+          <span className="text-[40px] text-[black] font-[google] font-bold tracking-wider ">
             Login{" "}
           </span>
-          <span className="text-[15px] font-normal text-[#cacaca] font-[google] ">
+          <span className="text-[15px] font-normal text-[#4f4f4f] font-[google] ">
             new user ?
             <span
               className="text-[#4b93b9] hover:text-[#fe9c9a] cursor-pointer  font-normal"
@@ -79,7 +79,7 @@ const Login = () => {
           }}
         ></input> */}
         <input
-          className="log outline-none font-[google] mt-[40px] bg  text-[16px] w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[white] bg-[#292f3f]"
+          className="log outline-none font-[google] mt-[40px] bg  text-[16px] w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[black] bg-[#e4eaf1]"
           placeholder="Email"
           type="email"
           value={email}
@@ -88,7 +88,7 @@ const Login = () => {
         {show === true ? (
           <div className="w-full flex justify-center items-center">
             <input
-              className=" log outline-none font-[google]  text-[16px]  w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[white] bg-[#292f3f]"
+              className=" log outline-none font-[google]  text-[16px]  w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[black] bg-[#e4eaf1] placeholder:black"
               placeholder="Password"
               type="text"
               value={password}
@@ -106,7 +106,7 @@ const Login = () => {
         ) : (
           <div className="w-full flex justify-center items-center">
             <input
-              className="log outline-none font-[google] text-[16px]   w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[white] bg-[#292f3f]"
+              className="log outline-none font-[google] text-[16px]   w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[black] bg-[#e4eaf1] placeholder:black"
               placeholder="Password"
               type="password"
               value={password}

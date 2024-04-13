@@ -1,4 +1,15 @@
 import { useEffect, useState } from "react";
+import {
+  Area,
+  AreaChart,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+} from "recharts";
 import dp from "../assets/img/dp2.jpg";
 import profile from "../assets/img/profile.jpg";
 import profile2 from "../assets/img/d.png";
@@ -42,7 +53,7 @@ import { orderBy } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
 import searchh from "../assets/img/searchh.png";
 import cross from "../assets/img/cross.png";
-import { MdGroups2 } from "react-icons/md";
+// import { MdGroups2 } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import { RiSearch2Line } from "react-icons/ri";
 import { IoMdDocument } from "react-icons/io";
@@ -64,6 +75,7 @@ import { MdPersonSearch } from "react-icons/md";
 import { MdSettings } from "react-icons/md";
 import { BsFillPersonPlusFill } from "react-icons/bs";
 import { TiGroup } from "react-icons/ti";
+import { MdGroups2 } from "react-icons/md";
 import { MdOutlinePassword } from "react-icons/md";
 import { IoTrailSignOutline } from "react-icons/io5";
 import { TiDelete } from "react-icons/ti";
@@ -74,14 +86,18 @@ import { IoChevronDownOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { signOut } from "firebase/auth";
 import { RiEditFill } from "react-icons/ri";
+import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
 import { MdOutlineDone } from "react-icons/md";
 import { RiRadioButtonLine } from "react-icons/ri";
+import { RiSettings4Fill } from "react-icons/ri";
 import StatusUserList from "./StatusUserList";
 
 import { LuSettings2 } from "react-icons/lu";
 // import { MdGroups2 } from "react-icons/md";
 import { MdGroupAdd } from "react-icons/md";
+import { BsPersonFillAdd } from "react-icons/bs";
 import { IoIosApps } from "react-icons/io";
+import { FaAngleDown } from "react-icons/fa6";
 // import { BsFillChatSquareTextFill } from "react-icons/bs";
 // const Hello = () => {
 //   const [userName, setUserName] = useState("");
@@ -95,14 +111,47 @@ import { IoIosApps } from "react-icons/io";
 //   });
 //   return(<></>)
 // }
+import { BiSolidMoon } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
+import { MdNoAccounts } from "react-icons/md";
+import { TbHelpSquareRoundedFilled } from "react-icons/tb";
+import { IoLogOut } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { IoMdMoon } from "react-icons/io";
 import { IoMoonOutline } from "react-icons/io5";
 import { PiMoon } from "react-icons/pi";
 import { TbLogout } from "react-icons/tb";
 import { AiOutlineDelete } from "react-icons/ai";
-import { MdNoAccounts } from "react-icons/md";
+// import { MdNoAccounts } from "react-icons/md";
 import { FaAppStoreIos } from "react-icons/fa";
+
+const dd = [
+  {
+    date: 21,
+    time: 3.4,
+  },
+  {
+    date: 22,
+    time: 6.4,
+  },
+  {
+    date: 23,
+    time: 3.8,
+  },
+  {
+    date: 24,
+    time: 5.4,
+  },
+  {
+    date: 25,
+    time: 7.8,
+  },
+  {
+    date: 26,
+    time: 3.7,
+  },
+];
+
 const AddFriend = (props) => {
   const [userName, setUserName] = useState("");
   const [photoURL, setPhotoURL] = useState("");
@@ -164,6 +213,16 @@ const Friends = (props) => {
 
   const dispatch = useDispatch();
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
+
+  const [theme, setTheme] = useState(true);
+
+  useEffect(() => {
+    const user = firebase.auth().currentUser;
+    const ref = db.collection("Chat Record").doc(user.uid);
+    onSnapshot(ref, (snapshot) => {
+      setTheme(snapshot?.data()?.theme);
+    });
+  }, []);
 
   useEffect(() => {
     setUserUid(props.data.UserId);
@@ -405,7 +464,12 @@ const Friends = (props) => {
       )} */}
       {ActiveChatUser === UserUid && UserUid != "" ? (
         <>
-          <div className="group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center bg-[#292f3f]  cursor-pointer   border-b-[1px] border-[#35384a]   ">
+          <div
+            className={
+              "group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center   cursor-pointer   border-b-[1px]   " +
+              (theme ? " border-[#d9dde1]" : " border-[#35384a]")
+            }
+          >
             <div
               className="group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center cursor-pointer  "
               onClick={() => {
@@ -413,7 +477,12 @@ const Friends = (props) => {
                 // dispatch(toggleSendFlag(true));
               }}
             >
-              <div className="w-[50px] h-[50px]  rounded-full">
+              <div
+                className={
+                  "w-[50px] h-[50px]   rounded-full" +
+                  (theme ? " bg-[#ffffff]" : " bg-[#1b202d]")
+                }
+              >
                 {photoURL === "nophoto" ? (
                   <img
                     src={profile2}
@@ -428,12 +497,20 @@ const Friends = (props) => {
               </div>
               <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
                 <div className="w-full font-semibold flex h-[23px]">
-                  <span className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis  text-white  font-[google] font-normal  ">
+                  <span
+                    className={
+                      "w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal " +
+                      (theme ? " text-[#000000]" : " text-[#ffffff]")
+                    }
+                  >
                     {/* {props.data.user} */}
                     {userName}
                   </span>
                   <span
-                    className="w-[70px] group-hover:mr-[25px] h-full text-[13px]  flex justify-end items-center text-white   font-[google] font-light"
+                    className={
+                      "w-[70px] group-hover:mr-[25px] h-full text-[14px]  flex justify-end items-center    font-[google] font-light" +
+                      (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                    }
                     onClick={() => {
                       deleteChatUser();
                     }}
@@ -449,7 +526,12 @@ const Friends = (props) => {
                     <>
                       {chatFlag === 1 ? (
                         <>
-                          <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[google] font-light">
+                          <span
+                            className={
+                              "w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[google] font-light" +
+                              (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                            }
+                          >
                             you:
                           </span>
                         </>
@@ -457,8 +539,18 @@ const Friends = (props) => {
                         <></>
                       )}
 
-                      <BsFillCameraFill className="mr-[5px] text-[#bcbcbc] " />
-                      <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[google] font-light">
+                      <BsFillCameraFill
+                        className={
+                          "mr-[5px]  " +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
+                      />
+                      <span
+                        className={
+                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
+                      >
                         {lastMsg}
                       </span>
                     </>
@@ -466,7 +558,12 @@ const Friends = (props) => {
                     <>
                       {chatFlag === 1 ? (
                         <>
-                          <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[google] font-light">
+                          <span
+                            className={
+                              "w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full font-[google] font-light" +
+                              (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                            }
+                          >
                             you:
                           </span>
                         </>
@@ -474,8 +571,18 @@ const Friends = (props) => {
                         <></>
                       )}
 
-                      <TiVideo className="mr-[5px] text-[#bcbcbc] " />
-                      <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[google] font-light">
+                      <TiVideo
+                        className={
+                          "mr-[5px]  " +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
+                      />
+                      <span
+                        className={
+                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
+                      >
                         {lastMsg}
                       </span>
                     </>
@@ -483,7 +590,12 @@ const Friends = (props) => {
                     <>
                       {chatFlag === 1 ? (
                         <>
-                          <span className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[google] font-light">
+                          <span
+                            className={
+                              "w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[google] font-light" +
+                              (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                            }
+                          >
                             you:
                           </span>
                         </>
@@ -491,8 +603,18 @@ const Friends = (props) => {
                         <></>
                       )}
 
-                      <IoMdDocument className="mr-[5px] text-[#bcbcbc] " />
-                      <span className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[google] font-light">
+                      <IoMdDocument
+                        className={
+                          "mr-[5px]  " +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
+                      />
+                      <span
+                        className={
+                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
+                      >
                         {docName}
                       </span>
                     </>
@@ -500,25 +622,40 @@ const Friends = (props) => {
                     <>
                       {chatFlag === 1 ? (
                         <>
-                          <span className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#fff]  font-[google] font-light">
+                          <span
+                            className={
+                              "w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full  font-[google] font-light" +
+                              (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                            }
+                          >
                             you:
                           </span>
                         </>
                       ) : (
                         <></>
                       )}
-                      <span className="w-[calc(100%-100px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#bcbcbc]   font-[google] font-light">
-                        {lastMsg}
+                      <span
+                        className={
+                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
+                        // style={{ transition: ".5s" }}
+                      >
+                        {!lastMsg ? (
+                          <>Messages are end-to-end encrypted.</>
+                        ) : (
+                          <>{lastMsg}</>
+                        )}
                       </span>
                     </>
                   )}
                   {/* </span> */}
-                  <span className="w-[70px] text-[15px] h-full font-normal  text-[white] flex justify-end items-center">
+                  <span className="w-[70px] text-[15px] h-full font-normal   flex justify-end items-center">
                     {unreadMessages === 0 ? (
                       <></>
                     ) : (
                       <>
-                        <span className="w-[18px] h-[18px] text-[11px] flex justify-center items-center rounded-full bg-[#000000] text-[#ffffff]">
+                        <span className="w-[18px] h-[18px] text-[11px] flex justify-center items-center rounded-full bg-[#ffffff] text-[#000000]">
                           {unreadMessages}
                         </span>
                       </>
@@ -535,7 +672,7 @@ const Friends = (props) => {
                 console.log("clickeddddddd");
               }}
             >
-              <MdDelete className="text-[20px] text-[#4b93b9]" />
+              <MdDelete className="text-[20px] text-[#000000]" />
             </span>
           </div>
         </>
@@ -543,10 +680,18 @@ const Friends = (props) => {
         <>
           <div className="group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center bg-transparent  cursor-pointer    z-10 ">
             <div
-              className=" group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px] border-[#35384a] flex justify-center items-center bg-transparent  cursor-pointer   z-10  "
+              className={
+                " group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px]  flex justify-center items-center bg-transparent  cursor-pointer   z-10  " +
+                (theme ? " border-[#d9dde1]" : " border-[#35384a]")
+              }
               onClick={() => activerChatUser()}
             >
-              <div className="w-[50px] h-[50px]  rounded-full">
+              <div
+                className={
+                  "w-[50px] h-[50px]  rounded-full" +
+                  (theme ? " bg-[#ffffff]" : " bg-[#1b202d]")
+                }
+              >
                 {photoURL === "nophoto" ? (
                   <img
                     src={profile2}
@@ -562,14 +707,20 @@ const Friends = (props) => {
               <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
                 <div className="w-full font-semibold flex h-[23px]">
                   <span
-                    className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]    font-[google] font-normal group-hover:text-[white] "
+                    className={
+                      "w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis font-[google] font-normal " +
+                      (theme ? " text-[#000000]" : " text-[#ffffff]")
+                    }
                     // style={{ transition: ".9s" }}
                   >
                     {/* {props.data.user} */}
                     {userName}
                   </span>
                   <span
-                    className="w-[70px] h-full group-hover:mr-[25px] text-[13px] flex justify-end items-center text-[#8e9396] font-[google] font-light z-50"
+                    className={
+                      "w-[70px] h-full group-hover:mr-[25px] text-[14px] flex justify-end items-center  font-[google] font-light z-50" +
+                      (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                    }
 
                     // style={{ transition: ".9s" }}
                   >
@@ -583,7 +734,10 @@ const Friends = (props) => {
                       {chatFlag === 1 ? (
                         <>
                           <span
-                            className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]   group-hover:text-[#8e9396]  font-[google] font-light"
+                            className={
+                              "w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[google] font-light" +
+                              (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                            }
                             // style={{ transition: ".5s" }}
                           >
                             you:
@@ -593,11 +747,17 @@ const Friends = (props) => {
                         <></>
                       )}
                       <BsFillCameraFill
-                        className="mr-[5px] text-[#8e9396] group-hover:text-[#8e9396] "
+                        className={
+                          "mr-[5px]  " +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
                         // style={{ transition: ".5s" }}
                       />
                       <span
-                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[google] font-light"
+                        className={
+                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
                         // style={{ transition: ".5s" }}
                       >
                         {lastMsg}
@@ -608,7 +768,10 @@ const Friends = (props) => {
                       {chatFlag === 1 ? (
                         <>
                           <span
-                            className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[google] font-light group-hover:text-[#8e9396]"
+                            className={
+                              "w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[google] font-light " +
+                              (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                            }
                             // style={{ transition: ".5s" }}
                           >
                             you:
@@ -618,11 +781,17 @@ const Friends = (props) => {
                         <></>
                       )}
                       <TiVideo
-                        className="mr-[5px] text-[#8e9396] group-hover:text-[#8e9396] "
+                        className={
+                          "mr-[5px]   " +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
                         // style={{ transition: ".5s" }}
                       />
                       <span
-                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[google] font-light"
+                        className={
+                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full     font-[google] font-light" +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
                         // style={{ transition: ".5s" }}
                       >
                         {lastMsg}
@@ -633,7 +802,10 @@ const Friends = (props) => {
                       {chatFlag === 1 ? (
                         <>
                           <span
-                            className="w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[google] font-light group-hover:text-[#8e9396]"
+                            className={
+                              "w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[google] font-light " +
+                              (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                            }
                             // style={{ transition: ".5s" }}
                           >
                             you:
@@ -643,11 +815,17 @@ const Friends = (props) => {
                         <></>
                       )}
                       <IoMdDocument
-                        className="mr-[5px] text-[#8e9396] group-hover:text-[#8e9396] "
+                        className={
+                          "mr-[5px] " +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
                         // style={{ transition: ".5s" }}
                       />
                       <span
-                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[google] font-light"
+                        className={
+                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
                         // style={{ transition: ".5s" }}
                       >
                         {docName}
@@ -658,7 +836,10 @@ const Friends = (props) => {
                       {chatFlag === 1 ? (
                         <>
                           <span
-                            className="w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396]  font-[google] font-light group-hover:text-[#8e9396]"
+                            className={
+                              "w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[google] font-light " +
+                              (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                            }
                             // style={{ transition: ".5s" }}
                           >
                             you:
@@ -668,7 +849,10 @@ const Friends = (props) => {
                         <></>
                       )}
                       <span
-                        className="w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] group-hover:text-[#8e9396]   font-[google] font-light"
+                        className={
+                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                        }
                         // style={{ transition: ".5s" }}
                       >
                         {!lastMsg ? (
@@ -687,7 +871,7 @@ const Friends = (props) => {
                       <></>
                     ) : (
                       <>
-                        <span className="w-[20px] h-[20px] text-[11px] flex justify-center items-center rounded-full bg-[#4b93b9] text-[#000000]">
+                        <span className="w-[20px] h-[20px] text-[11px] flex justify-center items-center rounded-full bg-[#ffffff] text-[#000000]">
                           {unreadMessages}
                         </span>
                       </>
@@ -704,7 +888,7 @@ const Friends = (props) => {
                 console.log("clickeddddddd");
               }}
             >
-              <MdDelete className="text-[20px] text-[#4b93b9]" />
+              <MdDelete className="text-[20px] text-[#000000]" />
             </span>
           </div>
 
@@ -728,6 +912,16 @@ const SearchFriends = (props) => {
 
   const dispatch = useDispatch();
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
+
+  const [theme, setTheme] = useState(true);
+
+  useEffect(() => {
+    const user = firebase.auth().currentUser;
+    const ref = db.collection("Chat Record").doc(user.uid);
+    onSnapshot(ref, (snapshot) => {
+      setTheme(snapshot?.data()?.theme);
+    });
+  }, []);
 
   useEffect(() => {
     setUserUid(props.data.UserId);
@@ -802,7 +996,10 @@ const SearchFriends = (props) => {
     <>
       <div className=" group w-[100%] h-[85px] px-[10px] md:px-[20px] lg:px-[20px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent ">
         <div
-          className="border-b-[1px] border-[#35384a] w-[100%] h-[85px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent   "
+          className={
+            "border-b-[1px] w-[100%] h-[85px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent   " +
+            (theme ? " border-[#c8c8c8]" : " border-[#35384a]")
+          }
           onClick={() => {
             props.setData("Chat");
             activerChatUser();
@@ -814,11 +1011,19 @@ const SearchFriends = (props) => {
           <div className="w-[17px] h-full  flex justify-end items-end pb-[5px]">
             {isOnline === true ? (
               <div
-                className="w-[12px] max-h-[12px] min-h-[12px] bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f]  rounded-full flex justify-center items-center   z-50 "
+                className={
+                  "w-[12px] max-h-[12px] min-h-[12px] rounded-full flex justify-center items-center   z-50 " +
+                  (theme
+                    ? "bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
+                    : "bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f]")
+                }
                 style={{ zIndex: "100" }}
               >
                 <div
-                  className="w-[8px] max-h-[8px] min-h-[8px] bg-[#96df73]  rounded-full  z-50"
+                  className={
+                    "w-[8px] max-h-[8px] min-h-[8px] rounded-full  z-50" +
+                    (theme ? " bg-[#469422]" : " bg-[#96df73]")
+                  }
                   style={{ zIndex: "100" }}
                 ></div>
               </div>
@@ -827,14 +1032,17 @@ const SearchFriends = (props) => {
             )}
           </div>
           <div
-            className="w-[50px] h-[50px] ml-[-17px]  rounded-full "
+            className={
+              "w-[50px] h-[50px] ml-[-17px]  rounded-full " +
+              (theme ? " bg-[#ffffff]" : " bg-[#1b202d]")
+            }
             // style={{ zIndex: "10" }}
           >
             {photoURL === "nophoto" ? (
               <>
                 <img
                   src={profile2}
-                  className="w-full h-full rounded-full object-cover drop-shadow-sm "
+                  className="w-full h-full rounded-full object-cover  "
                 ></img>
                 {/* <div className="w-[12px] h-[12px] bg-[#ffffff] ml-[5px] mt-[-10px] rounded-full border-[2px] border-[#1B202D] md:border-[#292f3f] lg:border-[#292f3f] z-50" style={{zIndex:"100"}}></div> */}
               </>
@@ -842,7 +1050,7 @@ const SearchFriends = (props) => {
               <>
                 <img
                   src={photoURL}
-                  className="w-full h-full rounded-full object-cover drop-shadow-sm"
+                  className="w-full h-full rounded-full object-cover "
                 ></img>
                 {/* <div className="w-[12px] h-[12px] bg-[#ffffff] ml-[5px] mt-[-10px] rounded-full border-[2px] border-[#1B202D] md:border-[#292f3f] lg:border-[#292f3f] z-50"></div> */}
               </>
@@ -851,21 +1059,27 @@ const SearchFriends = (props) => {
           <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
             <div className="w-full font-semibold flex h-[23px]">
               <span
-                className="w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis text-[white]   drop-shadow-sm  font-[google] font-normal"
+                className={
+                  "w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis font-[google] font-normal" +
+                  (theme ? " text-[#000000]" : " text-[#ffffff]")
+                }
                 // style={{ transition: ".9s" }}
               >
                 {/* {props.data.user} */}
                 {userName}
                 {/* {isOnline} */}
               </span>
-              <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-white group-hover:text-black drop-shadow-md">
+              <span className="w-[70px] h-full text-[13px] font-normal  flex justify-end items-center text-white group-hover:text-black ">
                 {/* {props.data.time} */}
                 {/* {Time} */}
               </span>
             </div>
             <div className="w-full flex h-[23px]">
               <span
-                className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#8e9396] drop-shadow-sm  font-[google] font-light"
+                className={
+                  "w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                  (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                }
                 // style={{ transition: ".9s" }}
               >
                 {/* {props.data.msg} */}
@@ -952,20 +1166,71 @@ const UserList = (props) => {
   const [nameChangeFlag, setNameChangeFlag] = useState(false);
   const [aboutChangeFlag, setAboutChangeFlag] = useState(false);
   const [accountStatus, setAccountStatus] = useState(false);
+  const [help, setHelp] = useState(false);
 
   const [statusPosition, setStatusPosition] = useState(0);
   const [stTime, setStTime] = useState("");
   const [stText, setStText] = useState("");
+
+  const [onMin, setOnMin] = useState(-1);
+  const [onHour, setOnHour] = useState(-1);
+  const [showTime, setShowTime] = useState(false);
+  const [theme, setTheme] = useState(true);
   // const [left, setRight] = useState(0);
   // addFriendList;
   console.log("UserList");
   console.log(UserList);
+
+  function changeTheme() {
+    const user = firebase.auth().currentUser;
+    if (theme === true) {
+      // setTheme(false);
+      db.collection("Chat Record").doc(user.uid).update({ theme: false });
+    } else {
+      // setTheme(true)
+      db.collection("Chat Record").doc(user.uid).update({ theme: true });
+    }
+  }
 
   useEffect(() => {
     fetchownerInfo();
     fetchUserList();
     fetchAllGroups();
   }, []);
+
+  useEffect(() => {
+    const user = firebase.auth().currentUser;
+    const ref = db.collection("Chat Record").doc(user.uid);
+    onSnapshot(ref, (snapshot) => {
+      setOnHour(snapshot?.data()?.onTimeHour);
+      setOnMin(snapshot?.data()?.onTimeMinute);
+      setTheme(snapshot?.data()?.theme);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (onHour >= 0 && onMin >= 0) {
+      const user = firebase.auth().currentUser;
+
+      setTimeout(() => {
+        // console.log("Hello, World!");
+        //  const user = firebase.auth().currentUser;
+
+        if (onMin + 1 >= 60) {
+          db.collection("Chat Record")
+            .doc(user.uid)
+            .update({ onTimeHour: onHour + 1, onTimeMinute: 0 });
+          // setOnMin(0);
+          // setOnHour(onHour + 1);
+        } else {
+          db.collection("Chat Record")
+            .doc(user.uid)
+            .update({ onTimeMinute: onMin + 1 });
+          // setOnMin(onMin + 1);
+        }
+      }, 60000);
+    }
+  }, [onMin, onHour]);
 
   function isLink(inputString) {
     // Regular expression to match URLs
@@ -1395,7 +1660,14 @@ const UserList = (props) => {
           </>
         ) : props.data === "All" ? (
           <>
-            <div className=" mt-[10px]   w-[100%] px-[0] md:px-[10px] lg:px-[10px] flex justify-end items-center min-h-[60px] pb-[10px] bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]   overflow-hidden z-[100] ">
+            <div
+              className={
+                " mt-[10px]   w-[100%] px-[0] md:px-[10px] lg:px-[10px] flex justify-end items-center min-h-[60px] pb-[10px]    overflow-hidden z-[100] " +
+                (theme
+                  ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
+                  : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+              }
+            >
               <input
                 style={{ transition: ".5s", zIndex: "60" }}
                 value={searchUser}
@@ -1413,7 +1685,12 @@ const UserList = (props) => {
                   // setIsSearchBar(!isSearchBar);
                 }}
                 placeholder="Search Friends"
-                className="input w-full h-[50px] opacity-100  text-[white] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] font-[google] font-normal text-[15px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px] z-50  rounded-xl "
+                className={
+                  "input w-full h-[50px] opacity-100   font-[google] font-normal text-[15px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px] z-50  rounded-xl " +
+                  (theme
+                    ? " text-[#000000] bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff]"
+                    : " text-[#ffffff] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]")
+                }
               ></input>
               <div
                 className="w-[50px] h-[50px] ml-[-50px]  rounded-full flex justify-center items-center z-5   text-white cursor-pointer z-[100]"
@@ -1427,7 +1704,18 @@ const UserList = (props) => {
                 }}
               >
                 <div className="w-[50px] h-[50px] rounded-full flex justify-center items-center z-[100]">
-                  <RxCross2 className="text-[20px] z-[100] text-[white]" />
+                  {searchUser.length === 0 ? (
+                    <></>
+                  ) : (
+                    <>
+                      <RxCross2
+                        className={
+                          "text-[20px] z-[100] " +
+                          (theme ? " text-[black]" : " text-[white]")
+                        }
+                      />
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -1634,7 +1922,14 @@ const UserList = (props) => {
           <>
             {showStatus === true ? (
               // <div className="fixed">
-              <div className=" z-50 fixed bottom-0 h-[100svh] bg-[#1b202d]  md:bg-[#292f3f] lg:bg-[#292f3f] w-full md:w-[400px] lg:w-[400px] left-0 flex-col flex justify-center items-center">
+              <div
+                className={
+                  " z-50 fixed bottom-0 h-[100svh] w-full md:w-[400px] lg:w-[400px] left-0 flex-col flex justify-center items-center" +
+                  (theme
+                    ? " bg-[#e4eaf1]  md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
+                    : " bg-[#1b202d]  md:bg-[#292f3f] lg:bg-[#292f3f]")
+                }
+              >
                 {/* Cross ------------------------- */}
                 <div
                   className="fixed top-[25px] left-[calc(100%-55px)] md:left-[calc(400px-55px)]  lg:left-[calc(400px-55px)]  w-[35px] h-[35px]  rounded-full bg-[white] md:bg-[#1c1f2f] lg:bg-[white] drop-shadow-none text-black flex justify-center items-center  cursor-pointer rotate-45 z-40"
@@ -1652,7 +1947,12 @@ const UserList = (props) => {
                     // setShowStatus(true);
                   }}
                 >
-                  <div className="w-[59px] h-[59px] border-[2.4px] border-[#2f9d49] flex justify-center items-center rounded-full">
+                  <div
+                    className={
+                      "w-[59px] h-[59px] border-[2.4px] flex justify-center items-center rounded-full" +
+                      (theme ? " border-[#469422]" : " border-[#96df73]")
+                    }
+                  >
                     {profileURL === "nophoto" ? (
                       <img
                         src={profile2}
@@ -1667,12 +1967,22 @@ const UserList = (props) => {
                   </div>
                   <div className="w-[calc(100%-65px)] h-[50px] ml-[15px] bg-transparent  flex flex-col justify-center items-start ">
                     <div className="w-full font-semibold flex h-[23px]">
-                      <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
+                      <span
+                        className={
+                          "w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  " +
+                          (theme ? " text-black" : " text-black")
+                        }
+                      >
                         My Status
                       </span>
                       <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light"></span>
                     </div>
-                    <div className="w-full flex h-[23px] justify-between items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-[#9fa5a7]   font-[google] font-light">
+                    <div
+                      className={
+                        "w-full flex h-[23px] justify-between items-center text-[13px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-light" +
+                        (theme ? " text-[#5f5f5f]" : " text-[#9fa5a7]")
+                      }
+                    >
                       {stTime}
                     </div>
                   </div>
@@ -1736,7 +2046,12 @@ const UserList = (props) => {
                             {statusImageUrl[statusPosition]?.text}
                           </a>
                         ) : (
-                          <pre className="w-[80%] whitespace-pre-wrap text-center font-[google] font-normal text-[20px] text-[white]">
+                          <pre
+                            className={
+                              "w-[80%] whitespace-pre-wrap text-center font-[google] font-normal text-[20px] " +
+                              (theme ? " text-[black]" : " text-[white]")
+                            }
+                          >
                             {statusImageUrl[statusPosition]?.text}
                           </pre>
                         )}
@@ -1786,7 +2101,7 @@ const UserList = (props) => {
             {statusModal === true ? (
               <>
                 <div
-                  className="fixed z-20 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[40px] h-[40px]  rounded-full bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] text-white  flex justify-center items-center rotate-[135deg] cursor-pointer"
+                  className="fixed z-20 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[40px] h-[40px]  rounded-full  text-white  flex justify-center items-center rotate-[135deg] cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                     setStatusTextModal(false);
@@ -1931,7 +2246,12 @@ const UserList = (props) => {
                     setShowStatus(true);
                   }}
                 >
-                  <div className="w-[59px] h-[59px] border-[2.4px] border-[#2f9d49] flex justify-center items-center rounded-full">
+                  <div
+                    className={
+                      "w-[59px] h-[59px] border-[2.4px]  flex justify-center items-center rounded-full" +
+                      (theme ? " border-[#469422]" : " border-[#96df73]")
+                    }
+                  >
                     {profileURL === "nophoto" ? (
                       <img
                         src={profile2}
@@ -1975,7 +2295,7 @@ const UserList = (props) => {
               </div>
             ) : (
               <div className=" group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal  px-[10px]  md:px-[20px] lg:px-[20px]  text-[#ffffff] hover:text-[#000000] border-t-[1px] border-b-[1px] border-[#404040]">
-                <div className="w-[50px] h-[50px]  rounded-full">
+                <div className="w-[59px] h-[59px] border-[2.4px] border-transparent rounded-full">
                   {profileURL === "nophoto" ? (
                     <img
                       src={profile2}
@@ -2027,9 +2347,12 @@ const UserList = (props) => {
             {/* <div className="w-[100%] fixed h-[100svh] flex justify-center items-center">
             <div className="w-[200px] h-[400px] bg-slate-500 rounded-xl"></div>
           </div> */}
-            <div className="w-full h-full p-[10px] flex justify-center items-center ">
-              <div className="w-full h-full  rounded-3xl flex flex-col justify-start pt-[20px] items-center">
-                <div className="w-full h-auto flex justify-start items-center ml-[10px]">
+            {/* <div className="w-full bg-[#292f3f] rounded-xl h-[300px] flex justify-center items-center tracking-widest text-white text-[60px] font-[google] font-normal">
+                  12 : {onMin < 10 ? (<>0{onMin}</>) : (<>{onMin}</>)}
+                </div> */}
+            <div className="w-full h-full flex justify-center items-center ">
+              <div className="w-full h-full  rounded-3xl flex flex-col justify-start pt-[10px]  items-center">
+                {/* <div className="w-full h-auto flex justify-start items-center ml-[10px]">
                   <span className="text-[28px] text-[#8b8b8b] font-[google] font-normal">
                     My{" "}
                   </span>
@@ -2038,8 +2361,144 @@ const UserList = (props) => {
                     {" "}
                     Profile
                   </span>
-                </div>
-                <div className="w-full h-[100px] mt-[20px]  flex justify-start items-center px-[10px]">
+                </div> */}
+                {showTime == true ? (
+                  <div
+                    className="w-full md:w-[380px] lg:w-[380px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] rounded-xl min-h-[240px] max-h-[240px] flex flex-col justify-between items-center  text-white text-[25px] font-[google] font-normal p-[20px]"
+                    style={{ transition: ".4s" }}
+                    onClick={() => {
+                      setShowTime(false);
+                    }}
+                  >
+                    {/* <span className="text-[19px] fixed left-[30px] top-[100px] tracking-normal block text-[#9f9f9f]">
+                      Screen Time
+                    </span> */}
+                    {/* <span className="text-[19px] tracking-normal w-[0px] overflow-hidden opacity-0" style={{transition:".4s"}}>Screen Time</span> */}
+                    <div
+                      className="w-full h-[20px] flex justify-between items-center"
+                      // style={{ transition: ".4s" }}
+                    >
+                      <div className="text-[16px] text-[white] tracking-normal flex justify-start items-center">
+                        <FaAngleDown className="text-[white] text-[17px] mr-[10px]" />
+                        21/06/2024
+                      </div>
+                      <div className="text-[#c0c0c0]">
+                        {onHour < 10 ? <>0{onHour}</> : <>{onHour}</>} :{" "}
+                        {onMin < 10 ? <>0{onMin}</> : <>{onMin}</>}
+                      </div>
+                    </div>
+                    <div
+                      className="w-full mt-[40px] h-[140px] flex justify-center items-end"
+                      // style={{ transition: ".4s", transitionDelay: ".5s" }}
+                    >
+                      <div
+                        className="w-full h-full flex justify-center items-end"
+                        style={{ transition: ".4s", transitionDelay: ".5s" }}
+                      >
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart width={730} height={250} data={dd}>
+                            <defs>
+                              <linearGradient
+                                id="colorAvg"
+                                x1="0"
+                                y1="0"
+                                x2="0"
+                                y2="1"
+                              >
+                                <stop
+                                  offset="10%"
+                                  stopColor="#96df73"
+                                  stopOpacity={0.8}
+                                />
+                                <stop
+                                  offset="100%"
+                                  stopColor="#96df73"
+                                  stopOpacity={0}
+                                />
+                              </linearGradient>
+                            </defs>
+                            {/* <Tooltip /> */}
+                            <Area
+                              type="bump"
+                              dataKey="time"
+                              stroke="#487532"
+                              fillOpacity={1}
+                              fill="url(#colorAvg)"
+                            />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="w-full md:w-[380px] lg:w-[380px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] rounded-xl min-h-[60px] max-h-[60px]  flex flex-col justify-between right-[0px] items-center  text-white text-[25px] font-[google] font-normal p-[20px]"
+                    style={{ transition: ".4s", transitionDelay: ".5s" }}
+                    onClick={() => {
+                      setShowTime(true);
+                    }}
+                  >
+                    {/* <span className="text-[19px] fixed left-[30px] top-[100px] tracking-normal block ">
+                      Screen Time
+                    </span> */}
+                    {/* <span className="text-[19px] tracking-normal w-[130px] overflow-hidden opacity-100" style={{transition:".4s"}}>Screen Time</span> */}
+                    <div
+                      className="w-full h-[20px] flex justify-between items-center"
+                      // style={{ transition: ".4s", transitionDelay: ".5s" }}
+                    >
+                      <div className="text-[18px] text-[#c0c0c0] tracking-normal flex justify-start items-center">
+                        Today
+                      </div>
+                      <div>
+                        {onHour < 10 ? <>0{onHour}</> : <>{onHour}</>} :{" "}
+                        {onMin < 10 ? <>0{onMin}</> : <>{onMin}</>}
+                      </div>
+                    </div>
+                    <div
+                      className="w-full mt-[20px] h-[0] flex justify-center items-end"
+                      style={{ transition: ".4s" }}
+                    >
+                      <div
+                        className="w-full  h-[0] flex justify-center items-end"
+                        style={{ transition: ".4s" }}
+                      >
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart width={730} height={250} data={dd}>
+                            <defs>
+                              <linearGradient
+                                id="colorAvg"
+                                x1="0"
+                                y1="0"
+                                x2="0"
+                                y2="1"
+                              >
+                                <stop
+                                  offset="10%"
+                                  stopColor="#96df73"
+                                  stopOpacity={0.8}
+                                />
+                                <stop
+                                  offset="100%"
+                                  stopColor="#96df73"
+                                  stopOpacity={0}
+                                />
+                              </linearGradient>
+                            </defs>
+                            {/* <Tooltip /> */}
+                            <Area
+                              type="bump"
+                              dataKey="time"
+                              stroke="#487532"
+                              fillOpacity={1}
+                              fill="url(#colorAvg)"
+                            />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div className="w-full h-[100px] mt-[25px] flex justify-start items-center px-[20px]">
                   <div className="group w-[80px] h-[80px] rounded-full  flex justify-end items-end">
                     {/* <img
                     src={profileURL}
@@ -2092,7 +2551,7 @@ const UserList = (props) => {
                             //   // setIsSearchBar(!isSearchBar);
                             // }}
                             placeholder="Name"
-                            className="w-[calc(100%-10px)] h-[50px] text-[white] font-normal px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px] drop-shadow-md rounded-xl pr-[50px]"
+                            className="w-[calc(100%-10px)] h-[50px] text-[white] font-normal px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px]  rounded-xl pr-[50px]"
                           ></input>
                           <span
                             className="w-[20px] h-[30px] flex justify-center items-center ml-[-45px]  z-20"
@@ -2132,7 +2591,7 @@ const UserList = (props) => {
                             //   // setIsSearchBar(!isSearchBar);
                             // }}
                             placeholder="Name"
-                            className="w-[calc(100%-10px)] h-[50px] text-[#bababa] font-normal px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px] drop-shadow-md rounded-xl pr-[30px]"
+                            className="w-[calc(100%-10px)] h-[50px] text-[#bababa] font-normal px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px]  rounded-xl pr-[30px]"
                           ></input>
                           <span
                             className="w-[20px] h-[30px] flex justify-center items-center ml-[-25px] mr-[5px] z-20"
@@ -2162,7 +2621,7 @@ const UserList = (props) => {
                             // }}
                             onChange={(e) => setOwnerInfo(e.target.value)}
                             placeholder="About"
-                            className="w-[calc(100%-10px)] h-[50px] text-[#bababa]  px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google] font-normal border-none  z-0 outline-none  text-[15px] drop-shadow-md rounded-xl pr-[50px]"
+                            className="w-[calc(100%-10px)] h-[50px] text-[#bababa]  px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google] font-normal border-none  z-0 outline-none  text-[15px]  rounded-xl pr-[50px]"
                           ></input>
                           <span
                             className="w-[20px] h-[30px] flex justify-center items-center ml-[-45px] z-20"
@@ -2199,7 +2658,7 @@ const UserList = (props) => {
                             // }}
                             onChange={(e) => setOwnerInfo(e.target.value)}
                             placeholder="About"
-                            className="w-[calc(100%-10px)] h-[50px] text-[#bababa] font-normal px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px] drop-shadow-md rounded-xl pr-[30px]"
+                            className="w-[calc(100%-10px)] h-[50px] text-[#bababa] font-normal px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px]  rounded-xl pr-[30px]"
                           ></input>
 
                           <span
@@ -2224,27 +2683,89 @@ const UserList = (props) => {
                     <RiEditFill className="text-[20px] text-[#ffffff]" />
                   </div>
                 </div>
-                <div className="w-full px-[10px] mt-[30px]">
-                  <div className="w-full border-[1px] border-[#474747]"></div>
+                <div className="w-full px-[20px] mt-[30px]">
+                  <div className="w-full border-[1px] border-[#d9dde1]"></div>
                 </div>
-                <div className=" h-[230px]  mt-[50px] w-full px-[10px] flex flex-col justify-between items-center ">
-                  <div className="w-full   h-auto flex flex-col justify-center items-start">
-                    <div className="w-[100%] h-[40px]  rounded-xl   flex justify-start items-center text-white font-[google] font-light drop-shadow-md text-[16px] cursor-pointer">
-                      <PiMoon className="text-[20px] mr-[16px]" /> App Theme
+                {help === true ? (
+                  <div
+                    className="w-full md:w-[400px] lg:w-[400px] h-[400px] fixed top-[70px] p-[20px] flex justify-center items-center z-50 text-[16px]"
+                    style={{ transition: ".4s" }}
+                  >
+                    <div className="w-full h-full rounded-xl font-[google] font-normal text-white px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] flex flex-col justify-center items-start">
+                      <span className="font-medium">How to add friend ?</span>
+                      <span className="text-[#a8a8a8]">
+                        Go to add person icon and click on it. Then in the
+                        searchbar type the exact username your friend has and
+                        click on the search icon. From the result below click on
+                        your friends profile and start messaging.
+                      </span>
                     </div>
-                    {/* <div className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] mt-[10px] flex justify-center items-center text-white font-[google] font-light drop-shadow-md text-[13px] cursor-pointer">
+                  </div>
+                ) : (
+                  <div
+                    className="w-full md:w-[400px] lg:w-[400px] h-[400px] fixed top-[-430px] p-[10px] flex justify-center items-center"
+                    style={{ transition: ".4s" }}
+                  >
+                    <div className="w-full h-full rounded-xl bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] "></div>
+                  </div>
+                )}
+
+                <div className=" h-[230px]  mt-[50px] w-full px-[20px] flex flex-col justify-between items-center ">
+                  <div
+                    className={
+                      "w-full   h-auto flex flex-col justify-center items-start" +
+                      (theme ? " text-black" : " text-white")
+                    }
+                  >
+                    {/* <div className="w-[100%] h-[34px]  rounded-xl   flex justify-start items-center text-white font-[google] font-light  text-[15px] cursor-pointer">
+                      <BiSolidMoon className="text-[20px] mr-[16px]" /> App
+                      Theme
+                    </div> */}
+                    <div
+                      className="w-[100%] h-[34px]  rounded-xl    mt-[10px] flex justify-between items-center  font-[google] font-light  text-[15px] cursor-pointer"
+                      onClick={() => {
+                        changeTheme();
+                      }}
+                    >
+                      <div className="flex justify-start items-center">
+                        <BiSolidMoon className="text-[20px] mr-[16px]" /> App
+                        Theme : {theme === true ? <>Light</> : <>Dark</>}
+                      </div>
+                      <div
+                        className={
+                          "w-[32px] h-[22px] rounded-full flex items-center justify-start  border " +
+                          (theme
+                            ? " bg-[#ffffff] border-[#b7bcc0]"
+                            : " bg-[#95df734c] border-[#96df73]")
+                        }
+                      >
+                        {theme ? (
+                          <div
+                            className="w-[16px] h-[16px] rounded-full ml-[3px] bg-[#b7bcc0] "
+                            style={{ transition: ".4s" }}
+                          ></div>
+                        ) : (
+                          <div
+                            className="w-[16px] h-[16px] rounded-full ml-[13px] bg-[#96df73] "
+                            style={{ transition: ".4s" }}
+                          ></div>
+                        )}
+                      </div>
+                    </div>
+                    {/* <div className="w-[calc(100%-40px)] h-[50px] rounded-xl bg-[#292f3f] mt-[10px] flex justify-center items-center text-white font-[google] font-light  text-[13px] cursor-pointer">
                       <MdOutlinePassword className="mr-[10px] text-[20px] text-[gray]" />{" "}
                       Change Password
                     </div> */}
                     {/* </div> */}
                     {/* <div className="w-full px-[10px] h-[40px] mt-[10px] flex justify-evenly items-center"> */}
-                    <div className="w-[100%] h-[40px]  rounded-xl    mt-[10px] flex justify-start items-center text-white font-[google] font-light drop-shadow-md text-[16px] cursor-pointer">
-                      <AiOutlineDelete className="text-[20px] mr-[16px]" />{" "}
-                      Delete Account
+
+                    <div className="w-[100%] h-[34px]  rounded-xl    mt-[10px] flex justify-start items-center font-[google] font-light  text-[15px] cursor-pointer">
+                      <AiFillDelete className="text-[20px] mr-[16px]" /> Delete
+                      Account
                     </div>
 
                     <div
-                      className="w-[100%] h-[40px]  rounded-xl    mt-[10px] flex justify-between items-center text-white font-[google] font-light drop-shadow-md text-[16px] cursor-pointer"
+                      className="w-[100%] h-[34px]  rounded-xl    mt-[10px] flex justify-between items-center font-[google] font-light  text-[15px] cursor-pointer"
                       onClick={() => {
                         changeAccountStatus();
                       }}
@@ -2255,43 +2776,49 @@ const UserList = (props) => {
                       </div>
                       <div
                         className={
-                          "w-[40px] h-[24px] rounded-full flex items-center justify-start " +
-                          (accountStatus ? "bg-[#ffd55753]" : "bg-[#95df734c]")
+                          "w-[32px] h-[22px] rounded-full flex items-center justify-start  border  " +
+                          (theme
+                            ? "bg-[#ffffff] border-[#b7bcc0]"
+                            : "bg-[#95df734c] border-[#96df73]")
                         }
                       >
                         {accountStatus ? (
                           <div
-                            className="w-[18px] h-[18px] rounded-full ml-[4px] bg-[#ffd557] drop-shadow-lg"
+                            className="w-[16px] h-[16px] rounded-full ml-[3px] bg-[#b7bcc0] "
                             style={{ transition: ".4s" }}
                           ></div>
                         ) : (
                           <div
-                            className="w-[18px] h-[18px] rounded-full ml-[18px] bg-[#96df73] drop-shadow-lg"
+                            className="w-[16px] h-[16px] rounded-full ml-[13px] bg-[#96df73] "
                             style={{ transition: ".4s" }}
                           ></div>
                         )}
                       </div>
                     </div>
                     <div
-                      className="w-[100%] h-[40px]  rounded-xl    mt-[10px] flex justify-start items-center text-white font-[google] font-light drop-shadow-md text-[16px] cursor-pointer"
+                      className="w-[100%] h-[34px]  rounded-xl    mt-[10px] flex justify-start items-center  font-[google] font-light  text-[15px] cursor-pointer"
                       onClick={() => {
-                        userSignOut();
+                        setHelp(true);
                       }}
                     >
-                      <IoIosHelpCircleOutline className="text-[20px] mr-[16px]" />{" "}
+                      <TbHelpSquareRoundedFilled className="text-[20px] mr-[16px]" />{" "}
                       Help
                     </div>
                     <div
-                      className="w-[100%] h-[40px]  rounded-xl    mt-[10px] flex justify-start items-center text-[#ff9448] font-[google] font-light drop-shadow-md text-[16px] cursor-pointer"
+                      className={
+                        "w-[100%] h-[34px]  rounded-xl    mt-[10px] flex justify-start items-center text-[#ff9448] font-[google] font-light  text-[15px] cursor-pointer" +
+                        (theme ? " text-[#bf692c]" : " text-[#ff9448]")
+                      }
                       onClick={() => {
                         userSignOut();
                       }}
                     >
-                      <TbLogout className="text-[20px] mr-[16px] ml-[1.5px]" />{" "}
+                      <IoLogOut className="text-[23px] mr-[12px] ml-[1.5px]" />{" "}
                       Log Out
                     </div>
                   </div>
                 </div>
+
                 {/* <div className="w-full py-[40px] text-[#8b8b8b] text-[13px] flex flex-col justify-center items-center">
                   <span>Want to use this in Android</span>
                   <span> Click the icon below to download the app</span>
@@ -2305,17 +2832,38 @@ const UserList = (props) => {
         )}
       </div>
 
-      <div className="w-full md:w-[400px] lg:w-[400px] h-[60px]   overflow-hidden fixed bottom-0 flex items-center justify-center bg-[#1c1f2f] md:bg-[#292f3f] lg:bg-[#292f3f] text-[white]">
-        {/* <div className="fixed w-[50px] h-[50px] rounded-full text-[white] bg-[#4b93b9] drop-shadow-md"></div> */}
+      <div
+        className={
+          "w-full md:w-[400px] lg:w-[400px] h-[60px]   overflow-hidden fixed bottom-0 flex items-center justify-center  " +
+          (theme
+            ? "bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
+            : "bg-[#1c1f2f] md:bg-[#292f3f] lg:bg-[#292f3f]")
+        }
+      >
+        {/* <div className="fixed w-[50px] h-[50px] rounded-full text-[white] bg-[#4b93b9] "></div> */}
         {/* bg-[#283035]
         bg-[#303A40]
         bg-[#354249] */}
+
+        <div
+          className={
+            "w-[calc(400px/5)] fixed h-[40px] rounded-xl  z-0 " +
+            (theme
+              ? "text-[#000000] bg-[#ffffff] "
+              : "text-[#ffffff] bg-[#96df73] ")
+          }
+          style={{ zIndex: "0" }}
+        ></div>
+
         {props.data === "All" ? (
           <div
-            className="w-full h-full  flex  items-center ml-[0]"
+            className={
+              "w-full h-full  flex  items-center ml-[0]" +
+              (theme ? "text-[#000000] " : "text-[#ffffff] ")
+            }
             style={{ transition: ".5s" }}
           >
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
               <TbPlaystationCircle
                 className="text-[23px]"
                 onClick={() => {
@@ -2325,8 +2873,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <LuSettings2
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <RiSettings4Fill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2336,10 +2884,10 @@ const UserList = (props) => {
               />
             </div>
             <div
-              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[#4b93b9]"
+              className="min-w-[20%] h-[40px]  flex justify-center items-center z-10  text-[black]"
               // style={{ transitionDelay: ".25s" }}
             >
-              <MdGroupAdd
+              <BsPersonFillAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2349,9 +2897,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <TiGroup
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <MdGroups2
+                className="text-[27px]"
                 onClick={() => {
                   setSearchFlag(false);
                   props.setData("Group");
@@ -2360,9 +2908,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillChatSquareTextFill
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <HiChatBubbleBottomCenterText
+                className="text-[25px]"
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
@@ -2373,9 +2921,7 @@ const UserList = (props) => {
               />
             </div>
 
-            {/*  */}
-
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
               <TbPlaystationCircle
                 className="text-[23px]"
                 onClick={() => {
@@ -2385,8 +2931,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <LuSettings2
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <RiSettings4Fill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2395,8 +2941,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdGroupAdd
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <BsPersonFillAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2406,9 +2952,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <TiGroup
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <MdGroups2
+                className="text-[27px]"
                 onClick={() => {
                   setSearchFlag(false);
                   props.setData("Group");
@@ -2417,9 +2963,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillChatSquareTextFill
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <HiChatBubbleBottomCenterText
+                className="text-[25px]"
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
@@ -2435,7 +2981,7 @@ const UserList = (props) => {
             className="w-full h-full  flex  items-center ml-[-40%] "
             style={{ transition: ".5s" }}
           >
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
               <TbPlaystationCircle
                 className="text-[23px]"
                 onClick={() => {
@@ -2445,8 +2991,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <LuSettings2
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <RiSettings4Fill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2455,8 +3001,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdGroupAdd
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <BsPersonFillAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2467,11 +3013,11 @@ const UserList = (props) => {
               />
             </div>
             <div
-              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[#4b93b9]"
+              className="min-w-[20%] h-[40px]  flex justify-center items-center z-10  text-[black]"
               // style={{ transitionDelay: ".25s" }}
             >
-              <TiGroup
-                className="text-[23px]"
+              <MdGroups2
+                className="text-[27px]"
                 onClick={() => {
                   setSearchFlag(false);
                   props.setData("Group");
@@ -2480,9 +3026,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillChatSquareTextFill
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <HiChatBubbleBottomCenterText
+                className="text-[25px]"
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
@@ -2493,9 +3039,7 @@ const UserList = (props) => {
               />
             </div>
 
-            {/*  */}
-
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
               <TbPlaystationCircle
                 className="text-[23px]"
                 onClick={() => {
@@ -2505,8 +3049,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <LuSettings2
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <RiSettings4Fill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2515,8 +3059,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdGroupAdd
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <BsPersonFillAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2526,9 +3070,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <TiGroup
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <MdGroups2
+                className="text-[27px]"
                 onClick={() => {
                   setSearchFlag(false);
                   props.setData("Group");
@@ -2537,9 +3081,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillChatSquareTextFill
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <HiChatBubbleBottomCenterText
+                className="text-[25px]"
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
@@ -2555,7 +3099,7 @@ const UserList = (props) => {
             className="w-full h-full  flex  items-center ml-[-80%] "
             style={{ transition: ".5s" }}
           >
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
               <TbPlaystationCircle
                 className="text-[23px]"
                 onClick={() => {
@@ -2565,8 +3109,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <LuSettings2
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <RiSettings4Fill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2575,8 +3119,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdGroupAdd
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <BsPersonFillAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2586,9 +3130,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <TiGroup
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <MdGroups2
+                className="text-[27px]"
                 onClick={() => {
                   setSearchFlag(false);
                   props.setData("Group");
@@ -2598,11 +3142,11 @@ const UserList = (props) => {
               />
             </div>
             <div
-              className="min-w-[20%] h-[70px] flex justify-center items-center text-[#4b93b9] "
+              className="min-w-[20%] h-[40px] flex justify-center items-center  text-[black] z-10 "
               // style={{ transitionDelay: ".25s" }}
             >
-              <BsFillChatSquareTextFill
-                className="text-[23px]"
+              <HiChatBubbleBottomCenterText
+                className="text-[25px]"
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
@@ -2613,9 +3157,7 @@ const UserList = (props) => {
               />
             </div>
 
-            {/*  */}
-
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
               <TbPlaystationCircle
                 className="text-[23px]"
                 onClick={() => {
@@ -2625,8 +3167,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <LuSettings2
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <RiSettings4Fill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2635,8 +3177,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdGroupAdd
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <BsPersonFillAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2646,9 +3188,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <TiGroup
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <MdGroups2
+                className="text-[27px]"
                 onClick={() => {
                   setSearchFlag(false);
                   props.setData("Group");
@@ -2657,9 +3199,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillChatSquareTextFill
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <HiChatBubbleBottomCenterText
+                className="text-[25px]"
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
@@ -2675,7 +3217,7 @@ const UserList = (props) => {
             className="w-full h-full  flex  items-center ml-[-120%] "
             style={{ transition: ".5s" }}
           >
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
               <TbPlaystationCircle
                 className="text-[23px]"
                 onClick={() => {
@@ -2685,8 +3227,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <LuSettings2
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <RiSettings4Fill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2695,8 +3237,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdGroupAdd
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <BsPersonFillAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2706,9 +3248,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <TiGroup
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <MdGroups2
+                className="text-[27px]"
                 onClick={() => {
                   setSearchFlag(false);
                   props.setData("Group");
@@ -2717,9 +3259,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillChatSquareTextFill
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <HiChatBubbleBottomCenterText
+                className="text-[25px]"
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
@@ -2730,10 +3272,8 @@ const UserList = (props) => {
               />
             </div>
 
-            {/*  */}
-
             <div
-              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[#4b93b9]"
+              className="min-w-[20%] h-[40px]  flex justify-center items-center z-10  text-[black]"
               // style={{ transitionDelay: ".25s" }}
             >
               <TbPlaystationCircle
@@ -2745,8 +3285,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <LuSettings2
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <RiSettings4Fill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2755,8 +3295,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdGroupAdd
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <BsPersonFillAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2766,9 +3306,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <TiGroup
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <MdGroups2
+                className="text-[27px]"
                 onClick={() => {
                   setSearchFlag(false);
                   props.setData("Group");
@@ -2777,9 +3317,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillChatSquareTextFill
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <HiChatBubbleBottomCenterText
+                className="text-[25px]"
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
@@ -2795,7 +3335,7 @@ const UserList = (props) => {
             className="w-full h-full  flex  items-center ml-[-160%] "
             style={{ transition: ".5s" }}
           >
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
               <TbPlaystationCircle
                 className="text-[23px]"
                 onClick={() => {
@@ -2805,8 +3345,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <LuSettings2
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <RiSettings4Fill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2815,8 +3355,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdGroupAdd
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <BsPersonFillAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2826,9 +3366,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <TiGroup
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <MdGroups2
+                className="text-[27px]"
                 onClick={() => {
                   setSearchFlag(false);
                   props.setData("Group");
@@ -2837,9 +3377,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillChatSquareTextFill
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <HiChatBubbleBottomCenterText
+                className="text-[25px]"
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
@@ -2850,9 +3390,7 @@ const UserList = (props) => {
               />
             </div>
 
-            {/*  */}
-
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
               <TbPlaystationCircle
                 className="text-[23px]"
                 onClick={() => {
@@ -2863,10 +3401,10 @@ const UserList = (props) => {
               />
             </div>
             <div
-              className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center text-[#4b93b9]"
+              className="min-w-[20%] h-[40px]  flex justify-center items-center z-10  text-[black]"
               // style={{ transitionDelay: ".25s" }}
             >
-              <LuSettings2
+              <RiSettings4Fill
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2875,8 +3413,8 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <MdGroupAdd
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <BsPersonFillAdd
                 className="text-[23px]"
                 onClick={() => {
                   setSearchFlag(false);
@@ -2886,9 +3424,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <TiGroup
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <MdGroups2
+                className="text-[27px]"
                 onClick={() => {
                   setSearchFlag(false);
                   props.setData("Group");
@@ -2897,9 +3435,9 @@ const UserList = (props) => {
                 }}
               />
             </div>
-            <div className="min-w-[20%] h-[40px] drop-shadow-md flex justify-center items-center">
-              <BsFillChatSquareTextFill
-                className="text-[23px]"
+            <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
+              <HiChatBubbleBottomCenterText
+                className="text-[25px]"
                 onClick={() => {
                   setSearchFlag(false);
                   fetchUserList();
@@ -2918,3 +3456,25 @@ const UserList = (props) => {
 };
 
 export default UserList;
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="p-4 bg-[#373748] border border-[#8d6c6e] rounded-xl flex flex-col gap-4 ">
+        <p className="text-medium text-white text-lg">Hour : {label}</p>
+        <p className="text-sm text-blue-400 font-[google]">
+          Max:
+          <span className="ml-2">{payload[0].value} bpm</span>
+        </p>
+        <p className="text-sm text-[#72f63b] font-[google]">
+          Min:
+          <span className="ml-2">{payload[1].value} bpm</span>
+        </p>
+        <p className="text-sm text-[#ff7b00] font-[google]">
+          Avg:
+          <span className="ml-2">{payload[2].value} bpm</span>
+        </p>
+      </div>
+    );
+  }
+};
