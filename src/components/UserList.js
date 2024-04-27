@@ -686,27 +686,30 @@ const Friends = (props) => {
                 " group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px]  flex justify-center items-center bg-transparent  cursor-pointer   z-10  " +
                 (theme ? " border-[#d9dde1]" : " border-[#35384a]")
               }
-              onClick={() => activerChatUser()}
             >
               <div
                 className={
-                  "w-[50px] h-[50px]  rounded-full" +
+                  "w-[50px] h-[50px]  rounded-[20px]" +
                   (theme ? " bg-[#ffffff]" : " bg-[#1b202d]")
                 }
+                onClick={() => props.setProfileZoom(photoURL)}
               >
                 {photoURL === "nophoto" ? (
                   <img
                     src={profile2}
-                    className="w-full h-full rounded-full object-cover "
+                    className="w-full h-full rounded-[20px] object-cover "
                   ></img>
                 ) : (
                   <img
                     src={photoURL}
-                    className="w-full h-full rounded-full object-cover "
+                    className="w-full h-full rounded-[20px] object-cover "
                   ></img>
                 )}
               </div>
-              <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
+              <div
+                className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start"
+                onClick={() => activerChatUser()}
+              >
                 <div className="w-full font-semibold flex h-[23px]">
                   <span
                     className={
@@ -1002,19 +1005,12 @@ const SearchFriends = (props) => {
             "border-b-[1px] w-[100%] h-[85px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent   " +
             (theme ? " border-[#c8c8c8]" : " border-[#35384a]")
           }
-          onClick={() => {
-            props.setData("Chat");
-            activerChatUser();
-            addToFriendList();
-            // setSearchFlag(false);
-            // dispatch(toggleSendFlag(true));
-          }}
         >
-          <div className="w-[17px] h-full  flex justify-end items-end pb-[5px]">
+          <div className="w-[17px] h-full  flex justify-end items-end pb-[5px] z-30">
             {isOnline === true ? (
               <div
                 className={
-                  "w-[12px] max-h-[12px] min-h-[12px] rounded-full flex justify-center items-center   z-50 " +
+                  "w-[12px] max-h-[12px] min-h-[12px] rounded-full flex justify-center items-center   z-30 " +
                   (theme
                     ? "bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
                     : "bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f]")
@@ -1023,7 +1019,7 @@ const SearchFriends = (props) => {
               >
                 <div
                   className={
-                    "w-[8px] max-h-[8px] min-h-[8px] rounded-full  z-50" +
+                    "w-[8px] max-h-[8px] min-h-[8px] rounded-full  z-30" +
                     (theme ? " bg-[#469422]" : " bg-[#96df73]")
                   }
                   style={{ zIndex: "100" }}
@@ -1035,16 +1031,19 @@ const SearchFriends = (props) => {
           </div>
           <div
             className={
-              "w-[50px] h-[50px] ml-[-17px]  rounded-full " +
+              "w-[50px] h-[50px] ml-[-17px]  rounded-[20px] " +
               (theme ? " bg-[#ffffff]" : " bg-[#1b202d]")
             }
+            onClick={() => {
+              props.setProfileZoom(photoURL);
+            }}
             // style={{ zIndex: "10" }}
           >
             {photoURL === "nophoto" ? (
               <>
                 <img
                   src={profile2}
-                  className="w-full h-full rounded-full object-cover  "
+                  className="w-full h-full rounded-[20px] object-cover  "
                 ></img>
                 {/* <div className="w-[12px] h-[12px] bg-[#ffffff] ml-[5px] mt-[-10px] rounded-full border-[2px] border-[#1B202D] md:border-[#292f3f] lg:border-[#292f3f] z-50" style={{zIndex:"100"}}></div> */}
               </>
@@ -1052,13 +1051,22 @@ const SearchFriends = (props) => {
               <>
                 <img
                   src={photoURL}
-                  className="w-full h-full rounded-full object-cover "
+                  className="w-full h-full rounded-[20px] object-cover "
                 ></img>
                 {/* <div className="w-[12px] h-[12px] bg-[#ffffff] ml-[5px] mt-[-10px] rounded-full border-[2px] border-[#1B202D] md:border-[#292f3f] lg:border-[#292f3f] z-50"></div> */}
               </>
             )}
           </div>
-          <div className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
+          <div
+            className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start"
+            onClick={() => {
+              props.setData("Chat");
+              activerChatUser();
+              addToFriendList();
+              // setSearchFlag(false);
+              // dispatch(toggleSendFlag(true));
+            }}
+          >
             <div className="w-full font-semibold flex h-[23px]">
               <span
                 className={
@@ -1179,6 +1187,7 @@ const UserList = (props) => {
   const [showTime, setShowTime] = useState(false);
   const [theme, setTheme] = useState(true);
   const [timer, setTimer] = useState(false);
+  const [profileZoom, setProfileZoom] = useState("");
   // const [left, setRight] = useState(0);
   // addFriendList;
   console.log("UserList");
@@ -1605,7 +1614,43 @@ const UserList = (props) => {
         {searchFlag === true ? (
           <>
             {/* <div className="min-h-[70px] w-full  flex justify-center items-center"> */}
-            <div className=" mt-[10px]   w-[100%] px-[0] md:px-[10px] lg:px-[10px] flex justify-end items-center h-[60px] pb-[10px] bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]   overflow-hidden  ">
+            {profileZoom.length === 0 ? (
+              <div
+                className="w-full h-[0] bg-[#e4eaf125] fixed z-50 right-0 top-0 flex justify-center items-center"
+                onClick={() => {
+                  setProfileZoom("");
+                }}
+              >
+                <img src={profileZoom} className="w-[0] h-[0] "></img>
+              </div>
+            ) : (
+              <div
+                className={
+                  "w-full backdrop-blur-sm lg:w-[400px] md:w-[400px] lg:left-0 md:left-0 h-[100svh] bg-[#e4eaf16d] fixed z-50 right-0 top-0 flex justify-center items-center flex-col drop-shadow-md" +
+                  (theme ? " bg-[#e4eaf16d]" : " bg-[#1b202d6d]")
+                }
+                onClick={() => {
+                  setProfileZoom("");
+                }}
+              >
+                <img
+                  src={profileZoom}
+                  className="w-[280px] rounded-3xl aspect-square object-cover "
+                ></img>
+                {/* <div className="w-[280px] h-[50px]  flex ">
+              <div className="w-[140px] h-full flex justify-center items-center "><MdDelete  className="text-white text-[24px]"/></div>
+              <div className="w-[140px] h-full flex justify-center items-center "><HiChatBubbleBottomCenterText className="text-white text-[24px]"/></div>
+            </div> */}
+              </div>
+            )}
+            <div
+              className={
+                " mt-[10px]   w-[100%] px-[0] md:px-[10px] lg:px-[10px] flex justify-end items-center h-[60px] pb-[10px]   overflow-hidden  " +
+                (theme
+                  ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
+                  : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+              }
+            >
               <input
                 style={{ transition: ".5s" }}
                 value={searchUser}
@@ -1623,10 +1668,15 @@ const UserList = (props) => {
                   // setIsSearchBar(!isSearchBar);
                 }}
                 placeholder="Search Friends"
-                className="input w-full h-[50px] opacity-100  text-[white] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] font-[google] font-normal text-[15px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px] z-50  rounded-xl "
+                className={
+                  "input w-full h-[50px] opacity-100   font-[google] font-normal text-[15px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px] z-30  rounded-xl " +
+                  (theme
+                    ? " text-[#000000] bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff]"
+                    : " text-[#ffffff] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]")
+                }
               ></input>
               <div
-                className="w-[50px] h-[50px] ml-[-50px]  rounded-full flex justify-center items-center z-5   text-white cursor-pointer z-[100]"
+                className="w-[50px] h-[50px] ml-[-50px]  rounded-full flex justify-center items-center   text-white cursor-pointer z-40"
                 onClick={() => {
                   // if (searchUser.length !== 0) {
                   //   searchUserFriend();
@@ -1637,8 +1687,13 @@ const UserList = (props) => {
                   setIsSearchBar(false);
                 }}
               >
-                <div className="w-[50px] h-[50px] rounded-full flex justify-center items-center z-[100]">
-                  <RxCross2 className="text-[20px] z-[100] text-[white]" />
+                <div className="w-[50px] h-[50px] rounded-full flex justify-center items-center z-40">
+                  <RxCross2
+                    className={
+                      "text-[20px] z-[100] " +
+                      (theme ? " text-[black]" : " text-[white]")
+                    }
+                  />
                 </div>
               </div>
             </div>
@@ -1646,15 +1701,25 @@ const UserList = (props) => {
             <div className="w-full lg:w-full md:w-full h-[(100%-110px)] overflow-y-scroll">
               {SearchUserList.length === 0 ? (
                 <>
-                  <div className=" group w-full h-[70px] py-[10px] flex justify-center items-center cursor-pointer font-[work]   px-[10px]  text-[#4b93b9] ">
+                  <div
+                    className={
+                      " group w-full h-[70px] py-[10px] flex flex-col justify-center items-center cursor-pointer font-[work]   px-[10px]  " +
+                      (theme ? " text-[black]" : " text-[white]")
+                    }
+                  >
                     <span>No Users Found</span>
+                    <span>Searching is Case Sensitive</span>
                   </div>
                 </>
               ) : (
                 <>
                   {SearchUserList.map((friends) => {
                     return (
-                      <SearchFriends setData={props.setData} data={friends} />
+                      <SearchFriends
+                        setData={props.setData}
+                        data={friends}
+                        setProfileZoom={setProfileZoom}
+                      />
                     );
                   })}
                 </>
@@ -1663,9 +1728,39 @@ const UserList = (props) => {
           </>
         ) : props.data === "All" ? (
           <>
+            {profileZoom.length === 0 ? (
+              <div
+                className="w-full h-[0] bg-[#e4eaf125] fixed z-50 right-0 top-0 flex justify-center items-center"
+                onClick={() => {
+                  setProfileZoom("");
+                }}
+              >
+                <img src={profileZoom} className="w-[0] h-[0] "></img>
+              </div>
+            ) : (
+              <div
+                className={
+                  "w-full backdrop-blur-sm lg:w-[400px] md:w-[400px] lg:left-0 md:left-0 h-[100svh] bg-[#e4eaf16d] fixed z-50 right-0 top-0 flex justify-center items-center flex-col drop-shadow-md" +
+                  (theme ? " bg-[#e4eaf16d]" : " bg-[#1b202d6d]")
+                }
+                onClick={() => {
+                  setProfileZoom("");
+                }}
+              >
+                <img
+                  src={profileZoom}
+                  className="w-[280px] rounded-3xl aspect-square object-cover "
+                ></img>
+                {/* <div className="w-[280px] h-[50px]  flex ">
+              <div className="w-[140px] h-full flex justify-center items-center "><MdDelete  className="text-white text-[24px]"/></div>
+              <div className="w-[140px] h-full flex justify-center items-center "><HiChatBubbleBottomCenterText className="text-white text-[24px]"/></div>
+            </div> */}
+              </div>
+            )}
+
             <div
               className={
-                " mt-[10px]   w-[100%] px-[0] md:px-[10px] lg:px-[10px] flex justify-end items-center min-h-[60px] pb-[10px]    overflow-hidden z-[100] " +
+                " mt-[10px]   w-[100%] px-[0] md:px-[10px] lg:px-[10px] flex justify-end items-center min-h-[60px] pb-[10px]    overflow-hidden z-30 " +
                 (theme
                   ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
                   : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
@@ -1689,14 +1784,14 @@ const UserList = (props) => {
                 }}
                 placeholder="Search Friends"
                 className={
-                  "input w-full h-[50px] opacity-100   font-[google] font-normal text-[15px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px] z-50  rounded-xl " +
+                  "input w-full h-[50px] opacity-100   font-[google] font-normal text-[15px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px] z-30  rounded-xl " +
                   (theme
                     ? " text-[#000000] bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff]"
                     : " text-[#ffffff] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]")
                 }
               ></input>
               <div
-                className="w-[50px] h-[50px] ml-[-50px]  rounded-full flex justify-center items-center z-5   text-white cursor-pointer z-[100]"
+                className="w-[50px] h-[50px] ml-[-50px]  rounded-full flex justify-center items-center    text-white cursor-pointer z-40"
                 onClick={() => {
                   // if (searchUser.length !== 0) {
                   //   searchUserFriend();
@@ -1706,14 +1801,14 @@ const UserList = (props) => {
                   setIsSearchBar(false);
                 }}
               >
-                <div className="w-[50px] h-[50px] rounded-full flex justify-center items-center z-[100]">
+                <div className="w-[50px] h-[50px] rounded-full flex justify-center items-center z-40">
                   {searchUser.length === 0 ? (
                     <></>
                   ) : (
                     <>
                       <RxCross2
                         className={
-                          "text-[20px] z-[100] " +
+                          "text-[20px] " +
                           (theme ? " text-[black]" : " text-[white]")
                         }
                       />
@@ -1735,7 +1830,11 @@ const UserList = (props) => {
                 <>
                   {AllUserList?.map((friends) => {
                     return (
-                      <SearchFriends setData={props.setData} data={friends} />
+                      <SearchFriends
+                        setData={props.setData}
+                        data={friends}
+                        setProfileZoom={setProfileZoom}
+                      />
                     );
                   })}
                 </>
@@ -1743,21 +1842,54 @@ const UserList = (props) => {
             </div>
           </>
         ) : props.data === "Chat" ? (
-          <div className="w-full lg:w-full md:w-full h-[(100%-110px)] ">
-            {UserList.length === 0 ? (
-              <>
-                <div className=" group w-full h-[70px] py-[10px] flex justify-center items-center cursor-pointer font-[work]   px-[10px]  text-[#4b93b9] ">
-                  <span>No Friends Yet</span>
-                </div>
-              </>
+          <>
+            {profileZoom.length === 0 ? (
+              <div
+                className="w-full h-[0] bg-[#e4eaf125] fixed z-50 right-0 top-0 flex justify-center items-center"
+                onClick={() => {
+                  setProfileZoom("");
+                }}
+              >
+                <img src={profileZoom} className="w-[0] h-[0] "></img>
+              </div>
             ) : (
-              <>
-                {UserList?.map((friends) => {
-                  return <Friends data={friends} />;
-                })}
-              </>
+              <div
+                className={
+                  "w-full backdrop-blur-sm lg:w-[400px] md:w-[400px] lg:left-0 md:left-0 h-[100svh] bg-[#e4eaf16d] fixed z-50 right-0 top-0 flex justify-center items-center flex-col drop-shadow-md" +
+                  (theme ? " bg-[#e4eaf16d]" : " bg-[#1b202d6d]")
+                }
+                onClick={() => {
+                  setProfileZoom("");
+                }}
+              >
+                <img
+                  src={profileZoom}
+                  className="w-[280px] rounded-3xl aspect-square object-cover "
+                ></img>
+                {/* <div className="w-[280px] h-[50px]  flex ">
+              <div className="w-[140px] h-full flex justify-center items-center "><MdDelete  className="text-white text-[24px]"/></div>
+              <div className="w-[140px] h-full flex justify-center items-center "><HiChatBubbleBottomCenterText className="text-white text-[24px]"/></div>
+            </div> */}
+              </div>
             )}
-          </div>
+            <div className="w-full lg:w-full md:w-full h-[(100%-110px)] ">
+              {UserList.length === 0 ? (
+                <>
+                  <div className=" group w-full h-[70px] py-[10px] flex justify-center items-center cursor-pointer font-[work]   px-[10px]  text-[#4b93b9] ">
+                    <span>No Friends Yet</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {UserList?.map((friends) => {
+                    return (
+                      <Friends data={friends} setProfileZoom={setProfileZoom} />
+                    );
+                  })}
+                </>
+              )}
+            </div>
+          </>
         ) : props.data === "Group" ? (
           <>
             {groupModal === true ? (

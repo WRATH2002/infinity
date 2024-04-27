@@ -9,7 +9,7 @@ font-family: 'Roboto', sans-serif;
 font-family: 'Rubik', sans-serif; */
 
 .b {
-  background-image: url(../src/assets/img/bb1.jpg);
+  background-image: url(../src/assets/img/bb1.webp);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 2000%;
@@ -26,7 +26,7 @@ font-family: 'Rubik', sans-serif; */
 }
 
 .b2 {
-  background-image: url(../src/assets/img/bb1.jpg);
+  background-image: url(../src/assets/img/bb1.webp);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 4000%;
@@ -37,7 +37,7 @@ font-family: 'Rubik', sans-serif; */
 }
 
 .bb {
-  background-image: url(../src/assets/img/bb1.jpg);
+  background-image: url(../src/assets/img/bb1.webp);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 9000%;

@@ -8,7 +8,7 @@ import firebase from "../firebase";
 import Chatbody from "./Chatbody";
 import Sidebar from "./Sidebar";
 import { useSelector } from "react-redux";
-import bg from "../assets/img/bb1.jpg";
+import bg from "../assets/img/bb1.webp";
 import { WiStars } from "react-icons/wi";
 const Loading = (props) => {
   const [isLoading, setIsLoading] = useState(true);
