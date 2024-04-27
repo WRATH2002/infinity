@@ -8,18 +8,36 @@ import firebase from "../firebase";
 import Chatbody from "./Chatbody";
 import Sidebar from "./Sidebar";
 import { useSelector } from "react-redux";
-
+import bg from "../assets/img/bb1.jpg";
+import { WiStars } from "react-icons/wi";
 const Loading = (props) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [per, setPer] = useState(0);
   const [isSubLoading, setIsSubLoading] = useState(false);
   useEffect(() => {
     // Creating a timeout within the useEffect hook
+    run();
     const timer = setTimeout(() => {
       // setData("Welcome to gfg!");
       setIsLoading(false);
       return () => clearTimeout(timer);
-    }, 4000);
+    }, 3990);
   }, []);
+  useEffect(() => {
+    if (per != 0 && per <= 100) {
+      run();
+    }
+  }, [per]);
+
+  function run() {
+    // while (true) {
+    const timer = setTimeout(() => {
+      // setData("Welcome to gfg!");
+      setPer(per + 25);
+      return () => clearTimeout(timer);
+    }, 980);
+    // }
+  }
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
   useEffect(() => {
     // Creating a timeout within the useEffect hook
@@ -32,9 +50,9 @@ const Loading = (props) => {
 
   return (
     <>
-      {isLoading === true ? (
+      {isLoading == true ? (
         <>
-          <div className="w-full bg-[#1b202d] flex flex-col justify-center items-center h-[100dvh]">
+          <div className="w-full bg-[#ffffff] flex flex-col justify-center items-center h-[100dvh]">
             {/* <div class="col-3">
               <div class="snippet" data-title="dot-gathering">
                 <div class="stage filter-contrast">
@@ -53,9 +71,20 @@ const Loading = (props) => {
               </text>
             </svg> */}
             {/* <div class="custom-loader"></div> */}
-            <div className="w-[200px] lg:w-[400px] md:w-[400px] h-[4px] rounded-full ">
-              <span class="loader4"></span>
+            <div className="flex justify-center items-center font-[google] text-[28px]">
+              <WiStars className="text-[#965ba3] text-[30px]" />{" "}
+              <span>Wait a moment !</span>{" "}
+              {/* <span>We are loading everything for you</span> */}
+            </div>
+            <div className="w-[230px] lg:w-[400px] md:w-[400px] h-[4px] rounded-full ">
+              {/* <span class="bg-black w-full"></span> */}
+              <span class="loader4 bg-gradient-to-l from-[#2e9df6] to-[#975ba3]"></span>
+
               {/* <span class="loader"></span> */}
+            </div>
+            <div className="flex flex-col justify-center items-center font-[google] text-[16px] mt-[32px] text-[#424242]">
+              <span>We are preparing everything for you</span>
+              <span className="text-[20px] ">{per}%</span>
             </div>
 
             {/* <span className="text-[13px] lg:text-[16px] md:text-[16px] tracking-[13px] lg:tracking-[17px] md:tracking-[17px] font-semibold text-[#cdd8dd] mt-[20px] w-full flex justify-center items-center">
@@ -163,61 +192,71 @@ const AuthDetails = () => {
       ) : (
         <>
           {start == false ? (
-            <div className="w-full h-[100svh] flex flex-col justify-center items-center bg-[#e4eaf1]">
-              {/* {mode === 1 ? <Login /> : <Signup />} */}
-              <span
-                className="text-black font-[google] flex text-[35px]  "
-                style={{ transition: ".2s" }}
-              >
-                Welcome to Infinity
-              </span>
-              <span
-                className="text-[#4f4f4f] mt-[20px] h-[90px]  w-[90%] md:w-[40%] lg:w-[40%] font-[google] text-[15px] px-[30px] flex justify-center items-center text-center "
-                style={{ transition: ".2s" }}
-              >
-                Experience seamless connections and vibrant conversations with
-                Infinity, where every message brings joy and connection to your
-                fingertips.
-              </span>
-              <div
-                className="px-[15px] h-[40px] w-[150px] whitespace-nowrap mt-[30px] cursor-pointer select-none outline-none drop-shadow-sm bg-[white] text-black rounded-full text-[15px] flex justify-center items-center"
-                onClick={() => {
-                  setStart(!start);
-                  setTimeout(() => {
-                    setSubStart(true);
-                  }, 1500);
-                  setTimeout(() => {
-                    setSubSubStart(true);
-                  }, 2000);
-                }}
-                style={{ transition: ".2s" }}
-              >
-                Start Messaging
+            <>
+              <div className="w-full h-[100svh] flex flex-col justify-center items-center z-10 backdrop-blur-xl ">
+                {/* {mode === 1 ? <Login /> : <Signup />} */}
+                <span
+                  className="text-white font-[google] font-medium flex text-[37px] lg:text-[65px]  b justify-center items-center"
+                  style={{ transition: ".2s" }}
+                >
+                  Welcome to Infinity <WiStars className="text-[#0462e8]" />
+                </span>
+                <span
+                  className="text-[#000000b4] mt-[20px] h-[90px]  w-[90%] md:w-[40%] lg:w-[40%] font-[google] font-thin text-[15px] tracking-wide px-[30px] flex justify-center items-center text-center "
+                  style={{ transition: ".2s" }}
+                >
+                  Experience seamless connections and vibrant conversations with
+                  Infinity, where every message brings joy and connection to
+                  your fingertips.
+                </span>
+                <div
+                  className="px-[20px] h-[40px] w-auto whitespace-nowrap mt-[30px] cursor-pointer select-none outline-none drop-shadow-sm bg-[white] text-white rounded-full text-[16px] flex justify-center items-center bb"
+                  onClick={() => {
+                    setStart(!start);
+                    setTimeout(() => {
+                      setSubStart(true);
+                    }, 1500);
+                    setTimeout(() => {
+                      setSubSubStart(true);
+                    }, 2000);
+                  }}
+                  style={{ transition: ".2s" }}
+                >
+                  Let's Start
+                </div>
+                {/* <div className="w-full h-full bg-slate-500"></div> */}
               </div>
-              {/* <div className="w-full h-full bg-slate-500"></div> */}
-            </div>
+              {/* <div className="w-full h-[100svh] fixed z-0">
+                <img className="w-full h-full object-cover" src={bg}></img>
+              </div> */}
+            </>
           ) : subStart === false ? (
-            <div className="w-full h-[100svh] flex flex-col justify-center items-center bg-[#e4eaf1]">
-              <span
-                className="text-black font-[google] text-[35px] hidden  "
-                style={{ transition: ".2s" }}
-              >
-                Welcome to Infinity
-              </span>
-              <span
-                className="text-[#4f4f4f]  max-h-[90px] h-0 overflow-hidden w-full md:w-[40%] lg:w-[40%] font-[google] text-[15px] px-[30px] text-center "
-                style={{ transition: ".2s" }}
-              >
-                Experience seamless connections and vibrant conversations with
-                Infinity, where every message brings joy and connection to your
-                fingertips.
-              </span>
-              <div
-                className="px-[15px] h-[40px] w-[40px] animate-bounce  cursor-pointer bg-[white] text-black rounded-full text-[16px] flex justify-center  select-none outline-none items-center"
-                // onClick={() => setStart(!start)}
-                style={{ transition: ".2s" }}
-              ></div>
-            </div>
+            <>
+              <div className="w-full h-[100svh] flex flex-col justify-center items-center backdrop-blur-xl z-10">
+                <span
+                  className="text-black font-[google] text-[35px] hidden  "
+                  style={{ transition: ".2s" }}
+                >
+                  Welcome to Infinity
+                </span>
+                <span
+                  className="text-[#4f4f4f]  max-h-[90px] h-0 overflow-hidden w-full md:w-[40%] lg:w-[40%] font-[google] text-[16px] tracking-wide px-[30px] text-center "
+                  style={{ transition: ".2s" }}
+                >
+                  Experience seamless connections and vibrant conversations with
+                  Infinity, where every message brings joy and connection to
+                  your fingertips.
+                </span>
+                <div
+                  className="px-[20px] h-[40px] w-[40px] animate-bounce  cursor-pointer bg-[white] text-black rounded-full text-[16px] flex justify-center  select-none outline-none items-center"
+                  // onClick={() => setStart(!start)}
+                  style={{ transition: ".2s" }}
+                ></div>
+              </div>
+              {/* <div className="w-full h-[100svh] fixed z-0">
+                <img className="w-full h-full object-cover" src={bg}></img>
+              </div> */}
+            </>
           ) : (
             <div className="w-full h-[100svh] flex flex-col justify-center items-center bg-[#e4eaf1]">
               <span
@@ -227,7 +266,7 @@ const AuthDetails = () => {
                 <b>Welcome to Infinity</b>
               </span>
               <span
-                className="text-[#4f4f4f]  max-h-[90px] h-0 overflow-hidden w-full md:w-[40%] lg:w-[40%] font-[google] text-[15px] px-[30px] text-center "
+                className="text-[#4f4f4f]  max-h-[90px] h-0 overflow-hidden w-full md:w-[40%] lg:w-[40%] font-[google] text-[16px] tracking-wide px-[30px] text-center "
                 style={{ transition: ".2s" }}
               >
                 Experience seamless connections and vibrant conversations with
@@ -235,7 +274,7 @@ const AuthDetails = () => {
                 fingertips.
               </span>
               <div
-                className="px-[15px] h-[100svh] w-full cursor-pointer bg-[#ffffff] text-black rounded-none text-[16px] flex justify-center  select-none outline-none items-center"
+                className=" h-[100svh] w-full  bg-[#ffffff] text-black rounded-none text-[16px] flex justify-center outline-none items-center"
                 onClick={() => {
                   // setStart(!start);
                   // setSubStart(false);
@@ -246,12 +285,20 @@ const AuthDetails = () => {
                 {subSubStart === true ? (
                   <>
                     {mode === 1 ? (
-                      <div
-                        className="w-full h-full opacity-100 flex justify-center items-center"
-                        style={{ transition: ".4s" }}
-                      >
-                        <Login />
-                      </div>
+                      <>
+                        <div
+                          className="w-full px-[20px] h-full backdrop-blur-xl opacity-100 flex justify-center z-10 items-center"
+                          style={{ transition: ".4s" }}
+                        >
+                          <Login />
+                        </div>
+                        {/* <div className="w-full h-[100svh] fixed z-0">
+                          <img
+                            className="w-full h-full object-cover"
+                            src={bg}
+                          ></img>
+                        </div> */}
+                      </>
                     ) : (
                       <div
                         className="w-full h-full opacity-100 flex justify-center items-center"

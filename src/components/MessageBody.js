@@ -66,7 +66,7 @@ import back from "../assets/img/back.png";
 import download from "../assets/img/download.png";
 import download1 from "../assets/img/download1.png";
 import download2 from "../assets/img/download2.png";
-import logo from "../assets/img/logo.png";
+import logo from "../assets/img/lll3.png";
 import loading from "../assets/img/loading.png";
 import { Blurhash } from "react-blurhash";
 import { saveAs } from "file-saver";
@@ -95,6 +95,8 @@ import { RiVideoLine } from "react-icons/ri";
 import { FiUser } from "react-icons/fi";
 import { AiOutlineSend } from "react-icons/ai";
 import { IoMdDocument } from "react-icons/io";
+import { WiStars } from "react-icons/wi";
+import { BsStars } from "react-icons/bs";
 import { MdFileDownload } from "react-icons/md";
 
 import SpeechRecognition, {
@@ -134,6 +136,7 @@ const Messagess = (props) => {
       {/* <div className="w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] right-0 h-[100svh] fixed bg-[#0000003a] z-50 mt-[-70px] flex justify-center items-center">
         <img src={props.data.Image} className=" w-full"></img>
       </div> */}
+
       {props?.data?.Flag === 2 ? (
         <>
           <div className="w-full  my-[4px] flex text-[15px] justify-start  pl-[10px]">
@@ -178,8 +181,9 @@ const Messagess = (props) => {
                   }}
                   src={props.data.Image}
                   className="rounded-lg w-full h-full object-cover group-hover:opacity-60"
-
-                  // onClick={() => {}}
+                  onClick={() => {
+                    props.temp(props.data.Image);
+                  }}
                 ></img>
                 <span className="fixed text-transparent overflow-hidden w-full select-none right-0">
                   {props.data.Image}
@@ -355,11 +359,14 @@ const Messagess = (props) => {
                     setIsImageLoaded(true);
                     console.log("Loaded Image");
                   }}
-                  onClick={() => {
-                    setZoomImage(true);
-                  }}
+                  // onClick={() => {
+                  //   setZoomImage(true);
+                  // }}
                   src={props.data.Image}
                   className="rounded-lg w-full h-full object-cover  group-hover:opacity-60"
+                  onClick={() => {
+                    props.temp(props.data.Image);
+                  }}
                 ></img>
                 <span className="fixed text-transparent overflow-hidden w-full select-none left-0">
                   {props.data.Image}
@@ -499,6 +506,7 @@ export const MessageBody = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [documentUrl, setDocumentUrl] = useState("");
+  const [tempPhotoUrl, setTempPhotoUrl] = useState("");
 
   const dispatch = useDispatch();
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
@@ -960,6 +968,51 @@ export const MessageBody = () => {
 
   return (
     <>
+      {tempPhotoUrl.length === 0 ? (
+        <></>
+      ) : (
+        <div
+          className={
+            "fixed w-auto  max-w-[100%] lg:max-w-[32%] md:max-w-[32%] min-h-[100svh] max-h-[100svh] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal flex flex-wrap justify-end items-center z-50" +
+            (theme
+              ? " bg-[#e4eaf1] text-[black]"
+              : " bg-[#292f3f] text-[white]")
+          }
+          onClick={() => {
+            setTempPhotoUrl("");
+          }}
+        >
+          {/* {tempPhotoUrl} */}
+          <img
+            loading="lazy"
+            // onLoad={() => {
+            //   setIsImageLoaded(true);
+            //   console.log("Loaded Image");
+            // }}
+            src={tempPhotoUrl}
+            className=" w-full h-full object-cover group-hover:opacity-60"
+
+            // onClick={() => {}}
+          ></img>
+          {/* <span className="fixed text-transparent overflow-hidden w-full select-none right-0">
+          {props.data.Image}
+        </span>
+        
+
+        {isImageLoaded === true ? (
+          <div
+            className={
+              "w-auto bottom-0  h-[25px] bg-transparent  fixed flex items-center justify-end whitespace-nowrap text-[10px]   py-[8px] px-[14px] font-[google] font-light" +
+              (theme ? "  text-[#2d2d2d]" : "  text-[#bcbcbc]")
+            }
+          >
+            {props?.data?.Time}
+          </div>
+        ) : (
+          <></>
+        )} */}
+        </div>
+      )}
       <div
         className={
           "w-full h-[calc(100%-140px)] pb-[10px] mt-[80px] overflow-y-scroll  z-20 " +
@@ -981,8 +1034,8 @@ export const MessageBody = () => {
                 }
               >
                 <img src={logo} className="w-[150px] opacity-60"></img>
-                <span className="text-[30px] tracking-wide">
-                  Welcome to Infinity
+                <span className="text-[30px] tracking-wide b2 flex justify-center items-center">
+                  Welcome to Infinity <WiStars className="text-[#9f63a0]" />
                 </span>
                 <span
                   className={
@@ -1032,7 +1085,7 @@ export const MessageBody = () => {
               {chatMessage?.map((msg) => {
                 return (
                   <>
-                    <Messagess data={msg} />
+                    <Messagess data={msg} temp={setTempPhotoUrl} />
                   </>
                 );
               })}
@@ -1040,7 +1093,7 @@ export const MessageBody = () => {
           )}
         </div>
       </div>
-      <div className="w-full px-[12px] fixed mt-[-443px] ">
+      <div className="w-full px-[10px] fixed mt-[-435px] drop-shadow-md">
         {emoji === true ? (
           <Picker
             // className="w-[100%]"
@@ -1059,7 +1112,7 @@ export const MessageBody = () => {
       {document === true ? (
         <>
           <div
-            className="w-[208px] pl-[10px] fixed mt-[-346px] "
+            className="w-[208px] pl-[10px] fixed mt-[-338px] drop-shadow-md "
             style={{ transition: ".5s" }}
           >
             <div

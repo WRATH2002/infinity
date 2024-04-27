@@ -15,6 +15,15 @@ const StatusUserList = (props) => {
   const [statusPosition, setStatusPosition] = useState(0);
   const [statusImageUrl, setStatusImageUrl] = useState();
   const [stTime, setStTime] = useState("");
+  const [theme, setTheme] = useState(true);
+
+  useEffect(() => {
+    const user = firebase.auth().currentUser;
+    const ref = db.collection("Chat Record").doc(user.uid);
+    onSnapshot(ref, (snapshot) => {
+      setTheme(snapshot?.data()?.theme);
+    });
+  }, []);
   useEffect(() => {
     console.log("propssssssssssssssssssssssssssssss");
     console.log(props);
@@ -47,10 +56,20 @@ const StatusUserList = (props) => {
     <>
       {showStatus === true ? (
         // <div className="fixed">
-        <div className=" z-50 fixed bottom-0 h-[100svh] bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f] w-full md:w-[400px] lg:w-[400px] left-0 flex-col flex justify-center items-center">
+        <div
+          className={
+            " z-50 fixed bottom-0 h-[100svh]  w-full md:w-[400px] lg:w-[400px] left-0 flex-col flex justify-center items-center" +
+            (theme
+              ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
+              : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+          }
+        >
           {/* Cross ------------------------- */}
           <div
-            className="fixed top-[25px] left-[calc(100%-55px)] md:left-[calc(400px-55px)]  lg:left-[calc(400px-55px)]  w-[35px] h-[35px]  rounded-full bg-[white] md:bg-[#1c1f2f] lg:bg-[white] drop-shadow-none text-black flex justify-center items-center  cursor-pointer rotate-45 z-40"
+            className={
+              "fixed top-[25px] left-[calc(100%-55px)] md:left-[calc(400px-55px)]  lg:left-[calc(400px-55px)]  w-[35px] h-[35px]  rounded-full drop-shadow-none  flex justify-center items-center  cursor-pointer rotate-45 z-40" +
+              (theme ? " bg-[#1b202d] text-white" : " bg-[white] text-black")
+            }
             onClick={() => {
               setShowStatus(false);
             }}
@@ -60,27 +79,45 @@ const StatusUserList = (props) => {
           </div>
           {/* Profile ---------------------- */}
           <div
-            className=" group w-full md:w-[400px] lg:w-[400px] h-[90px] py-[10px] flex justify-start items-center bg-[#1c1f2f]  md:bg-[#292f3f] lg:bg-[#292f3f] cursor-pointer font-[google] font-normal  px-[20px]  text-[#ffffff]  fixed top-0   drop-shadow-none"
+            className={
+              " group w-full md:w-[400px] lg:w-[400px] h-[90px] py-[10px] flex justify-start items-center  cursor-pointer font-[google] font-normal  px-[20px]  text-[#ffffff]  fixed top-0   drop-shadow-none" +
+              (theme
+                ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
+                : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+            }
             onClick={() => {
               // setShowStatus(true);
             }}
           >
-            <div className="w-[59px] h-[59px] border-[2.4px] border-[#96df73] flex justify-center items-center rounded-full">
+            <div className="w-[59px] h-[59px] border-[2.4px] borderGrad  flex justify-center items-center rounded-full z-10">
               {photo === "nophoto" ? (
                 <img
                   src={profile2}
-                  className="w-[50px] h-[50px] rounded-full object-cover "
+                  className="w-[50px] h-[50px] rounded-full object-cover z-10 "
                 ></img>
               ) : (
                 <img
                   src={photo}
-                  className="w-[50px] h-[50px] rounded-full object-cover "
+                  className="w-[50px] h-[50px] rounded-full object-cover z-10 "
                 ></img>
               )}
+              <div
+                className={
+                  "w-[54.2px] h-[54.2px] rounded-full bg-white fixed z-0" +
+                  (theme
+                    ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
+                    : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+                }
+              ></div>
             </div>
             <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
+                <span
+                  className={
+                    "w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  " +
+                    (theme ? "  text-black" : "  text-white")
+                  }
+                >
                   {name}
                 </span>
                 <span className="w-[70px] h-full text-[11px]  flex justify-end items-center text-black   font-[google] font-light"></span>
@@ -99,7 +136,12 @@ const StatusUserList = (props) => {
             ) : (
               <>
                 <div
-                  className="fixed w-[26px] h-[46px] rounded-full bg-[white] cursor-pointer text-[black] flex justify-center items-center left-0"
+                  className={
+                    "fixed w-[26px] h-[46px] rounded-full  cursor-pointer  flex justify-center items-center left-0" +
+                    (theme
+                      ? " bg-[#1b202d] text-white"
+                      : " bg-[white] text-black")
+                  }
                   onClick={() => {
                     if (statusPosition > 0) {
                       setStatusPosition(statusPosition - 1);
@@ -117,7 +159,12 @@ const StatusUserList = (props) => {
             ) : (
               <>
                 <div
-                  className="fixed w-[26px] h-[46px] rounded-full bg-[white] cursor-pointer text-[black] flex justify-center items-center right-0"
+                  className={
+                    "fixed w-[26px] h-[46px] rounded-full  cursor-pointer  flex justify-center items-center right-0" +
+                    (theme
+                      ? " bg-[#1b202d] text-white"
+                      : " bg-[white] text-black")
+                  }
                   onClick={() => {
                     if (statusPosition < statusLength - 1) {
                       setStatusPosition(statusPosition + 1);
@@ -143,7 +190,12 @@ const StatusUserList = (props) => {
                       {statusImageUrl[statusPosition]?.text}
                     </a>
                   ) : (
-                    <pre className="w-[80%] whitespace-pre-wrap text-center font-[google] font-normal text-[20px] text-[white]">
+                    <pre
+                      className={
+                        "w-[80%] whitespace-pre-wrap text-center font-[google] font-normal text-[20px] " +
+                        (theme ? "  text-black" : "  text-white")
+                      }
+                    >
                       {statusImageUrl[statusPosition]?.text}
                     </pre>
                   )}
@@ -172,7 +224,12 @@ const StatusUserList = (props) => {
                     <>
                       {index === statusPosition ? (
                         <div
-                          className="w-[8px] mx-[2px] h-[4px] bg-white rounded-full"
+                          className={
+                            "w-[8px] mx-[2px] h-[4px] rounded-full" +
+                            (theme
+                              ? " bg-[#1b202d] text-white"
+                              : " bg-[white] text-black")
+                          }
                           style={{ transition: ".4s" }}
                         ></div>
                       ) : (
@@ -201,27 +258,43 @@ const StatusUserList = (props) => {
         >
           {" "}
           <div
-            className=" group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px] border-[#35384a] flex justify-center items-center bg-transparent  cursor-pointer   z-10 select-none"
+            className={
+              " group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px] flex justify-center items-center bg-transparent  cursor-pointer   z-10 select-none" +
+              (theme ? " border-[#dde1e7]" : " border-[#35384a] ")
+            }
             onClick={() => {
               // setShowStatus(true);
             }}
           >
-            <div className="w-[59px] h-[59px] border-[2.4px] border-[#96df73] flex justify-center items-center rounded-full">
+            <div className="w-[59px] h-[59px] border-[2.4px] borderGrad  flex justify-center items-center rounded-full z-10">
               {photo === "nophoto" ? (
                 <img
                   src={profile2}
-                  className="w-[50px] h-[50px] rounded-full object-cover "
+                  className="w-[50px] h-[50px] rounded-full object-cover z-10 "
                 ></img>
               ) : (
                 <img
                   src={photo}
-                  className="w-[50px] h-[50px] rounded-full object-cover "
+                  className="w-[50px] h-[50px] rounded-full object-cover z-10 "
                 ></img>
               )}
+              <div
+                className={
+                  "w-[54.2px] h-[54.2px] rounded-full fixed z-0" +
+                  (theme
+                    ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
+                    : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+                }
+              ></div>
             </div>
             <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
               <div className="w-full font-semibold flex h-[23px]">
-                <span className="w-[calc(100%-70px)] text-[16px] h-full text-[white]  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
+                <span
+                  className={
+                    "w-[calc(100%-70px)] text-[16px] h-full   flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  " +
+                    (theme ? "  text-black" : "  text-white")
+                  }
+                >
                   {/* {props.data.user} */}
                   {/* {ownerName} */}
                   {name}

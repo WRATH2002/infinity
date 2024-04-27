@@ -10,6 +10,7 @@ import {
   Legend,
   Tooltip,
 } from "recharts";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import dp from "../assets/img/dp2.jpg";
 import profile from "../assets/img/profile.jpg";
 import profile2 from "../assets/img/d.png";
@@ -124,7 +125,8 @@ import { TbLogout } from "react-icons/tb";
 import { AiOutlineDelete } from "react-icons/ai";
 // import { MdNoAccounts } from "react-icons/md";
 import { FaAppStoreIos } from "react-icons/fa";
-
+import { RiTimer2Fill } from "react-icons/ri";
+import { LuCircleDashed } from "react-icons/lu";
 const dd = [
   {
     date: 21,
@@ -479,19 +481,19 @@ const Friends = (props) => {
             >
               <div
                 className={
-                  "w-[50px] h-[50px]   rounded-full" +
+                  "w-[50px] h-[50px]   rounded-[20px]" +
                   (theme ? " bg-[#ffffff]" : " bg-[#1b202d]")
                 }
               >
                 {photoURL === "nophoto" ? (
                   <img
                     src={profile2}
-                    className="w-full h-full rounded-full object-cover "
+                    className="w-full h-full rounded-[20px] object-cover "
                   ></img>
                 ) : (
                   <img
                     src={photoURL}
-                    className="w-full h-full rounded-full object-cover "
+                    className="w-full h-full rounded-[20px] object-cover "
                   ></img>
                 )}
               </div>
@@ -1176,6 +1178,7 @@ const UserList = (props) => {
   const [onHour, setOnHour] = useState(-1);
   const [showTime, setShowTime] = useState(false);
   const [theme, setTheme] = useState(true);
+  const [timer, setTimer] = useState(false);
   // const [left, setRight] = useState(0);
   // addFriendList;
   console.log("UserList");
@@ -1932,7 +1935,12 @@ const UserList = (props) => {
               >
                 {/* Cross ------------------------- */}
                 <div
-                  className="fixed top-[25px] left-[calc(100%-55px)] md:left-[calc(400px-55px)]  lg:left-[calc(400px-55px)]  w-[35px] h-[35px]  rounded-full bg-[white] md:bg-[#1c1f2f] lg:bg-[white] drop-shadow-none text-black flex justify-center items-center  cursor-pointer rotate-45 z-40"
+                  className={
+                    "fixed top-[25px] left-[calc(100%-55px)] md:left-[calc(400px-55px)]  lg:left-[calc(400px-55px)]  w-[35px] h-[35px]  rounded-full  drop-shadow-none flex justify-center items-center  cursor-pointer rotate-45 z-40" +
+                    (theme
+                      ? " bg-[#1b202d] text-white"
+                      : " bg-[white] text-black")
+                  }
                   onClick={() => {
                     setShowStatus(false);
                   }}
@@ -1942,35 +1950,43 @@ const UserList = (props) => {
                 </div>
                 {/* Profile ---------------------- */}
                 <div
-                  className=" group w-full md:w-[400px]  lg:w-[400px] h-[90px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal  px-[20px]  text-[#ffffff]  fixed top-0  drop-shadow-none"
+                  className={
+                    " group w-full md:w-[400px]  lg:w-[400px] h-[90px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal  px-[20px]    fixed top-0  drop-shadow-none" +
+                    (theme
+                      ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
+                      : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+                  }
                   onClick={() => {
                     // setShowStatus(true);
                   }}
                 >
-                  <div
-                    className={
-                      "w-[59px] h-[59px] border-[2.4px] flex justify-center items-center rounded-full" +
-                      (theme ? " border-[#469422]" : " border-[#96df73]")
-                    }
-                  >
+                  <div className="w-[59px] h-[59px] border-[2.4px] borderGrad  flex justify-center items-center rounded-full z-10">
                     {profileURL === "nophoto" ? (
                       <img
                         src={profile2}
-                        className="w-[50px] h-[50px] rounded-full object-cover "
+                        className="w-[50px] h-[50px] rounded-full object-cover z-10 "
                       ></img>
                     ) : (
                       <img
                         src={profileURL}
-                        className="w-[50px] h-[50px] rounded-full object-cover "
+                        className="w-[50px] h-[50px] rounded-full object-cover z-10 "
                       ></img>
                     )}
+                    <div
+                      className={
+                        "w-[54.2px] h-[54.2px] rounded-full fixed z-0" +
+                        (theme
+                          ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
+                          : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+                      }
+                    ></div>
                   </div>
                   <div className="w-[calc(100%-65px)] h-[50px] ml-[15px] bg-transparent  flex flex-col justify-center items-start ">
                     <div className="w-full font-semibold flex h-[23px]">
                       <span
                         className={
                           "w-[calc(100%-70px)] text-[16px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  " +
-                          (theme ? " text-black" : " text-black")
+                          (theme ? "  text-black" : "  text-white")
                         }
                       >
                         My Status
@@ -1996,7 +2012,12 @@ const UserList = (props) => {
                   ) : (
                     <>
                       <div
-                        className="fixed w-[26px] h-[46px] rounded-full bg-[white] cursor-pointer text-[black] flex justify-center items-center left-0"
+                        className={
+                          "fixed w-[26px] h-[46px] rounded-full cursor-pointer flex justify-center items-center left-0" +
+                          (theme
+                            ? " bg-[#1b202d] text-white"
+                            : " bg-[white] text-black")
+                        }
                         onClick={() => {
                           if (statusPosition > 0) {
                             setStatusPosition(statusPosition - 1);
@@ -2014,7 +2035,12 @@ const UserList = (props) => {
                   ) : (
                     <>
                       <div
-                        className="fixed w-[26px] h-[46px] rounded-full bg-[white] cursor-pointer text-[black] flex justify-center items-center right-0"
+                        className={
+                          "fixed w-[26px] h-[46px] rounded-full cursor-pointer flex justify-center items-center right-0" +
+                          (theme
+                            ? " bg-[#1b202d] text-white"
+                            : " bg-[white] text-black")
+                        }
                         onClick={() => {
                           if (statusPosition < statusCount - 1) {
                             setStatusPosition(statusPosition + 1);
@@ -2049,7 +2075,7 @@ const UserList = (props) => {
                           <pre
                             className={
                               "w-[80%] whitespace-pre-wrap text-center font-[google] font-normal text-[20px] " +
-                              (theme ? " text-[black]" : " text-[white]")
+                              (theme ? "  text-black" : "  text-white")
                             }
                           >
                             {statusImageUrl[statusPosition]?.text}
@@ -2079,7 +2105,12 @@ const UserList = (props) => {
                           <>
                             {index === statusPosition ? (
                               <div
-                                className="w-[8px] mx-[2px] h-[4px] bg-white rounded-full"
+                                className={
+                                  "w-[8px] mx-[2px] h-[4px]  rounded-full" +
+                                  (theme
+                                    ? " bg-[#1b202d] text-white"
+                                    : " bg-[white] text-black")
+                                }
                                 style={{ transition: ".4s" }}
                               ></div>
                             ) : (
@@ -2101,7 +2132,7 @@ const UserList = (props) => {
             {statusModal === true ? (
               <>
                 <div
-                  className="fixed z-20 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[40px] h-[40px]  rounded-full  text-white  flex justify-center items-center rotate-[135deg] cursor-pointer"
+                  className="fixed z-20 bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px] w-[40px] h-[40px]  rounded-full bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]  text-white  flex justify-center items-center rotate-[135deg] cursor-pointer"
                   onClick={() => {
                     setStatusModal(!statusModal);
                     setStatusTextModal(false);
@@ -2241,35 +2272,46 @@ const UserList = (props) => {
               <div className="group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center bg-transparent  cursor-pointer    z-10 select-none">
                 {" "}
                 <div
-                  className=" group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px] border-[#35384a] flex justify-center items-center bg-transparent  cursor-pointer   z-10 select-none"
+                  className={
+                    " group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px]  flex justify-center items-center bg-transparent  cursor-pointer   z-10 select-none" +
+                    (theme ? " border-[#dde1e7]" : " border-[#35384a] ")
+                  }
                   onClick={() => {
                     setShowStatus(true);
                   }}
                 >
-                  <div
-                    className={
-                      "w-[59px] h-[59px] border-[2.4px]  flex justify-center items-center rounded-full" +
-                      (theme ? " border-[#469422]" : " border-[#96df73]")
-                    }
-                  >
+                  <div className="w-[59px] h-[59px] border-[2.4px] borderGrad  flex justify-center items-center rounded-full z-10">
                     {profileURL === "nophoto" ? (
                       <img
                         src={profile2}
-                        className="w-[50px] h-[50px] rounded-full object-cover "
+                        className="w-[50px] h-[50px] rounded-full object-cover z-10 "
                       ></img>
                     ) : (
                       <img
                         src={profileURL}
-                        className="w-[50px] h-[50px] rounded-full object-cover "
+                        className="w-[50px] h-[50px] rounded-full object-cover z-10 "
                       ></img>
                     )}
+                    <div
+                      className={
+                        "w-[54.2px] h-[54.2px] rounded-full fixed z-0" +
+                        (theme
+                          ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
+                          : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+                      }
+                    ></div>
                   </div>
                   <div
                     className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex justify-center items-start z-50"
                     style={{ zIndex: "999" }}
                   >
                     <div className="w-[calc(100%-70px)] font-semibold flex flex-col h-full">
-                      <span className="w-full text-[16px] h-[50%] text-[white]  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
+                      <span
+                        className={
+                          "w-full text-[16px] h-[50%] flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  " +
+                          (theme ? "  text-black" : "  text-white")
+                        }
+                      >
                         {/* {props.data.user} */}
                         {/* {ownerName} */}
                         My Status
@@ -2287,14 +2329,24 @@ const UserList = (props) => {
                         console.log("clicked");
                       }}
                     >
-                      <MdDelete className="text-[20px] text-white" />
+                      <MdDelete
+                        className={
+                          "text-[20px] " +
+                          (theme ? "  text-[#1b202d]" : "  text-white")
+                        }
+                      />
                     </div>
                     {/* <span className="text-[15px]">Hello! How Are you</span> */}
                   </div>
                 </div>
               </div>
             ) : (
-              <div className=" group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal  px-[10px]  md:px-[20px] lg:px-[20px]  text-[#ffffff] hover:text-[#000000] border-t-[1px] border-b-[1px] border-[#404040]">
+              <div
+                className={
+                  " group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-start items-center cursor-pointer font-[google] font-normal  px-[10px]  md:px-[20px] lg:px-[20px]   border-t-[1px] border-b-[1px] " +
+                  (theme ? " border-[#dde1e7]" : " border-[#35384a] ")
+                }
+              >
                 <div className="w-[59px] h-[59px] border-[2.4px] border-transparent rounded-full">
                   {profileURL === "nophoto" ? (
                     <img
@@ -2313,7 +2365,12 @@ const UserList = (props) => {
                   // style={{ zIndex: "999" }}
                 >
                   <div className="w-[calc(100%-70px)] font-semibold flex flex-col h-full">
-                    <span className="w-full text-[16px] h-[50%] text-[white]  flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  ">
+                    <span
+                      className={
+                        "w-full text-[16px] h-[50%]   flex items-center whitespace-nowrap overflow-hidden text-ellipsis    font-[google] font-normal  " +
+                        (theme ? " text-black" : " text-white")
+                      }
+                    >
                       {/* {props.data.user} */}
                       {/* {ownerName} */}
                       My Status
@@ -2364,7 +2421,12 @@ const UserList = (props) => {
                 </div> */}
                 {showTime == true ? (
                   <div
-                    className="w-full md:w-[380px] lg:w-[380px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] rounded-xl min-h-[240px] max-h-[240px] flex flex-col justify-between items-center  text-white text-[25px] font-[google] font-normal p-[20px]"
+                    className={
+                      "w-full md:w-[380px] lg:w-[380px] rounded-xl min-h-[240px] max-h-[240px] flex flex-col justify-between items-center  text-[25px] font-[google] font-normal p-[20px]" +
+                      (theme
+                        ? " bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff] text-black"
+                        : " bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] text-white")
+                    }
                     style={{ transition: ".4s" }}
                     onClick={() => {
                       setShowTime(false);
@@ -2378,11 +2440,15 @@ const UserList = (props) => {
                       className="w-full h-[20px] flex justify-between items-center"
                       // style={{ transition: ".4s" }}
                     >
-                      <div className="text-[16px] text-[white] tracking-normal flex justify-start items-center">
-                        <FaAngleDown className="text-[white] text-[17px] mr-[10px]" />
+                      <div className="text-[16px]  tracking-normal flex justify-start items-center">
+                        <FaAngleDown className=" text-[17px] mr-[10px]" />
                         21/06/2024
                       </div>
-                      <div className="text-[#c0c0c0]">
+                      <div
+                        className={
+                          "" + (theme ? " text-[#2d2d2d]" : " text-[#c0c0c0]")
+                        }
+                      >
                         {onHour < 10 ? <>0{onHour}</> : <>{onHour}</>} :{" "}
                         {onMin < 10 ? <>0{onMin}</> : <>{onMin}</>}
                       </div>
@@ -2407,12 +2473,12 @@ const UserList = (props) => {
                               >
                                 <stop
                                   offset="10%"
-                                  stopColor="#96df73"
+                                  stopColor="#2e9df6"
                                   stopOpacity={0.8}
                                 />
                                 <stop
                                   offset="100%"
-                                  stopColor="#96df73"
+                                  stopColor="#975ba3"
                                   stopOpacity={0}
                                 />
                               </linearGradient>
@@ -2421,7 +2487,7 @@ const UserList = (props) => {
                             <Area
                               type="bump"
                               dataKey="time"
-                              stroke="#487532"
+                              stroke="#acbfd5"
                               fillOpacity={1}
                               fill="url(#colorAvg)"
                             />
@@ -2432,12 +2498,40 @@ const UserList = (props) => {
                   </div>
                 ) : (
                   <div
-                    className="w-full md:w-[380px] lg:w-[380px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] rounded-xl min-h-[60px] max-h-[60px]  flex flex-col justify-between right-[0px] items-center  text-white text-[25px] font-[google] font-normal p-[20px]"
+                    className={
+                      "w-full md:w-[380px] lg:w-[380px] rounded-xl min-h-[60px] max-h-[60px]  flex flex-col justify-between right-[0px] items-center   text-[25px] font-[google] font-normal p-[20px]" +
+                      (theme
+                        ? " bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff] text-black"
+                        : " bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] text-white")
+                    }
                     style={{ transition: ".4s", transitionDelay: ".5s" }}
                     onClick={() => {
                       setShowTime(true);
                     }}
                   >
+                    {timer === true ? (
+                      <div className="w-[calc(100%-20px)] md:w-[calc(400px-20px)] lg:[calc(400px-20px)] h-[300px] rounded-xl bg-white flex justify-center items-center fixed mt-[-90px] z-50">
+                        {/* <CountdownCircleTimer
+                          {...timerProps}
+                          colors={[
+                            ["#9000ff", 0],
+                            ["#0066FF", 1],
+                          ]}
+                          isLinearGradient={true}
+                          duration={daysDuration}
+                          initialRemainingTime={remainingTime}
+                          trailColor={[["#dbdbdb"]]}
+                        >
+                          {({ elapsedTime }) =>
+                            renderTime(getTimeDays(daysDuration - elapsedTime))
+                          }
+                        </CountdownCircleTimer> */}
+                        {/* <div className="w-[170px] h-[170px] rounded-full border-[3px] border-[black]"></div> */}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+
                     {/* <span className="text-[19px] fixed left-[30px] top-[100px] tracking-normal block ">
                       Screen Time
                     </span> */}
@@ -2446,10 +2540,19 @@ const UserList = (props) => {
                       className="w-full h-[20px] flex justify-between items-center"
                       // style={{ transition: ".4s", transitionDelay: ".5s" }}
                     >
-                      <div className="text-[18px] text-[#c0c0c0] tracking-normal flex justify-start items-center">
+                      <div
+                        className={
+                          "text-[18px] tracking-normal flex justify-start items-center" +
+                          (theme ? " text-[#2d2d2d]" : " text-[#c0c0c0]")
+                        }
+                      >
                         Today
                       </div>
-                      <div>
+                      <div
+                        className={
+                          "" + (theme ? " text-[#2d2d2d]" : " text-[#c0c0c0]")
+                        }
+                      >
                         {onHour < 10 ? <>0{onHour}</> : <>{onHour}</>} :{" "}
                         {onMin < 10 ? <>0{onMin}</> : <>{onMin}</>}
                       </div>
@@ -2474,12 +2577,12 @@ const UserList = (props) => {
                               >
                                 <stop
                                   offset="10%"
-                                  stopColor="#96df73"
+                                  stopColor="#975ba3"
                                   stopOpacity={0.8}
                                 />
                                 <stop
                                   offset="100%"
-                                  stopColor="#96df73"
+                                  stopColor="#2e9df6"
                                   stopOpacity={0}
                                 />
                               </linearGradient>
@@ -2488,7 +2591,7 @@ const UserList = (props) => {
                             <Area
                               type="bump"
                               dataKey="time"
-                              stroke="#487532"
+                              stroke="#acbfd5"
                               fillOpacity={1}
                               fill="url(#colorAvg)"
                             />
@@ -2507,12 +2610,12 @@ const UserList = (props) => {
                     {profileURL === "nophoto" ? (
                       <img
                         src={profile2}
-                        className="w-full h-full rounded-full object-cover"
+                        className="w-full h-full rounded-[28px] border-[1.7px] border-[#c1c5c8] object-cover"
                       ></img>
                     ) : (
                       <img
                         src={profileURL}
-                        className="w-full h-full rounded-full object-cover"
+                        className="w-full h-full rounded-[28px] border-[1.7px] border-[#c1c5c8] object-cover"
                       ></img>
                     )}
                     <input
@@ -2525,9 +2628,14 @@ const UserList = (props) => {
                     <label
                       for="getFile"
                       // onclick={document.getElementById("getFile").click()}
-                      className=" w-[30px] h-[30px] flex justify-center items-center border-[2px] border-[#292f3f] md:border-[#1b202d] lg:border-[#1b202d] bg-[#4b565c] fixed rounded-full cursor-pointer z-10"
+                      className={
+                        " w-[30px] h-[30px]  flex justify-center items-center border-[2px]   fixed rounded-full cursor-pointer z-10" +
+                        (theme
+                          ? " bg-[#c48ed8] text-black border-[#c1c5c8] md:border-[#c1c5c8] lg:border-[#c1c5c8]"
+                          : " bg-[#4b565c] text-white border-[#292f3f] md:border-[#1b202d] lg:border-[#1b202d]")
+                      }
                     >
-                      <BsCameraFill className="text-white text-[13px]" />
+                      <BsCameraFill className=" text-[13px]" />
                     </label>
                   </div>
                   <div className="w-[calc(100%-140px)] h-full  ml-[20px] flex flex-col justify-center  items-start">
@@ -2672,45 +2780,74 @@ const UserList = (props) => {
                         </>
                       )}
                     </div> */}
-                    <div className="text-white font-[google] text-[20px] md:text-[22px] lg:text-[22px] w-full ">
+                    <div
+                      className={
+                        " font-[google] text-[22px] md:text-[22px] lg:text-[22px] w-full " +
+                        (theme ? " text-black" : " text-white")
+                      }
+                    >
                       {ownerName}
                     </div>
-                    <div className="text-[#bbbbbb] font-[google] max-h-[47px] line-clamp-2 overflow-hidden text-ellipsis mt-[5px] text-[15px] w-full font-light">
+                    <div
+                      className={
+                        " font-[google] max-h-[47px] line-clamp-2 overflow-hidden text-ellipsis mt-[0px] text-[16px] w-full font-light" +
+                        (theme ? " text-[#2d2d2d]" : " text-[#bbbbbb]")
+                      }
+                    >
                       {ownerInfo}
                     </div>
                   </div>
                   <div className="w-[30px] flex justify-end items-center">
-                    <RiEditFill className="text-[20px] text-[#ffffff]" />
+                    <RiEditFill
+                      className={
+                        "text-[20px] " + (theme ? " text-black" : " text-white")
+                      }
+                    />
                   </div>
                 </div>
-                <div className="w-full px-[20px] mt-[30px]">
+                {/* <div className="w-full px-[20px] mt-[10px]">
                   <div className="w-full border-[1px] border-[#d9dde1]"></div>
-                </div>
+                </div> */}
                 {help === true ? (
-                  <div
-                    className="w-full md:w-[400px] lg:w-[400px] h-[400px] fixed top-[70px] p-[20px] flex justify-center items-center z-50 text-[16px]"
-                    style={{ transition: ".4s" }}
-                  >
-                    <div className="w-full h-full rounded-xl font-[google] font-normal text-white px-[20px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] flex flex-col justify-center items-start">
-                      <span className="font-medium">How to add friend ?</span>
-                      <span className="text-[#a8a8a8]">
-                        Go to add person icon and click on it. Then in the
-                        searchbar type the exact username your friend has and
-                        click on the search icon. From the result below click on
-                        your friends profile and start messaging.
-                      </span>
+                  <>
+                    <div
+                      className="w-full md:w-[400px] lg:w-[400px] h-[400px] fixed top-[70px] p-[10px] flex flex-col justify-center items-center z-50 text-[16px]"
+                      style={{ transition: ".4s" }}
+                    >
+                      <div className="w-full h-[350px] rounded-xl font-[google] font-normal text-white px-[30px] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] flex flex-col justify-center items-start">
+                        <span className="font-medium">How to add friend ?</span>
+                        <span className="text-[#a8a8a8]">
+                          Go to add person icon and click on it. Then in the
+                          searchbar type the exact username your friend has and
+                          click on the search icon. From the result below click
+                          on your friends profile and start messaging.
+                        </span>
+                      </div>
+                      <div
+                        className="w-[40px] h-[40px] mt-[10px] bg-[#292f3f] rounded-full"
+                        onClick={() => {
+                          setHelp(false);
+                        }}
+                      >
+                        <cross />
+                      </div>
                     </div>
-                  </div>
+
+                    <div className="w-full  md:w-[400px] lg:w-[400px] h-[100svh] bg-[#e4eaf125] backdrop-blur-md z-40 fixed"></div>
+                  </>
                 ) : (
-                  <div
-                    className="w-full md:w-[400px] lg:w-[400px] h-[400px] fixed top-[-430px] p-[10px] flex justify-center items-center"
-                    style={{ transition: ".4s" }}
-                  >
-                    <div className="w-full h-full rounded-xl bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] "></div>
-                  </div>
+                  <>
+                    <div
+                      className="w-full md:w-[400px] lg:w-[400px] h-[400px] fixed top-[-430px] p-[10px] z-50 flex justify-center items-center"
+                      style={{ transition: ".4s" }}
+                    >
+                      <div className="w-full h-full rounded-xl bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] "></div>
+                    </div>
+                    <div className="w-0  md:w-0 lg:w-0 h-0 bg-[#e4eaf125] backdrop-blur-md z-0 fixed"></div>
+                  </>
                 )}
 
-                <div className=" h-[230px]  mt-[50px] w-full px-[20px] flex flex-col justify-between items-center ">
+                <div className=" h-[230px]  mt-[20px] w-full px-[20px] flex flex-col justify-between items-center ">
                   <div
                     className={
                       "w-full   h-auto flex flex-col justify-center items-start" +
@@ -2746,7 +2883,7 @@ const UserList = (props) => {
                           ></div>
                         ) : (
                           <div
-                            className="w-[16px] h-[16px] rounded-full ml-[13px] bg-[#96df73] "
+                            className="w-[16px] h-[16px] rounded-full ml-[12px] bg-[#96df73] "
                             style={{ transition: ".4s" }}
                           ></div>
                         )}
@@ -2789,16 +2926,25 @@ const UserList = (props) => {
                           ></div>
                         ) : (
                           <div
-                            className="w-[16px] h-[16px] rounded-full ml-[13px] bg-[#96df73] "
+                            className="w-[16px] h-[16px] rounded-full ml-[12px] bg-[#96df73] "
                             style={{ transition: ".4s" }}
                           ></div>
                         )}
                       </div>
                     </div>
+
                     <div
                       className="w-[100%] h-[34px]  rounded-xl    mt-[10px] flex justify-start items-center  font-[google] font-light  text-[15px] cursor-pointer"
                       onClick={() => {
-                        setHelp(true);
+                        setTimer(!timer);
+                      }}
+                    >
+                      <RiTimer2Fill className="text-[20px] mr-[16px]" /> Limit
+                    </div>
+                    <div
+                      className="w-[100%] h-[34px]  rounded-xl    mt-[10px] flex justify-start items-center  font-[google] font-light  text-[15px] cursor-pointer"
+                      onClick={() => {
+                        setHelp(!help);
                       }}
                     >
                       <TbHelpSquareRoundedFilled className="text-[20px] mr-[16px]" />{" "}
@@ -2845,7 +2991,108 @@ const UserList = (props) => {
         bg-[#303A40]
         bg-[#354249] */}
 
-        <div
+        {/* {props.data === "All" ? 
+        (<><div className="w-full md:w-[400px] lg:w-[400px] h-[60px] fixed bottom-0 flex justify-start items-center z-0 bg-slate-500 pl-[0px]"><div
+              className={
+                "w-[calc(400px/5)] h-[40px] rounded-xl  z-0 ml-0 " +
+                (theme
+                  ? "text-[#000000] bg-[#ffffff] "
+                  : "text-[#ffffff] bg-[#96df73] ")
+              }
+              style={{ zIndex: "0", transition:".4s" }}
+            ></div></div></>) : props.data === "Group" ? 
+        (<><div className="w-full md:w-[400px] lg:w-[400px] h-[60px] fixed bottom-0 flex justify-start items-center z-0 bg-slate-500 pl-[80px]"><div
+              className={
+                "w-[calc(400px/5)] h-[40px] rounded-xl  z-0 ml-0 " +
+                (theme
+                  ? "text-[#000000] bg-[#ffffff] "
+                  : "text-[#ffffff] bg-[#96df73] ")
+              }
+              style={{ zIndex: "0", transition:".4s" }}
+            ></div></div></>) : props.data === "Chat" ? 
+        (<><div className="w-full md:w-[400px] lg:w-[400px] h-[60px] fixed bottom-0 flex justify-start items-center z-0 bg-slate-500  pl-[160px]"><div
+              className={
+                "w-[calc(400px/5)] h-[40px] rounded-xl  z-0 ml-0 " +
+                (theme
+                  ? "text-[#000000] bg-[#ffffff] "
+                  : "text-[#ffffff] bg-[#96df73] ")
+              }
+              style={{ zIndex: "0", transition:".4s" }}
+            ></div></div></>) : props.data === "Status" ? 
+        (<><div className="w-full md:w-[400px] lg:w-[400px] h-[60px] fixed bottom-0 flex justify-start items-center z-0 bg-slate-500  pl-[240px]"><div
+              className={
+                "w-[calc(400px/5)] h-[40px] rounded-xl  z-0 ml-0 " +
+                (theme
+                  ? "text-[#000000] bg-[#ffffff] "
+                  : "text-[#ffffff] bg-[#96df73] ")
+              }
+              style={{ zIndex: "0", transition:".4s" }}
+            ></div></div></>) : 
+        (<><div className="w-full md:w-[400px] lg:w-[400px] h-[60px] fixed bottom-0 flex justify-start items-center z-0 bg-slate-500  pl-[320px]"><div
+              className={
+                "w-[calc(400px/5)] h-[40px] rounded-xl  z-0 ml-0 " +
+                (theme
+                  ? "text-[#000000] bg-[#ffffff] "
+                  : "text-[#ffffff] bg-[#96df73] ")
+              }
+              style={{ zIndex: "0", transition:".4s" }}
+            ></div></div></>)} */}
+
+        <div className="w-full md:w-[400px] lg:w-[400px] h-[60px] fixed bottom-0 flex justify-start items-center z-0 ">
+          {props.data === "All" ? (
+            <div
+              className={
+                "w-[calc(400px/5)] h-[40px] rounded-xl  z-0 ml-0 " +
+                (theme
+                  ? "text-[#000000] bg-[#ffffff] "
+                  : "text-[#ffffff] bg-[#96df73] ")
+              }
+              style={{ zIndex: "0" }}
+            ></div>
+          ) : props.data === "Group" ? (
+            <div
+              className={
+                "w-[calc(400px/5)] h-[40px] rounded-xl  z-0 ml-[80px]" +
+                (theme
+                  ? "text-[#000000] bg-[#ffffff] "
+                  : "text-[#ffffff] bg-[#96df73] ")
+              }
+              style={{ zIndex: "0" }}
+            ></div>
+          ) : props.data === "Chat" ? (
+            <div
+              className={
+                "w-[calc(400px/5)] h-[40px] rounded-xl  z-0 ml-[160px]" +
+                (theme
+                  ? "text-[#000000] bg-[#ffffff] "
+                  : "text-[#ffffff] bg-[#96df73] ")
+              }
+              style={{ zIndex: "0" }}
+            ></div>
+          ) : props.data === "Status" ? (
+            <div
+              className={
+                "w-[calc(400px/5)] h-[40px] rounded-xl  z-0 left-[240px]" +
+                (theme
+                  ? "text-[#000000] bg-[#ffffff] "
+                  : "text-[#ffffff] bg-[#96df73] ")
+              }
+              style={{ zIndex: "0" }}
+            ></div>
+          ) : (
+            <div
+              className={
+                "w-[calc(400px/5)] h-[40px] rounded-xl  z-0 left-[320px]" +
+                (theme
+                  ? "text-[#000000] bg-[#ffffff] "
+                  : "text-[#ffffff] bg-[#96df73] ")
+              }
+              style={{ zIndex: "0" }}
+            ></div>
+          )}
+        </div>
+
+        {/* <div
           className={
             "w-[calc(400px/5)] fixed h-[40px] rounded-xl  z-0 " +
             (theme
@@ -2853,12 +3100,138 @@ const UserList = (props) => {
               : "text-[#ffffff] bg-[#96df73] ")
           }
           style={{ zIndex: "0" }}
-        ></div>
+        ></div> */}
 
-        {props.data === "All" ? (
+        <div
+          className="w-full h-full  flex  items-center  z-20"
+          style={{ transition: ".5s" }}
+        >
+          {/* <div className="min-w-[20%] h-full  flex justify-center items-center">
+            <LuCircleDashed
+              className="text-[23px]"
+              onClick={() => {
+                setSearchFlag(false);
+                props.setData("Status");
+                setIsSearchBar(false);
+              }}
+            />
+          </div>
+          <div className="min-w-[20%] h-full  flex justify-center items-center">
+            <RiSettings4Fill
+              className="text-[23px]"
+              onClick={() => {
+                setSearchFlag(false);
+                props.setData("Setting");
+                setIsSearchBar(false);
+              }}
+            />
+          </div> */}
+          <div className="min-w-[20%] h-full  flex justify-center items-center">
+            <BsPersonFillAdd
+              className="text-[23px]"
+              onClick={() => {
+                setSearchFlag(false);
+                allUserList();
+                props.setData("All");
+                setStatusModal(false);
+              }}
+            />
+          </div>
+          <div className="min-w-[20%] h-full  flex justify-center items-center">
+            <MdGroups2
+              className="text-[27px]"
+              onClick={() => {
+                setSearchFlag(false);
+                props.setData("Group");
+                setIsSearchBar(false);
+                setStatusModal(false);
+              }}
+            />
+          </div>
+          <div
+            className="min-w-[20%] h-full flex justify-center items-center  text-[black] z-10 "
+            // style={{ transitionDelay: ".25s" }}
+          >
+            <HiChatBubbleBottomCenterText
+              className="text-[25px]"
+              onClick={() => {
+                setSearchFlag(false);
+                fetchUserList();
+                props.setData("Chat");
+                setIsSearchBar(false);
+                setStatusModal(false);
+              }}
+            />
+          </div>
+
+          <div className="min-w-[20%] h-full  flex justify-center items-center">
+            <LuCircleDashed
+              className="text-[23px]"
+              onClick={() => {
+                setSearchFlag(false);
+                props.setData("Status");
+                setIsSearchBar(false);
+              }}
+            />
+            <div
+              className="w-[12px] h-[12px] bg-black rounded-full ml-[-17.3px]"
+              onClick={() => {
+                setSearchFlag(false);
+                props.setData("Status");
+                setIsSearchBar(false);
+              }}
+            ></div>
+          </div>
+          <div className="min-w-[20%] h-full  flex justify-center items-center">
+            <RiSettings4Fill
+              className="text-[23px]"
+              onClick={() => {
+                setSearchFlag(false);
+                props.setData("Setting");
+                setIsSearchBar(false);
+              }}
+            />
+          </div>
+          {/* <div className="min-w-[20%] h-full  flex justify-center items-center">
+            <BsPersonFillAdd
+              className="text-[23px]"
+              onClick={() => {
+                setSearchFlag(false);
+                allUserList();
+                props.setData("All");
+                setStatusModal(false);
+              }}
+            />
+          </div>
+          <div className="min-w-[20%] h-full  flex justify-center items-center">
+            <MdGroups2
+              className="text-[27px]"
+              onClick={() => {
+                setSearchFlag(false);
+                props.setData("Group");
+                setIsSearchBar(false);
+                setStatusModal(false);
+              }}
+            />
+          </div>
+          <div className="min-w-[20%] h-full  flex justify-center items-center">
+            <HiChatBubbleBottomCenterText
+              className="text-[25px]"
+              onClick={() => {
+                setSearchFlag(false);
+                fetchUserList();
+                props.setData("Chat");
+                setIsSearchBar(false);
+                setStatusModal(false);
+              }}
+            />
+          </div> */}
+        </div>
+
+        {/* {props.data === "All" ? (
           <div
             className={
-              "w-full h-full  flex  items-center ml-[0]" +
+              "w-full h-full  flex  items-center ml-[0] " +
               (theme ? "text-[#000000] " : "text-[#ffffff] ")
             }
             style={{ transition: ".5s" }}
@@ -3096,7 +3469,7 @@ const UserList = (props) => {
           </div>
         ) : props.data === "Chat" ? (
           <div
-            className="w-full h-full  flex  items-center ml-[-80%] "
+            className="w-full h-full  flex  items-center ml-[-80%] z-20"
             style={{ transition: ".5s" }}
           >
             <div className="min-w-[20%] h-[40px]  flex justify-center items-center">
@@ -3448,7 +3821,7 @@ const UserList = (props) => {
               />
             </div>
           </div>
-        )}
+        )} */}
         {/* <div className="w-full h-full bg-slate-800"></div> */}
       </div>
     </>
@@ -3478,3 +3851,20 @@ const CustomTooltip = ({ active, payload, label }) => {
     );
   }
 };
+// const timerProps = {
+//   isPlaying: true,
+//   size: 90,
+//   strokeWidth: 6,
+// };
+// const renderTime = (time) => {
+//   return (
+//     <div className="time-wrapper">
+//       <div className="title time">{time}</div>
+//     </div>
+//   );
+// };
+
+// const getTimeSeconds = (time) => Math.ceil(minuteSeconds - time) - 1;
+// const getTimeMinutes = (time) => Math.ceil(time / minuteSeconds) - 1;
+// const getTimeHours = (time) => Math.ceil(time / hourSeconds) - 1;
+// const getTimeDays = (time) => Math.ceil(time / daySeconds) - 1;

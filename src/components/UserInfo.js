@@ -596,8 +596,9 @@ export const UserInfo = () => {
               )}
               <div
                 className={
-                  "w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[80px] z-50  fixed top-0 flex justify-center items-start p-[10px] overflow-visible" +
-                  (theme ? " bg-[#e4eaf1] " : " bg-[#1b202d]")
+                  "w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  z-50  fixed top-0 flex justify-center items-start p-[10px] backdrop-blur-sm overflow-visible" +
+                  (theme ? " bg-[#e4eaf1a2] " : " bg-[#1b202d]") +
+                  (expand ? " h-[100svh] " : " h-[80px]")
                 }
               >
                 {expand == true ? (

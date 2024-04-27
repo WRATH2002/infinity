@@ -30,6 +30,7 @@ const Login = () => {
       })
       .catch((error) => {
         toast.error("Invalid Login Credentials");
+        console.log(error);
         // toast.error(error.message);
         // console.log(error);
         // console.log(error.message);
@@ -43,13 +44,13 @@ const Login = () => {
       <div className="w-full lg:w-[350px] md:w-[350px] p-[40px] rounded-none md:rounded-xl lg:rounded-xl h-[100svh] md:h-[70%] lg:h-[70%]  flex flex-col justify-center items-center">
         {/* <span className="in  font-bold text-[40px] mb-[30px]">INFINITY</span> */}
         <div className="w-full flex flex-col ">
-          <span className="text-[40px] text-[black] font-[google] font-bold tracking-wider ">
+          <span className="text-[40px] text-[#ffffff] font-[google] font-bold tracking-wider b2">
             Login{" "}
           </span>
-          <span className="text-[15px] font-normal text-[#4f4f4f] font-[google] ">
+          <span className="text-[15px] font-normal text-[#000000b4] font-[google] ">
             new user ?
             <span
-              className="text-[#4b93b9] hover:text-[#fe9c9a] cursor-pointer  font-normal"
+              className="text-[#9a53a1] hover:text-[#9a53a1] cursor-pointer  font-normal"
               style={{ transition: ".3s" }}
               onClick={() => changeMode()}
             >
@@ -85,6 +86,7 @@ const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
+
         {show === true ? (
           <div className="w-full flex justify-center items-center">
             <input
@@ -100,13 +102,13 @@ const Login = () => {
                 setShow(!show);
               }}
             >
-              <IoEyeOff className="text-[#4b93b9] text-[20px]" />
+              <IoEyeOff className="text-[#000000] text-[20px]" />
             </div>
           </div>
         ) : (
           <div className="w-full flex justify-center items-center">
             <input
-              className="log outline-none font-[google] text-[16px]   w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[black] bg-[#e4eaf1] placeholder:black"
+              className="log outline-none font-[google] text-[14px]   w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[black] bg-[#e4eaf1] placeholder:black"
               placeholder="Password"
               type="password"
               value={password}
@@ -118,10 +120,13 @@ const Login = () => {
                 setShow(!show);
               }}
             >
-              <IoEye className="text-[#4b93b9] text-[20px]" />
+              <IoEye className="text-[#000000] text-[20px]" />
             </div>
           </div>
         )}
+        {/* <div className=" font-[google] mt-[5px] bg  text-[15px] w-full h-[10px] my-[10px] flex justify-end items-center rounded-xl  font-normal  text-[#ffffff] ">
+          forgot password ?
+        </div> */}
         {/* <button
           type="submit"
           onClick={signUp}
@@ -129,8 +134,11 @@ const Login = () => {
         >
           Signup
         </button> */}
+        {/* <div className=" font-[google] mt-[20px] bg  text-[15px] w-full h-[10px]  flex justify-start items-center rounded-xl  font-normal  text-[#ff483f] ">
+          * forgot password ?
+        </div> */}
         <button
-          className="w-full h-[50px] text-[19px] text-[#000000] font-[google] font-medium outline-none flex justify-center items-center bg-[#4b93b9] hover:bg-[#b8dedf] hover:text-[black] rounded-xl mt-[30px]"
+          className="w-full h-[50px] text-[17px] text-[#ffffff] font-[google] font-medium outline-none flex justify-center items-center bg-[#000000]  rounded-xl mt-[10px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signIn}

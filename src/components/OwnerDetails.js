@@ -40,6 +40,7 @@ import { TbPlaystationCircle } from "react-icons/tb";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { MdGroups2 } from "react-icons/md";
 import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
+import { LuCircleDashed } from "react-icons/lu";
 const OwnerDetails = (props) => {
   const [ownerInfo, setOwnerInfo] = useState("");
   const [changeOwnerInfo, setChangeOwnerInfo] = useState("");
@@ -217,7 +218,8 @@ const OwnerDetails = (props) => {
                   </span>
                 ) : props.data === "Status" ? (
                   <span className="flex justify-start items-center">
-                    <TbPlaystationCircle className="text-[20px]   mr-[10px]" />
+                    <LuCircleDashed className="text-[20px]   mr-[10px]" />
+                    <div className="w-[11px] h-[11px] bg-black rounded-full ml-[-25.5px] mr-[11px]"></div>
                     Status's ( 1 )
                   </span>
                 ) : props.data === "Group" ? (
@@ -336,7 +338,8 @@ const OwnerDetails = (props) => {
                   </span>
                 ) : props.data === "Status" ? (
                   <span className="flex justify-start items-center">
-                    <TbPlaystationCircle className="text-[20px]   mr-[10px]" />
+                    <LuCircleDashed className="text-[20px]   mr-[10px]" />
+                    <div className="w-[11px] h-[11px] bg-black rounded-full ml-[-25.5px] mr-[11px]"></div>
                     Status's ( 0 )
                   </span>
                 ) : props.data === "Group" ? (

@@ -108,13 +108,13 @@ const Signup = () => {
     <>
       <div className="w-full lg:w-[350px] md:w-[350px] p-[40px] rounded-none md:rounded-xl lg:rounded-xl h-[100svh] md:h-[70%] lg:h-[70%]  flex flex-col justify-center items-center">
         <div className="w-full flex flex-col">
-          <span className="text-[40px] text-[black] font-[google] font-bold tracking-wider">
+          <span className="text-[40px] text-[black] font-[google] font-bold tracking-wider b2">
             Signup{" "}
           </span>
-          <span className="text-[15px] font-normal font-[google] text-[#4f4f4f] ">
+          <span className="text-[15px] font-normal font-[google] text-[#000000b4] ">
             already a user ?
             <span
-              className="text-[#4b93b9] hover:text-[#fe9c9a] cursor-pointer font-normal"
+              className="text-[#9a53a1] hover:text-[#9a53a1] cursor-pointer font-normal"
               style={{ transition: ".3s" }}
               onClick={() => changeModeTwo()}
             >
@@ -125,14 +125,14 @@ const Signup = () => {
         </div>
         {/* <div>Signup</div> */}
         <input
-          className="input outline-none  mt-[40px]  w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[black] bg-[#e4eaf1] log"
+          className=" outline-none  mt-[40px]  w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
           placeholder="Name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         ></input>
         <input
-          className="input outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[black] bg-[#e4eaf1] log"
+          className=" outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
           placeholder="Phone Number"
           type="tel"
           value={number}
@@ -144,7 +144,7 @@ const Signup = () => {
           }}
         ></input>
         <input
-          className="input outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[17px] text-[black] bg-[#e4eaf1] log"
+          className=" outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
           placeholder="Email"
           type="email"
           value={email}
@@ -153,7 +153,7 @@ const Signup = () => {
         {show === true ? (
           <div className="w-full flex justify-center items-center">
             <input
-              className="input outline-none    w-full h-[50px] my-[10px] rounded-xl px-[15px] font-[google] font-normal text-[17px] text-[black] bg-[#e4eaf1] log"
+              className=" outline-none    w-full h-[50px] my-[10px] rounded-xl px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
               placeholder="Password"
               type="text"
               value={password}
@@ -165,13 +165,13 @@ const Signup = () => {
                 setShow(!show);
               }}
             >
-              <IoEyeOff className="text-[#4b93b9] text-[20px]" />
+              <IoEyeOff className="text-[#000000] text-[20px]" />
             </div>
           </div>
         ) : (
           <div className="w-full flex justify-center items-center">
             <input
-              className="input outline-none    w-full h-[50px] my-[10px] rounded-xl px-[15px] font-[google] font-normal text-[17px] text-[black] bg-[#e4eaf1] log"
+              className=" outline-none    w-full h-[50px] my-[10px] rounded-xl px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
               placeholder="Password"
               type="password"
               value={password}
@@ -183,7 +183,7 @@ const Signup = () => {
                 setShow(!show);
               }}
             >
-              <IoEye className="text-[#4b93b9] text-[20px]" />
+              <IoEye className="text-[#000000] text-[20px]" />
             </div>
           </div>
         )}
@@ -196,7 +196,7 @@ const Signup = () => {
           Signup
         </button> */}
         <button
-          className="w-full h-[50px] text-[#000000] text-[19px] font-medium font-[google] outline-none flex justify-center items-center bg-[#4b93b9] hover:bg-[#b8dedf] hover:text-[black] rounded-xl mt-[30px]"
+          className="w-full h-[50px] text-[#ffffff] text-[17px] font-medium font-[google] outline-none flex justify-center items-center bg-[#000000] hover:bg-[#000000]  rounded-xl mt-[30px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signUp}
