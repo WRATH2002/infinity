@@ -20,6 +20,7 @@ import { auth, storage } from "../firebase";
 import { db } from "../firebase";
 import firebase from "../firebase";
 import { useDispatch, useSelector } from "react-redux";
+import { IoMdInformationCircle } from "react-icons/io";
 import {
   addFriendList,
   clearFriendList,
@@ -510,7 +511,7 @@ const Friends = (props) => {
                   </span>
                   <span
                     className={
-                      "w-[70px] group-hover:mr-[25px] h-full text-[14px]  flex justify-end items-center    font-[google] font-light" +
+                      "w-[70px] group-hover:mr-[25px] h-full text-[15px]  flex justify-end items-center font-light   font-[work] " +
                       (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                     }
                     onClick={() => {
@@ -530,7 +531,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[google] font-light" +
+                              "w-[35px] text-[15px]  whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work] " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                           >
@@ -549,7 +550,7 @@ const Friends = (props) => {
                       />
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          "w-[calc(100%-105px)] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                       >
@@ -562,7 +563,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full font-[google] font-light" +
+                              "w-[35px] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full font-[work] t" +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                           >
@@ -581,7 +582,7 @@ const Friends = (props) => {
                       />
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          "w-[calc(100%-105px)] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                       >
@@ -594,7 +595,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[google] font-light" +
+                              "w-[35px] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work] " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                           >
@@ -613,7 +614,7 @@ const Friends = (props) => {
                       />
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          "w-[calc(100%-105px)] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                       >
@@ -626,7 +627,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full  font-[google] font-light" +
+                              "w-[30px] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full  font-[work] " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                           >
@@ -638,7 +639,7 @@ const Friends = (props) => {
                       )}
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          "w-[calc(100%-105px)] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                         // style={{ transition: ".5s" }}
@@ -723,7 +724,7 @@ const Friends = (props) => {
                   </span>
                   <span
                     className={
-                      "w-[70px] h-full group-hover:mr-[25px] text-[14px] flex justify-end items-center  font-[google] font-light z-50" +
+                      "w-[70px] h-full group-hover:mr-[25px] text-[15px] flex justify-end items-center  font-[work] font-light z-50" +
                       (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                     }
 
@@ -740,7 +741,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[google] font-light" +
+                              "w-[35px] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work] " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                             // style={{ transition: ".5s" }}
@@ -760,7 +761,7 @@ const Friends = (props) => {
                       />
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          "w-[calc(100%-105px)] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                         // style={{ transition: ".5s" }}
@@ -774,7 +775,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[google] font-light " +
+                              "w-[35px] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work]  " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                             // style={{ transition: ".5s" }}
@@ -794,7 +795,7 @@ const Friends = (props) => {
                       />
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full     font-[google] font-light" +
+                          "w-[calc(100%-105px)] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full     font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                         // style={{ transition: ".5s" }}
@@ -808,7 +809,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[35px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[google] font-light " +
+                              "w-[35px] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work]  " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                             // style={{ transition: ".5s" }}
@@ -828,7 +829,7 @@ const Friends = (props) => {
                       />
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          "w-[calc(100%-105px)] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                         // style={{ transition: ".5s" }}
@@ -842,7 +843,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[30px] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[google] font-light " +
+                              "w-[30px] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work]  " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                             // style={{ transition: ".5s" }}
@@ -855,7 +856,7 @@ const Friends = (props) => {
                       )}
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                          "w-[calc(100%-105px)] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                         // style={{ transition: ".5s" }}
@@ -1003,7 +1004,7 @@ const SearchFriends = (props) => {
         <div
           className={
             "border-b-[1px] w-[100%] h-[85px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent   " +
-            (theme ? " border-[#c8c8c8]" : " border-[#35384a]")
+            (theme ? " border-[#d9dde1]" : " border-[#35384a]")
           }
         >
           <div className="w-[17px] h-full  flex justify-end items-end pb-[5px] z-30">
@@ -1087,7 +1088,7 @@ const SearchFriends = (props) => {
             <div className="w-full flex h-[23px]">
               <span
                 className={
-                  "w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[google] font-light" +
+                  "w-[calc(100%-70px)] text-[15px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                   (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                 }
                 // style={{ transition: ".9s" }}
@@ -1669,7 +1670,7 @@ const UserList = (props) => {
                 }}
                 placeholder="Search Friends"
                 className={
-                  "input w-full h-[50px] opacity-100   font-[google] font-normal text-[15px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px] z-30  rounded-xl " +
+                  "input w-full h-[50px] opacity-100   font-[google] font-normal text-[15px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px] z-30  rounded-2xl " +
                   (theme
                     ? " text-[#000000] bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff]"
                     : " text-[#ffffff] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]")
@@ -1703,16 +1704,24 @@ const UserList = (props) => {
                 <>
                   <div
                     className={
-                      " group w-full h-[70px] py-[10px] flex flex-col justify-center items-center cursor-pointer font-[work]   px-[10px]  " +
+                      " group w-full h-[100px] py-[10px] flex flex-col justify-center items-center cursor-pointer font-[google]   px-[10px]  " +
                       (theme ? " text-[black]" : " text-[white]")
                     }
                   >
-                    <span>No Users Found</span>
-                    <span>Searching is Case Sensitive</span>
+                    <span className="h-[40px] flex justify-center items-center px-[15px] bg-[#ff8b32af] rounded-xl text-black">
+                      No Users Found
+                    </span>
+                    <span className="flex justify-center items-center mt-[10px]">
+                      <IoMdInformationCircle className="text-[24px] text-[#000000] mr-[5px]" />{" "}
+                      Searching is Case Sensitive
+                    </span>
                   </div>
                 </>
               ) : (
                 <>
+                  <div className=" w-full px-[10px] flex justify-end items-center h-[14px] font-[work] font-normal text-[15px]">
+                    {SearchUserList.length} Results
+                  </div>
                   {SearchUserList.map((friends) => {
                     return (
                       <SearchFriends
@@ -1784,7 +1793,7 @@ const UserList = (props) => {
                 }}
                 placeholder="Search Friends"
                 className={
-                  "input w-full h-[50px] opacity-100   font-[google] font-normal text-[15px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px] z-30  rounded-xl " +
+                  "input w-full h-[50px] opacity-100   font-[google] font-normal text-[15px] tracking-[.4px] border-none  outline-none  pl-[20px] pr-[50px] z-30  rounded-2xl " +
                   (theme
                     ? " text-[#000000] bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff]"
                     : " text-[#ffffff] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]")
@@ -2733,6 +2742,66 @@ const UserList = (props) => {
                     </div>
                   </div>
                 )}
+                {nameChangeFlag === true ? (
+                  <div className="w-full md:w-[400px] lg-[400px] h-[100svh] bg-[#e4eaf16d] z-50 fixed top-0 left-0 flex justify-center items-center px-[10px] md:px-0 lg:px-0 backdrop-blur-md">
+                    <div className="w-[calc(100%-40px)] h-[295px] rounded-3xl bg-[white] flex flex-col justify-center items-center px-[20px] drop-shadow-sm">
+                      <span className="font-medium w-full pl-[20px] h-[30px]  flex items-start mt-[-5px] text-black text-[21px] font-[google]">
+                        Update Profile
+                      </span>
+                      <input
+                        style={{ transition: ".5s" }}
+                        value={ownerName}
+                        onChange={(e) => setOwnerName(e.target.value)}
+                        placeholder="Name"
+                        className={
+                          "log w-[calc(100%-40px)] h-[45px] font-normal px-[20px]  input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px]  rounded-2xl pr-[50px] mt-[20px]" +
+                          (theme
+                            ? " text-black bg-[#e4eaf1]"
+                            : " text-[white] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]")
+                        }
+                      ></input>
+                      <input
+                        style={{ transition: ".5s" }}
+                        value={ownerInfo}
+                        onChange={(e) => setOwnerInfo(e.target.value)}
+                        placeholder="About"
+                        className={
+                          "log w-[calc(100%-40px)] h-[45px] font-normal px-[20px]  input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px]  rounded-2xl pr-[50px] mt-[20px]" +
+                          (theme
+                            ? " text-black bg-[#e4eaf1]"
+                            : " text-[white] bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d]")
+                        }
+                      ></input>
+
+                      <div className="w-[calc(100%-40px)] h-[45px] flex justify-between items-center font-[google] font-normal text-[15px] mt-[20px]">
+                        <span
+                          className="w-[calc((100%-20px)/2)] h-full rounded-2xl bg-[#1b1b1b] text-white flex justify-center items-center   z-20"
+                          onClick={() => {
+                            setNameChangeFlag(false);
+                          }}
+                        >
+                          {/* <RxCross2 className="text-[18px] text-[#4b93b9]" /> */}
+                          Close
+                        </span>
+                        <span
+                          className="w-[calc((100%-20px)/2)] h-full rounded-2xl text-black bg-[#96df73] flex justify-center items-center  z-20"
+                          onClick={() => {
+                            setNameChangeFlag(false);
+                            updateUserName();
+                            updateUserInfo();
+                          }}
+                        >
+                          {/* <MdOutlineDone className="text-[18px] text-[#4b93b9]" /> */}
+                          Update
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <></>
+                )}
+
+                {/* dfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb */}
                 <div className="w-full h-[100px] mt-[25px] flex justify-start items-center px-[20px]">
                   <div className="group w-[80px] h-[80px] rounded-full  flex justify-end items-end">
                     {/* <img
@@ -2742,12 +2811,12 @@ const UserList = (props) => {
                     {profileURL === "nophoto" ? (
                       <img
                         src={profile2}
-                        className="w-full h-full rounded-[28px] border-[1.7px] border-[#c1c5c8] object-cover"
+                        className="w-full h-full rounded-[28px] object-cover"
                       ></img>
                     ) : (
                       <img
                         src={profileURL}
-                        className="w-full h-full rounded-[28px] border-[1.7px] border-[#c1c5c8] object-cover"
+                        className="w-full h-full rounded-[28px] object-cover"
                       ></img>
                     )}
                     <input
@@ -2763,13 +2832,14 @@ const UserList = (props) => {
                       className={
                         " w-[30px] h-[30px]  flex justify-center items-center border-[2px]   fixed rounded-full cursor-pointer z-10" +
                         (theme
-                          ? " bg-[#c48ed8] text-black border-[#c1c5c8] md:border-[#c1c5c8] lg:border-[#c1c5c8]"
+                          ? " bg-[#c48ed8] text-black border-[#e4eaf1] md:border-[#e4eaf1] lg:border-[#e4eaf1]"
                           : " bg-[#4b565c] text-white border-[#292f3f] md:border-[#1b202d] lg:border-[#1b202d]")
                       }
                     >
                       <BsCameraFill className=" text-[13px]" />
                     </label>
                   </div>
+
                   <div className="w-[calc(100%-140px)] h-full  ml-[20px] flex flex-col justify-center  items-start">
                     {/* <div className="mt-[50px] w-[250px] flex justify-center items-center">
                       {nameChangeFlag === true ? (
@@ -2929,7 +2999,13 @@ const UserList = (props) => {
                       {ownerInfo}
                     </div>
                   </div>
-                  <div className="w-[30px] flex justify-end items-center">
+
+                  <div
+                    className="w-[30px] flex justify-end items-center"
+                    onClick={() => {
+                      setNameChangeFlag(true);
+                    }}
+                  >
                     <RiEditFill
                       className={
                         "text-[20px] " + (theme ? " text-black" : " text-white")
@@ -3314,16 +3390,37 @@ const UserList = (props) => {
               }}
             ></div>
           </div>
-          <div className="min-w-[20%] h-full  flex justify-center items-center">
-            <RiSettings4Fill
-              className="text-[23px]"
-              onClick={() => {
-                setSearchFlag(false);
-                props.setData("Setting");
-                setIsSearchBar(false);
-              }}
-            />
-          </div>
+          {props.data === "Setting" ? (
+            <div
+              className="min-w-[20%] h-full  flex justify-center items-center "
+              style={{ transition: ".4s" }}
+            >
+              <RiSettings4Fill
+                className="text-[23px] rotate-90"
+                style={{ transition: ".4s" }}
+                onClick={() => {
+                  setSearchFlag(false);
+                  props.setData("Setting");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+          ) : (
+            <div
+              className="min-w-[20%] h-full  flex justify-center items-center"
+              style={{ transition: ".4s" }}
+            >
+              <RiSettings4Fill
+                className="text-[23px] rotate-0"
+                style={{ transition: ".4s" }}
+                onClick={() => {
+                  setSearchFlag(false);
+                  props.setData("Setting");
+                  setIsSearchBar(false);
+                }}
+              />
+            </div>
+          )}
           {/* <div className="min-w-[20%] h-full  flex justify-center items-center">
             <BsPersonFillAdd
               className="text-[23px]"

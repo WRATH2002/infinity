@@ -39,47 +39,15 @@ import { storage } from "../firebase";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { getDownloadURL } from "firebase/storage";
 import toast, { Toaster, useToaster } from "react-hot-toast";
-import a from "../assets/img/a.jpg";
-import aa from "../assets/img/aa.jpg";
-import ww from "../assets/img/w2.png";
 
 // ---------------------------------------------------------- Import Icons Png
 
-import docc from "../assets/img/document.png";
-import doccc from "../assets/img/documents.png";
-import phot from "../assets/img/image.png";
-import three from "../assets/img/threedots.png";
-import mic from "../assets/img/mic.png";
-import profile from "../assets/img/profile.png";
-import sendd from "../assets/img/send.png";
-import logout from "../assets/img/logout.png";
-import vide from "../assets/img/videoo.png";
-import giff from "../assets/img/gif.png";
-import sticker from "../assets/img/sticker.png";
-import attach from "../assets/img/attach.png";
-import smiley from "../assets/img/smiley.png";
-import settings from "../assets/img/settings.png";
-import camera from "../assets/img/camera.png";
-import contacts from "../assets/img/contacts.png";
-import cross from "../assets/img/cross.png";
-import back from "../assets/img/back.png";
-import download from "../assets/img/download.png";
-import download1 from "../assets/img/download1.png";
-import download2 from "../assets/img/download2.png";
 import logo from "../assets/img/lll3.png";
-import loading from "../assets/img/loading.png";
-import { Blurhash } from "react-blurhash";
+
 import { saveAs } from "file-saver";
 import { BsFillStopFill } from "react-icons/bs";
 // ---------------------------------------------------------- Test Videos
 
-import vid from "../assets/video/video2.mp4";
-import vid3 from "../assets/video/video3.mp4";
-import vid4 from "../assets/video/video4.mp4";
-import vid5 from "../assets/video/video5.mp4";
-import vid6 from "../assets/video/video6.mp4";
-import vid8 from "../assets/video/video8.mp4";
-import bb from "../assets/doc/bb.pdf";
 import { MdEmojiEmotions } from "react-icons/md";
 import OutsideClickHandler from "react-outside-click-handler";
 
@@ -1779,7 +1747,7 @@ export const MessageBody = () => {
         {ActiveChatUser.length === 0 ? (
           <></>
         ) : (
-          <div className="w-full h-full flex justify-center items-end  py-[5px] ">
+          <div className="w-full h-full flex justify-center items-center  py-[5px] ">
             {emoji === true ? (
               <div
                 className="w-[30px] h-full ml-[8px] flex justify-center items-center cursor-pointer   rounded-full  z-10 "
@@ -1914,7 +1882,7 @@ export const MessageBody = () => {
                   rows="1"
                   placeholder="Write Something .."
                   className={
-                    "input w-[calc(100%-135px)] ml-[10px]   px-[20px] pr-[50px]  outline-none text-[15px] font-[work] font-medium tracking-[.4px] rounded-[15px]   h-[50px]   pl-[20px]" +
+                    "input w-[calc(100%-135px)] ml-[10px]   px-[20px] pr-[50px]  outline-none text-[15px] font-[work] font-medium tracking-[.4px] rounded-2xl   h-[45px]   pl-[20px]" +
                     (theme
                       ? " bg-[#ffffff] text-[black]"
                       : " bg-[#292F3F] text-[white]")

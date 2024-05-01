@@ -7,8 +7,8 @@ import firebase from "../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
-import { MdCall } from "react-icons/md";
-import { BiSolidVideo } from "react-icons/bi";
+import { MdCall, MdDoNotDisturb } from "react-icons/md";
+import { BiCross, BiSolidVideo } from "react-icons/bi";
 import { PiChatCenteredTextFill } from "react-icons/pi";
 import { addActiveUser } from "../utils/chatSlice";
 import { onSnapshot, serverTimestamp } from "firebase/firestore";
@@ -29,6 +29,21 @@ import del from "../assets/img/delete2.png";
 import { IoMdVideocam } from "react-icons/io";
 import { LuChevronRight } from "react-icons/lu";
 import { RiMessage2Fill } from "react-icons/ri";
+import { BsFiletypeJpg } from "react-icons/bs";
+import { BsFiletypePng } from "react-icons/bs";
+import { BsFiletypeTxt } from "react-icons/bs";
+import { BsFiletypePdf } from "react-icons/bs";
+import { BsFiletypeDocx } from "react-icons/bs";
+import { BsFiletypeXlsx } from "react-icons/bs";
+import { BsFiletypePpt } from "react-icons/bs";
+import { BsFiletypePptx } from "react-icons/bs";
+import { BsFiletypeExe } from "react-icons/bs";
+import { BsFiletypeGif } from "react-icons/bs";
+import { BsFileEarmark } from "react-icons/bs";
+import { BsFileEarmarkZip } from "react-icons/bs";
+import { BsFileEarmarkMusic } from "react-icons/bs";
+import { BsFileEarmarkPlay } from "react-icons/bs";
+import { RxCross2 } from "react-icons/rx";
 // import {MdCall} from "react-icons/md";
 
 // import { FaAngleLeft } from "react-icons/fa6";
@@ -44,7 +59,50 @@ const Media = (props) => {
   return (
     <>
       {/* <div className="w-full h-full justify-start items-center  flex"> */}
-      {!props.data.docName ? (
+
+      {props.data.mop === "Photos" ? (
+        <>
+          {!props.data.docName ? (
+            <div className="w-[calc(100%/3)] lg:w-[calc(100%/5)] md:w-[calc(100%/3)] aspect-square rounded-2xl p-[5px]">
+              <img
+                className="w-full h-full rounded-xl"
+                src={props.data.url}
+              ></img>
+            </div>
+          ) : (
+            // <div className="group min-w-[90px] lg:min-w-[120px] md:min-w-[120px] max-w-[90px] lg:max-w-[120px] md:max-w-[120px] h-[90px] lg:h-[120px] md:h-[120px] mx-[3px] lg:mx-[5px] md:mx-[5px] rounded-xl">
+            //   <img
+            //     className="group-hover:opacity-40 w-full h-full object-cover rounded-xl"
+            //     src={props.data.url}
+            //   ></img>
+            //   <div className="min-w-[90px] lg:min-w-[120px] md:min-w-[120px] h-[90px] lg:h-[120px] md:h-[120px] mt-[-90px] lg:mt-[-120px] md:mt-[-120px] rounded-xl flex justify-center items-center bg-[#1f201f]">
+            //     <div
+            //       className="group-hover:flex  hidden w-[35px] h-[35px] rounded-full justify-center items-center bg-[#e3e3e35f] backdrop-blur-sm z-20 cursor-pointer "
+            //       onClick={() => {
+            //         setUrl(props.data.url);
+            //         downloadImage(props.data.url);
+            //         toast("Downloading Image", {
+            //           icon: "⬇️",
+            //           className: "font-[nunitosans] font-normal",
+            //           style: {
+            //             borderRadius: "9px",
+            //             background: "#333",
+            //             color: "#cdd8dd",
+            //           },
+            //         });
+            //       }}
+            //     >
+            //       <img src={download} className="w-[20px]   z-20 "></img>
+            //     </div>
+            //   </div>
+            // </div>
+            <></>
+          )}
+        </>
+      ) : (
+        <></>
+      )}
+      {/* {!props.data.docName ? (
         <div className="group min-w-[90px] lg:min-w-[120px] md:min-w-[120px] max-w-[90px] lg:max-w-[120px] md:max-w-[120px] h-[90px] lg:h-[120px] md:h-[120px] mx-[3px] lg:mx-[5px] md:mx-[5px] rounded-xl">
           <img
             className="group-hover:opacity-40 w-full h-full object-cover rounded-xl"
@@ -81,7 +139,7 @@ const Media = (props) => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
       {/* <div className="min-w-[120px] h-[120px] bg-slate-300"><img className="w-full object-cover" src={}></img></div>
         <div className="min-w-[120px] h-[120px] bg-slate-200"><img className="w-full object-cover" src={}></img></div>
         <div className="min-w-[120px] h-[120px] bg-slate-300"><img className="w-full object-cover" src={}></img></div>
@@ -121,6 +179,8 @@ export const UserInfo = () => {
   const [arr, setArr] = useState([]);
   const [timer, setTimer] = useState(false);
   const [theme, setTheme] = useState(true);
+  const [mediaOption, setMediaOption] = useState("Documents");
+  const [mediaShow, setMediaShow] = useState(false);
 
   useEffect(() => {
     const user = firebase.auth().currentUser;
@@ -541,32 +601,38 @@ export const UserInfo = () => {
               {delConfirmation === true ? (
                 <div
                   className={
-                    "fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[calc(100%-80px)]  flex justify-center items-center    backdrop-blur-sm top-[80px]" +
-                    (theme ? " bg-[#e4eaf1a2]" : " bg-[#000000a2]")
+                    "fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[100%]  flex justify-center items-center    backdrop-blur-md top-[0px] " +
+                    (theme ? " bg-[#e4eaf16d]" : " bg-[#000000a2]")
                   }
-                  style={{ zIndex: "10" }}
+                  style={{ zIndex: "100" }}
                   onClick={() => {
                     // console.log("clicked");
-                    setDelConfirmation(false);
+                    // setDelConfirmation(false);
                   }}
                 >
                   <div
                     className={
-                      " text-[15px] w-[320px] lg:w-[450px] md:w-[450px] h-[190px] rounded-xl flex flex-col " +
+                      " text-[15px] w-[320px] lg:w-[450px] md:w-[450px] h-[220px] rounded-2xl flex flex-col justify-center items-center " +
                       (theme
                         ? " bg-[#ffffff] text-black"
                         : " bg-[#292f3f] text-white")
                     }
                   >
-                    <div className="w-full h-[110px] rounded-xl  flex justify-center items-center px-[30px]">
-                      <span className=" font-[google] font-light ">
-                        ⚠️ Are you sure? you want to delete all chats!
+                    <div className="w-full rounded-xl  flex justify-start items-center px-[40px]">
+                      <span className=" font-[google] font-medium text-[22px] ">
+                        Clear this Chat?
                       </span>
                     </div>
-                    <div className=" h-[80px] w-full flex justify-between items-center px-[30px] rounded-xl">
+                    <div className="w-full mt-[10px] rounded-xl font-[work] text-[#343434]  flex justify-center items-center px-[40px]">
+                      <span className="  font-light ">
+                        ⚠️&nbsp; All the chats and media will be deleted. Are
+                        you sure?
+                      </span>
+                    </div>
+                    <div className=" h-[45px] w-full mt-[30px] flex justify-between items-center px-[40px] rounded-xl">
                       <button
                         className={
-                          "w-[115px] lg:w-[165px] md:w-[165px] h-[45px]    cursor-pointer  font-[google] font-light   rounded-xl" +
+                          "w-[calc((100%-20px)/2)] h-[45px]    cursor-pointer  font-[google] font-light   rounded-2xl" +
                           (theme
                             ? " bg-[#e4eaf1] text-[#000000]"
                             : " bg-[#1b202d] text-[#ffffff]")
@@ -576,10 +642,10 @@ export const UserInfo = () => {
                           setDelConfirmation(false);
                         }}
                       >
-                        Cancel
+                        Close
                       </button>
                       <button
-                        className="w-[115px] lg:w-[165px] md:w-[165px] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#96df73]  rounded-xl"
+                        className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#96df73]  rounded-2xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -594,17 +660,439 @@ export const UserInfo = () => {
               ) : (
                 <></>
               )}
+              {mediaShow === true ? (
+                <div
+                  className={
+                    "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[calc(100svh-200px)]  top-[190px] flex flex-col justify-start items-center rounded-2xl py-[20px] pb-[10px] px-[15px]" +
+                    (theme ? " bg-[#ffffff]" : " bg-[#292f3f]")
+                  }
+                  style={{ zIndex: "100", transition: ".4s" }}
+                >
+                  <div
+                    className={
+                      "w-full h-[40px] flex justify-center items-center font-[google] font-normal text-[15px] mb-[10px] px-[5px] z-10" +
+                      (theme ? " text-[black]" : " text-[white]")
+                    }
+                  >
+                    <div
+                      className="w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg"
+                      onClick={() => {
+                        // setUserSidebar(!userSidebar);
+                        setMediaOption("Documents");
+                      }}
+                    >
+                      Documents
+                    </div>
+                    <div
+                      className="w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg"
+                      onClick={() => {
+                        // setUserSidebar(!userSidebar);
+                        setMediaOption("Photos");
+                      }}
+                    >
+                      Photos
+                    </div>
+                    <div
+                      className="w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg"
+                      onClick={() => {
+                        // setUserSidebar(!userSidebar);
+                        setMediaOption("Videos");
+                      }}
+                    >
+                      Videos
+                    </div>
+                  </div>
+                  <div
+                    className={
+                      "w-full h-[40px] mt-[-50px] flex justify-start items-center font-[google] font-normal text-[15px] mb-[10px] px-[5px] " +
+                      (theme ? " text-[black]" : " text-[white]")
+                    }
+                  >
+                    {mediaOption === "Photos" ? (
+                      <div
+                        className="w-[calc(100%/3)]  ml-[calc(100%/3)]  h-full flex justify-center items-center rounded-lg bg-[#e4eaf1]"
+                        style={{ transition: ".2s" }}
+                      ></div>
+                    ) : mediaOption === "Videos" ? (
+                      <div
+                        className="w-[calc(100%/3)] ml-[calc((100%/3)*2)] h-full flex justify-center items-center rounded-lg bg-[#e4eaf1]"
+                        style={{ transition: ".2s" }}
+                      ></div>
+                    ) : (
+                      <div
+                        className="w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg bg-[#e4eaf1]"
+                        style={{ transition: ".2s" }}
+                      ></div>
+                    )}
+                  </div>
+                  <div className="w-full max-h-[calc(100%-60px)] overflow-y-scroll flex justify-start items-start gap-y-0 flex-wrap">
+                    {ImageMediaLink.map((link) => {
+                      return (
+                        <>
+                          {console.log(link)}
+                          {mediaOption === "Photos" ? (
+                            <>
+                              {!link.docName ? (
+                                <div className="w-[calc(100%/3)] lg:w-[calc(100%/5)] md:w-[calc(100%/3)] aspect-square rounded-2xl p-[5px]">
+                                  <img
+                                    className="object-cover w-full h-full bg-[#e4eaf1] rounded-xl"
+                                    src={link?.url}
+                                  ></img>
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                            </>
+                          ) : mediaOption === "Videos" ? (
+                            <></>
+                          ) : (
+                            <>
+                              {!link.docName ? (
+                                <></>
+                              ) : (
+                                <>
+                                  <div
+                                    className={
+                                      "w-full h-[50px] font-[google] font-normal flex justify-start items-center text-[15px] px-[5px] rounded-xl hover:bg-[#e4eaf1] " +
+                                      (theme
+                                        ? " text-[black]"
+                                        : " text-[white]")
+                                    }
+                                  >
+                                    {link?.docName
+                                      ?.substring(
+                                        link?.docName?.indexOf(".") + 1
+                                      )
+                                      .toLowerCase() === "png" ? (
+                                      <BsFiletypePng className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "jpg" ? (
+                                      <BsFiletypeJpg className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "jpeg" ? (
+                                      <BsFiletypeJpg className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "pdf" ? (
+                                      <BsFiletypePdf className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "txt" ? (
+                                      <BsFiletypeTxt className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "docx" ? (
+                                      <BsFiletypeDocx className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "xlsx" ? (
+                                      <BsFiletypeXlsx className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "ppt" ? (
+                                      <BsFiletypePpt className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "pptx" ? (
+                                      <BsFiletypePptx className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "exe" ? (
+                                      <BsFiletypeExe className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "gif" ? (
+                                      <BsFiletypeGif className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "rar" ? (
+                                      <BsFileEarmarkZip className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "zip" ? (
+                                      <BsFileEarmarkZip className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "mp3" ? (
+                                      <BsFileEarmarkMusic className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "mp4" ? (
+                                      <BsFileEarmarkPlay className="text-[20px] mr-[10px]" />
+                                    ) : (
+                                      <>
+                                        <BsFileEarmark className="text-[20px] mr-[10px]" />
+                                      </>
+                                    )}
+                                    <div className="w-[calc(100%-40px)] flex justify-start items-center  overflow-hidden text-ellipsis line-clamp-1 h-full">
+                                      {link?.docName}
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+                            </>
+                          )}
+
+                          {/* <Media data={link} mop={mediaOption} /> */}
+                        </>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className={
+                    "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[0px]  top-[190px] flex flex-col justify-start items-center rounded-2xl py-[0px] pb-[0px] px-[15px] overflow-hidden " +
+                    (theme ? " bg-[#ffffff]" : " bg-[#292f3f]")
+                  }
+                  style={{ zIndex: "100", transition: ".4s" }}
+                >
+                  <div
+                    className={
+                      "w-full h-[40px] flex justify-center items-center font-[google] font-normal text-[15px] mb-[10px] px-[5px] " +
+                      (theme ? " text-[black]" : " text-[white]")
+                    }
+                  >
+                    <div
+                      className="w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg"
+                      onClick={() => {
+                        // setUserSidebar(!userSidebar);
+                        setMediaOption("Documents");
+                      }}
+                    >
+                      Documents
+                    </div>
+                    <div
+                      className="w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg"
+                      onClick={() => {
+                        // setUserSidebar(!userSidebar);
+                        setMediaOption("Photos");
+                      }}
+                    >
+                      Photos
+                    </div>
+                    <div
+                      className="w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg"
+                      onClick={() => {
+                        // setUserSidebar(!userSidebar);
+                        setMediaOption("Videos");
+                      }}
+                    >
+                      Videos
+                    </div>
+                  </div>
+                  <div
+                    className={
+                      "w-full h-[40px] mt-[-50px] flex justify-start items-center font-[google] font-normal text-[15px] mb-[10px] px-[5px] " +
+                      (theme ? " text-[black]" : " text-[white]")
+                    }
+                  >
+                    {mediaOption === "Photos" ? (
+                      <div
+                        className="w-[calc(100%/3)]  ml-[calc(100%/3)]  h-full flex justify-center items-center rounded-lg bg-[#e4eaf1]"
+                        style={{ transition: ".2s" }}
+                      ></div>
+                    ) : mediaOption === "Videos" ? (
+                      <div
+                        className="w-[calc(100%/3)] ml-[calc((100%/3)*2)] h-full flex justify-center items-center rounded-lg bg-[#e4eaf1]"
+                        style={{ transition: ".2s" }}
+                      ></div>
+                    ) : (
+                      <div
+                        className="w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg bg-[#e4eaf1]"
+                        style={{ transition: ".2s" }}
+                      ></div>
+                    )}
+                  </div>
+                  <div className="w-full max-h-[calc(100%-60px)] overflow-y-scroll flex justify-start items-start gap-y-0 flex-wrap">
+                    {ImageMediaLink.map((link) => {
+                      return (
+                        <>
+                          {console.log(link)}
+                          {mediaOption === "Photos" ? (
+                            <>
+                              {!link.docName ? (
+                                <div className="w-[calc(100%/3)] lg:w-[calc(100%/5)] md:w-[calc(100%/3)] aspect-square rounded-2xl p-[5px]">
+                                  <img
+                                    className="object-cover w-full h-full rounded-xl"
+                                    src={link?.url}
+                                  ></img>
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                            </>
+                          ) : mediaOption === "Videos" ? (
+                            <></>
+                          ) : (
+                            <>
+                              {!link.docName ? (
+                                <></>
+                              ) : (
+                                <>
+                                  <div
+                                    className={
+                                      "w-full h-[50px] font-[google] font-normal flex justify-start items-center text-[15px] px-[5px] rounded-xl hover:bg-[#e4eaf1] " +
+                                      (theme
+                                        ? " text-[black]"
+                                        : " text-[white]")
+                                    }
+                                  >
+                                    {link?.docName
+                                      ?.substring(
+                                        link?.docName?.indexOf(".") + 1
+                                      )
+                                      .toLowerCase() === "png" ? (
+                                      <BsFiletypePng className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "jpg" ? (
+                                      <BsFiletypeJpg className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "jpeg" ? (
+                                      <BsFiletypeJpg className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "pdf" ? (
+                                      <BsFiletypePdf className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "txt" ? (
+                                      <BsFiletypeTxt className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "docx" ? (
+                                      <BsFiletypeDocx className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "xlsx" ? (
+                                      <BsFiletypeXlsx className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "ppt" ? (
+                                      <BsFiletypePpt className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "pptx" ? (
+                                      <BsFiletypePptx className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "exe" ? (
+                                      <BsFiletypeExe className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "gif" ? (
+                                      <BsFiletypeGif className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "rar" ? (
+                                      <BsFileEarmarkZip className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "zip" ? (
+                                      <BsFileEarmarkZip className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "mp3" ? (
+                                      <BsFileEarmarkMusic className="text-[20px] mr-[10px]" />
+                                    ) : link?.docName
+                                        ?.substring(
+                                          link?.docName?.indexOf(".") + 1
+                                        )
+                                        .toLowerCase() === "mp4" ? (
+                                      <BsFileEarmarkPlay className="text-[20px] mr-[10px]" />
+                                    ) : (
+                                      <>
+                                        <BsFileEarmark className="text-[20px] mr-[10px]" />
+                                      </>
+                                    )}
+                                    <div className="w-[calc(100%-40px)] flex justify-start items-center  overflow-hidden text-ellipsis line-clamp-1 h-full">
+                                      {link?.docName}
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+                            </>
+                          )}
+
+                          {/* <Media data={link} mop={mediaOption} /> */}
+                        </>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
               <div
                 className={
-                  "w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  z-50  fixed top-0 flex justify-center items-start p-[10px] backdrop-blur-sm overflow-visible" +
-                  (theme ? " bg-[#e4eaf1a2] " : " bg-[#1b202d]") +
-                  (expand ? " h-[100svh] " : " h-[80px]")
+                  "w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  z-50  fixed top-0 flex justify-center items-start p-[10px] backdrop-blur-md overflow-visible" +
+                  (theme ? "  " : " bg-[#1b202d]") +
+                  (expand
+                    ? " h-[100svh] bg-[#e4eaf16d] "
+                    : " h-[80px] bg-[#e4eaf1]")
                 }
               >
                 {expand == true ? (
                   <div
                     className={
-                      "w-full h-[170px] z-50  rounded-xl  top-0 flex justify-between items-center p-[20px] " +
+                      "w-full h-[170px] z-50  rounded-2xl  top-0 flex justify-between items-center p-[20px] " +
                       (theme ? " bg-[#ffffff]" : " bg-[#292f3f]")
                     }
                     style={{ transition: ".4s" }}
@@ -667,6 +1155,7 @@ export const UserInfo = () => {
                       }}
                       onClick={() => {
                         setExpand(!expand);
+                        setMediaShow(false);
                       }}
                     >
                       {chatUserPhoto === "nophoto" ? (
@@ -684,7 +1173,7 @@ export const UserInfo = () => {
                     <div className="w-[calc(100%-155px)]  lg:w-[calc(100%-215px)] md:w-[calc(100%-215px)] h-full ml-[15px]  flex flex-col justify-center items-start z-20">
                       <span
                         className={
-                          "text-[20px]  font-[google] font-normal    z-20" +
+                          "text-[18px]  font-[google] font-normal    z-20" +
                           (theme ? " text-black" : " text-white")
                         }
                         style={{
@@ -696,7 +1185,7 @@ export const UserInfo = () => {
                       </span>
                       <span
                         className={
-                          "text-[15px]  font-[google] font-light    z-20" +
+                          "text-[15px]  font-[work] font-light    z-20" +
                           (theme ? " text-[#2d2d2d]" : " text-[#b1b1b1]")
                         }
                         style={{
@@ -708,7 +1197,7 @@ export const UserInfo = () => {
                       </span>
                       <span
                         className={
-                          "text-[14px]  max-h-[50px] overflow-hidden w-full line-clamp-2 text-ellipsis font-[google] font-light   z-20" +
+                          "text-[14px]  max-h-[50px] overflow-hidden w-full line-clamp-2 text-ellipsis font-[work] font-light   z-20" +
                           (theme ? " text-[#2d2d2d]" : " text-[#8e8e8e]")
                         }
                         style={{ transition: ".4s", transitionDelay: ".4s" }}
@@ -716,7 +1205,7 @@ export const UserInfo = () => {
                         {chatUserAbout}
                       </span>
 
-                      {isOnline === true ? (
+                      {/* {isOnline === true ? (
                         <>
                           <div
                             className=" justify-center  items-center h-[30px] flex  mt-[5px]"
@@ -779,20 +1268,49 @@ export const UserInfo = () => {
                             </span>
                           </div>
                         </>
-                      )}
-                      {/* <span
-                        className="w-[90px] mt-[10px] h-[30px] rounded-full bg-[#4b93b9] text-white text-[15px]  font-[google] font-light flex justify-center items-center"
+                      )} */}
+                      <span
+                        className="w-auto pl-[10px] pr-[3.5px] mt-[10px] h-[30px] rounded-3xl bg-[#04bdb6] text-white text-[14px]  font-[work] font-light flex justify-center items-center"
                         onClick={() => {
-                          setUserSidebar(!userSidebar);
+                          // setUserSidebar(!userSidebar);
+                          setMediaShow(!mediaShow);
+                          setMediaOption("Documents");
                         }}
                         style={{
                           transition: ".4s",
-                          transitionDelay: ".4s",
+                          transitionDelay: ".8s",
                         }}
                       >
-                        <span>Media</span>
-                        <LuChevronRight className="text-white text-[20px] ml-[5px]" />
-                      </span> */}
+                        <span>
+                          {ImageMediaLink.length !== 0 ? (
+                            <>
+                              {mediaShow === true ? (
+                                <>Close Media</>
+                              ) : (
+                                <>Media</>
+                              )}
+                            </>
+                          ) : (
+                            <>No Media</>
+                          )}
+                        </span>
+                        <div className="border-[.7px] border-[white] h-[15px] ml-[6px]"></div>
+                        {ImageMediaLink.length !== 0 ? (
+                          <>
+                            {mediaShow === true ? (
+                              <>
+                                <RxCross2 className="text-white text-[15px] ml-[1.5px] mr-[1.5px]" />
+                              </>
+                            ) : (
+                              <LuChevronRight className="text-white text-[15px] ml-[1.5px]" />
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <MdDoNotDisturb className="text-white text-[15px] ml-[3px] mr-[1.5px]" />
+                          </>
+                        )}
+                      </span>
                     </div>
                     <span
                       className="cursor-pointer w-[0] lg:w-[0]  md:w-[0] overflow-hidden "
@@ -822,7 +1340,7 @@ export const UserInfo = () => {
                 ) : (
                   <div
                     className={
-                      "w-full h-[60px] z-50  rounded-xl  top-0 flex justify-between items-center px-[20px]" +
+                      "w-full h-[60px] z-50  rounded-2xl  top-0 flex justify-between items-center px-[20px]" +
                       (theme
                         ? " bg-[#ffffff] text-[black]"
                         : " bg-[#292f3f] text-[white]")
@@ -909,7 +1427,7 @@ export const UserInfo = () => {
                       }
                     >
                       <span
-                        className="text-[17px]  font-[google] font-normal    z-20"
+                        className="text-[18px]  font-[google] font-normal    z-20"
                         style={{
                           transition: ".4s",
                           transitionDelay: ".2s",
@@ -919,7 +1437,7 @@ export const UserInfo = () => {
                       </span>
                       <span
                         className={
-                          "text-[14px]  font-[google] font-light   z-20" +
+                          "text-[14px]  font-[work] font-light   z-20" +
                           (theme ? "  text-[#2d2d2d]" : "  text-[#b1b1b1]")
                         }
                         style={{
@@ -931,7 +1449,7 @@ export const UserInfo = () => {
                       </span>
                       <span
                         className={
-                          "text-[14px]  max-h-[0px] overflow-hidden w-full line-clamp-2 text-ellipsis font-[google] font-light  z-20" +
+                          "text-[14px]  max-h-[0px] overflow-hidden w-full line-clamp-2 text-ellipsis font-[work] font-light  z-20" +
                           (theme ? "  text-[#2d2d2d]" : "  text-[#8e8e8e] ")
                         }
                         style={{ transition: ".4s", transitionDelay: ".4s" }}
@@ -939,7 +1457,7 @@ export const UserInfo = () => {
                         ~ {chatUserAbout}
                       </span>
 
-                      {isOnline === true ? (
+                      {/* {isOnline === true ? (
                         <>
                           <div
                             className=" justify-center overflow-hidden items-center flex h-[0] mt-[5px]"
@@ -998,7 +1516,47 @@ export const UserInfo = () => {
                             </span>
                           </div>
                         </>
-                      )}
+                      )} */}
+                      <span
+                        className="w-0 pl-[0px] pr-0 mt-[0px] h-[0px] overflow-hidden rounded-3xl bg-[#04bdb6] text-white text-[14px]  font-[work] font-light flex justify-center items-center"
+                        onClick={() => {
+                          setUserSidebar(!userSidebar);
+                        }}
+                        style={{
+                          transition: ".4s",
+                          transitionDelay: ".4s",
+                        }}
+                      >
+                        <span>
+                          {ImageMediaLink.length !== 0 ? (
+                            <>
+                              {mediaShow === true ? (
+                                <>Close Media</>
+                              ) : (
+                                <>Media</>
+                              )}
+                            </>
+                          ) : (
+                            <>No Media</>
+                          )}
+                        </span>
+                        <div className="border-[.7px] border-[white] h-[15px] ml-[6px]"></div>
+                        {ImageMediaLink.length !== 0 ? (
+                          <>
+                            {mediaShow === true ? (
+                              <>
+                                <RxCross2 className="text-white text-[15px] ml-[1.5px] mr-[1.5px]" />
+                              </>
+                            ) : (
+                              <LuChevronRight className="text-white text-[15px] ml-[1.5px]" />
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <MdDoNotDisturb className="text-white text-[15px] ml-[3px] mr-[1.5px]" />
+                          </>
+                        )}
+                      </span>
                       {/* <span
                         className="w-[0] mt-[10px] h-[0px] overflow-hidden rounded-full bg-[#4b93b9] text-white text-[15px]  font-[google] font-light flex justify-center items-center"
                         onClick={() => {

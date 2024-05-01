@@ -199,7 +199,7 @@ const OwnerDetails = (props) => {
           <>
             <div
               className={
-                "text-[18px] font-[google] font-medium  w-full h-full flex justify-between items-center px-[10px] rounded-xl z-0 pl-[20px]" +
+                "text-[18px] font-[google] font-medium  w-full h-full flex justify-between items-center px-[10px] rounded-2xl z-0 pl-[20px]" +
                 (theme
                   ? " bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff] text-[#000000]"
                   : " bg-[#292f3f] md:bg-[#1B202D] lg:bg-[#1B202D] text-[#ffffff]")
@@ -319,7 +319,7 @@ const OwnerDetails = (props) => {
           <>
             <div
               className={
-                "text-[18px] font-[google] font-medium w-full h-full hidden md:flex lg:flex  justify-between items-center px-[10px] rounded-xl z-0 pl-[20px]" +
+                "text-[18px] font-[google] font-medium w-full h-full hidden md:flex lg:flex  justify-between items-center px-[10px] rounded-2xl z-0 pl-[20px]" +
                 (theme
                   ? "bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff] text-[#000000]"
                   : "bg-[#292f3f] md:bg-[#1B202D] lg:bg-[#1B202D] text-[#ffffff]")

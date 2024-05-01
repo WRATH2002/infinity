@@ -82,7 +82,7 @@ const Loading = (props) => {
 
               {/* <span class="loader"></span> */}
             </div>
-            <div className="flex flex-col justify-center items-center font-[google] text-[16px] mt-[32px] text-[#424242]">
+            <div className="flex flex-col justify-center items-center font-[work] text-[16px] mt-[32px] text-[#424242]">
               <span>We are preparing everything for you</span>
               <span className="text-[20px] ">{per}%</span>
             </div>
@@ -202,7 +202,7 @@ const AuthDetails = () => {
                   Welcome to Infinity <WiStars className="text-[#0462e8]" />
                 </span>
                 <span
-                  className="text-[#000000b4] mt-[20px] h-[90px]  w-[90%] md:w-[40%] lg:w-[40%] font-[google] font-thin text-[15px] tracking-wide px-[30px] flex justify-center items-center text-center "
+                  className="text-[#000000b4] mt-[20px] h-[90px]  w-[90%] md:w-[40%] lg:w-[40%] font-[work] font-thin text-[15px] tracking-wide px-[30px] flex justify-center items-center text-center "
                   style={{ transition: ".2s" }}
                 >
                   Experience seamless connections and vibrant conversations with
