@@ -755,7 +755,7 @@ export const UserInfo = () => {
                                     className={
                                       "w-full h-[50px] font-[google] font-normal flex justify-start items-center text-[15px] px-[5px] rounded-xl hover:bg-[#e4eaf1] " +
                                       (theme
-                                        ? " text-[black]"
+                                        ? " text-[#b21313]"
                                         : " text-[white]")
                                     }
                                   >
@@ -854,7 +854,14 @@ export const UserInfo = () => {
                                         <BsFileEarmark className="text-[20px] mr-[10px]" />
                                       </>
                                     )}
-                                    <div className="w-[calc(100%-40px)] flex justify-start items-center  overflow-hidden text-ellipsis line-clamp-1 h-full">
+                                    <div
+                                      className={
+                                        "w-[calc(100%-40px)] flex justify-start items-center  overflow-hidden text-ellipsis line-clamp-1 h-full" +
+                                        (theme
+                                          ? " text-[black]"
+                                          : " text-[white]")
+                                      }
+                                    >
                                       {link?.docName}
                                     </div>
                                   </div>

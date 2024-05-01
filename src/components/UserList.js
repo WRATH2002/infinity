@@ -218,6 +218,7 @@ const Friends = (props) => {
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
 
   const [theme, setTheme] = useState(true);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
     const user = firebase.auth().currentUser;
@@ -410,61 +411,76 @@ const Friends = (props) => {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      {/* {ActiveChatUser.length !== 0 ? (
-        <>
+      {confirmDelete === true ? (
+        <div className=" w-full md:w-[400px] lg:w-[400px] h-[100svh] top-0 left-0 fixed bg-[#e4eaf16d] z-50 backdrop-blur-md flex justify-center items-center">
           <div
-            className="w-full h-auto flex  justify-center items-center px-[10px] fixed top-[10px] z-50"
-            style={{ zIndex: "999999" }}
+            className={
+              " text-[15px] w-[320px]  h-[300px] rounded-2xl flex flex-col justify-center items-center " +
+              (theme ? " bg-[#ffffff] text-black" : " bg-[#292f3f] text-white")
+            }
           >
-            <div className="w-full h-full bg-[#292f3f8a] font-[google] text-[14px] text-white backdrop-blur-md rounded-xl flex flex-col justify-center items-center px-[20px] py-[5px]">
-              <div className="w-full h-[70px]  flex justify-center items-center border-b-[.5px] border-[#696969]">
-                <div className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]">
+            <div className="w-full rounded-xl  flex justify-start items-center px-[40px]">
+              <span className=" font-[google] font-medium text-[22px] ">
+                Delete this Contact?
+              </span>
+            </div>
+            <div className="w-full rounded-xl  flex justify-start items-center px-[40px]">
+              <span
+                className={
+                  " font-[work]  font-normal flex justify-start items-center text-[20px] mt-[5px]" +
+                  (theme ? "  text-black" : "  text-white")
+                }
+              >
+                {photoURL === "nophoto" ? (
                   <img
-                    className="w-full h-full rounded-full object-cover"
-                    src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/users%2FmQWgSxyplBPSi1iTXfybzmoIQOr1%2FProfile%20Photo?alt=media&token=63d7a766-2417-46a4-9150-29711c10f835"
+                    src={profile2}
+                    className="w-[30px] h-[30px] rounded-full object-cover mr-[10px] "
                   ></img>
-                </div>
-                <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start">
-                  <span className="text-[16px]">Hmadri Purkait</span>
-                  <span className="text-[#b3b3b3]">
-                    Hey! whats up?? where you been
-                  </span>
-                </div>
-              </div>
-              <div className="w-full h-[70px] flex justify-center items-center  border-b-[.5px] border-[#696969]">
-                <div className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]">
+                ) : (
                   <img
-                    className="w-full h-full rounded-full object-cover"
-                    src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/users%2FUbP9mzfzYOgr5Z9ivbHdAjxQ2Sf2%2FProfile%20Photo?alt=media&token=c30bf2b7-26ee-4074-aaf8-8c5c7e61e1c9"
+                    src={photoURL}
+                    className="w-[30px] h-[30px] rounded-full object-cover mr-[10px] "
                   ></img>
-                </div>
-                <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start">
-                  <span className="text-[16px]">Niladri Purkait</span>
-                  <span className="text-[#b3b3b3]">Hello Brp !!</span>
-                </div>
-              </div>
-              <div className="w-full h-[70px] flex justify-center items-center  ">
-                <div className="w-[40px] h-[40px] bg-white rounded-full mr-[10px]">
-                  <img
-                    className="w-full h-full rounded-full object-cover"
-                    src="https://firebasestorage.googleapis.com/v0/b/infinity-new.appspot.com/o/users%2FP9RvCXpI86UBTywtRFDUSvPjxn22%2FProfile%20Photo?alt=media&token=b030ecbe-106f-4ca6-a93f-35c6373281b9"
-                  ></img>
-                </div>
-
-                <div className="w-[calc(100%-50px)] h-[40px] text-[15px] flex flex-col justify-center items-start ">
-                  <span className="text-[16px]">Random Purkait</span>
-                  <span className="text-[#b3b3b3]">
-                    YOu have won an mercedes
-                  </span>
-                </div>
-              </div>
-              <div className="w-[60px] h-[4px] bg-[#939393] border border-[#939393] rounded-xl flex justify-center items-center mt-[15px] px-[10px] my-[5px]"></div>
+                )}{" "}
+                {userName}
+              </span>
+            </div>
+            <div className="w-full mt-[20px] rounded-xl font-[work] text-[#343434]  flex justify-center items-center px-[40px]">
+              <span className="  font-light ">
+                ⚠️&nbsp; All the chats history and media with this contact will
+                be deleted. Are you sure?
+              </span>
+            </div>
+            <div className=" h-[45px] w-full mt-[30px] flex justify-between items-center px-[40px] rounded-xl">
+              <button
+                className={
+                  "w-[calc((100%-20px)/2)] h-[45px]    cursor-pointer  font-[google] font-light   rounded-2xl" +
+                  (theme
+                    ? " bg-[#e4eaf1] text-[#000000]"
+                    : " bg-[#1b202d] text-[#ffffff]")
+                }
+                onClick={() => {
+                  // console.log("clicked");
+                  setConfirmDelete(false);
+                }}
+              >
+                Close
+              </button>
+              <button
+                className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#96df73]  rounded-2xl"
+                onClick={() => {
+                  // console.log("clicked");
+                  deleteChatUser();
+                }}
+              >
+                Delete
+              </button>
             </div>
           </div>
-        </>
+        </div>
       ) : (
         <></>
-      )} */}
+      )}
       {ActiveChatUser === UserUid && UserUid != "" ? (
         <>
           <div
@@ -515,7 +531,7 @@ const Friends = (props) => {
                       (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                     }
                     onClick={() => {
-                      deleteChatUser();
+                      // deleteChatUser();
                     }}
                   >
                     {/* {props.data.time} */}
@@ -672,6 +688,7 @@ const Friends = (props) => {
               className="group-hover:flex hidden justify-center items-start pt-[10px] md:pt-[5px] lg:pt-[5px] h-full w-[20px] ml-[-20px] z-40"
               onClick={() => {
                 deleteChatUser();
+                setConfirmDelete(true);
                 console.log("clickeddddddd");
               }}
             >
@@ -890,7 +907,7 @@ const Friends = (props) => {
             <span
               className="group-hover:flex hidden justify-center items-start pt-[10px] md:pt-[5px] lg:pt-[5px] h-full w-[20px] ml-[-20px] z-40"
               onClick={() => {
-                deleteChatUser();
+                setConfirmDelete(true);
                 console.log("clickeddddddd");
               }}
             >
@@ -1708,7 +1725,7 @@ const UserList = (props) => {
                       (theme ? " text-[black]" : " text-[white]")
                     }
                   >
-                    <span className="h-[40px] flex justify-center items-center px-[15px] bg-[#ff8b32af] rounded-xl text-black">
+                    <span className="h-[40px] flex justify-center items-center px-[15px] bg-[#ff8b32af] rounded-2xl text-black">
                       No Users Found
                     </span>
                     <span className="flex justify-center items-center mt-[10px]">
@@ -2560,188 +2577,7 @@ const UserList = (props) => {
                     Profile
                   </span>
                 </div> */}
-                {showTime == true ? (
-                  <div
-                    className={
-                      "w-full md:w-[380px] lg:w-[380px] rounded-xl min-h-[240px] max-h-[240px] flex flex-col justify-between items-center  text-[25px] font-[google] font-normal p-[20px]" +
-                      (theme
-                        ? " bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff] text-black"
-                        : " bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] text-white")
-                    }
-                    style={{ transition: ".4s" }}
-                    onClick={() => {
-                      setShowTime(false);
-                    }}
-                  >
-                    {/* <span className="text-[19px] fixed left-[30px] top-[100px] tracking-normal block text-[#9f9f9f]">
-                      Screen Time
-                    </span> */}
-                    {/* <span className="text-[19px] tracking-normal w-[0px] overflow-hidden opacity-0" style={{transition:".4s"}}>Screen Time</span> */}
-                    <div
-                      className="w-full h-[20px] flex justify-between items-center"
-                      // style={{ transition: ".4s" }}
-                    >
-                      <div className="text-[16px]  tracking-normal flex justify-start items-center">
-                        <FaAngleDown className=" text-[17px] mr-[10px]" />
-                        21/06/2024
-                      </div>
-                      <div
-                        className={
-                          "" + (theme ? " text-[#2d2d2d]" : " text-[#c0c0c0]")
-                        }
-                      >
-                        {onHour < 10 ? <>0{onHour}</> : <>{onHour}</>} :{" "}
-                        {onMin < 10 ? <>0{onMin}</> : <>{onMin}</>}
-                      </div>
-                    </div>
-                    <div
-                      className="w-full mt-[40px] h-[140px] flex justify-center items-end"
-                      // style={{ transition: ".4s", transitionDelay: ".5s" }}
-                    >
-                      <div
-                        className="w-full h-full flex justify-center items-end"
-                        style={{ transition: ".4s", transitionDelay: ".5s" }}
-                      >
-                        <ResponsiveContainer width="100%" height="100%">
-                          <AreaChart width={730} height={250} data={dd}>
-                            <defs>
-                              <linearGradient
-                                id="colorAvg"
-                                x1="0"
-                                y1="0"
-                                x2="0"
-                                y2="1"
-                              >
-                                <stop
-                                  offset="10%"
-                                  stopColor="#2e9df6"
-                                  stopOpacity={0.8}
-                                />
-                                <stop
-                                  offset="100%"
-                                  stopColor="#975ba3"
-                                  stopOpacity={0}
-                                />
-                              </linearGradient>
-                            </defs>
-                            {/* <Tooltip /> */}
-                            <Area
-                              type="bump"
-                              dataKey="time"
-                              stroke="#acbfd5"
-                              fillOpacity={1}
-                              fill="url(#colorAvg)"
-                            />
-                          </AreaChart>
-                        </ResponsiveContainer>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                    className={
-                      "w-full md:w-[380px] lg:w-[380px] rounded-xl min-h-[60px] max-h-[60px]  flex flex-col justify-between right-[0px] items-center   text-[25px] font-[google] font-normal p-[20px]" +
-                      (theme
-                        ? " bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff] text-black"
-                        : " bg-[#292f3f] md:bg-[#1b202d] lg:bg-[#1b202d] text-white")
-                    }
-                    style={{ transition: ".4s", transitionDelay: ".5s" }}
-                    onClick={() => {
-                      setShowTime(true);
-                    }}
-                  >
-                    {timer === true ? (
-                      <div className="w-[calc(100%-20px)] md:w-[calc(400px-20px)] lg:[calc(400px-20px)] h-[300px] rounded-xl bg-white flex justify-center items-center fixed mt-[-90px] z-50">
-                        {/* <CountdownCircleTimer
-                          {...timerProps}
-                          colors={[
-                            ["#9000ff", 0],
-                            ["#0066FF", 1],
-                          ]}
-                          isLinearGradient={true}
-                          duration={daysDuration}
-                          initialRemainingTime={remainingTime}
-                          trailColor={[["#dbdbdb"]]}
-                        >
-                          {({ elapsedTime }) =>
-                            renderTime(getTimeDays(daysDuration - elapsedTime))
-                          }
-                        </CountdownCircleTimer> */}
-                        {/* <div className="w-[170px] h-[170px] rounded-full border-[3px] border-[black]"></div> */}
-                      </div>
-                    ) : (
-                      <></>
-                    )}
 
-                    {/* <span className="text-[19px] fixed left-[30px] top-[100px] tracking-normal block ">
-                      Screen Time
-                    </span> */}
-                    {/* <span className="text-[19px] tracking-normal w-[130px] overflow-hidden opacity-100" style={{transition:".4s"}}>Screen Time</span> */}
-                    <div
-                      className="w-full h-[20px] flex justify-between items-center"
-                      // style={{ transition: ".4s", transitionDelay: ".5s" }}
-                    >
-                      <div
-                        className={
-                          "text-[18px] tracking-normal flex justify-start items-center" +
-                          (theme ? " text-[#2d2d2d]" : " text-[#c0c0c0]")
-                        }
-                      >
-                        Today
-                      </div>
-                      <div
-                        className={
-                          "" + (theme ? " text-[#2d2d2d]" : " text-[#c0c0c0]")
-                        }
-                      >
-                        {onHour < 10 ? <>0{onHour}</> : <>{onHour}</>} :{" "}
-                        {onMin < 10 ? <>0{onMin}</> : <>{onMin}</>}
-                      </div>
-                    </div>
-                    <div
-                      className="w-full mt-[20px] h-[0] flex justify-center items-end"
-                      style={{ transition: ".4s" }}
-                    >
-                      <div
-                        className="w-full  h-[0] flex justify-center items-end"
-                        style={{ transition: ".4s" }}
-                      >
-                        <ResponsiveContainer width="100%" height="100%">
-                          <AreaChart width={730} height={250} data={dd}>
-                            <defs>
-                              <linearGradient
-                                id="colorAvg"
-                                x1="0"
-                                y1="0"
-                                x2="0"
-                                y2="1"
-                              >
-                                <stop
-                                  offset="10%"
-                                  stopColor="#975ba3"
-                                  stopOpacity={0.8}
-                                />
-                                <stop
-                                  offset="100%"
-                                  stopColor="#2e9df6"
-                                  stopOpacity={0}
-                                />
-                              </linearGradient>
-                            </defs>
-                            {/* <Tooltip /> */}
-                            <Area
-                              type="bump"
-                              dataKey="time"
-                              stroke="#acbfd5"
-                              fillOpacity={1}
-                              fill="url(#colorAvg)"
-                            />
-                          </AreaChart>
-                        </ResponsiveContainer>
-                      </div>
-                    </div>
-                  </div>
-                )}
                 {nameChangeFlag === true ? (
                   <div className="w-full md:w-[400px] lg-[400px] h-[100svh] bg-[#e4eaf16d] z-50 fixed top-0 left-0 flex justify-center items-center px-[10px] md:px-0 lg:px-0 backdrop-blur-md">
                     <div className="w-[calc(100%-40px)] h-[295px] rounded-3xl bg-[white] flex flex-col justify-center items-center px-[20px] drop-shadow-sm">
