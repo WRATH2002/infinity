@@ -61,14 +61,14 @@ const StatusUserList = (props) => {
             " z-50 fixed bottom-0 h-[100svh]  w-full md:w-[400px] lg:w-[400px] left-0 flex-col flex justify-center items-center" +
             (theme
               ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
-              : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+              : " bg-[#17171a] md:bg-[#17171a] lg:bg-[#17171a]")
           }
         >
           {/* Cross ------------------------- */}
           <div
             className={
               "fixed top-[25px] left-[calc(100%-55px)] md:left-[calc(400px-55px)]  lg:left-[calc(400px-55px)]  w-[35px] h-[35px]  rounded-full drop-shadow-none  flex justify-center items-center  cursor-pointer rotate-45 z-40" +
-              (theme ? " bg-[#1b202d] text-white" : " bg-[white] text-black")
+              (theme ? " bg-[#17171a] text-white" : " bg-[white] text-black")
             }
             onClick={() => {
               setShowStatus(false);
@@ -83,30 +83,30 @@ const StatusUserList = (props) => {
               " group w-full md:w-[400px] lg:w-[400px] h-[90px] py-[10px] flex justify-start items-center  cursor-pointer font-[google] font-normal  px-[20px]  text-[#ffffff]  fixed top-0   drop-shadow-none" +
               (theme
                 ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
-                : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+                : " bg-[#17171a] md:bg-[#17171a] lg:bg-[#17171a]")
             }
             onClick={() => {
               // setShowStatus(true);
             }}
           >
-            <div className="w-[59px] h-[59px] border-[2.4px] borderGrad  flex justify-center items-center rounded-full z-10">
+            <div className="w-[59px] h-[59px] border-[2.4px] borderGrad  flex justify-center items-center rounded-[20px] z-10">
               {photo === "nophoto" ? (
                 <img
                   src={profile2}
-                  className="w-[50px] h-[50px] rounded-full object-cover z-10 "
+                  className="w-[50px] h-[50px] rounded-[20px] object-cover z-10 "
                 ></img>
               ) : (
                 <img
                   src={photo}
-                  className="w-[50px] h-[50px] rounded-full object-cover z-10 "
+                  className="w-[50px] h-[50px] rounded-[20px] object-cover z-10 "
                 ></img>
               )}
               <div
                 className={
-                  "w-[54.2px] h-[54.2px] rounded-full bg-white fixed z-0" +
+                  "w-[53.2px] h-[53.2px] rounded-[20px] bg-white fixed z-0" +
                   (theme
                     ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
-                    : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+                    : " bg-[#17171a] md:bg-[#17171a] lg:bg-[#17171a]")
                 }
               ></div>
             </div>
@@ -139,7 +139,7 @@ const StatusUserList = (props) => {
                   className={
                     "fixed w-[26px] h-[46px] rounded-full  cursor-pointer  flex justify-center items-center left-0" +
                     (theme
-                      ? " bg-[#1b202d] text-white"
+                      ? " bg-[#17171a] text-white"
                       : " bg-[white] text-black")
                   }
                   onClick={() => {
@@ -162,7 +162,7 @@ const StatusUserList = (props) => {
                   className={
                     "fixed w-[26px] h-[46px] rounded-full  cursor-pointer  flex justify-center items-center right-0" +
                     (theme
-                      ? " bg-[#1b202d] text-white"
+                      ? " bg-[#17171a] text-white"
                       : " bg-[white] text-black")
                   }
                   onClick={() => {
@@ -227,7 +227,7 @@ const StatusUserList = (props) => {
                           className={
                             "w-[8px] mx-[2px] h-[4px] rounded-full" +
                             (theme
-                              ? " bg-[#1b202d] text-white"
+                              ? " bg-[#17171a] text-white"
                               : " bg-[white] text-black")
                           }
                           style={{ transition: ".4s" }}
@@ -260,30 +260,30 @@ const StatusUserList = (props) => {
           <div
             className={
               " group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px] flex justify-center items-center bg-transparent  cursor-pointer   z-10 select-none" +
-              (theme ? " border-[#dde1e7]" : " border-[#35384a] ")
+              (theme ? " border-[#dde1e7]" : " border-[#212129] ")
             }
             onClick={() => {
               // setShowStatus(true);
             }}
           >
-            <div className="w-[59px] h-[59px] border-[2.4px] borderGrad  flex justify-center items-center rounded-full z-10">
+            <div className="w-[59px] h-[59px] border-[2.4px] borderGrad  flex justify-center items-center rounded-[20px] z-10">
               {photo === "nophoto" ? (
                 <img
                   src={profile2}
-                  className="w-[50px] h-[50px] rounded-full object-cover z-10 "
+                  className="w-[50px] h-[50px] rounded-[20px] object-cover z-10 "
                 ></img>
               ) : (
                 <img
                   src={photo}
-                  className="w-[50px] h-[50px] rounded-full object-cover z-10 "
+                  className="w-[50px] h-[50px] rounded-[20px] object-cover z-10 "
                 ></img>
               )}
               <div
                 className={
-                  "w-[54.2px] h-[54.2px] rounded-full fixed z-0" +
+                  "w-[53.2px] h-[53.2px] rounded-[20px] fixed z-0" +
                   (theme
                     ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
-                    : " bg-[#1b202d] md:bg-[#292f3f] lg:bg-[#292f3f]")
+                    : " bg-[#17171a] md:bg-[#17171a] lg:bg-[#17171a]")
                 }
               ></div>
             </div>

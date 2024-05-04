@@ -17,7 +17,7 @@ import {
 } from "../utils/chatSlice";
 import { doc, onSnapshot, serverTimestamp } from "firebase/firestore";
 import { useRef } from "react";
-import { BiSolidLockAlt } from "react-icons/bi";
+import { BiCheckDouble, BiSolidLockAlt } from "react-icons/bi";
 import { BiSolidSend } from "react-icons/bi";
 import { BiSolidMicrophone } from "react-icons/bi";
 import { TiAttachment } from "react-icons/ti";
@@ -76,6 +76,9 @@ const Messagess = (props) => {
 
   const [zoomImage, setZoomImage] = useState(false);
   const [theme, setTheme] = useState(true);
+  const [lastMessageId, setLastMessageId] = useState(0);
+
+  const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
 
   useEffect(() => {
     const user = firebase.auth().currentUser;
@@ -84,6 +87,22 @@ const Messagess = (props) => {
       setTheme(snapshot?.data()?.theme);
     });
   }, []);
+
+  useEffect(() => {
+    CheckMesageDelivery();
+  }, []);
+
+  function CheckMesageDelivery() {
+    const user = firebase.auth().currentUser;
+    const mesRef = db
+      .collection("Chat Record")
+      .doc(ActiveChatUser)
+      .collection("Chat Friends")
+      .doc(user.uid);
+    onSnapshot(mesRef, (snapshot) => {
+      setLastMessageId(snapshot?.data()?.LastMessage);
+    });
+  }
   // useEffect(() => {
   //   g();
   // }, []);
@@ -104,6 +123,7 @@ const Messagess = (props) => {
       {/* <div className="w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] right-0 h-[100svh] fixed bg-[#0000003a] z-50 mt-[-70px] flex justify-center items-center">
         <img src={props.data.Image} className=" w-full"></img>
       </div> */}
+      {console.log(props.data)}
 
       {props?.data?.Flag === 2 ? (
         <>
@@ -112,10 +132,10 @@ const Messagess = (props) => {
               <>
                 <div
                   className={
-                    "w-auto  max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex flex-wrap justify-between" +
+                    "w-auto  max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] pr-[8px] rounded-lg flex flex-wrap justify-between" +
                     (theme
                       ? " bg-[#ffffff] text-[black]"
-                      : " bg-[#292f3f] text-[white]")
+                      : " bg-[#282828] text-[white]")
                   }
                 >
                   <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[google] font-light">
@@ -123,7 +143,7 @@ const Messagess = (props) => {
                   </pre>
                   <div
                     className={
-                      "ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[google] font-light  text-[10px]  mb-[-5px]  " +
+                      "ml-auto w-[49px] flex justify-end items-end whitespace-nowrap  font-[google] font-light  text-[10px]  mb-[-5px]  " +
                       (theme ? "  text-[#2d2d2d]" : "  text-[#bcbcbc]")
                     }
                   >
@@ -137,7 +157,7 @@ const Messagess = (props) => {
                   "group w-auto  max-w-[75%] lg:max-w-[32%] md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex flex-wrap justify-end items-center" +
                   (theme
                     ? " bg-[#ffffff] text-[black]"
-                    : " bg-[#292f3f] text-[white]")
+                    : " bg-[#282828] text-[white]")
                 }
               >
                 {/* <a href={props.data.Image} download> */}
@@ -173,7 +193,7 @@ const Messagess = (props) => {
                   }}
                 >
              
-                  <MdDownload className="text-[25px] text-[#4b93b9]" />
+                  <MdDownload className="text-[25px] text-[#8981f7]" />
                 </div> */}
 
                 {isImageLoaded === true ? (
@@ -218,7 +238,7 @@ const Messagess = (props) => {
                     "w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[0px]  rounded-lg  flex justify-center items-center" +
                     (theme
                       ? " bg-[#ffffff] text-[black]"
-                      : " bg-[#292f3f] text-[white]")
+                      : " bg-[#282828] text-[white]")
                   }
                 >
                   <div className="w-full h-full  rounded-lg  flex justify-start items-center ">
@@ -244,14 +264,14 @@ const Messagess = (props) => {
                           "w-[30px] h-[30px] rounded-full flex justify-center items-center cursor-pointer" +
                           (theme
                             ? " hover:bg-[#e4eaf1]"
-                            : " hover:bg-[#1b202d]")
+                            : " hover:bg-[#17171a]")
                         }
                       >
                         {/* <img src={download} className="w-[20px]"></img> */}
                         <MdDownload
                           className={
                             "text-[25px]  " +
-                            (theme ? " text-[#000000]" : " text-[#4b93b9]")
+                            (theme ? " text-[#000000]" : " text-[#8981f7]")
                           }
                         />
                       </div>
@@ -268,10 +288,10 @@ const Messagess = (props) => {
             {props.data.Message.length != 0 ? (
               <div
                 className={
-                  "w-auto max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] rounded-lg flex  flex-wrap justify-between" +
+                  "w-auto max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] pr-[8px] rounded-lg flex  flex-wrap justify-between" +
                   (theme
                     ? " bg-[#ffffff] text-[black]"
-                    : " bg-[#292f3f] text-[white]")
+                    : " bg-[#282828] text-[white]")
                 }
               >
                 <pre className="max-w-[calc(100%)] whitespace-pre-wrap   font-[google] font-light">
@@ -279,12 +299,17 @@ const Messagess = (props) => {
                 </pre>
                 <div
                   className={
-                    "ml-auto w-[48px] flex justify-end items-end whitespace-nowrap  font-[google] font-light  text-[10px]  mb-[-5px] " +
+                    "ml-auto w-[64px] flex justify-end items-end whitespace-nowrap  font-[google] font-light  text-[10px]  mb-[-5px]  " +
                     (theme ? "  text-[#2d2d2d]" : "  text-[#bcbcbc]")
                   }
                 >
                   {props?.data?.Time}
-                </div>
+                  {props.data.id > lastMessageId ? (
+                    <BiCheckDouble className="text-[15px] ml-[2px] text-[#747474]" />
+                  ) : (
+                    <BiCheckDouble className="text-[15px] ml-[2px] text-[#04bdb6]" />
+                  )}
+                </div>{" "}
               </div>
             ) : props.data.Image.length != 0 ? (
               <div
@@ -292,7 +317,7 @@ const Messagess = (props) => {
                   "group w-auto  max-w-[75%] lg:max-w-[32%]  md:max-w-[32%] max-h-[320px] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal p-[1.5px] rounded-lg flex items-center  flex-wrap justify-center hover:bg-[#1f201f]" +
                   (theme
                     ? " bg-[#ffffff] text-[black]"
-                    : " bg-[#292f3f] text-[white]")
+                    : " bg-[#282828] text-[white]")
                 }
               >
                 {/* <img
@@ -356,7 +381,7 @@ const Messagess = (props) => {
                   }}
                 >
                
-                  <MdDownload className="text-[25px] text-[#4b93b9]" />
+                  <MdDownload className="text-[25px] text-[#8981f7]" />
                 </div> */}
                 {isImageLoaded === true ? (
                   <div
@@ -398,7 +423,7 @@ const Messagess = (props) => {
                     "w-[75%] lg:w-[32%] md:w-[32%]  h-[65px] p-[2px]  rounded-lg  flex justify-center items-center " +
                     (theme
                       ? " bg-[#ffffff] text-[black]"
-                      : " bg-[#292f3f] text-[white]")
+                      : " bg-[#282828] text-[white]")
                   }
                 >
                   <div className="w-full h-full  rounded-lg  flex justify-start items-center ">
@@ -425,7 +450,7 @@ const Messagess = (props) => {
                             "w-[30px] h-[30px] rounded-full  flex justify-center items-center cursor-pointer" +
                             (theme
                               ? " hover:bg-[#e4eaf1]"
-                              : " hover:bg-[#1b202d]")
+                              : " hover:bg-[#17171a]")
                           }
                         >
                           {/* <img src={download} className="w-[20px]"></img> */}
@@ -433,7 +458,7 @@ const Messagess = (props) => {
                           <MdDownload
                             className={
                               "text-[25px] " +
-                              (theme ? " text-[#000000]" : " text-[#4b93b9]")
+                              (theme ? " text-[#000000]" : " text-[#8981f7]")
                             }
                           />
                         </div>
@@ -944,7 +969,7 @@ export const MessageBody = () => {
             "fixed w-auto  max-w-[100%] lg:max-w-[32%] md:max-w-[32%] min-h-[100svh] max-h-[100svh] lg:max-h-[370px] min-w-[65%] lg:min-w-[25%] md:min-w-[25%] md:max-h-[370px] overflow-hidden font-normal flex flex-wrap justify-end items-center z-50" +
             (theme
               ? " bg-[#e4eaf1] text-[black]"
-              : " bg-[#292f3f] text-[white]")
+              : " bg-[#17171a] text-[white]")
           }
           onClick={() => {
             setTempPhotoUrl("");
@@ -984,7 +1009,7 @@ export const MessageBody = () => {
       <div
         className={
           "w-full h-[calc(100%-140px)] pb-[10px] mt-[80px] overflow-y-scroll  z-20 " +
-          (theme ? "bg-[#e4eaf1]" : "bg-[#1b202d]")
+          (theme ? "bg-[#e4eaf1]" : "bg-[#17171a]")
         }
       >
         <div
@@ -998,7 +1023,7 @@ export const MessageBody = () => {
                   "w-[calc(100%-400px)] right-0 top-[0] h-[100svh] fixed    flex flex-col justify-center items-center  font-[google]  " +
                   (theme
                     ? " bg-[#e4eaf1] text-black"
-                    : " bg-[#1b202d] text-white")
+                    : " bg-[#17171a] text-white")
                 }
               >
                 <img src={logo} className="w-[150px] opacity-60"></img>
@@ -1034,7 +1059,7 @@ export const MessageBody = () => {
                 <span
                   className={
                     "w-full h-full flex justify-center items-center ml-[10px] font-[google] font-light text-[14px] " +
-                    (theme ? " text-[#000000] " : " text-[#4b93b9] ")
+                    (theme ? " text-[#000000] " : " text-[#8981f7] ")
                   }
                 >
                   <BiSolidLockAlt className=" mr-[10px]" /> Messages are
@@ -1088,7 +1113,7 @@ export const MessageBody = () => {
                 "w-[170px] h-[338px]   border  backdrop-blur-md p-[20px] px-[10px] rounded-lg font-[google] font-normal text-[14px] flex flex-col justify-between " +
                 (theme
                   ? " bg-[#ffffff] text-[black] border-[#e4eaf1]"
-                  : " border-[#1b202d] bg-[#292f3f] text-[white]  ")
+                  : " border-[#17171a] bg-[#282828] text-[white]  ")
               }
               style={{ transition: ".5s" }}
             >
@@ -1101,7 +1126,7 @@ export const MessageBody = () => {
                   <div
                     className={
                       "w-full h-full px-[10px] flex items-center    border-transparent hover: rounded-md" +
-                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#4b93b9]")
+                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#8981f7]")
                     }
                   >
                     <input
@@ -1127,7 +1152,7 @@ export const MessageBody = () => {
                   <div
                     className={
                       "w-full h-full px-[10px] flex items-center  border-transparent hover: rounded-md" +
-                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#4b93b9]")
+                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#8981f7]")
                     }
                   >
                     <input
@@ -1152,7 +1177,7 @@ export const MessageBody = () => {
                   <div
                     className={
                       "w-full h-full px-[10px] flex items-center    border-transparent hover: rounded-md" +
-                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#4b93b9]")
+                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#8981f7]")
                     }
                   >
                     <input
@@ -1177,7 +1202,7 @@ export const MessageBody = () => {
                   <div
                     className={
                       "w-full h-full px-[10px] flex items-center   border-transparent hover: rounded-md" +
-                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#4b93b9]")
+                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#8981f7]")
                     }
                   >
                     <input
@@ -1202,7 +1227,7 @@ export const MessageBody = () => {
                   <div
                     className={
                       "w-full h-full px-[10px] flex items-center    border-transparent hover: rounded-md" +
-                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#4b93b9]")
+                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#8981f7]")
                     }
                     onClick={() => {
                       toast("Sticker Sharing not Supported", {
@@ -1230,7 +1255,7 @@ export const MessageBody = () => {
                   <div
                     className={
                       "w-full h-full px-[10px] flex items-center  border-transparent hover: rounded-md" +
-                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#4b93b9]")
+                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#8981f7]")
                     }
                     onClick={() => {
                       toast("Contact Sharing not Supported", {
@@ -1515,7 +1540,7 @@ export const MessageBody = () => {
                 "w-[0] h-[0]  backdrop-blur-md py-[0px]   border-transparent  rounded-lg font-[nunitosans] font-normal text-[14px] flex flex-col justify-between" +
                 (theme
                   ? " bg-[#ffffff] text-[black]"
-                  : " bg-[#292f3f] text-[white]")
+                  : " bg-[#282828] text-[white]")
               }
               style={{ transition: ".5s" }}
             >
@@ -1529,7 +1554,7 @@ export const MessageBody = () => {
                   <div
                     className={
                       "w-full h-full px-[10px] flex items-center" +
-                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#4b93b9]")
+                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#8981f7]")
                     }
                   >
                     <input
@@ -1555,7 +1580,7 @@ export const MessageBody = () => {
                   <div
                     className={
                       "w-full h-full px-[10px] flex items-center" +
-                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#4b93b9]")
+                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#8981f7]")
                     }
                   >
                     <input
@@ -1581,7 +1606,7 @@ export const MessageBody = () => {
                   <div
                     className={
                       "w-full h-full px-[10px] flex items-center" +
-                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#4b93b9]")
+                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#8981f7]")
                     }
                   >
                     <input
@@ -1607,7 +1632,7 @@ export const MessageBody = () => {
                   <div
                     className={
                       "w-full h-full px-[10px] flex items-center" +
-                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#4b93b9]")
+                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#8981f7]")
                     }
                   >
                     <input
@@ -1634,7 +1659,7 @@ export const MessageBody = () => {
                   <div
                     className={
                       "w-full h-full px-[10px] flex items-center" +
-                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#4b93b9]")
+                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#8981f7]")
                     }
                   >
                     <PiSticker className="text-[22px] mr-[8px]" />
@@ -1651,7 +1676,7 @@ export const MessageBody = () => {
                   <div
                     className={
                       "w-full h-full px-[10px] flex items-center" +
-                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#4b93b9]")
+                      (theme ? " hover:bg-[#e4eaf1]" : " hover:bg-[#8981f7]")
                     }
                   >
                     <FiUser className="text-[22px] mr-[8px]" />
@@ -1741,7 +1766,7 @@ export const MessageBody = () => {
       <div
         className={
           "w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] h-[60px] fixed bottom-0 flex flex-col justify-center items-start " +
-          (theme ? " bg-[#e4eaf1]" : " bg-[#1b202d]")
+          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
         }
       >
         {ActiveChatUser.length === 0 ? (
@@ -1756,7 +1781,7 @@ export const MessageBody = () => {
                 <MdEmojiEmotions
                   className={
                     "text-[25px] " +
-                    (theme ? " text-[#000000]" : " text-[#96df73]")
+                    (theme ? " text-[#000000]" : " text-[#ffffff]")
                   }
                 />
               </div>
@@ -1771,7 +1796,7 @@ export const MessageBody = () => {
                 <MdEmojiEmotions
                   className={
                     "text-[25px] " +
-                    (theme ? " text-[#000000]" : " text-[#96df73]")
+                    (theme ? " text-[#000000]" : " text-[#ffffff]")
                   }
                 />
               </div>
@@ -1800,7 +1825,7 @@ export const MessageBody = () => {
                   <TiAttachment
                     className={
                       "text-[25px] " +
-                      (theme ? " text-[#000000]" : " text-[#96df73]")
+                      (theme ? " text-[#000000]" : " text-[#ffffff]")
                     }
                   />
                 </div>
@@ -1832,7 +1857,7 @@ export const MessageBody = () => {
                   <TiAttachment
                     className={
                       "text-[25px] " +
-                      (theme ? " text-[#000000]" : " text-[#96df73]")
+                      (theme ? " text-[#000000]" : " text-[#ffffff]")
                     }
                   />
                 </div>
@@ -1860,7 +1885,7 @@ export const MessageBody = () => {
                     "input  w-[calc(100%-135px)] ml-[10px]   px-[20px] pr-[50px]  outline-none text-[15px] font-[work] font-medium tracking-[.4px] rounded-[15px]   h-[50px]   pl-[60px]" +
                     (theme
                       ? " bg-[#ffffff] text-[black]"
-                      : " bg-[#292F3F] text-[white]")
+                      : " bg-[#282828] text-[white]")
                   }
                   style={{ transition: ".4s" }}
                 ></input>
@@ -1885,7 +1910,7 @@ export const MessageBody = () => {
                     "input w-[calc(100%-135px)] ml-[10px]   px-[20px] pr-[50px]  outline-none text-[15px] font-[work] font-medium tracking-[.4px] rounded-2xl   h-[45px]   pl-[20px]" +
                     (theme
                       ? " bg-[#ffffff] text-[black]"
-                      : " bg-[#292F3F] text-[white]")
+                      : " bg-[#282828] text-[white]")
                   }
                   style={{ transition: ".4s" }}
                 ></input>
@@ -1916,7 +1941,7 @@ export const MessageBody = () => {
                     "text-[20px] " +
                     (theme
                       ? " bg-[#ffffff] text-[#303030]"
-                      : " bg-[#292F3F] text-[#95df7397]")
+                      : " bg-[#282828] text-[#9b9b9b]")
                   }
                 />
               ) : (
@@ -1925,7 +1950,7 @@ export const MessageBody = () => {
                     "text-[20px] " +
                     (theme
                       ? " bg-[#ffffff] text-[#000000]"
-                      : " bg-[#292F3F] text-[#96df73]")
+                      : " bg-[#282828] text-[#ffffff]")
                   }
                 />
               )}
@@ -1936,7 +1961,7 @@ export const MessageBody = () => {
                   <BsFillStopFill
                     className={
                       "text-[25px] " +
-                      (theme ? " text-[#000000]" : " text-[#96df73]")
+                      (theme ? " text-[#000000]" : " text-[#ffffff]")
                     }
                     onClick={() => {
                       setIsListening(false);
@@ -1951,7 +1976,7 @@ export const MessageBody = () => {
                   <BiSolidMicrophone
                     className={
                       "text-[25px] " +
-                      (theme ? " text-[#000000]" : " text-[#96df73]")
+                      (theme ? " text-[#000000]" : " text-[#ffffff]")
                     }
                     onClick={() => {
                       resetTranscript();

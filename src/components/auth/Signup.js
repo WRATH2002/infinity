@@ -20,7 +20,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState("false");
-
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
 
   //   function createFirestoreAccount() {
@@ -71,19 +71,26 @@ const Signup = () => {
       Phone: number,
       Photo: "nophoto",
       AccountStatus: true,
+      onTimeHour: 0,
+      onTimeMinute: 0,
+      totalDay: 0,
+      totalHour: 0,
     });
     console.log("done");
   }
   const signUp = (e) => {
+    const letterPattern = /[a-zA-Z]/;
     e.preventDefault();
     if (name.length === 0) {
-      toast.error("Enter your Name");
-    } else if (number.length === 0) {
-      toast.error("Enter your Phone Number");
+      setError("Name can't be empty");
+    } else if (letterPattern.test(number)) {
+      setError("Number must contain only digits");
+    } else if (number.length < 10 || number.length > 10) {
+      setError("Number must be 10 digits");
     } else if (email.length === 0 || !email.includes("@gmail.com")) {
-      toast.error("Enter valid Email id");
-    } else if (password.length < 6) {
-      toast.error("Password must be atleast 6 digits");
+      setError("Email must contain '@gmail.com'");
+    } else if (password.length < 8) {
+      setError("Password should be atleast 8 characters");
     } else {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -97,6 +104,7 @@ const Signup = () => {
         })
         .catch((error) => {
           console.log(error.message);
+          setError("Oops! Email already in use");
         });
     }
   };
@@ -125,26 +133,34 @@ const Signup = () => {
         </div>
         {/* <div>Signup</div> */}
         <input
-          className=" outline-none  mt-[40px]  w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
+          className=" outline-none  mt-[40px]  w-full h-[50px] my-[10px] rounded-2xl px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
           placeholder="Name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         ></input>
         <input
-          className=" outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
+          className=" outline-none    w-full h-[50px] mb-[10px] rounded-2xl px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
           placeholder="Phone Number"
           type="tel"
           value={number}
+          onKeyDown={(e) => {
+            console.log(e);
+            if (e.key == "Backspace") {
+              if (number.length == 10) {
+                setNumber(number.slice(0, -1));
+              }
+            }
+          }}
           onChange={(e) => {
-            if (number.length <= 10) {
+            if (number.length <= 9) {
               setNumber(e.target.value);
             } else {
             }
           }}
         ></input>
         <input
-          className=" outline-none    w-full h-[50px] my-[10px] rounded-md px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
+          className=" outline-none    w-full h-[50px] mb-[10px] rounded-2xl px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
           placeholder="Email"
           type="email"
           value={email}
@@ -153,7 +169,7 @@ const Signup = () => {
         {show === true ? (
           <div className="w-full flex justify-center items-center">
             <input
-              className=" outline-none    w-full h-[50px] my-[10px] rounded-xl px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
+              className=" outline-none    w-full h-[50px] mb-[7px] rounded-2xl px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
               placeholder="Password"
               type="text"
               value={password}
@@ -171,7 +187,7 @@ const Signup = () => {
         ) : (
           <div className="w-full flex justify-center items-center">
             <input
-              className=" outline-none    w-full h-[50px] my-[10px] rounded-xl px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
+              className=" outline-none    w-full h-[50px] mb-[7px] rounded-2xl px-[15px] font-[google] font-normal text-[14px] text-[black] bg-[#e4eaf1] log"
               placeholder="Password"
               type="password"
               value={password}
@@ -195,8 +211,12 @@ const Signup = () => {
         >
           Signup
         </button> */}
+        <div className="w-full flex justify-end items-center font-[google] font-normal mt-0 text-[15px] text-[#fc4506]">
+          {error}
+        </div>
+
         <button
-          className="w-full h-[50px] text-[#ffffff] text-[17px] font-medium font-[google] outline-none flex justify-center items-center bg-[#000000] hover:bg-[#000000]  rounded-xl mt-[30px]"
+          className="w-full h-[50px] text-[#000000] text-[17px] font-medium font-[google] outline-none flex justify-center items-center bg-[#96df73]  rounded-2xl mt-[15px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signUp}

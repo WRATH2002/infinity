@@ -24,8 +24,8 @@ const Sidebar = () => {
           className={
             " w-full lg:w-[400px] md:w-[400px] h-full  fixed lg:relative md:relative flex flex-col justify-start items-center z-10" +
             (theme
-              ? " md:bg-[#e4eaf1] lg:bg-[#e4eaf1] bg-[#e4eaf1]"
-              : " md:bg-[#292f3f] lg:bg-[#292f3f] bg-[#1B202D]")
+              ? " md:bg-[#e4eaf1] lg:bg-[#e4eaf1] bg-[#e4eaf1] border-[#d9dde1]"
+              : " md:bg-[#17171a] lg:bg-[#17171a] bg-[#17171a] border-[#292f3f]")
           }
           // style={{ transition: ".5s" }}
         >
@@ -40,7 +40,7 @@ const Sidebar = () => {
             " w-0 lg:w-[400px] md:w-[400px] h-full  fixed lg:relative md:relative flex flex-col justify-start items-center z-0 border-r-[1.5px] " +
             (theme
               ? " md:bg-[#e4eaf1] lg:bg-[#e4eaf1] bg-[#e4eaf1] border-[#d9dde1]"
-              : " md:bg-[#292f3f] lg:bg-[#292f3f] bg-[#252a38] border-[#292f3f]")
+              : " md:bg-[#17171a] lg:bg-[#17171a] bg-[#17171a] border-[#292f3f]")
           }
           // style={{ transition: ".5s" }}
         >

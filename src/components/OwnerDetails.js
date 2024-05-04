@@ -192,7 +192,7 @@ const OwnerDetails = (props) => {
           "w-full md:w-[400px] lg:w-[400px] h-[80px] fixed top-0 flex   justify-between items-center px-[10px] overflow-hidden py-[10px] z-0" +
           (theme
             ? " md:bg-[#e4eaf1] lg:bg-[#e4eaf1] bg-[#e4eaf1]"
-            : "bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f] ")
+            : "bg-[#17171a] md:bg-[#17171a] lg:bg-[#17171a] ")
         }
       >
         {ActiveChatUser.length === 0 ? (
@@ -202,7 +202,7 @@ const OwnerDetails = (props) => {
                 "text-[18px] font-[google] font-medium  w-full h-full flex justify-between items-center px-[10px] rounded-2xl z-0 pl-[20px]" +
                 (theme
                   ? " bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff] text-[#000000]"
-                  : " bg-[#292f3f] md:bg-[#1B202D] lg:bg-[#1B202D] text-[#ffffff]")
+                  : " bg-[#222228] md:bg-[#222228] lg:bg-[#222228] text-[#ffffff]")
               }
             >
               <div>
@@ -219,7 +219,12 @@ const OwnerDetails = (props) => {
                 ) : props.data === "Status" ? (
                   <span className="flex justify-start items-center">
                     <LuCircleDashed className="text-[20px]   mr-[10px]" />
-                    <div className="w-[11px] h-[11px] bg-black rounded-full ml-[-25.5px] mr-[11px]"></div>
+                    <div
+                      className={
+                        "w-[11px] h-[11px] rounded-full ml-[-25.5px] mr-[11px]" +
+                        (theme ? " bg-black " : " bg-white")
+                      }
+                    ></div>
                     Status's ( 1 )
                   </span>
                 ) : props.data === "Group" ? (
@@ -322,7 +327,7 @@ const OwnerDetails = (props) => {
                 "text-[18px] font-[google] font-medium w-full h-full hidden md:flex lg:flex  justify-between items-center px-[10px] rounded-2xl z-0 pl-[20px]" +
                 (theme
                   ? "bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff] text-[#000000]"
-                  : "bg-[#292f3f] md:bg-[#1B202D] lg:bg-[#1B202D] text-[#ffffff]")
+                  : "bg-[#222228] md:bg-[#222228] lg:bg-[#222228] text-[#ffffff]")
               }
             >
               <div>
@@ -339,7 +344,12 @@ const OwnerDetails = (props) => {
                 ) : props.data === "Status" ? (
                   <span className="flex justify-start items-center">
                     <LuCircleDashed className="text-[20px]   mr-[10px]" />
-                    <div className="w-[11px] h-[11px] bg-black rounded-full ml-[-25.5px] mr-[11px]"></div>
+                    <div
+                      className={
+                        "w-[11px] h-[11px] rounded-full ml-[-25.5px] mr-[11px]" +
+                        (theme ? " bg-black " : " bg-white")
+                      }
+                    ></div>
                     Status's ( 0 )
                   </span>
                 ) : props.data === "Group" ? (

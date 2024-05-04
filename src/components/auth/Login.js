@@ -19,22 +19,30 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState("false");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
 
   const signIn = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-      })
-      .catch((error) => {
-        toast.error("Invalid Login Credentials");
-        console.log(error);
-        // toast.error(error.message);
-        // console.log(error);
-        // console.log(error.message);
-      });
+    if (!email.includes("@gmail.com")) {
+      setError("Email must contain '@gmail.com'");
+    } else if (password.length < 8) {
+      setError("Password should be atleast 8 characters");
+    } else {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          console.log(userCredential);
+        })
+        .catch((error) => {
+          // toast.error("Invalid Login Credentials");
+          console.log(error);
+          setError("Oops! Invalid Login Credentials");
+          // toast.error(error.message);
+          // console.log(error);
+          // console.log(error.message);
+        });
+    }
   };
   function changeMode() {
     dispatch(toggleStateMode(2));
@@ -80,24 +88,30 @@ const Login = () => {
           }}
         ></input> */}
         <input
-          className="log outline-none font-[google] mt-[40px] bg  text-[16px] w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[black] bg-[#e4eaf1]"
+          className="log outline-none font-[google] mt-[40px] bg  text-[16px] w-full h-[50px] my-[10px] rounded-2xl px-[15px] font-normal  text-[black] bg-[#e4eaf1]"
           placeholder="Email"
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setError("");
+          }}
         ></input>
 
         {show === true ? (
           <div className="w-full flex justify-center items-center">
             <input
-              className=" log outline-none font-[google]  text-[16px]  w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[black] bg-[#e4eaf1] placeholder:black"
+              className=" log outline-none font-[google]  text-[16px]  w-full h-[50px] mb-[7px] rounded-2xl px-[15px] font-normal  text-[black] bg-[#e4eaf1] placeholder:black"
               placeholder="Password"
               type="text"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setError("");
+              }}
             ></input>
             <div
-              className="w-[50px] h-[40px] ml-[-50px] flex justify-center items-center"
+              className="w-[50px] h-[50px] ml-[-50px] flex justify-center items-center"
               onClick={() => {
                 setShow(!show);
               }}
@@ -108,14 +122,17 @@ const Login = () => {
         ) : (
           <div className="w-full flex justify-center items-center">
             <input
-              className="log outline-none font-[google] text-[14px]   w-full h-[50px] my-[10px] rounded-xl px-[15px] font-normal  text-[black] bg-[#e4eaf1] placeholder:black"
+              className="log outline-none font-[google] text-[14px]   w-full h-[50px] mb-[7px] rounded-2xl px-[15px] font-normal  text-[black] bg-[#e4eaf1] placeholder:black"
               placeholder="Password"
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setError("");
+              }}
             ></input>
             <div
-              className="w-[50px] h-[40px] ml-[-50px] flex justify-center items-center"
+              className="w-[50px] h-[50px] ml-[-50px] flex justify-center items-center"
               onClick={() => {
                 setShow(!show);
               }}
@@ -137,8 +154,11 @@ const Login = () => {
         {/* <div className=" font-[google] mt-[20px] bg  text-[15px] w-full h-[10px]  flex justify-start items-center rounded-xl  font-normal  text-[#ff483f] ">
           * forgot password ?
         </div> */}
+        <div className="w-full flex justify-end items-center font-[google] font-normal mt-0 text-[15px] text-[#fc4506]">
+          {error}
+        </div>
         <button
-          className="w-full h-[50px] text-[17px] text-[#ffffff] font-[google] font-medium outline-none flex justify-center items-center bg-[#000000]  rounded-xl mt-[10px]"
+          className="w-full h-[50px] text-[17px] text-[#000000] font-[google] font-medium outline-none flex justify-center items-center bg-[#96df73]  rounded-2xl mt-[15px]"
           style={{ transition: ".3s" }}
           type="submit"
           onClick={signIn}

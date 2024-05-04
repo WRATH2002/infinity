@@ -25,7 +25,7 @@ font-family: 'Rubik', sans-serif; */
 .borderGrad {
   border: 2.4px solid transparent;
   background: linear-gradient(to left, #2e9df6, #975ba3) border-box;
-  border-radius: 50em;
+  border-radius: 23px;
   /* padding: 25px; */
 }
 

@@ -423,7 +423,7 @@ export const UserInfo = () => {
                   {/* {arr.map((item) => {
                         return (
                           <> */}
-                  {arr.length != 0 && timer == true ? (
+                  {/* {arr.length != 0 && timer == true ? (
                     <>
                       <div
                         className="w-full h-auto flex mt-[0]  justify-center items-center px-[10px] fixed top-[10px]"
@@ -480,7 +480,7 @@ export const UserInfo = () => {
                         </div>
                       </div>
                     </>
-                  )}
+                  )} */}
                   {/* </>
                         );
                       })} */}
@@ -602,7 +602,7 @@ export const UserInfo = () => {
                 <div
                   className={
                     "fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[100%]  flex justify-center items-center    backdrop-blur-md top-[0px] " +
-                    (theme ? " bg-[#e4eaf16d]" : " bg-[#000000a2]")
+                    (theme ? " bg-[#e4eaf16d]" : " bg-[#17171a25]")
                   }
                   style={{ zIndex: "100" }}
                   onClick={() => {
@@ -612,10 +612,10 @@ export const UserInfo = () => {
                 >
                   <div
                     className={
-                      " text-[15px] w-[320px] lg:w-[450px] md:w-[450px] h-[220px] rounded-2xl flex flex-col justify-center items-center " +
+                      " text-[15px] w-[320px] lg:w-[450px] md:w-[450px] h-[220px] rounded-3xl flex flex-col justify-center items-center " +
                       (theme
                         ? " bg-[#ffffff] text-black"
-                        : " bg-[#292f3f] text-white")
+                        : " bg-[#222228] text-white")
                     }
                   >
                     <div className="w-full rounded-xl  flex justify-start items-center px-[40px]">
@@ -623,7 +623,12 @@ export const UserInfo = () => {
                         Clear this Chat?
                       </span>
                     </div>
-                    <div className="w-full mt-[10px] rounded-xl font-[work] text-[#343434]  flex justify-center items-center px-[40px]">
+                    <div
+                      className={
+                        "w-full mt-[10px] rounded-xl font-[work] flex justify-center items-center px-[40px]" +
+                        (theme ? " text-[#343434]" : " text-[#afafaf]")
+                      }
+                    >
                       <span className="  font-light ">
                         ⚠️&nbsp; All the chats and media will be deleted. Are
                         you sure?
@@ -635,7 +640,7 @@ export const UserInfo = () => {
                           "w-[calc((100%-20px)/2)] h-[45px]    cursor-pointer  font-[google] font-light   rounded-2xl" +
                           (theme
                             ? " bg-[#e4eaf1] text-[#000000]"
-                            : " bg-[#1b202d] text-[#ffffff]")
+                            : " bg-[#17171a] text-[#ffffff]")
                         }
                         onClick={() => {
                           // console.log("clicked");
@@ -664,7 +669,7 @@ export const UserInfo = () => {
                 <div
                   className={
                     "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[calc(100svh-200px)]  top-[190px] flex flex-col justify-start items-center rounded-2xl py-[20px] pb-[10px] px-[15px]" +
-                    (theme ? " bg-[#ffffff]" : " bg-[#292f3f]")
+                    (theme ? " bg-[#ffffff]" : " bg-[#222228]")
                   }
                   style={{ zIndex: "100", transition: ".4s" }}
                 >
@@ -710,17 +715,26 @@ export const UserInfo = () => {
                   >
                     {mediaOption === "Photos" ? (
                       <div
-                        className="w-[calc(100%/3)]  ml-[calc(100%/3)]  h-full flex justify-center items-center rounded-lg bg-[#e4eaf1]"
+                        className={
+                          "w-[calc(100%/3)]  ml-[calc(100%/3)]  h-full flex justify-center items-center rounded-lg " +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
                         style={{ transition: ".2s" }}
                       ></div>
                     ) : mediaOption === "Videos" ? (
                       <div
-                        className="w-[calc(100%/3)] ml-[calc((100%/3)*2)] h-full flex justify-center items-center rounded-lg bg-[#e4eaf1]"
+                        className={
+                          "w-[calc(100%/3)] ml-[calc((100%/3)*2)] h-full flex justify-center items-center rounded-lg " +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
                         style={{ transition: ".2s" }}
                       ></div>
                     ) : (
                       <div
-                        className="w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg bg-[#e4eaf1]"
+                        className={
+                          "w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg " +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
                         style={{ transition: ".2s" }}
                       ></div>
                     )}
@@ -735,7 +749,12 @@ export const UserInfo = () => {
                               {!link.docName ? (
                                 <div className="w-[calc(100%/3)] lg:w-[calc(100%/5)] md:w-[calc(100%/3)] aspect-square rounded-2xl p-[5px]">
                                   <img
-                                    className="object-cover w-full h-full bg-[#e4eaf1] rounded-xl"
+                                    className={
+                                      "object-cover w-full h-full rounded-xl" +
+                                      (theme
+                                        ? " bg-[#e4eaf1]"
+                                        : " bg-[#17171a]")
+                                    }
                                     src={link?.url}
                                   ></img>
                                 </div>
@@ -753,10 +772,10 @@ export const UserInfo = () => {
                                 <>
                                   <div
                                     className={
-                                      "w-full h-[50px] font-[google] font-normal flex justify-start items-center text-[15px] px-[5px] rounded-xl hover:bg-[#e4eaf1] " +
+                                      "w-full h-[50px] font-[google] font-normal flex justify-start items-center text-[15px] px-[5px] rounded-xl  " +
                                       (theme
-                                        ? " text-[#b21313]"
-                                        : " text-[white]")
+                                        ? " text-[#b21313] hover:bg-[#e4eaf1]"
+                                        : " text-[#04bdb6] hover:bg-[#17171a]")
                                     }
                                   >
                                     {link?.docName
@@ -880,7 +899,7 @@ export const UserInfo = () => {
                 <div
                   className={
                     "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[0px]  top-[190px] flex flex-col justify-start items-center rounded-2xl py-[0px] pb-[0px] px-[15px] overflow-hidden " +
-                    (theme ? " bg-[#ffffff]" : " bg-[#292f3f]")
+                    (theme ? " bg-[#ffffff]" : " bg-[#222228]")
                   }
                   style={{ zIndex: "100", transition: ".4s" }}
                 >
@@ -926,17 +945,26 @@ export const UserInfo = () => {
                   >
                     {mediaOption === "Photos" ? (
                       <div
-                        className="w-[calc(100%/3)]  ml-[calc(100%/3)]  h-full flex justify-center items-center rounded-lg bg-[#e4eaf1]"
+                        className={
+                          "w-[calc(100%/3)]  ml-[calc(100%/3)]  h-full flex justify-center items-center rounded-lg " +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
                         style={{ transition: ".2s" }}
                       ></div>
                     ) : mediaOption === "Videos" ? (
                       <div
-                        className="w-[calc(100%/3)] ml-[calc((100%/3)*2)] h-full flex justify-center items-center rounded-lg bg-[#e4eaf1]"
+                        className={
+                          "w-[calc(100%/3)] ml-[calc((100%/3)*2)] h-full flex justify-center items-center rounded-lg " +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
                         style={{ transition: ".2s" }}
                       ></div>
                     ) : (
                       <div
-                        className="w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg bg-[#e4eaf1]"
+                        className={
+                          "w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg " +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
                         style={{ transition: ".2s" }}
                       ></div>
                     )}
@@ -969,7 +997,7 @@ export const UserInfo = () => {
                                 <>
                                   <div
                                     className={
-                                      "w-full h-[50px] font-[google] font-normal flex justify-start items-center text-[15px] px-[5px] rounded-xl hover:bg-[#e4eaf1] " +
+                                      "w-full h-[50px] font-[google] font-normal flex justify-start items-center text-[15px] px-[5px] rounded-xl  " +
                                       (theme
                                         ? " text-[black]"
                                         : " text-[white]")
@@ -1086,21 +1114,30 @@ export const UserInfo = () => {
                   </div>
                 </div>
               )}
+              <div
+                className={
+                  "w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] z-30 fixed top-0" +
+                  (theme ? " h-[80px] bg-[#e4eaf1]" : " h-[80px] bg-[#17171a]")
+                }
+              ></div>
 
               <div
                 className={
                   "w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  z-50  fixed top-0 flex justify-center items-start p-[10px] backdrop-blur-md overflow-visible" +
-                  (theme ? "  " : " bg-[#1b202d]") +
-                  (expand
-                    ? " h-[100svh] bg-[#e4eaf16d] "
-                    : " h-[80px] bg-[#e4eaf1]")
+                  (theme
+                    ? expand
+                      ? " h-[100svh] bg-[#e4eaf16d] "
+                      : " h-[80px] bg-[#e4eaf1]"
+                    : expand
+                    ? " h-[100svh] bg-[#17171a25] "
+                    : " h-[80px] bg-[#17171a]")
                 }
               >
                 {expand == true ? (
                   <div
                     className={
                       "w-full h-[170px] z-50  rounded-2xl  top-0 flex justify-between items-center p-[20px] " +
-                      (theme ? " bg-[#ffffff]" : " bg-[#292f3f]")
+                      (theme ? " bg-[#ffffff]" : " bg-[#282828]")
                     }
                     style={{ transition: ".4s" }}
                   >
@@ -1153,7 +1190,7 @@ export const UserInfo = () => {
                     <div
                       className={
                         "w-[130px] h-[130px]  rounded-full cursor-pointer  ml-[-17px]  text-white " +
-                        (theme ? " bg-[#e4eaf1]" : " bg-[#21323a]")
+                        (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
                       }
                       style={{
                         transition: ".4s",
@@ -1277,7 +1314,7 @@ export const UserInfo = () => {
                         </>
                       )} */}
                       <span
-                        className="w-auto pl-[10px] pr-[3.5px] mt-[10px] h-[30px] rounded-3xl bg-[#04bdb6] text-white text-[14px]  font-[work] font-light flex justify-center items-center"
+                        className="w-auto pl-[10px] pr-[3.5px] mt-[10px] h-[30px] rounded-3xl overflow-hidden bg-[#04bdb6] text-white text-[14px]  font-[work] font-light flex justify-center items-center"
                         onClick={() => {
                           // setUserSidebar(!userSidebar);
                           setMediaShow(!mediaShow);
@@ -1332,7 +1369,14 @@ export const UserInfo = () => {
                       }}
                     >
                       <div className="group flex justify-end items-center">
-                        <div className="hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px] font-[work] font-normal bg-[#292f3f] text-[white]">
+                        <div
+                          className={
+                            "hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px] font-[work] font-normal " +
+                            (theme
+                              ? " bg-[#e4eaf1] text-black"
+                              : " bg-[#17171a] text-white")
+                          }
+                        >
                           Delete Chats
                         </div>
                         <MdDelete
@@ -1350,7 +1394,7 @@ export const UserInfo = () => {
                       "w-full h-[60px] z-50  rounded-2xl  top-0 flex justify-between items-center px-[20px]" +
                       (theme
                         ? " bg-[#ffffff] text-[black]"
-                        : " bg-[#292f3f] text-[white]")
+                        : " bg-[#282828] text-[white]")
                     }
                     style={{ transition: ".4s", transitionDelay: ".4s" }}
                     // onClick={() => {
@@ -1379,7 +1423,7 @@ export const UserInfo = () => {
                             "w-[12px] max-h-[12px] min-h-[12px]   rounded-full flex justify-center items-center   z-10 " +
                             (theme
                               ? " bg-[#ffffff] md:bg-[#ffffff] lg:bg-[#ffffff]"
-                              : " bg-[#1B202D] md:bg-[#292f3f] lg:bg-[#292f3f]")
+                              : " bg-[#282828] md:bg-[#282828] lg:bg-[#282828]")
                           }
                           // style={{ zIndex: "100" }}
                         >
@@ -1401,7 +1445,7 @@ export const UserInfo = () => {
                         "w-[50px] h-[50px]  rounded-full cursor-pointer  ml-[-17px]   " +
                         (theme
                           ? " bg-[#e4eaf1] text-black"
-                          : " bg-[#21323a] text-white")
+                          : " bg-[#17171a] text-white")
                       }
                       style={{
                         transition: ".4s",
@@ -1591,7 +1635,14 @@ export const UserInfo = () => {
                       }}
                     >
                       <div className="group flex justify-end items-center">
-                        <div className="hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px] font-[work] font-normal bg-[#292f3f] text-[white]">
+                        <div
+                          className={
+                            "hidden justify-center items-center group-hover:flex z-30 overflow-hidden w-[0] lg:w-[100px] md:w-[100px] mr-[10px] rounded-lg h-[30px]  text-[14px] font-[work] font-normal " +
+                            (theme
+                              ? " bg-[#e4eaf1] text-black"
+                              : " bg-[#17171a] text-white")
+                          }
+                        >
                           Delete Chats
                         </div>
                         <MdDelete
@@ -1628,7 +1679,12 @@ export const UserInfo = () => {
             </div>
 
             <div className="w-full h-[calc(100%-70px)]  flex flex-col justify-center items-center">
-              <div className="w-[150px] lg:w-[200px] md:w-[200px] h-[150px] lg:h-[200px] md:h-[200px] rounded-full bg-[#cdd8dd]  ">
+              <div
+                className={
+                  "w-[150px] lg:w-[200px] md:w-[200px] h-[150px] lg:h-[200px] md:h-[200px] rounded-full   " +
+                  (theme ? " bg-[#cdd8dd]" : " bg-[#17171a]")
+                }
+              >
                 {/* <span>Photo</span> */}
                 {chatUserPhoto === "nophoto" ? (
                   <img
