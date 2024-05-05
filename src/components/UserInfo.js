@@ -26,8 +26,8 @@ import { saveAs } from "file-saver";
 import toast, { Toaster, useToaster } from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 import del from "../assets/img/delete2.png";
-import { IoMdVideocam } from "react-icons/io";
-import { LuChevronRight } from "react-icons/lu";
+import { IoIosInformationCircle, IoMdVideocam } from "react-icons/io";
+import { LuChevronRight, LuRefreshCw } from "react-icons/lu";
 import { RiMessage2Fill } from "react-icons/ri";
 import { BsFiletypeJpg } from "react-icons/bs";
 import { BsFiletypePng } from "react-icons/bs";
@@ -44,6 +44,7 @@ import { BsFileEarmarkZip } from "react-icons/bs";
 import { BsFileEarmarkMusic } from "react-icons/bs";
 import { BsFileEarmarkPlay } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
+import { TiLockClosed, TiLockOpen } from "react-icons/ti";
 // import {MdCall} from "react-icons/md";
 
 // import { FaAngleLeft } from "react-icons/fa6";
@@ -181,6 +182,16 @@ export const UserInfo = () => {
   const [theme, setTheme] = useState(true);
   const [mediaOption, setMediaOption] = useState("Documents");
   const [mediaShow, setMediaShow] = useState(false);
+  const [chatLockModal, setChatLockModal] = useState(false);
+  const [lock, setLock] = useState(false);
+  const [inp1, setIn1] = useState("");
+  const [inp2, setIn2] = useState("");
+  const [inp3, setIn3] = useState("");
+  const [inp4, setIn4] = useState("");
+  const [reLock, setReLock] = useState();
+  const [PassCode, setPassCode] = useState("");
+  const [er, setEr] = useState("");
+  const [chatUnlockModal, setChatUnlockModal] = useState(false);
 
   useEffect(() => {
     const user = firebase.auth().currentUser;
@@ -386,7 +397,11 @@ export const UserInfo = () => {
     if (ActiveChatUser.length !== 0) {
       fetchOnlineStatus();
     }
-  }, []);
+    setLock(false);
+    setChatLockModal(false);
+    setChatUnlockModal(false);
+    setEr("");
+  }, [ActiveChatUser]);
 
   function fetchOnlineStatus() {
     const user = firebase.auth().currentUser;
@@ -394,10 +409,68 @@ export const UserInfo = () => {
     onSnapshot(userDoc, (snapshot) => {
       setIsOnline(snapshot?.data()?.Online);
       console.log(snapshot?.data()?.Online);
+      // setLock(snapshot?.data?.ChatLock);
+    });
+
+    const userChatLock = db
+      .collection("Chat Record")
+      .doc(user.uid)
+      .collection("Chat Friends")
+      .doc(ActiveChatUser);
+    onSnapshot(userChatLock, (snapshot) => {
+      //  setIsOnline(snapshot?.data()?.Online);
+      //  console.log(snapshot?.data()?.Online);
+      setReLock(snapshot?.data()?.ChatLock);
+      setPassCode(snapshot?.data()?.ChatPassCode);
     });
   }
 
   const [isOnline, setIsOnline] = useState(false);
+
+  function checkInput(data) {
+    let last = data.slice(-1);
+    setEr("");
+    if (inp1.length === 0) {
+      setIn1(last);
+    } else if (inp2.length === 0) {
+      setIn2(last);
+    } else if (inp3.length === 0) {
+      setIn3(last);
+    } else if (inp4.length === 0) {
+      setIn4(last);
+    }
+  }
+
+  function updateChatLock() {
+    // let
+    const user = firebase.auth().currentUser;
+    db.collection("Chat Record")
+      .doc(user.uid)
+      .collection("Chat Friends")
+      .doc(ActiveChatUser)
+      .update({
+        ChatLock: true,
+        ChatPassCode: inp1 + inp2 + inp3 + inp4,
+      });
+  }
+
+  function checkChatLock() {
+    const user = firebase.auth().currentUser;
+    if (PassCode === inp1 + inp2 + inp3 + inp4) {
+      db.collection("Chat Record")
+        .doc(user.uid)
+        .collection("Chat Friends")
+        .doc(ActiveChatUser)
+        .update({
+          ChatLock: false,
+          ChatPassCode: "",
+        });
+
+      setChatUnlockModal(false);
+    } else {
+      setEr("Wrong PassCode");
+    }
+  }
 
   return (
     <>
@@ -1114,6 +1187,408 @@ export const UserInfo = () => {
                   </div>
                 </div>
               )}
+
+              {chatUnlockModal === true ? (
+                <div
+                  className="w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[calc(100svh-200px)]  top-[190px] flex flex-col justify-center items-center  p-[20px] z-50 font-[google] font-normal"
+                  style={{ zIndex: "100" }}
+                >
+                  <div
+                    className={
+                      "w-[320px] flex flex-col justify-start items-start rounded-3xl p-[20px]" +
+                      (theme
+                        ? " bg-[#ffffff] text-black"
+                        : " bg-[#222228] text-white")
+                    }
+                  >
+                    <div className="w-full rounded-xl  flex justify-start items-center px-[10px]">
+                      <span className="w-full flex justify-start items-center font-[google] font-medium text-[22px] ">
+                        Remove Chat Lock ?
+                      </span>
+                    </div>
+                    <div
+                      className={
+                        "w-full mt-[10px] rounded-xl font-[work]  flex justify-center items-center px-[10px]" +
+                        (theme ? " text-[#343434] " : " text-[#afafaf]")
+                      }
+                    >
+                      <span className="  font-light ">
+                        ⚠️&nbsp; Chat Lock will be removed from this chat.
+                        Anyone can see the content of the chat. Are you sure?
+                      </span>
+                    </div>
+                    <div
+                      className="w-full px-[10px] mt-[10px] flex justify-between items-center font-[google] font-light  text-[16px] cursor-pointer"
+                      // onClick={() => {
+                      //   // changeAccountStatus();
+                      //   setLock(!lock);
+                      //   setIn1("");
+                      //   setIn2("");
+                      //   setIn3("");
+                      //   setIn4("");
+                      // }}
+                    >
+                      <div className="flex justify-start items-center">
+                        Enter the PassCode
+                      </div>
+                      {/* <div
+                        className={
+                          "w-[32px] h-[22px] rounded-full flex items-center justify-start  border  " +
+                          (lock ? "border-[#b7bcc0]" : "border-[#8981f7]")
+                        }
+                      >
+                        {!lock ? (
+                          <div
+                            className="w-[16px] h-[16px] rounded-full ml-[3px] bg-[#b7bcc0] "
+                            style={{ transition: ".4s" }}
+                          ></div>
+                        ) : (
+                          <div
+                            className="w-[16px] h-[16px] rounded-full ml-[12px] bg-[#8981f7] "
+                            style={{ transition: ".4s" }}
+                          ></div>
+                        )}
+                      </div> */}
+                    </div>
+                    <div
+                      className="w-full  mt-[15px] flex justify-center items-center ml-[17px] overflow-hidden h-[45px]"
+
+                      // style={{ transition: ".3s" }}
+                    >
+                      <input
+                        value={inp1}
+                        onChange={(e) => {
+                          console.log(e);
+                          // setEe(e);
+                          checkInput(e.target.value);
+                        }}
+                        className={
+                          "h-full w-[35px] rounded-lg outline-none flex justify-center items-center px-[11px] text-[20px] caret-transparent" +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
+                      ></input>
+                      <input
+                        value={inp2}
+                        onChange={(e) => {
+                          console.log(e);
+                          checkInput(e.target.value);
+                        }}
+                        className={
+                          "h-full w-[35px] ml-[5px] rounded-lg outline-none flex justify-center items-center px-[11px] text-[20px] caret-transparent" +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
+                      ></input>
+                      <input
+                        value={inp3}
+                        onChange={(e) => {
+                          console.log(e);
+                          checkInput(e.target.value);
+                        }}
+                        className={
+                          "h-full w-[35px] ml-[5px] rounded-lg outline-none flex justify-center items-center px-[11px] text-[20px] caret-transparent" +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
+                      ></input>
+                      <input
+                        value={inp4}
+                        onChange={(e) => {
+                          console.log(e);
+                          checkInput(e.target.value);
+                        }}
+                        className={
+                          "h-full w-[35px] ml-[5px] rounded-lg outline-none flex justify-center items-center px-[11px] text-[20px] caret-transparent" +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
+                      ></input>
+                      <div
+                        onClick={() => {
+                          // console.log("clicked");
+                          // deleteChatUser();
+                          setIn1("");
+                          setIn2("");
+                          setIn3("");
+                          setIn4("");
+                          setEr("");
+                        }}
+                      >
+                        <LuRefreshCw
+                          className={
+                            "text-[21px] ml-[15px] " +
+                            (theme ? " text-black" : " text-white")
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full px-[10px] mt-[10px] flex justify-center text-[#ff653b] items-center font-[google] font-light  text-[14px] cursor-pointer">
+                      {/* <div className="flex justify-start items-center"> */}
+                      {er.length === 0 ? <></> : <>{er}</>}
+                      {/* </div> */}
+                    </div>
+                    <div className=" h-[45px] w-full mt-[15px] flex justify-between items-center px-[10px] mb-[10px] rounded-xl">
+                      <button
+                        className={
+                          "w-[calc((100%-20px)/2)] h-[45px]    cursor-pointer  font-[google] font-light   rounded-2xl" +
+                          (theme
+                            ? " bg-[#e4eaf1] text-[#000000]"
+                            : " bg-[#17171a] text-[#ffffff]")
+                        }
+                        onClick={() => {
+                          // console.log("clicked");
+                          // setConfirmDelete(false);
+                          // setChatLockModal(false);
+                          // setLock(false);
+                          setChatUnlockModal(false);
+                          setIn1("");
+                          setIn2("");
+                          setIn3("");
+                          setIn4("");
+                          setEr("");
+                        }}
+                      >
+                        Close
+                      </button>
+                      {(inp1 + inp2 + inp3 + inp4).length === 4 ? (
+                        <button
+                          className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#96df73]  rounded-2xl"
+                          onClick={() => {
+                            // console.log("clicked");
+                            // deleteChatUser();
+                            checkChatLock();
+                            // setChatLockModal(false);
+                            // setLock(false);
+                            setIn1("");
+                            setIn2("");
+                            setIn3("");
+                            setIn4("");
+                            // setEr("");
+                          }}
+                        >
+                          Remove Lock
+                        </button>
+                      ) : (
+                        <button
+                          className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#95df7394]  rounded-2xl"
+                          onClick={() => {
+                            // console.log("clicked");
+                            // deleteChatUser();
+                            // checkChatLock();
+                            // // setChatLockModal(false);
+                            // // setLock(false);
+                            // setIn1("");
+                            // setIn2("");
+                            // setIn3("");
+                            // setIn4("");
+                            // setEr("");
+                          }}
+                        >
+                          Remove Lock
+                        </button>
+                      )}
+                    </div>
+                    {/* {ee} */}
+                  </div>
+                </div>
+              ) : (
+                <></>
+              )}
+
+              {chatLockModal === true ? (
+                <div
+                  className="w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[calc(100svh-200px)]  top-[190px] flex flex-col justify-center items-center  p-[20px] z-50 font-[google] font-normal"
+                  style={{ zIndex: "100" }}
+                >
+                  <div
+                    className={
+                      "w-[320px] flex flex-col justify-start items-start rounded-3xl p-[20px]" +
+                      (theme
+                        ? " bg-[#ffffff] text-black"
+                        : " bg-[#222228] text-white")
+                    }
+                  >
+                    <div className="w-full rounded-xl  flex justify-start items-center px-[10px]">
+                      <span className="w-full flex justify-start items-center font-[google] font-medium text-[22px] ">
+                        Enable Chat Lock ?
+                      </span>
+                    </div>
+                    <div
+                      className={
+                        "w-full mt-[10px] rounded-xl font-[work]  flex justify-center items-center px-[10px]" +
+                        (theme ? " text-[#343434] " : " text-[#afafaf]")
+                      }
+                    >
+                      <span className="  font-light ">
+                        ⚠️&nbsp; Every time you open this chat, you will have to
+                        verify using PIN that you will give for PassCode below.
+                        Are you sure?
+                      </span>
+                    </div>
+                    <div
+                      className="w-full px-[10px] mt-[10px] flex justify-between items-center font-[google] font-light  text-[16px] cursor-pointer"
+                      onClick={() => {
+                        // changeAccountStatus();
+                        setLock(!lock);
+                        setIn1("");
+                        setIn2("");
+                        setIn3("");
+                        setIn4("");
+                      }}
+                    >
+                      <div className="flex justify-start items-center">
+                        Enable Chat Lock
+                      </div>
+                      <div
+                        className={
+                          "w-[32px] h-[22px] rounded-full flex items-center justify-start  border  " +
+                          (lock ? "border-[#b7bcc0]" : "border-[#8981f7]")
+                        }
+                      >
+                        {!lock ? (
+                          <div
+                            className="w-[16px] h-[16px] rounded-full ml-[3px] bg-[#b7bcc0] "
+                            style={{ transition: ".4s" }}
+                          ></div>
+                        ) : (
+                          <div
+                            className="w-[16px] h-[16px] rounded-full ml-[12px] bg-[#8981f7] "
+                            style={{ transition: ".4s" }}
+                          ></div>
+                        )}
+                      </div>
+                    </div>
+                    <div
+                      className={
+                        "w-full  mt-[15px] flex justify-center items-center ml-[17px] overflow-hidden" +
+                        (lock ? " h-[45px]" : " h-[0px]")
+                      }
+                      // style={{ transition: ".3s" }}
+                    >
+                      <input
+                        value={inp1}
+                        onChange={(e) => {
+                          console.log(e);
+                          // setEe(e);
+                          checkInput(e.target.value);
+                        }}
+                        className={
+                          "h-full w-[35px] rounded-lg outline-none flex justify-center items-center px-[11px] text-[20px] caret-transparent" +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
+                      ></input>
+                      <input
+                        value={inp2}
+                        onChange={(e) => {
+                          console.log(e);
+                          checkInput(e.target.value);
+                        }}
+                        className={
+                          "h-full w-[35px] ml-[5px] rounded-lg outline-none flex justify-center items-center px-[11px] text-[20px] caret-transparent" +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
+                      ></input>
+                      <input
+                        value={inp3}
+                        onChange={(e) => {
+                          console.log(e);
+                          checkInput(e.target.value);
+                        }}
+                        className={
+                          "h-full w-[35px] ml-[5px] rounded-lg outline-none flex justify-center items-center px-[11px] text-[20px] caret-transparent" +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
+                      ></input>
+                      <input
+                        value={inp4}
+                        onChange={(e) => {
+                          console.log(e);
+                          checkInput(e.target.value);
+                        }}
+                        className={
+                          "h-full w-[35px] ml-[5px] rounded-lg outline-none flex justify-center items-center px-[11px] text-[20px] caret-transparent" +
+                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        }
+                      ></input>
+                      <div
+                        onClick={() => {
+                          // console.log("clicked");
+                          // deleteChatUser();
+                          setIn1("");
+                          setIn2("");
+                          setIn3("");
+                          setIn4("");
+                        }}
+                      >
+                        <LuRefreshCw
+                          className={
+                            "text-[21px] ml-[15px] " +
+                            (theme ? " text-black" : " text-white")
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div className=" h-[45px] w-full mt-[15px] flex justify-between items-center px-[10px] mb-[10px] rounded-xl">
+                      <button
+                        className={
+                          "w-[calc((100%-20px)/2)] h-[45px]    cursor-pointer  font-[google] font-light   rounded-2xl" +
+                          (theme
+                            ? " bg-[#e4eaf1] text-[#000000]"
+                            : " bg-[#17171a] text-[#ffffff]")
+                        }
+                        onClick={() => {
+                          // console.log("clicked");
+                          // setConfirmDelete(false);
+                          setChatLockModal(false);
+                          setLock(false);
+                          setIn1("");
+                          setIn2("");
+                          setIn3("");
+                          setIn4("");
+                        }}
+                      >
+                        Close
+                      </button>
+                      {lock === true &&
+                      (inp1 + inp2 + inp3 + inp4).length === 4 ? (
+                        <button
+                          className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#96df73]  rounded-2xl"
+                          onClick={() => {
+                            // console.log("clicked");
+                            // deleteChatUser();
+                            updateChatLock();
+                            setChatLockModal(false);
+                            setLock(false);
+                            setIn1("");
+                            setIn2("");
+                            setIn3("");
+                            setIn4("");
+                          }}
+                        >
+                          Set Lock
+                        </button>
+                      ) : (
+                        <button
+                          className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#95df7394]  rounded-2xl"
+                          onClick={() => {
+                            // console.log("clicked");
+                            // deleteChatUser();
+                            // updateChatLock();
+                            // setChatLockModal(false);
+                            // setLock(false);
+                            // setIn1("");
+                            // setIn2("");
+                            // setIn3("");
+                            // setIn4("");
+                          }}
+                        >
+                          Set Lock
+                        </button>
+                      )}
+                    </div>
+                    {/* {ee} */}
+                  </div>
+                </div>
+              ) : (
+                <></>
+              )}
               <div
                 className={
                   "w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] z-30 fixed top-0" +
@@ -1313,46 +1788,69 @@ export const UserInfo = () => {
                           </div>
                         </>
                       )} */}
-                      <span
-                        className="w-auto pl-[10px] pr-[3.5px] mt-[10px] h-[30px] rounded-3xl overflow-hidden bg-[#04bdb6] text-white text-[14px]  font-[work] font-light flex justify-center items-center"
-                        onClick={() => {
-                          // setUserSidebar(!userSidebar);
-                          setMediaShow(!mediaShow);
-                          setMediaOption("Documents");
-                        }}
-                        style={{
-                          transition: ".4s",
-                          transitionDelay: ".8s",
-                        }}
-                      >
-                        <span>
+                      <span className="flex justify-start items-center">
+                        <span
+                          className="w-auto pl-[10px] pr-[3.5px] mt-[10px] h-[30px] rounded-3xl overflow-hidden bg-[#04bdb6] text-white text-[14px]  font-[work] font-light flex justify-center items-center"
+                          onClick={() => {
+                            // setUserSidebar(!userSidebar);
+                            setMediaShow(!mediaShow);
+                            setMediaOption("Documents");
+                          }}
+                          style={{
+                            transition: ".4s",
+                            transitionDelay: ".8s",
+                          }}
+                        >
+                          <span>
+                            {ImageMediaLink.length !== 0 ? (
+                              <>
+                                {mediaShow === true ? (
+                                  <>Close Media</>
+                                ) : (
+                                  <>Media</>
+                                )}
+                              </>
+                            ) : (
+                              <>No Media</>
+                            )}
+                          </span>
+                          <div className="border-[.7px] border-[white] h-[15px] ml-[6px]"></div>
                           {ImageMediaLink.length !== 0 ? (
                             <>
                               {mediaShow === true ? (
-                                <>Close Media</>
+                                <>
+                                  <RxCross2 className="text-white text-[15px] ml-[1.5px] mr-[1.5px]" />
+                                </>
                               ) : (
-                                <>Media</>
+                                <LuChevronRight className="text-white text-[15px] ml-[1.5px]" />
                               )}
                             </>
                           ) : (
-                            <>No Media</>
+                            <>
+                              <MdDoNotDisturb className="text-white text-[15px] ml-[3px] mr-[1.5px]" />
+                            </>
                           )}
                         </span>
-                        <div className="border-[.7px] border-[white] h-[15px] ml-[6px]"></div>
-                        {ImageMediaLink.length !== 0 ? (
-                          <>
-                            {mediaShow === true ? (
-                              <>
-                                <RxCross2 className="text-white text-[15px] ml-[1.5px] mr-[1.5px]" />
-                              </>
-                            ) : (
-                              <LuChevronRight className="text-white text-[15px] ml-[1.5px]" />
-                            )}
-                          </>
+                        {reLock === true ? (
+                          <TiLockClosed
+                            className={
+                              "text-[25px] ml-[10px] mt-[7px] cursor-pointer" +
+                              (theme ? " text-[black]" : " text-[white]")
+                            }
+                            onClick={() => {
+                              setChatUnlockModal(!chatLockModal);
+                            }}
+                          />
                         ) : (
-                          <>
-                            <MdDoNotDisturb className="text-white text-[15px] ml-[3px] mr-[1.5px]" />
-                          </>
+                          <TiLockOpen
+                            className={
+                              "text-[25px] ml-[10px] mt-[7px] cursor-pointer" +
+                              (theme ? " text-[black]" : " text-[white]")
+                            }
+                            onClick={() => {
+                              setChatLockModal(!chatLockModal);
+                            }}
+                          />
                         )}
                       </span>
                     </div>

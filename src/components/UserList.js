@@ -1005,6 +1005,8 @@ const SearchFriends = (props) => {
           LastId: 0,
           TotalMessage: 0,
           LastMessage: 0,
+          ChatPassCode: "",
+          ChatLock: false,
         });
       }
     });
@@ -3586,9 +3588,7 @@ const UserList = (props) => {
                       <div
                         className={
                           "w-[32px] h-[22px] rounded-full flex items-center justify-start  border " +
-                          (theme
-                            ? "  border-[#b7bcc0]"
-                            : "  border-[#95df739d]")
+                          (theme ? "  border-[#b7bcc0]" : "  border-[#8981f7]")
                         }
                       >
                         {theme ? (
@@ -3598,7 +3598,7 @@ const UserList = (props) => {
                           ></div>
                         ) : (
                           <div
-                            className="w-[16px] h-[16px] rounded-full ml-[12px] bg-[#7fc160] "
+                            className="w-[16px] h-[16px] rounded-full ml-[12px] bg-[#8981f7] "
                             style={{ transition: ".4s" }}
                           ></div>
                         )}
@@ -3621,7 +3621,7 @@ const UserList = (props) => {
                           "w-[32px] h-[22px] rounded-full flex items-center justify-start  border  " +
                           (accountStatus
                             ? "border-[#b7bcc0]"
-                            : "border-[#95df739d]")
+                            : "border-[#8981f7]")
                         }
                       >
                         {accountStatus ? (
@@ -3631,7 +3631,7 @@ const UserList = (props) => {
                           ></div>
                         ) : (
                           <div
-                            className="w-[16px] h-[16px] rounded-full ml-[12px] bg-[#7fc160] "
+                            className="w-[16px] h-[16px] rounded-full ml-[12px] bg-[#8981f7] "
                             style={{ transition: ".4s" }}
                           ></div>
                         )}

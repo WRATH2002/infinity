@@ -510,6 +510,11 @@ export const MessageBody = () => {
 
   const [isListening, setIsListening] = useState(false);
 
+  const [PassCode1, setPassCode1] = useState("");
+  const [Lock1, setLock1] = useState(false);
+  const [PassCode2, setPassCode2] = useState("");
+  const [Lock2, setLock2] = useState(false);
+
   const {
     transcript,
     listening,
@@ -542,12 +547,14 @@ export const MessageBody = () => {
         .doc(user.uid)
         .collection("Chat Friends")
         .doc(ActiveChatUser)
-        .set({
+        .update({
           ChatHistory: ChatOne,
           LastUpdated: serverTimestamp(),
           LastId: lastIdOne + 1,
           TotalMessage: ChatOne.length,
           LastMessage: ChatOne.length,
+          ChatPassCode: PassCode1,
+          ChatLock: Lock1,
         });
 
       const MyDoc = db
@@ -555,12 +562,14 @@ export const MessageBody = () => {
         .doc(ActiveChatUser)
         .collection("Chat Friends")
         .doc(user.uid)
-        .set({
+        .update({
           ChatHistory: ChatTwo,
           LastUpdated: serverTimestamp(),
           LastId: lastIdTwo + 1,
           TotalMessage: ChatTwo.length,
           LastMessage: LastMessageTwo,
+          ChatPassCode: PassCode2,
+          ChatLock: Lock2,
         });
     }
   }
@@ -631,6 +640,8 @@ export const MessageBody = () => {
         setChatMessage(snapshot.data().ChatHistory);
         setLastIdOne(snapshot.data().LastId);
         setLastMessageOne(snapshot.data().LastMessage);
+        setPassCode1(snapshot.data()?.ChatPassCode);
+        setLock1(snapshot.data()?.ChatLock);
         dispatch(clearFlagOneMessage());
         snapshot.data().ChatHistory.forEach((flagOne) => {
           dispatch(pushFlagOneMessage(flagOne));
@@ -649,6 +660,8 @@ export const MessageBody = () => {
           console.log("exists");
           setLastIdTwo(snapshot.data().LastId);
           setLastMessageTwo(snapshot.data().LastMessage);
+          setPassCode2(snapshot.data()?.ChatPassCode);
+          setLock2(snapshot.data()?.ChatLock);
           dispatch(clearFlagTwoMessage());
           snapshot.data().ChatHistory.forEach((flagTwo) => {
             dispatch(pushFlagTwoMessage(flagTwo));
