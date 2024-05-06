@@ -14,13 +14,14 @@ import {
   pushFlagTwoMessage,
   clearImageMediaLink,
   addImageMediaLink,
+  addActiveUser,
 } from "../utils/chatSlice";
 import { doc, onSnapshot, serverTimestamp } from "firebase/firestore";
 import { useRef } from "react";
 import { BiCheckDouble, BiSolidLockAlt } from "react-icons/bi";
 import { BiSolidSend } from "react-icons/bi";
 import { BiSolidMicrophone } from "react-icons/bi";
-import { TiAttachment } from "react-icons/ti";
+import { TiArrowLeft, TiAttachment, TiLockClosed } from "react-icons/ti";
 import { GrFormAttachment } from "react-icons/gr";
 import { BsFillEmojiLaughingFill } from "react-icons/bs";
 import { HiDocumentText, HiSaveAs } from "react-icons/hi";
@@ -57,7 +58,7 @@ import { HiOutlinePhoto } from "react-icons/hi2";
 import { MdOutlineGif } from "react-icons/md";
 import { TbGif } from "react-icons/tb";
 import { PiSticker } from "react-icons/pi";
-import { LuContact2 } from "react-icons/lu";
+import { LuContact2, LuRefreshCw } from "react-icons/lu";
 import { MdOutlineInsertPhoto } from "react-icons/md";
 import { RiVideoLine } from "react-icons/ri";
 import { FiUser } from "react-icons/fi";
@@ -512,8 +513,15 @@ export const MessageBody = () => {
 
   const [PassCode1, setPassCode1] = useState("");
   const [Lock1, setLock1] = useState(false);
+  const [tempLock, setTempLock] = useState(false);
+  const [tempLockFlag, setTempLockFlag] = useState(false);
   const [PassCode2, setPassCode2] = useState("");
   const [Lock2, setLock2] = useState(false);
+  const [er, setEr] = useState("");
+  const [inp1, setIn1] = useState("");
+  const [inp2, setIn2] = useState("");
+  const [inp3, setIn3] = useState("");
+  const [inp4, setIn4] = useState("");
 
   const {
     transcript,
@@ -642,6 +650,8 @@ export const MessageBody = () => {
         setLastMessageOne(snapshot.data().LastMessage);
         setPassCode1(snapshot.data()?.ChatPassCode);
         setLock1(snapshot.data()?.ChatLock);
+        setTempLock(snapshot.data()?.ChatLock);
+        setTempLockFlag(false);
         dispatch(clearFlagOneMessage());
         snapshot.data().ChatHistory.forEach((flagOne) => {
           dispatch(pushFlagOneMessage(flagOne));
@@ -936,6 +946,62 @@ export const MessageBody = () => {
     }
   }
 
+  function checkInput(data) {
+    let last = data.slice(-1);
+    setEr("");
+    if (inp1.length === 0) {
+      setIn1(last);
+    } else if (inp2.length === 0) {
+      setIn2(last);
+    } else if (inp3.length === 0) {
+      setIn3(last);
+    } else if (inp4.length === 0) {
+      setIn4(last);
+    }
+  }
+
+  useEffect(() => {
+    setIn1("");
+    setIn2("");
+    setIn3("");
+    setIn4("");
+    // setTempLock(false);
+    // setTempLockFlag(false);
+  }, [ActiveChatUser]);
+
+  // useEffect(() => {
+  //   if (Lock1 === true && tempLockFlag === false) {
+  //     setTempLock(true);
+  //     setTempLockFlag(false);
+  //   } else {
+  //     setTempLock(false);
+  //     setTempLockFlag(false);
+  //   }
+  // }, [Lock1]);
+
+  useEffect(() => {
+    if ((inp1 + inp2 + inp3 + inp4).length === 4) {
+      checkValidity();
+    }
+  }, [inp4]);
+
+  function checkValidity() {
+    if (inp1 + inp2 + inp3 + inp4 === PassCode1) {
+      setTempLockFlag(true);
+      setTempLock(false);
+      setIn1("");
+      setIn2("");
+      setIn3("");
+      setIn4("");
+    } else {
+      setEr("Wrong PassCode");
+      setIn1("");
+      setIn2("");
+      setIn3("");
+      setIn4("");
+    }
+  }
+
   // --------------------------------------------------------------------------
 
   // useEffect(() => {
@@ -974,6 +1040,236 @@ export const MessageBody = () => {
 
   return (
     <>
+      {tempLock === true ? (
+        <>
+          <div
+            className="fixed w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] h-[100svh] top-0 right-0 flex justify-center items-center backdrop-blur-md"
+            style={{ zIndex: "200" }}
+          >
+            <div
+              className={
+                "w-[40px] md:w-[0px]  lg:w-[0px] h-[40px] md:h-[0px]  lg:h-[0px] overflow-hidden rounded-full left-[20px] top-[20px] flex justify-center items-center  fixed" +
+                (theme
+                  ? " bg-[white] text-[black]"
+                  : " bg-[black] text-[white]")
+              }
+              onClick={() => {
+                dispatch(addActiveUser(""));
+                setTempLock(false);
+              }}
+            >
+              <TiArrowLeft className="text-[30px]" />{" "}
+            </div>
+            <div
+              className={
+                "w-[320px] flex flex-col justify-start items-start rounded-3xl p-[20px]" +
+                (theme
+                  ? " bg-[#ffffff] text-black"
+                  : " bg-[#222228] text-white")
+              }
+            >
+              <div className="w-full rounded-xl  flex justify-start items-center px-[10px]">
+                <span className="w-full flex justify-start items-center font-[google] font-medium text-[22px] ">
+                  This Chat is Locked{" "}
+                  <TiLockClosed
+                    className={
+                      "text-[24px] ml-[6px] mt-[-2px]" +
+                      (theme ? " text-[black]" : " text-[white]")
+                    }
+                  />
+                </span>
+              </div>
+              {/* <div
+                className={
+                  "w-full mt-[10px] rounded-xl font-[work]  flex justify-center items-center px-[10px]" +
+                  (theme ? " text-[#343434] " : " text-[#afafaf]")
+                }
+              >
+                <span className="  font-light ">
+                  ⚠️&nbsp; Chat Lock will be removed from this chat. Anyone can
+                  see the content of the chat. Are you sure?
+                </span>
+              </div> */}
+              <div
+                className="w-full px-[10px] mt-[10px] flex justify-between items-center font-[google] font-light  text-[16px] cursor-pointer"
+                // onClick={() => {
+                //   // changeAccountStatus();
+                //   setLock(!lock);
+                //   setIn1("");
+                //   setIn2("");
+                //   setIn3("");
+                //   setIn4("");
+                // }}
+              >
+                <div
+                  className={
+                    "flex justify-start items-center " +
+                    (theme ? " text-[#595959]" : " text-[#b1b1b1]")
+                  }
+                >
+                  Enter the PassCode
+                </div>
+                {/* <div
+                        className={
+                          "w-[32px] h-[22px] rounded-full flex items-center justify-start  border  " +
+                          (lock ? "border-[#b7bcc0]" : "border-[#8981f7]")
+                        }
+                      >
+                        {!lock ? (
+                          <div
+                            className="w-[16px] h-[16px] rounded-full ml-[3px] bg-[#b7bcc0] "
+                            style={{ transition: ".4s" }}
+                          ></div>
+                        ) : (
+                          <div
+                            className="w-[16px] h-[16px] rounded-full ml-[12px] bg-[#8981f7] "
+                            style={{ transition: ".4s" }}
+                          ></div>
+                        )}
+                      </div> */}
+              </div>
+              <div
+                className="w-full  mt-[15px] flex justify-center items-center ml-[17px] overflow-hidden h-[45px] font-[google] font-normal"
+
+                // style={{ transition: ".3s" }}
+              >
+                <input
+                  value={inp1}
+                  onChange={(e) => {
+                    console.log(e);
+                    // setEe(e);
+                    checkInput(e.target.value);
+                  }}
+                  className={
+                    "h-full w-[35px] rounded-lg outline-none flex justify-center items-center px-[11px] text-[20px] caret-transparent" +
+                    (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                  }
+                ></input>
+                <input
+                  value={inp2}
+                  onChange={(e) => {
+                    console.log(e);
+                    checkInput(e.target.value);
+                  }}
+                  className={
+                    "h-full w-[35px] ml-[5px] rounded-lg outline-none flex justify-center items-center px-[11px] text-[20px] caret-transparent" +
+                    (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                  }
+                ></input>
+                <input
+                  value={inp3}
+                  onChange={(e) => {
+                    console.log(e);
+                    checkInput(e.target.value);
+                  }}
+                  className={
+                    "h-full w-[35px] ml-[5px] rounded-lg outline-none flex justify-center items-center px-[11px] text-[20px] caret-transparent" +
+                    (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                  }
+                ></input>
+                <input
+                  value={inp4}
+                  onChange={(e) => {
+                    console.log(e);
+                    checkInput(e.target.value);
+                  }}
+                  className={
+                    "h-full w-[35px] ml-[5px] rounded-lg outline-none flex justify-center items-center px-[11px] text-[20px] caret-transparent" +
+                    (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                  }
+                ></input>
+                <div
+                  onClick={() => {
+                    // console.log("clicked");
+                    // deleteChatUser();
+                    setIn1("");
+                    setIn2("");
+                    setIn3("");
+                    setIn4("");
+                    setEr("");
+                  }}
+                >
+                  <LuRefreshCw
+                    className={
+                      "text-[21px] ml-[15px] " +
+                      (theme ? " text-black" : " text-white")
+                    }
+                  />
+                </div>
+              </div>
+              <div className="w-full px-[10px] mt-[10px] flex justify-center text-[#ff653b] items-center font-[google] font-light  text-[14px] cursor-pointer">
+                {/* <div className="flex justify-start items-center"> */}
+                {er.length === 0 ? <></> : <>{er}</>}
+                {/* </div> */}
+              </div>
+              {/* <div className=" h-[45px] w-full mt-[15px] flex justify-between items-center px-[10px] mb-[10px] rounded-xl">
+                <button
+                  className={
+                    "w-[calc((100%-20px)/2)] h-[45px]    cursor-pointer  font-[google] font-light   rounded-2xl" +
+                    (theme
+                      ? " bg-[#e4eaf1] text-[#000000]"
+                      : " bg-[#17171a] text-[#ffffff]")
+                  }
+                  onClick={() => {
+                    // console.log("clicked");
+                    // setConfirmDelete(false);
+                    // setChatLockModal(false);
+                    // setLock(false);
+                    // setChatUnlockModal(false);
+                    // setIn1("");
+                    // setIn2("");
+                    // setIn3("");
+                    // setIn4("");
+                    // setEr("");
+                  }}
+                >
+                  Close
+                </button>
+                {true ? (
+                  <button
+                    className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#96df73]  rounded-2xl"
+                    onClick={() => {
+                      // console.log("clicked");
+                      // deleteChatUser();
+                      // checkChatLock();
+                      // // setChatLockModal(false);
+                      // // setLock(false);
+                      // setIn1("");
+                      // setIn2("");
+                      // setIn3("");
+                      // setIn4("");
+                      // setEr("");
+                    }}
+                  >
+                    Remove Lock
+                  </button>
+                ) : (
+                  <button
+                    className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#95df7394]  rounded-2xl"
+                    onClick={() => {
+                      // console.log("clicked");
+                      // deleteChatUser();
+                      // checkChatLock();
+                      // // setChatLockModal(false);
+                      // // setLock(false);
+                      // setIn1("");
+                      // setIn2("");
+                      // setIn3("");
+                      // setIn4("");
+                      // setEr("");
+                    }}
+                  >
+                    Remove Lock
+                  </button>
+                )}
+              </div> */}
+              {/* {ee} */}
+            </div>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
       {tempPhotoUrl.length === 0 ? (
         <></>
       ) : (

@@ -1190,7 +1190,10 @@ export const UserInfo = () => {
 
               {chatUnlockModal === true ? (
                 <div
-                  className="w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[calc(100svh-200px)]  top-[190px] flex flex-col justify-center items-center  p-[20px] z-50 font-[google] font-normal"
+                  className={
+                    "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[100svh]  top-[0px] flex flex-col justify-center items-center  p-[20px] z-50 font-[google] font-normal backdrop-blur-md" +
+                    (theme ? " bg-[#e4eaf16d] " : " h-[100svh] bg-[#17171a25] ")
+                  }
                   style={{ zIndex: "100" }}
                 >
                   <div
@@ -1394,7 +1397,10 @@ export const UserInfo = () => {
 
               {chatLockModal === true ? (
                 <div
-                  className="w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[calc(100svh-200px)]  top-[190px] flex flex-col justify-center items-center  p-[20px] z-50 font-[google] font-normal"
+                  className={
+                    "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[100svh]  top-[0px] flex flex-col justify-center items-center  p-[20px] z-50 font-[google] font-normal backdrop-blur-md" +
+                    (theme ? " bg-[#e4eaf16d] " : " h-[100svh] bg-[#17171a25] ")
+                  }
                   style={{ zIndex: "100" }}
                 >
                   <div
@@ -1790,7 +1796,7 @@ export const UserInfo = () => {
                       )} */}
                       <span className="flex justify-start items-center">
                         <span
-                          className="w-auto pl-[10px] pr-[3.5px] mt-[10px] h-[30px] rounded-3xl overflow-hidden bg-[#04bdb6] text-white text-[14px]  font-[work] font-light flex justify-center items-center"
+                          className="w-auto pl-[10px] pr-[3.5px] mt-[10px] h-[30px] rounded-3xl bg-[#04bdb6] text-white text-[14px]  font-[work] font-light flex justify-center items-center overflow-hidden"
                           onClick={() => {
                             // setUserSidebar(!userSidebar);
                             setMediaShow(!mediaShow);
@@ -1801,7 +1807,13 @@ export const UserInfo = () => {
                             transitionDelay: ".8s",
                           }}
                         >
-                          <span>
+                          <span
+                            className=" opacity-100"
+                            style={{
+                              transition: ".4s",
+                              transitionDelay: ".8s",
+                            }}
+                          >
                             {ImageMediaLink.length !== 0 ? (
                               <>
                                 {mediaShow === true ? (
@@ -1814,44 +1826,84 @@ export const UserInfo = () => {
                               <>No Media</>
                             )}
                           </span>
-                          <div className="border-[.7px] border-[white] h-[15px] ml-[6px]"></div>
+                          <div
+                            className="border-[.7px] border-[white] h-[15px] ml-[6px] opacity-100"
+                            style={{
+                              transition: ".4s",
+                              transitionDelay: ".8s",
+                            }}
+                          ></div>
                           {ImageMediaLink.length !== 0 ? (
                             <>
                               {mediaShow === true ? (
                                 <>
-                                  <RxCross2 className="text-white text-[15px] ml-[1.5px] mr-[1.5px]" />
+                                  <RxCross2
+                                    className="text-white text-[15px] ml-[1.5px] mr-[1.5px] opacity-100"
+                                    style={{
+                                      transition: ".4s",
+                                      transitionDelay: ".8s",
+                                    }}
+                                  />
                                 </>
                               ) : (
-                                <LuChevronRight className="text-white text-[15px] ml-[1.5px]" />
+                                <LuChevronRight
+                                  className="text-white text-[15px] ml-[1.5px] opacity-100"
+                                  style={{
+                                    transition: ".4s",
+                                    transitionDelay: ".8s",
+                                  }}
+                                />
                               )}
                             </>
                           ) : (
                             <>
-                              <MdDoNotDisturb className="text-white text-[15px] ml-[3px] mr-[1.5px]" />
+                              <MdDoNotDisturb
+                                className="text-white text-[15px] ml-[3px] mr-[1.5px] opacity-100"
+                                style={{
+                                  transition: ".4s",
+                                  transitionDelay: ".8s",
+                                }}
+                              />
                             </>
                           )}
                         </span>
-                        {reLock === true ? (
-                          <TiLockClosed
-                            className={
-                              "text-[25px] ml-[10px] mt-[7px] cursor-pointer" +
-                              (theme ? " text-[black]" : " text-[white]")
-                            }
-                            onClick={() => {
-                              setChatUnlockModal(!chatLockModal);
-                            }}
-                          />
-                        ) : (
-                          <TiLockOpen
-                            className={
-                              "text-[25px] ml-[10px] mt-[7px] cursor-pointer" +
-                              (theme ? " text-[black]" : " text-[white]")
-                            }
-                            onClick={() => {
-                              setChatLockModal(!chatLockModal);
-                            }}
-                          />
-                        )}
+                        <div
+                          className="h-[30px] w-auto flex justify-center items-center"
+                          style={{
+                            transition: ".4s",
+                            transitionDelay: ".8s",
+                          }}
+                        >
+                          {reLock === true ? (
+                            <TiLockClosed
+                              className={
+                                "text-[25px] ml-[10px] mt-[7px] cursor-pointer opacity-100" +
+                                (theme ? " text-[black]" : " text-[white]")
+                              }
+                              style={{
+                                transition: ".4s",
+                                transitionDelay: ".4s",
+                              }}
+                              onClick={() => {
+                                setChatUnlockModal(!chatLockModal);
+                              }}
+                            />
+                          ) : (
+                            <TiLockOpen
+                              className={
+                                "text-[25px] ml-[10px] mt-[7px] cursor-pointer opacity-100" +
+                                (theme ? " text-[black]" : " text-[white]")
+                              }
+                              style={{
+                                transition: ".4s",
+                                transitionDelay: ".4s",
+                              }}
+                              onClick={() => {
+                                setChatLockModal(!chatLockModal);
+                              }}
+                            />
+                          )}
+                        </div>
                       </span>
                     </div>
                     <span
@@ -2067,7 +2119,7 @@ export const UserInfo = () => {
                         </>
                       )} */}
                       <span
-                        className="w-0 pl-[0px] pr-0 mt-[0px] h-[0px] overflow-hidden rounded-3xl bg-[#04bdb6] text-white text-[14px]  font-[work] font-light flex justify-center items-center"
+                        className="w-0 pl-[0px] pr-0 mt-[0px] h-[0px] rounded-3xl bg-[#04bdb6] text-white text-[14px]  font-[work] font-light flex justify-center items-center overflow-hidden"
                         onClick={() => {
                           setUserSidebar(!userSidebar);
                         }}
@@ -2076,7 +2128,7 @@ export const UserInfo = () => {
                           transitionDelay: ".4s",
                         }}
                       >
-                        <span>
+                        <span className="opacity-0">
                           {ImageMediaLink.length !== 0 ? (
                             <>
                               {mediaShow === true ? (
@@ -2089,15 +2141,15 @@ export const UserInfo = () => {
                             <>No Media</>
                           )}
                         </span>
-                        <div className="border-[.7px] border-[white] h-[15px] ml-[6px]"></div>
+                        <div className="border-[.7px] border-[white] h-[15px] ml-[6px] opacity-0"></div>
                         {ImageMediaLink.length !== 0 ? (
                           <>
                             {mediaShow === true ? (
                               <>
-                                <RxCross2 className="text-white text-[15px] ml-[1.5px] mr-[1.5px]" />
+                                <RxCross2 className="text-white text-[15px] ml-[1.5px] mr-[1.5px] opacity-0" />
                               </>
                             ) : (
-                              <LuChevronRight className="text-white text-[15px] ml-[1.5px]" />
+                              <LuChevronRight className="text-white text-[15px] ml-[1.5px] opacity-0" />
                             )}
                           </>
                         ) : (
@@ -2106,6 +2158,29 @@ export const UserInfo = () => {
                           </>
                         )}
                       </span>
+                      <div className="w-0 h-0  border-none outline-none">
+                        {reLock === true ? (
+                          <TiLockClosed
+                            className={
+                              " ml-[10px] mt-[7px] cursor-pointer text-[0px]" +
+                              (theme ? " text-[black]" : " text-[white]")
+                            }
+                            onClick={() => {
+                              setChatUnlockModal(!chatLockModal);
+                            }}
+                          />
+                        ) : (
+                          <TiLockOpen
+                            className={
+                              " ml-[10px] mt-[7px] cursor-pointer text-[0px]" +
+                              (theme ? " text-[black]" : " text-[white]")
+                            }
+                            onClick={() => {
+                              setChatLockModal(!chatLockModal);
+                            }}
+                          />
+                        )}
+                      </div>
                       {/* <span
                         className="w-[0] mt-[10px] h-[0px] overflow-hidden rounded-full bg-[#4b93b9] text-white text-[15px]  font-[google] font-light flex justify-center items-center"
                         onClick={() => {
