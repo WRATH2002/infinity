@@ -23,9 +23,9 @@ font-family: 'Rubik', sans-serif; */
   -webkit-font-smoothing: antialiased;
 }
 .borderGrad {
-  border: 2.4px solid transparent;
+  border: 2px solid transparent;
   background: linear-gradient(to left, #2e9df6, #975ba3) border-box;
-  border-radius: 23px;
+  border-radius: 22px;
   /* padding: 25px; */
 }
 
@@ -248,13 +248,13 @@ em-emoji-picker {
 
 @keyframes color {
   0% {
-    background-color: #1b202d;
+    background-color: transparent;
   }
   50% {
-    background-color: #96df73;
+    background-color: #8981f7;
   }
   100% {
-    background-color: #1b202d;
+    background-color: transparent;
   }
 }
 
@@ -627,7 +627,7 @@ input {
   margin-left: 3px;
   margin-right: 3px;
   background: currentColor;
-  color: #96df73;
+  color: #8981f7;
   animation: animloader 0.3s 0.3s linear infinite alternate;
 }
 
@@ -657,7 +657,7 @@ input {
   /* margin: 20px auto; */
   /* position: relative; */
   background: currentColor;
-  color: #96df73;
+  color: #8981f7;
   animation: animloader1 0.3s 0.3s linear infinite alternate;
 }
 

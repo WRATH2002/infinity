@@ -89,21 +89,21 @@ const StatusUserList = (props) => {
               // setShowStatus(true);
             }}
           >
-            <div className="w-[59px] h-[59px] border-[2.4px] borderGrad  flex justify-center items-center rounded-[20px] z-10">
+            <div className="w-[50px] h-[50px]  border-[2.4px] border-[#8981f7] rounded-[22px]  flex justify-center items-center z-10">
               {photo === "nophoto" ? (
                 <img
                   src={profile2}
-                  className="w-[50px] h-[50px] rounded-[20px] object-cover z-10 "
+                  className="w-[41px] h-[41px] rounded-[18px] object-cover z-10 "
                 ></img>
               ) : (
                 <img
                   src={photo}
-                  className="w-[50px] h-[50px] rounded-[20px] object-cover z-10 "
+                  className="w-[41px] h-[41px] rounded-[18px] object-cover z-10 "
                 ></img>
               )}
               <div
                 className={
-                  "w-[53.2px] h-[53.2px] rounded-[20px] bg-white fixed z-0" +
+                  "w-[45px] h-[45px] rounded-[19.5px]  fixed z-0" +
                   (theme
                     ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
                     : " bg-[#17171a] md:bg-[#17171a] lg:bg-[#17171a]")
@@ -266,26 +266,26 @@ const StatusUserList = (props) => {
               // setShowStatus(true);
             }}
           >
-            <div className="w-[59px] h-[59px] border-[2.4px] borderGrad  flex justify-center items-center rounded-[20px] z-10">
+            <div className="w-[53px] h-[53px]  border-[2.2px] border-[#8981f7] rounded-[22.2px]  flex justify-center items-center z-10">
               {photo === "nophoto" ? (
                 <img
                   src={profile2}
-                  className="w-[50px] h-[50px] rounded-[20px] object-cover z-10 "
+                  className="w-[45px] h-[45px] rounded-[18px] object-cover z-10 "
                 ></img>
               ) : (
                 <img
                   src={photo}
-                  className="w-[50px] h-[50px] rounded-[20px] object-cover z-10 "
+                  className="w-[45px] h-[45px] rounded-[18px] object-cover z-10 "
                 ></img>
               )}
-              <div
+              {/* <div
                 className={
-                  "w-[53.2px] h-[53.2px] rounded-[20px] fixed z-0" +
+                  "w-[49px] h-[49px] rounded-[20px] fixed z-0" +
                   (theme
                     ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
                     : " bg-[#17171a] md:bg-[#17171a] lg:bg-[#17171a]")
                 }
-              ></div>
+              ></div> */}
             </div>
             <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start ">
               <div className="w-full font-semibold flex h-[23px]">

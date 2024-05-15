@@ -570,7 +570,7 @@ export const MessageBody = () => {
         .doc(ActiveChatUser)
         .collection("Chat Friends")
         .doc(user.uid)
-        .update({
+        .set({
           ChatHistory: ChatTwo,
           LastUpdated: serverTimestamp(),
           LastId: lastIdTwo + 1,

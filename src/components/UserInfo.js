@@ -685,7 +685,7 @@ export const UserInfo = () => {
                 >
                   <div
                     className={
-                      " text-[15px] w-[320px] lg:w-[450px] md:w-[450px] h-[220px] rounded-3xl flex flex-col justify-center items-center " +
+                      " text-[15px] w-[320px] lg:w-[450px] md:w-[450px] h-auto py-[22px] pt-[28px] rounded-3xl flex flex-col justify-center items-center " +
                       (theme
                         ? " bg-[#ffffff] text-black"
                         : " bg-[#222228] text-white")
@@ -699,7 +699,7 @@ export const UserInfo = () => {
                     <div
                       className={
                         "w-full mt-[10px] rounded-xl font-[work] flex justify-center items-center px-[40px]" +
-                        (theme ? " text-[#343434]" : " text-[#afafaf]")
+                        (theme ? " text-[#343434]" : " text-[#b7b7b7]")
                       }
                     >
                       <span className="  font-light ">
@@ -707,10 +707,10 @@ export const UserInfo = () => {
                         you sure?
                       </span>
                     </div>
-                    <div className=" h-[45px] w-full mt-[30px] flex justify-between items-center px-[40px] rounded-xl">
+                    <div className=" h-[45px] w-full mt-[20px] flex justify-end items-center px-[40px] rounded-xl">
                       <button
                         className={
-                          "w-[calc((100%-20px)/2)] h-[45px]    cursor-pointer  font-[google] font-light   rounded-2xl" +
+                          "w-auto flex items-end h-[35px] bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
                           (theme
                             ? " bg-[#e4eaf1] text-[#000000]"
                             : " bg-[#17171a] text-[#ffffff]")
@@ -723,7 +723,7 @@ export const UserInfo = () => {
                         Close
                       </button>
                       <button
-                        className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#96df73]  rounded-2xl"
+                        className="w-auto flex items-end h-[35px] ml-[30px] text-[#5f54ff]   cursor-pointer  font-[google] font-light   rounded-2xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -1327,10 +1327,10 @@ export const UserInfo = () => {
                       {er.length === 0 ? <></> : <>{er}</>}
                       {/* </div> */}
                     </div>
-                    <div className=" h-[45px] w-full mt-[15px] flex justify-between items-center px-[10px] mb-[10px] rounded-xl">
+                    <div className=" h-[35px] w-full mt-[15px] flex justify-end items-center px-[10px] mb-[10px] rounded-xl">
                       <button
                         className={
-                          "w-[calc((100%-20px)/2)] h-[45px]    cursor-pointer  font-[google] font-light   rounded-2xl" +
+                          "w-auto flex items-end h-[35px] bg-transparent    cursor-pointer  font-[google] font-light   rounded-2xl" +
                           (theme
                             ? " bg-[#e4eaf1] text-[#000000]"
                             : " bg-[#17171a] text-[#ffffff]")
@@ -1352,7 +1352,7 @@ export const UserInfo = () => {
                       </button>
                       {(inp1 + inp2 + inp3 + inp4).length === 4 ? (
                         <button
-                          className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#96df73]  rounded-2xl"
+                          className="w-auto flex items-end h-[35px] ml-[30px] text-[#5f54ff] cursor-pointer  font-[google] font-light   rounded-2xl"
                           onClick={() => {
                             // console.log("clicked");
                             // deleteChatUser();
@@ -1370,7 +1370,7 @@ export const UserInfo = () => {
                         </button>
                       ) : (
                         <button
-                          className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#95df7394]  rounded-2xl"
+                          className="w-auto flex items-end h-[35px] ml-[30px] text-[#5f54ff80] cursor-pointer  font-[google] font-light   rounded-2xl"
                           onClick={() => {
                             // console.log("clicked");
                             // deleteChatUser();
@@ -1445,7 +1445,7 @@ export const UserInfo = () => {
                       <div
                         className={
                           "w-[32px] h-[22px] rounded-full flex items-center justify-start  border  " +
-                          (lock ? "border-[#b7bcc0]" : "border-[#8981f7]")
+                          (!lock ? "border-[#b7bcc0]" : "border-[#8981f7]")
                         }
                       >
                         {!lock ? (
@@ -1531,10 +1531,10 @@ export const UserInfo = () => {
                         />
                       </div>
                     </div>
-                    <div className=" h-[45px] w-full mt-[15px] flex justify-between items-center px-[10px] mb-[10px] rounded-xl">
+                    <div className=" h-[45px] w-full mt-[15px] flex justify-end items-center px-[10px] mb-[10px] rounded-xl">
                       <button
                         className={
-                          "w-[calc((100%-20px)/2)] h-[45px]    cursor-pointer  font-[google] font-light   rounded-2xl" +
+                          "w-auto  h-[35px] flex items-end  bg-transparent  cursor-pointer  font-[google] font-light   rounded-2xl" +
                           (theme
                             ? " bg-[#e4eaf1] text-[#000000]"
                             : " bg-[#17171a] text-[#ffffff]")
@@ -1555,7 +1555,7 @@ export const UserInfo = () => {
                       {lock === true &&
                       (inp1 + inp2 + inp3 + inp4).length === 4 ? (
                         <button
-                          className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#96df73]  rounded-2xl"
+                          className="w-auto  h-[35px] flex items-end ml-[30px] text-[#5f54ff]    cursor-pointer  font-[google] font-light bg-[#95df7300]  rounded-2xl"
                           onClick={() => {
                             // console.log("clicked");
                             // deleteChatUser();
@@ -1572,7 +1572,7 @@ export const UserInfo = () => {
                         </button>
                       ) : (
                         <button
-                          className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#95df7394]  rounded-2xl"
+                          className="w-auto ml-[30px] flex items-end h-[35px] text-[#5f54ff80]   cursor-pointer  font-[google] font-light   rounded-2xl"
                           onClick={() => {
                             // console.log("clicked");
                             // deleteChatUser();
@@ -1992,7 +1992,7 @@ export const UserInfo = () => {
 
                     <div
                       className={
-                        "w-[50px] h-[50px]  rounded-full cursor-pointer  ml-[-17px]   " +
+                        "w-[45px] h-[45px]  rounded-full cursor-pointer  ml-[-17px]   " +
                         (theme
                           ? " bg-[#e4eaf1] text-black"
                           : " bg-[#17171a] text-white")

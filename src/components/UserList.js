@@ -139,11 +139,11 @@ const data = [
   { name: 1, num: 360 },
   { name: 2, num: 346 },
   { name: 3, num: 430 },
-  { name: 4, num: 449 },
+  { name: 4, num: 649 },
   { name: 5, num: 407 },
   { name: 6, num: 333 },
   { name: 7, num: 372 },
-  { name: 8, num: 388 },
+  { name: 8, num: 188 },
   { name: 9, num: 399 },
   { name: 10, num: 440 },
 ];
@@ -409,15 +409,10 @@ const Friends = (props) => {
         <div className=" w-full md:w-[400px] lg:w-[400px] h-[100svh] top-0 left-0 fixed bg-[#17171a25] z-50 backdrop-blur-md flex justify-center items-center">
           <div
             className={
-              " text-[15px] w-[320px]  h-[300px] rounded-3xl flex flex-col justify-center items-center " +
+              " text-[15px] w-[320px]  h-auto py-[28px] rounded-3xl flex flex-col justify-center items-center " +
               (theme ? " bg-[#ffffff] text-black" : " bg-[#222228] text-white")
             }
           >
-            <div className="w-full rounded-xl  flex justify-start items-center px-[40px]">
-              <span className=" font-[google] font-medium text-[22px] ">
-                Delete this Contact?
-              </span>
-            </div>
             <div className="w-full rounded-xl  flex justify-start items-center px-[40px]">
               <span
                 className={
@@ -428,21 +423,27 @@ const Friends = (props) => {
                 {photoURL === "nophoto" ? (
                   <img
                     src={profile2}
-                    className="w-[30px] h-[30px] rounded-full object-cover mr-[10px] "
+                    className="w-[40px] h-[40px] rounded-full object-cover mr-[10px] "
                   ></img>
                 ) : (
                   <img
                     src={photoURL}
-                    className="w-[30px] h-[30px] rounded-full object-cover mr-[10px] "
+                    className="w-[40px] h-[40px] rounded-full object-cover mr-[10px] "
                   ></img>
                 )}{" "}
                 {userName}
               </span>
             </div>
+            <div className="w-full rounded-xl  flex justify-start mt-[10px] items-center px-[40px]">
+              <span className=" font-[google] font-light text-[22px] ">
+                Delete this Contact?
+              </span>
+            </div>
+
             <div
               className={
-                "w-full mt-[20px] rounded-xl font-[work]  flex justify-center items-center px-[40px]" +
-                (theme ? " text-[#343434] " : " text-[#afafaf]")
+                "w-full mt-[10px] rounded-xl font-[work]  flex justify-center items-center px-[40px]" +
+                (theme ? " text-[#343434] " : " text-[#b7b7b7]")
               }
             >
               <span className="  font-light ">
@@ -450,10 +451,10 @@ const Friends = (props) => {
                 be deleted. Are you sure?
               </span>
             </div>
-            <div className=" h-[45px] w-full mt-[30px] flex justify-between items-center px-[40px] rounded-xl">
+            <div className=" h-[35px] w-full mt-[20px] flex justify-end items-center px-[40px] rounded-xl">
               <button
                 className={
-                  "w-[calc((100%-20px)/2)] h-[45px]    cursor-pointer  font-[google] font-light   rounded-2xl" +
+                  "w-auto h-[45px]  flex items-end bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
                   (theme
                     ? " bg-[#e4eaf1] text-[#000000]"
                     : " bg-[#17171a] text-[#ffffff]")
@@ -466,7 +467,7 @@ const Friends = (props) => {
                 Close
               </button>
               <button
-                className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#96df73]  rounded-2xl"
+                className="w-auto flex items-end ml-[30px] h-[45px] text-[#5f54ff]   cursor-pointer  font-[google] font-light  rounded-2xl"
                 onClick={() => {
                   // console.log("clicked");
                   deleteChatUser();
@@ -484,12 +485,12 @@ const Friends = (props) => {
         <>
           <div
             className={
-              "group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center   cursor-pointer   border-b-[1px]   " +
+              "group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[75px] py-[10px] flex justify-center items-center   cursor-pointer   border-b-[1px]   " +
               (theme ? " border-[#d9dde1]" : " border-[#25262f]")
             }
           >
             <div
-              className="group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center cursor-pointer  "
+              className="group w-full h-[75px] py-[10px] flex justify-center items-center cursor-pointer  "
               onClick={() => {
                 activerChatUser();
                 // dispatch(toggleSendFlag(true));
@@ -497,7 +498,7 @@ const Friends = (props) => {
             >
               <div
                 className={
-                  "w-[50px] h-[50px]   rounded-[20px]" +
+                  "w-[45px] h-[45px]   rounded-[18px]" +
                   (theme ? " bg-[#ffffff]" : " bg-[#222228]")
                 }
                 onClick={() => props.setProfileZoom(photoURL)}
@@ -505,16 +506,16 @@ const Friends = (props) => {
                 {photoURL === "nophoto" ? (
                   <img
                     src={profile2}
-                    className="w-full h-full rounded-[20px] object-cover "
+                    className="w-full h-full rounded-[18px] object-cover "
                   ></img>
                 ) : (
                   <img
                     src={photoURL}
-                    className="w-full h-full rounded-[20px] object-cover "
+                    className="w-full h-full rounded-[18px] object-cover "
                   ></img>
                 )}
               </div>
-              <div className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
+              <div className="w-[calc(100%-55px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start">
                 <div className="w-full font-semibold flex h-[23px]">
                   <span
                     className={
@@ -527,7 +528,7 @@ const Friends = (props) => {
                   </span>
                   <span
                     className={
-                      "w-[70px] group-hover:mr-[25px] h-full text-[15px]  flex justify-end items-center font-light   font-[work] " +
+                      "w-[70px] group-hover:mr-[25px] h-full text-[14px]  flex justify-end items-center font-light   font-[work] " +
                       (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                     }
                     onClick={() => {
@@ -547,7 +548,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[35px] text-[15px]  whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work] " +
+                              "w-[35px] text-[14px]  whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work] " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                           >
@@ -566,7 +567,7 @@ const Friends = (props) => {
                       />
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
+                          "w-[calc(100%-105px)] text-[14px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                       >
@@ -579,7 +580,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[35px] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full font-[work] t" +
+                              "w-[35px] text-[14px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full font-[work] t" +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                           >
@@ -598,7 +599,7 @@ const Friends = (props) => {
                       />
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
+                          "w-[calc(100%-105px)] text-[14px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                       >
@@ -611,7 +612,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[35px] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work] " +
+                              "w-[35px] text-[14px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work] " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                           >
@@ -630,7 +631,7 @@ const Friends = (props) => {
                       />
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
+                          "w-[calc(100%-105px)] text-[14px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                       >
@@ -643,7 +644,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[30px] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full  font-[work] " +
+                              "w-[30px] text-[14px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full  font-[work] " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                           >
@@ -655,7 +656,7 @@ const Friends = (props) => {
                       )}
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[15px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
+                          "w-[calc(100%-70px)] text-[14px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                         // style={{ transition: ".5s" }}
@@ -669,12 +670,12 @@ const Friends = (props) => {
                     </>
                   )}
                   {/* </span> */}
-                  <span className="w-[70px] text-[15px] h-full font-normal   flex justify-end items-center">
+                  <span className="w-[70px] text-[14px] h-full font-normal   flex justify-end items-center">
                     {unreadMessages === 0 ? (
                       <></>
                     ) : (
                       <>
-                        <span className="w-[18px] h-[18px] text-[11px] flex justify-center items-center rounded-full bg-[#ffffff] text-[#000000]">
+                        <span className="w-[18px] h-[18px] text-[11px] font-[google] font-semibold flex justify-center items-center rounded-full bg-[#8981f7] text-[#ffffff]">
                           {unreadMessages}
                         </span>
                       </>
@@ -685,7 +686,7 @@ const Friends = (props) => {
               </div>
             </div>
             <span
-              className="group-hover:flex hidden justify-center items-start pt-[10px] md:pt-[5px] lg:pt-[5px] h-full w-[20px] ml-[-20px] z-40"
+              className="group-hover:flex hidden justify-center items-start pt-[5px] h-full w-[20px] ml-[-20px] z-40"
               onClick={() => {
                 deleteChatUser();
                 setConfirmDelete(true);
@@ -694,7 +695,7 @@ const Friends = (props) => {
             >
               <MdDelete
                 className={
-                  "text-[20px] " + (theme ? " text-[black]" : " text-[white]")
+                  "text-[17px] " + (theme ? " text-[black]" : " text-[white]")
                 }
               />
             </span>
@@ -702,16 +703,16 @@ const Friends = (props) => {
         </>
       ) : (
         <>
-          <div className="group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] flex justify-center items-center bg-transparent  cursor-pointer    z-10 ">
+          <div className="group px-[10px] md:px-[20px] lg:px-[20px]  group w-full h-[75px] py-[10px] flex justify-center items-center bg-transparent  cursor-pointer    z-10 ">
             <div
               className={
-                " group w-full h-[85px] md:h-[75px] lg:h-[75px] py-[10px] border-b-[1px]  flex justify-center items-center bg-transparent  cursor-pointer   z-10  " +
+                " group w-full h-[75px] py-[10px] border-b-[1px]  flex justify-center items-center bg-transparent  cursor-pointer   z-10  " +
                 (theme ? " border-[#d9dde1]" : " border-[#25262f]")
               }
             >
               <div
                 className={
-                  "w-[50px] h-[50px]  rounded-[20px]" +
+                  "w-[45px] h-[45px]  rounded-[18px]" +
                   (theme ? " bg-[#ffffff]" : " bg-[#222228]")
                 }
                 onClick={() => props.setProfileZoom(photoURL)}
@@ -719,17 +720,17 @@ const Friends = (props) => {
                 {photoURL === "nophoto" ? (
                   <img
                     src={profile2}
-                    className="w-full h-full rounded-[20px] object-cover "
+                    className="w-full h-full rounded-[18px] object-cover "
                   ></img>
                 ) : (
                   <img
                     src={photoURL}
-                    className="w-full h-full rounded-[20px] object-cover "
+                    className="w-full h-full rounded-[18px] object-cover "
                   ></img>
                 )}
               </div>
               <div
-                className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start"
+                className=" w-[calc(100%-55px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start"
                 onClick={() => activerChatUser()}
               >
                 <div className="w-full font-semibold flex h-[23px]">
@@ -745,7 +746,7 @@ const Friends = (props) => {
                   </span>
                   <span
                     className={
-                      "w-[70px] h-full group-hover:mr-[25px] text-[15px] flex justify-end items-center  font-[work] font-light z-50" +
+                      "w-[70px] h-full group-hover:mr-[25px] text-[14px] flex justify-end items-center  font-[work] font-light z-50" +
                       (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                     }
 
@@ -762,7 +763,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[35px] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work] " +
+                              "w-[35px] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work] " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                             // style={{ transition: ".5s" }}
@@ -782,7 +783,7 @@ const Friends = (props) => {
                       />
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
+                          "w-[calc(100%-105px)] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                         // style={{ transition: ".5s" }}
@@ -796,7 +797,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[35px] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work]  " +
+                              "w-[35px] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work]  " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                             // style={{ transition: ".5s" }}
@@ -816,7 +817,7 @@ const Friends = (props) => {
                       />
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full     font-[work] " +
+                          "w-[calc(100%-105px)] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full     font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                         // style={{ transition: ".5s" }}
@@ -830,7 +831,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[35px] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work]  " +
+                              "w-[35px] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work]  " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                             // style={{ transition: ".5s" }}
@@ -850,7 +851,7 @@ const Friends = (props) => {
                       />
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
+                          "w-[calc(100%-105px)] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                         // style={{ transition: ".5s" }}
@@ -864,7 +865,7 @@ const Friends = (props) => {
                         <>
                           <span
                             className={
-                              "w-[30px] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work]  " +
+                              "w-[30px] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work]  " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
                             // style={{ transition: ".5s" }}
@@ -877,7 +878,7 @@ const Friends = (props) => {
                       )}
                       <span
                         className={
-                          "w-[calc(100%-105px)] text-[15px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
+                          "w-[calc(100%-70px)] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
                         // style={{ transition: ".5s" }}
@@ -893,12 +894,12 @@ const Friends = (props) => {
                   {/* <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
                   {lastMsg}
                 </span> */}
-                  <span className="w-[70px] text-[15px] h-full font-normal  flex justify-end items-center">
+                  <span className="w-[70px] text-[14px] h-full font-normal  flex justify-end items-center">
                     {unreadMessages === 0 ? (
                       <></>
                     ) : (
                       <>
-                        <span className="w-[20px] h-[20px] text-[11px] flex justify-center items-center rounded-full bg-[#ffffff] text-[#000000]">
+                        <span className="w-[20px] h-[20px] text-[11px] font-[google] font-semibold flex justify-center items-center rounded-full bg-[#8981f7] text-[#ffffff]">
                           {unreadMessages}
                         </span>
                       </>
@@ -909,7 +910,7 @@ const Friends = (props) => {
               </div>
             </div>
             <span
-              className="group-hover:flex hidden justify-center items-start pt-[10px] md:pt-[5px] lg:pt-[5px] h-full w-[20px] ml-[-20px] z-40"
+              className="group-hover:flex hidden justify-center items-start pt-[5px] h-full w-[20px] ml-[-20px] z-40"
               onClick={() => {
                 setConfirmDelete(true);
                 console.log("clickeddddddd");
@@ -917,7 +918,7 @@ const Friends = (props) => {
             >
               <MdDelete
                 className={
-                  "text-[20px] " + (theme ? " text-black" : " text-white")
+                  "text-[17px] " + (theme ? " text-black" : " text-white")
                 }
               />
             </span>
@@ -1027,14 +1028,14 @@ const SearchFriends = (props) => {
 
   return (
     <>
-      <div className=" group w-[100%] h-[85px] px-[10px] md:px-[20px] lg:px-[20px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent ">
+      <div className=" group w-[100%] h-[75px] px-[10px] md:px-[20px] lg:px-[20px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent ">
         <div
           className={
-            "border-b-[1px] w-[100%] h-[85px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent   " +
+            "border-b-[1px] w-[100%] h-[75px] py-[10px] flex items-center justify-center cursor-pointer bg-transparent   " +
             (theme ? " border-[#d9dde1]" : " border-[#25262f]")
           }
         >
-          <div className="w-[17px] h-full  flex justify-end items-end pb-[5px] z-30">
+          <div className="w-[13px] h-full  flex justify-end items-end pb-[4px] z-30">
             {isOnline === true ? (
               <div
                 className={
@@ -1057,7 +1058,7 @@ const SearchFriends = (props) => {
           </div>
           <div
             className={
-              "w-[50px] h-[50px] ml-[-17px]  rounded-[20px] " +
+              "w-[45px] h-[45px] ml-[-13px]  rounded-[18px] " +
               (theme ? " bg-[#ffffff]" : " bg-[#222228]")
             }
             onClick={() => {
@@ -1069,7 +1070,7 @@ const SearchFriends = (props) => {
               <>
                 <img
                   src={profile2}
-                  className="w-full h-full rounded-[20px] object-cover  "
+                  className="w-full h-full rounded-[18px] object-cover  "
                 ></img>
                 {/* <div className="w-[12px] h-[12px] bg-[#ffffff] ml-[5px] mt-[-10px] rounded-full border-[2px] border-[#17171a] md:border-[#17171a] lg:border-[#17171a] z-50" style={{zIndex:"100"}}></div> */}
               </>
@@ -1077,14 +1078,14 @@ const SearchFriends = (props) => {
               <>
                 <img
                   src={photoURL}
-                  className="w-full h-full rounded-[20px] object-cover "
+                  className="w-full h-full rounded-[18px] object-cover "
                 ></img>
                 {/* <div className="w-[12px] h-[12px] bg-[#ffffff] ml-[5px] mt-[-10px] rounded-full border-[2px] border-[#17171a] md:border-[#17171a] lg:border-[#17171a] z-50"></div> */}
               </>
             )}
           </div>
           <div
-            className=" w-[calc(100%-65px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start"
+            className=" w-[calc(100%-55px)] h-[50px] ml-[15px]  flex flex-col justify-center items-start"
             onClick={() => {
               props.setData("Chat");
               activerChatUser();
@@ -1113,7 +1114,7 @@ const SearchFriends = (props) => {
             <div className="w-full flex h-[23px]">
               <span
                 className={
-                  "w-[calc(100%-70px)] text-[15px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
+                  "w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                   (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                 }
                 // style={{ transition: ".9s" }}
@@ -1121,7 +1122,7 @@ const SearchFriends = (props) => {
                 {/* {props.data.msg} */}
                 {info}
               </span>
-              <span className="w-[70px] text-[15px] h-full font-normal  flex justify-end items-center">
+              <span className="w-[70px] text-[14px] h-full font-normal  flex justify-end items-center">
                 {/* {unreadMessages === 0 ? (
                     <></>
                   ) : (
@@ -1382,11 +1383,26 @@ const UserList = (props) => {
   //   }
   // }, [searchUser]);
 
-  function searchUserFriend() {
+  function searchUserFriendChangeWord() {
+    let words = searchUser.split(" ");
+
+    // Iterate through each word in the array
+    for (let i = 0; i < words.length; i++) {
+      // Capitalize the first character of the word and make the rest lowercase
+      words[i] =
+        words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+    }
+
+    // Join the words back together into a single string
+    // return words.join(" ");
+    searchUserFriend(words.join(" "));
+  }
+
+  function searchUserFriend(nameString) {
     console.log("USers--------");
     const UserRef = db.collection("Chat Record");
 
-    const queryRef = UserRef.where("Name", "==", searchUser);
+    const queryRef = UserRef.where("Name", "==", nameString);
     queryRef.get().then((data) => {
       console.log(data.docs);
       // setSearchUserList(data.docs);
@@ -1669,14 +1685,31 @@ const UserList = (props) => {
       .catch((error) => console.log(error));
   };
 
+  function CamalCaseName() {
+    let words = ownerName.split(" ");
+
+    // Iterate through each word in the array
+    for (let i = 0; i < words.length; i++) {
+      // Capitalize the first character of the word and make the rest lowercase
+      words[i] =
+        words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+    }
+
+    // Join the words back together into a single string
+    // return words.join(" ");
+    // searchUserFriend(words.join(" "));
+    updateUserName(words.join(" "));
+    setOwnerName(words.join(" "));
+  }
+
   function updateUserInfo() {
     const user = firebase.auth().currentUser;
     db.collection("Chat Record").doc(user.uid).update({ Info: ownerInfo });
     toast.success("Name Changed");
   }
-  function updateUserName() {
+  function updateUserName(dataName) {
     const user = firebase.auth().currentUser;
-    db.collection("Chat Record").doc(user.uid).update({ Name: ownerName });
+    db.collection("Chat Record").doc(user.uid).update({ Name: dataName });
     toast.success("Info Changed");
   }
 
@@ -1773,7 +1806,7 @@ const UserList = (props) => {
                     e.nativeEvent.key === "Enter" &&
                     searchUser.length !== 0
                   ) {
-                    searchUserFriend();
+                    searchUserFriendChangeWord();
                     setSearchFlag(true);
                   }
                 }}
@@ -1826,7 +1859,7 @@ const UserList = (props) => {
                     </span>
                     <span className="flex justify-center items-center mt-[10px] ">
                       <IoMdInformationCircle className="text-[24px] mr-[5px] " />{" "}
-                      Searching is Case Sensitive
+                      Try to search Full Name
                     </span>
                   </div>
                 </>
@@ -1914,7 +1947,7 @@ const UserList = (props) => {
                     e.nativeEvent.key === "Enter" &&
                     searchUser.length !== 0
                   ) {
-                    searchUserFriend();
+                    searchUserFriendChangeWord();
                     setSearchFlag(true);
                   }
                 }}
@@ -2211,7 +2244,7 @@ const UserList = (props) => {
               >
                 <div
                   className={
-                    " text-[15px] w-[320px] h-[220px] rounded-3xl flex flex-col justify-center items-center " +
+                    " text-[15px] w-[320px] h-auto py-[28px] rounded-3xl flex flex-col justify-center items-center " +
                     (theme
                       ? " bg-[#ffffff] text-black"
                       : " bg-[#17171a] text-white")
@@ -2222,16 +2255,21 @@ const UserList = (props) => {
                       Delete all Status?
                     </span>
                   </div>
-                  <div className="w-full mt-[10px] rounded-xl font-[work] text-[#343434]  flex justify-center items-center px-[40px]">
+                  <div
+                    className={
+                      "w-full mt-[10px] rounded-xl font-[work]  flex justify-center items-center px-[40px]" +
+                      (theme ? " text-[#343434]" : " text-[#b7b7b7]")
+                    }
+                  >
                     <span className="  font-light ">
                       ⚠️&nbsp; Once deleted none will be able to see the status.
                       Are you sure?
                     </span>
                   </div>
-                  <div className=" h-[45px] w-full mt-[30px] flex justify-between items-center px-[40px] rounded-xl">
+                  <div className=" h-[45px] w-full mt-[20px] flex justify-end items-center px-[40px] rounded-xl">
                     <button
                       className={
-                        "w-[calc((100%-20px)/2)] h-[45px]    cursor-pointer  font-[google] font-light   rounded-2xl" +
+                        "w-auto h-[35px] flex items-end  bg-transparent  cursor-pointer  font-[google] font-light   rounded-2xl" +
                         (theme
                           ? " bg-[#e4eaf1] text-[#000000]"
                           : " bg-[#17171a] text-[#ffffff]")
@@ -2245,7 +2283,7 @@ const UserList = (props) => {
                       Close
                     </button>
                     <button
-                      className="w-[calc((100%-20px)/2)] h-[45px] text-[black]   cursor-pointer  font-[google] font-light bg-[#96df73]  rounded-2xl"
+                      className="w-auto h-[35px] flex items-end ml-[30px] text-[#5f54ff]   cursor-pointer  font-[google] font-light   rounded-2xl"
                       onClick={() => {
                         // console.log("clicked");
                         // setDelConfirmation(false);
@@ -2299,21 +2337,21 @@ const UserList = (props) => {
                     // setShowStatus(true);
                   }}
                 >
-                  <div className="w-[59px] h-[59px] border-[2.4px] borderGrad  flex justify-center items-center rounded-[20px] z-10">
+                  <div className="w-[50px] h-[50px]  border-[2.4px] border-[#8981f7] rounded-[22px]  flex justify-center items-center z-10">
                     {profileURL === "nophoto" ? (
                       <img
                         src={profile2}
-                        className="w-[50px] h-[50px] rounded-[20px] object-cover z-10 "
+                        className="w-[41px] h-[41px] rounded-[18px] object-cover z-10 "
                       ></img>
                     ) : (
                       <img
                         src={profileURL}
-                        className="w-[50px] h-[50px] rounded-[20px] object-cover z-10 "
+                        className="w-[41px] h-[41px] rounded-[18px] object-cover z-10 "
                       ></img>
                     )}
                     <div
                       className={
-                        "w-[53.2px] h-[53.2px] rounded-[20px] fixed z-0" +
+                        "w-[45px] h-[45px] rounded-[19.5px] fixed z-0" +
                         (theme
                           ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
                           : " bg-[#17171a] md:bg-[#17171a] lg:bg-[#17171a]")
@@ -2657,7 +2695,7 @@ const UserList = (props) => {
                   }
                 >
                   <div
-                    className="w-[59px] h-[59px] border-[2.4px] borderGrad  flex justify-center items-center rounded-[20px] z-10"
+                    className="w-[53px] h-[53px]  border-[2.2px] border-[#8981f7] rounded-[22.2px] flex justify-center items-center  z-10"
                     onClick={() => {
                       setShowStatus(true);
                     }}
@@ -2665,22 +2703,22 @@ const UserList = (props) => {
                     {profileURL === "nophoto" ? (
                       <img
                         src={profile2}
-                        className="w-[50px] h-[50px] rounded-[20px] object-cover z-10 "
+                        className="w-[45px] h-[45px] rounded-[18px] object-cover z-10 "
                       ></img>
                     ) : (
                       <img
                         src={profileURL}
-                        className="w-[50px] h-[50px] rounded-[20px] object-cover z-10 "
+                        className="w-[45px] h-[45px] rounded-[18px] object-cover z-10 "
                       ></img>
                     )}
-                    <div
+                    {/* <div
                       className={
                         "w-[53.2px] h-[53.2px] rounded-[20px] fixed z-0" +
                         (theme
                           ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
                           : " bg-[#17171a] md:bg-[#17171a] lg:bg-[#17171a]")
                       }
-                    ></div>
+                    ></div> */}
                   </div>
                   <div
                     className="w-[calc(100%-65px)] h-[50px] ml-[15px]  flex justify-center items-start z-50"
@@ -2827,7 +2865,7 @@ const UserList = (props) => {
                     <span className="text-[30px]">
                       {onMin < 10 ? <>0{onMin}</> : <>{onMin}</>}
                     </span>
-                    m{/* {onHour*60+onMin}*60+{onMin} */}
+                    m
                   </div>
                   <div className="w-[150px] h-[150px] text-0">
                     {onHour * 60 + onMin > 600 ? (
@@ -2966,6 +3004,40 @@ const UserList = (props) => {
                       (theme ? " text-black" : " text-white")
                     }
                   >
+                    {/* <div className="w-[150px] h-[350px] ">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart width={730} height={250} data={data}>
+                          <defs>
+                            <linearGradient
+                              id="colorAvg"
+                              x1="0"
+                              y1="0"
+                              x2="0"
+                              y2="1"
+                            >
+                              <stop
+                                offset="10%"
+                                stopColor="#8981f7"
+                                stopOpacity={0.6}
+                              />
+                              <stop
+                                offset="100%"
+                                stopColor="#8981f7"
+                                stopOpacity={0}
+                              />
+                            </linearGradient>
+                          </defs>
+
+                          <Area
+                            type="monotone"
+                            dataKey="num"
+                            stroke="#8981f7"
+                            fillOpacity={1}
+                            fill="url(#colorAvg)"
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div> */}
                     {onHour * 60 + onMin > 600 ? (
                       <>
                         <span className="flex justify-center items-center text-[#ff653b] text-[16px]">
@@ -2981,26 +3053,6 @@ const UserList = (props) => {
                           Above Avg
                         </span>
                         <span className=" ">( You should take a break )</span>
-                        {/* <ResponsiveContainer width="100%" height="100%">
-          <AreaChart width={730} height={250} data={data}>
-            <defs>
-              <linearGradient id="colorAvg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="10%" stopColor="#8981f7" stopOpacity={0.6} />
-                <stop offset="100%" stopColor="#8981f7" stopOpacity={0} />
-              </linearGradient>
-            </defs>
-           
-            
-        
-            <Area
-              type="monotone"
-              dataKey="num"
-              stroke="#8981f7"
-              fillOpacity={1}
-              fill="url(#colorAvg)"
-            />
-          </AreaChart>
-        </ResponsiveContainer> */}
                       </>
                     ) : (
                       <>
@@ -3048,7 +3100,7 @@ const UserList = (props) => {
                   >
                     <div
                       className={
-                        "w-[320px] h-[295px] rounded-3xl  flex flex-col justify-center items-center px-[20px] drop-shadow-sm" +
+                        "w-[320px] h-auto rounded-3xl  flex flex-col justify-center items-center px-[20px] py-[28px] drop-shadow-sm" +
                         (theme ? " bg-[white]" : " bg-[#222228]")
                       }
                     >
@@ -3085,10 +3137,10 @@ const UserList = (props) => {
                         }
                       ></input>
 
-                      <div className="w-[calc(100%-40px)] h-[45px] flex justify-between items-center font-[google] font-normal text-[15px] mt-[30px]">
+                      <div className="w-[calc(100%-40px)] h-[35px] flex justify-end items-center font-[google] font-normal text-[15px] mt-[20px]">
                         <span
                           className={
-                            "w-[calc((100%-20px)/2)] h-full rounded-2xl flex justify-center items-center z-20" +
+                            "w-auto  flex items-end h-full rounded-2xl bg-transparent  z-20" +
                             (theme
                               ? " text-black bg-[#e4eaf1]"
                               : " text-[white] bg-[#17171a]")
@@ -3101,10 +3153,10 @@ const UserList = (props) => {
                           Close
                         </span>
                         <span
-                          className="w-[calc((100%-20px)/2)] h-full rounded-2xl text-black bg-[#96df73] flex justify-center items-center  z-20"
+                          className="w-auto ml-[30px] flex items-end h-full rounded-2xl text-[#5f54ff]   z-20"
                           onClick={() => {
                             setNameChangeFlag(false);
-                            updateUserName();
+                            CamalCaseName();
                             updateUserInfo();
                           }}
                         >
@@ -3582,7 +3634,12 @@ const UserList = (props) => {
                       }}
                     >
                       <div className="flex justify-start items-center">
-                        <BiSolidMoon className="text-[20px] mr-[16px]" />
+                        <BiSolidMoon
+                          className={
+                            " text-[23px] mr-[16px]" +
+                            (theme ? " text-[#000000]" : " text-[#8981f7]")
+                          }
+                        />
                         Theme : {theme === true ? <>Light</> : <>Dark</>}
                       </div>
                       <div
@@ -3612,7 +3669,12 @@ const UserList = (props) => {
                       }}
                     >
                       <div className="flex justify-start items-center">
-                        <MdNoAccounts className="text-[20px] mr-[16px]" />
+                        <MdNoAccounts
+                          className={
+                            " text-[23px] mr-[16px]" +
+                            (theme ? " text-[#000000]" : " text-[#8981f7]")
+                          }
+                        />
                         Account Visibility :{" "}
                         {accountStatus === true ? <>Public</> : <>Private</>}
                       </div>
@@ -3644,7 +3706,12 @@ const UserList = (props) => {
                         setTimer(!timer);
                       }}
                     >
-                      <RiTimer2Fill className="text-[20px] mr-[16px]" />
+                      <RiTimer2Fill
+                        className={
+                          " text-[23px] mr-[16px]" +
+                          (theme ? " text-[#000000]" : " text-[#8981f7]")
+                        }
+                      />
                       Daily Usage
                     </div>
                     <div
@@ -3653,7 +3720,12 @@ const UserList = (props) => {
                         setHelp(!help);
                       }}
                     >
-                      <TbHelpSquareRoundedFilled className="text-[20px] mr-[16px]" />{" "}
+                      <TbHelpSquareRoundedFilled
+                        className={
+                          " text-[23px] mr-[16px]" +
+                          (theme ? " text-[#000000]" : " text-[#8981f7]")
+                        }
+                      />{" "}
                       Help
                     </div>
                     <div
@@ -3665,8 +3737,13 @@ const UserList = (props) => {
                         }, 2000);
                       }}
                     >
-                      <AiFillDelete className="text-[20px] mr-[16px]" /> Delete
-                      Account
+                      <AiFillDelete
+                        className={
+                          " text-[23px] mr-[16px]" +
+                          (theme ? " text-[#000000]" : " text-[#8981f7]")
+                        }
+                      />{" "}
+                      Delete Account
                     </div>
                     <div
                       className="w-[100%] h-[34px]  rounded-xl    mt-[10px] flex justify-start items-center font-[google] font-light  text-[15px] cursor-pointer" // {
@@ -3677,7 +3754,12 @@ const UserList = (props) => {
                         userSignOut();
                       }}
                     >
-                      <IoLogOut className="text-[23px] mr-[12px] ml-[1.5px]" />{" "}
+                      <IoLogOut
+                        className={
+                          " text-[23px] mr-[12px] ml-[1.5px]" +
+                          (theme ? " text-[#000000]" : " text-[#8981f7]")
+                        }
+                      />{" "}
                       Log Out
                     </div>
                   </div>
@@ -3725,7 +3807,7 @@ const UserList = (props) => {
         <div
           className={
             "w-full h-full  flex  items-center  z-20" +
-            (theme ? " text-[#000000]" : " text-[#ffffff]")
+            (theme ? " text-[#000000]" : " text-[#8981f7]")
           }
           style={{ transition: ".5s" }}
         >
@@ -3779,7 +3861,7 @@ const UserList = (props) => {
             <div
               className={
                 "w-[12px] h-[12px] rounded-full ml-[-17.3px]" +
-                (theme ? " bg-[#000000]" : " bg-[#ffffff]")
+                (theme ? " bg-[#000000]" : " bg-[#8981f7]")
               }
               onClick={() => {
                 setSearchFlag(false);

@@ -63,9 +63,27 @@ const Signup = () => {
   //       }
   //     }
   //   }
+
+  function CamalCaseName() {
+    let words = name.split(" ");
+
+    // Iterate through each word in the array
+    for (let i = 0; i < words.length; i++) {
+      // Capitalize the first character of the word and make the rest lowercase
+      words[i] =
+        words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+    }
+
+    // Join the words back together into a single string
+    // return words.join(" ");
+    // searchUserFriend(words.join(" "));
+    // updateUserName(words.join(" "));
+    return words.join(" ");
+  }
+
   function createUserCollection(user) {
     db.collection("Chat Record").doc(user.uid).set({
-      Name: name,
+      Name: CamalCaseName(),
       Email: email,
       Info: "Hi folks! I am new to infinity.",
       Phone: number,
