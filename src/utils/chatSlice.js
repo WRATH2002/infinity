@@ -10,6 +10,7 @@ const chatSlice = createSlice({
     AllFriendList: [],
     SearchFriendList: [],
     allGroup: [],
+    totalGroup: [],
     allGroupMembers: [],
     ActiveUser: "",
     SendFlag: true,
@@ -110,6 +111,14 @@ const chatSlice = createSlice({
       state.allGroup = [];
       // console.log(state.messages);
     },
+    addTotalGroup: (state, action) => {
+      state.totalGroup.push(action.payload);
+      // console.log(state.messages);
+    },
+    clearTotalGroup: (state, action) => {
+      state.totalGroup = [];
+      // console.log(state.messages);
+    },
     addAllGroupMembers: (state, action) => {
       state.allGroupMembers.push(action.payload);
       // console.log(state.messages);
@@ -167,6 +176,8 @@ export const {
   clearAllGroup,
   addAllGroupMembers,
   clearAllGroupMembers,
+  addTotalGroup,
+  clearTotalGroup,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

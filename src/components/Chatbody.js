@@ -11,8 +11,11 @@ import {
   addFlagTwoMessage,
   toggleSendFlag,
 } from "../utils/chatSlice";
+import GroupInfo from "./GroupInfo";
+import GroupMessage from "./GroupMessage";
+import { onSnapshot } from "firebase/firestore";
 
-const Chatbody = () => {
+const Chatbody = (props) => {
   const [userInfoSidebar, setUserInfoSidebar] = useState(false);
   const [chatMessage, setChatMessage] = useState([]);
   const [Messages, setMessages] = useState("");
@@ -164,22 +167,63 @@ const Chatbody = () => {
       });
     }
   }
+  const [theme, setTheme] = useState(true);
+
+  useEffect(() => {
+    const user = firebase.auth().currentUser;
+
+    const ref = db.collection("Chat Record").doc(user.uid);
+    onSnapshot(ref, (snapshot) => {
+      setTheme(snapshot?.data()?.theme);
+      //   setProfile(snapshot?.data()?.Photo);
+      //   setName(snapshot?.data()?.Name);
+    });
+  }, []);
 
   return (
     <>
-      <div className="font-bold w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[100svh] bg-white flex flex-col justify-center items-center">
+      <div className="font-bold w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[100svh]  flex flex-col justify-center items-center">
         {/* Chatbody */}
         {userInfoSidebar === false ? (
           <>
             <div
-              className="w-full h-[100svh] flex justify-between items-center bg-[#d9e1e4]"
+              className={
+                "w-full h-[100svh] flex justify-between items-center " +
+                (theme ? " bg-[#d9e1e4]" : " bg-[#17171a]")
+              }
               style={{ transition: ".5s" }}
             >
-              <div className="w-full h-[100svh]">
-                <div className="w-full  ">
-                  <UserInfo />
+              <div
+                className={
+                  "w-full h-[100svh]" +
+                  (theme ? " bg-[#d9e1e4]" : " bg-[#17171a]")
+                }
+              >
+                <div
+                  className={
+                    "w-full  " + (theme ? " bg-[#d9e1e4]" : " bg-[#17171a]")
+                  }
+                >
+                  {props?.mode === 1 ? (
+                    <>
+                      <UserInfo />
+                    </>
+                  ) : (
+                    <>
+                      <GroupInfo />
+                      {/* jhvjv */}
+                    </>
+                  )}
                 </div>
-                <MessageBody />
+                {props?.mode === 1 ? (
+                  <>
+                    <MessageBody />
+                  </>
+                ) : (
+                  <>
+                    <GroupMessage />
+                  </>
+                )}
               </div>
             </div>
           </>
@@ -191,9 +235,21 @@ const Chatbody = () => {
                 style={{ transition: ".5s" }}
               >
                 <div className="w-full cursor-pointer">
-                  <UserInfo />
+                  {props?.mode === 1 ? (
+                    <>
+                      <UserInfo />
+                    </>
+                  ) : (
+                    <>message 2</>
+                  )}
                 </div>
-                <MessageBody />
+                {props?.mode === 1 ? (
+                  <>
+                    <MessageBody />
+                  </>
+                ) : (
+                  <>message 2</>
+                )}
               </div>
 
               {/* <div

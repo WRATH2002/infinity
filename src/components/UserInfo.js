@@ -45,6 +45,7 @@ import { BsFileEarmarkMusic } from "react-icons/bs";
 import { BsFileEarmarkPlay } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { TiLockClosed, TiLockOpen } from "react-icons/ti";
+import { TbAlertTriangle } from "react-icons/tb";
 // import {MdCall} from "react-icons/md";
 
 // import { FaAngleLeft } from "react-icons/fa6";
@@ -675,7 +676,7 @@ export const UserInfo = () => {
                 <div
                   className={
                     "fixed  w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)]  h-[100%]  flex justify-center items-center    backdrop-blur-md top-[0px] " +
-                    (theme ? " bg-[#e4eaf16d]" : " bg-[#17171a25]")
+                    (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
                   }
                   style={{ zIndex: "100" }}
                   onClick={() => {
@@ -685,32 +686,32 @@ export const UserInfo = () => {
                 >
                   <div
                     className={
-                      " text-[15px] w-[320px] lg:w-[450px] md:w-[450px] h-auto py-[22px] pt-[28px] rounded-3xl flex flex-col justify-center items-center " +
+                      " text-[15px] w-[320px]  h-auto  rounded-3xl flex flex-col p-[20px] justify-center items-center " +
                       (theme
                         ? " bg-[#ffffff] text-black"
                         : " bg-[#222228] text-white")
                     }
                   >
-                    <div className="w-full rounded-xl  flex justify-start items-center px-[40px]">
-                      <span className=" font-[google] font-medium text-[22px] ">
-                        Clear this Chat?
+                    <div className="w-full rounded-xl  flex justify-start items-center px-[6px]">
+                      <span className=" font-[google] font-medium text-[22px] flex justify-start text-[#bb2a23] items-center ">
+                        <TbAlertTriangle className="text-[25px] text-[#bb2a23]" />{" "}
+                        &nbsp; Clear this Chat?
                       </span>
                     </div>
                     <div
                       className={
-                        "w-full mt-[10px] rounded-xl font-[work] flex justify-center items-center px-[40px]" +
+                        "w-full mt-[10px] rounded-xl font-[work] flex justify-center items-center px-[6px]" +
                         (theme ? " text-[#343434]" : " text-[#b7b7b7]")
                       }
                     >
-                      <span className="  font-light ">
-                        ⚠️&nbsp; All the chats and media will be deleted. Are
-                        you sure?
+                      <span className="  font-light font-[google] ">
+                        All the chats and media will be deleted. Are you sure?
                       </span>
                     </div>
-                    <div className=" h-[45px] w-full mt-[20px] flex justify-end items-center px-[40px] rounded-xl">
+                    <div className=" h-auto w-full mt-[20px] flex justify-end items-center px-[6px] rounded-xl">
                       <button
                         className={
-                          "w-auto flex items-end h-[35px] bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
+                          "w-auto flex items-end  h-auto bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
                           (theme
                             ? " bg-[#e4eaf1] text-[#000000]"
                             : " bg-[#17171a] text-[#ffffff]")
@@ -723,7 +724,7 @@ export const UserInfo = () => {
                         Close
                       </button>
                       <button
-                        className="w-auto flex items-end h-[35px] ml-[30px] text-[#5f54ff]   cursor-pointer  font-[google] font-light   rounded-2xl"
+                        className="w-auto flex items-end  h-auto ml-[30px] text-[#bb2a23]   cursor-pointer  font-[google] font-light   rounded-2xl"
                         onClick={() => {
                           // console.log("clicked");
                           setDelConfirmation(false);
@@ -741,7 +742,7 @@ export const UserInfo = () => {
               {mediaShow === true ? (
                 <div
                   className={
-                    "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[calc(100svh-200px)]  top-[190px] flex flex-col justify-start items-center rounded-2xl py-[20px] pb-[10px] px-[15px]" +
+                    "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[calc(100svh-200px)]  top-[190px] flex flex-col justify-start items-center rounded-2xl  pb-[10px] px-[15px] pt-[10px]" +
                     (theme ? " bg-[#ffffff]" : " bg-[#222228]")
                   }
                   style={{ zIndex: "100", transition: ".4s" }}
@@ -788,26 +789,26 @@ export const UserInfo = () => {
                   >
                     {mediaOption === "Photos" ? (
                       <div
-                        className={
-                          "w-[calc(100%/3)]  ml-[calc(100%/3)]  h-full flex justify-center items-center rounded-lg " +
-                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
-                        }
+                        className="w-[calc(100%/3)]  border-[#8981f7] border-b-[2.5px] ml-[calc(100%/3)]  h-full flex justify-center items-center  " // {
+                        // +
+                        //   (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        // }
                         style={{ transition: ".2s" }}
                       ></div>
                     ) : mediaOption === "Videos" ? (
                       <div
-                        className={
-                          "w-[calc(100%/3)] ml-[calc((100%/3)*2)] h-full flex justify-center items-center rounded-lg " +
-                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
-                        }
+                        className="w-[calc(100%/3)] border-[#8981f7] border-b-[2.5px] ml-[calc((100%/3)*2)] h-full flex justify-center items-center  " // {
+                        // +
+                        //   (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        // }
                         style={{ transition: ".2s" }}
                       ></div>
                     ) : (
                       <div
-                        className={
-                          "w-[calc(100%/3)] h-full flex justify-center items-center rounded-lg " +
-                          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
-                        }
+                        className="w-[calc(100%/3)] border-[#8981f7] border-b-[2.5px] h-full flex justify-center items-center  " // {
+                        // +
+                        //   (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
+                        // }
                         style={{ transition: ".2s" }}
                       ></div>
                     )}
@@ -1398,38 +1399,39 @@ export const UserInfo = () => {
               {chatLockModal === true ? (
                 <div
                   className={
-                    "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[100svh]  top-[0px] flex flex-col justify-center items-center  p-[20px] z-50 font-[google] font-normal backdrop-blur-md" +
+                    "w-[100%] md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] right-0 fixed h-[100svh]  top-[0px] flex flex-col justify-center items-center  p-[20px] z-50 font-[google] font-normal backdrop-blur-md" +
                     (theme ? " bg-[#e4eaf16d] " : " h-[100svh] bg-[#17171a25] ")
                   }
                   style={{ zIndex: "100" }}
                 >
                   <div
                     className={
-                      "w-[320px] flex flex-col justify-start items-start rounded-3xl p-[20px]" +
+                      "w-[320px] flex flex-col justify-start items-start rounded-3xl  p-[20px] pb-[7px]" +
                       (theme
                         ? " bg-[#ffffff] text-black"
                         : " bg-[#222228] text-white")
                     }
                   >
-                    <div className="w-full rounded-xl  flex justify-start items-center px-[10px]">
+                    <div className="w-full rounded-xl  flex justify-start items-center px-[6px]">
                       <span className="w-full flex justify-start items-center font-[google] font-medium text-[22px] ">
-                        Enable Chat Lock ?
+                        <TiLockClosed className="text-[27px] ml-[-3px] mt-[-2px]" />{" "}
+                        &nbsp;Enable Chat Lock ?
                       </span>
                     </div>
                     <div
                       className={
-                        "w-full mt-[10px] rounded-xl font-[work]  flex justify-center items-center px-[10px]" +
+                        "w-full mt-[10px] rounded-xl font-[work]  flex justify-center items-center px-[6px]" +
                         (theme ? " text-[#343434] " : " text-[#afafaf]")
                       }
                     >
                       <span className="  font-light ">
-                        ⚠️&nbsp; Every time you open this chat, you will have to
-                        verify using PIN that you will give for PassCode below.
-                        Are you sure?
+                        Every time you open this chat, you will have to verify
+                        using PIN that you will give for PassCode below. Are you
+                        sure?
                       </span>
                     </div>
                     <div
-                      className="w-full px-[10px] mt-[10px] flex justify-between items-center font-[google] font-light  text-[16px] cursor-pointer"
+                      className="w-full mt-[10px] flex justify-between items-center font-[google] font-light  text-[16px] cursor-pointer px-[6px]"
                       onClick={() => {
                         // changeAccountStatus();
                         setLock(!lock);
@@ -1463,7 +1465,7 @@ export const UserInfo = () => {
                     </div>
                     <div
                       className={
-                        "w-full  mt-[15px] flex justify-center items-center ml-[17px] overflow-hidden" +
+                        "w-full  mt-[15px] flex justify-center items-center ml-[17px] overflow-hidden px-[6px]" +
                         (lock ? " h-[45px]" : " h-[0px]")
                       }
                       // style={{ transition: ".3s" }}
@@ -1531,7 +1533,7 @@ export const UserInfo = () => {
                         />
                       </div>
                     </div>
-                    <div className=" h-[45px] w-full mt-[15px] flex justify-end items-center px-[10px] mb-[10px] rounded-xl">
+                    <div className=" h-[45px] w-full mt-[5px] flex justify-end items-center mb-[10px] rounded-xl px-[6px]">
                       <button
                         className={
                           "w-auto  h-[35px] flex items-end  bg-transparent  cursor-pointer  font-[google] font-light   rounded-2xl" +
@@ -1796,7 +1798,7 @@ export const UserInfo = () => {
                       )} */}
                       <span className="flex justify-start items-center">
                         <span
-                          className="w-auto pl-[10px] pr-[3.5px] mt-[10px] h-[30px] rounded-3xl bg-[#04bdb6] text-white text-[14px]  font-[work] font-light flex justify-center items-center overflow-hidden"
+                          className="w-auto p-[15px] mt-[10px] h-[30px] rounded-3xl bg-[#8981f7] text-white text-[14px]  font-[google] font-light flex justify-center items-center overflow-hidden"
                           onClick={() => {
                             // setUserSidebar(!userSidebar);
                             setMediaShow(!mediaShow);
@@ -1816,24 +1818,20 @@ export const UserInfo = () => {
                           >
                             {ImageMediaLink.length !== 0 ? (
                               <>
-                                {mediaShow === true ? (
-                                  <>Close Media</>
-                                ) : (
-                                  <>Media</>
-                                )}
+                                {mediaShow === true ? <>Close</> : <>Media</>}
                               </>
                             ) : (
                               <>No Media</>
                             )}
                           </span>
-                          <div
+                          {/* <div
                             className="border-[.7px] border-[white] h-[15px] ml-[6px] opacity-100"
                             style={{
                               transition: ".4s",
                               transitionDelay: ".8s",
                             }}
-                          ></div>
-                          {ImageMediaLink.length !== 0 ? (
+                          ></div> */}
+                          {/* {ImageMediaLink.length !== 0 ? (
                             <>
                               {mediaShow === true ? (
                                 <>
@@ -1865,7 +1863,7 @@ export const UserInfo = () => {
                                 }}
                               />
                             </>
-                          )}
+                          )} */}
                         </span>
                         <div
                           className="h-[30px] w-auto flex justify-center items-center"

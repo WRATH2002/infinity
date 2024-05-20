@@ -10,10 +10,22 @@ import Sidebar from "./Sidebar";
 import { useSelector } from "react-redux";
 import bg from "../assets/img/bb1.webp";
 import { WiStars } from "react-icons/wi";
+import gg from "../assets/img/gg.jpg";
+import {
+  addAllGroup,
+  addTotalGroup,
+  clearAllGroup,
+  clearTotalGroup,
+} from "../utils/chatSlice";
+import { onSnapshot } from "firebase/firestore";
+import { useDispatch } from "react-redux";
 const Loading = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [per, setPer] = useState(0);
   const [isSubLoading, setIsSubLoading] = useState(false);
+  const [messageMode, setMessageMode] = useState(1);
+
+  const dispatch = useDispatch();
   useEffect(() => {
     // Creating a timeout within the useEffect hook
     run();
@@ -39,6 +51,54 @@ const Loading = (props) => {
     // }
   }
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
+  const TotalGroups = useSelector((store) => store.chat.totalGroup);
+
+  useEffect(() => {
+    // console.log(
+    //   "TotalGroupssnnadgfjdsfusdyfv------------------------------------------------------------------"
+    // );
+    // console.log(TotalGroups);
+    if (ActiveChatUser.length !== 0) {
+      if (isNameInArray(ActiveChatUser)) {
+        setMessageMode(2);
+      } else {
+        setMessageMode(1);
+      }
+    }
+  }, [ActiveChatUser]);
+
+  function isNameInArray(name) {
+    for (let i = 0; i < TotalGroups.length; i++) {
+      if (TotalGroups[i].GroupName === name) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  useEffect(() => {
+    fetchAllGroups();
+  }, []);
+
+  function fetchAllGroups() {
+    const user = firebase.auth().currentUser;
+    console.log(user.uid);
+    const grpRef = db.collection("Groups");
+    // .doc(user.uid);
+
+    onSnapshot(grpRef, (snapshot) => {
+      console.log("Group Naemeeeee");
+      console.log(snapshot.docs);
+
+      dispatch(clearTotalGroup());
+      snapshot.docs.forEach((name) => {
+        console.log("name---------------------------");
+        console.log(name?.id);
+        dispatch(addTotalGroup({ GroupName: name.id }));
+      });
+    });
+  }
+
   useEffect(() => {
     // Creating a timeout within the useEffect hook
     const timer = setTimeout(() => {
@@ -132,7 +192,7 @@ const Loading = (props) => {
           <div className="w-full flex h-[100svh] justify-between items-center">
             <Sidebar />
 
-            <Chatbody />
+            <Chatbody mode={messageMode} />
           </div>
         </>
       )}
@@ -210,7 +270,7 @@ const AuthDetails = () => {
                   your fingertips.
                 </span>
                 <div
-                  className="px-[20px] h-[40px] w-auto whitespace-nowrap mt-[30px] cursor-pointer select-none outline-none drop-shadow-sm bg-[white] text-white rounded-full text-[16px] flex justify-center items-center bb"
+                  className="px-[20px] h-[40px] w-auto whitespace-nowrap mt-[30px] cursor-pointer select-none outline-none drop-shadow-sm bg-[#8981f7] text-white rounded-full text-[16px] flex justify-center items-center "
                   onClick={() => {
                     setStart(!start);
                     setTimeout(() => {
@@ -284,6 +344,13 @@ const AuthDetails = () => {
               >
                 {subSubStart === true ? (
                   <>
+                    {/* <div className="w-full h-[100svh] flex justify-center items-center z-50">
+                      <img
+                        className="w-[70%] h-full object-cover z-50"
+                        src={gg}
+                      ></img>
+                      <div className="w-[30%] h-full"></div>
+                    </div> */}
                     {mode === 1 ? (
                       <>
                         <div
@@ -292,12 +359,6 @@ const AuthDetails = () => {
                         >
                           <Login />
                         </div>
-                        {/* <div className="w-full h-[100svh] fixed z-0">
-                          <img
-                            className="w-full h-full object-cover"
-                            src={bg}
-                          ></img>
-                        </div> */}
                       </>
                     ) : (
                       <div

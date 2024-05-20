@@ -69,12 +69,17 @@ import { BsCameraFill } from "react-icons/bs";
 import AllGroupList from "./AllGroupList";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
-import { FaLongArrowAltDown, FaLongArrowAltUp, FaPen } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaLongArrowAltDown,
+  FaLongArrowAltUp,
+  FaPen,
+} from "react-icons/fa";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 // import { LuSearch } from "react-icons/lu";
 // import { RxCross2 } from "react-icons/rx";
-import { TbPlaystationCircle } from "react-icons/tb";
-import { MdGroups } from "react-icons/md";
+import { TbAlertTriangle, TbPlaystationCircle } from "react-icons/tb";
+import { MdDescription, MdGroups } from "react-icons/md";
 import { BsFillChatSquareTextFill } from "react-icons/bs";
 import { PiChatCircleTextFill } from "react-icons/pi";
 import { MdPersonSearch } from "react-icons/md";
@@ -409,11 +414,11 @@ const Friends = (props) => {
         <div className=" w-full md:w-[400px] lg:w-[400px] h-[100svh] top-0 left-0 fixed bg-[#17171a25] z-50 backdrop-blur-md flex justify-center items-center">
           <div
             className={
-              " text-[15px] w-[320px]  h-auto py-[28px] rounded-3xl flex flex-col justify-center items-center " +
+              " text-[15px] w-[320px]  h-auto p-[20px] rounded-3xl flex flex-col justify-center items-center " +
               (theme ? " bg-[#ffffff] text-black" : " bg-[#222228] text-white")
             }
           >
-            <div className="w-full rounded-xl  flex justify-start items-center px-[40px]">
+            {/* <div className="w-full rounded-xl  flex justify-start items-center px-[6px]">
               <span
                 className={
                   " font-[work]  font-normal flex justify-start items-center text-[20px] mt-[5px]" +
@@ -423,38 +428,41 @@ const Friends = (props) => {
                 {photoURL === "nophoto" ? (
                   <img
                     src={profile2}
+                    alt=""
                     className="w-[40px] h-[40px] rounded-full object-cover mr-[10px] "
                   ></img>
                 ) : (
                   <img
                     src={photoURL}
+                    alt=""
                     className="w-[40px] h-[40px] rounded-full object-cover mr-[10px] "
                   ></img>
                 )}{" "}
                 {userName}
               </span>
-            </div>
-            <div className="w-full rounded-xl  flex justify-start mt-[10px] items-center px-[40px]">
-              <span className=" font-[google] font-light text-[22px] ">
-                Delete this Contact?
+            </div> */}
+            <div className="w-full rounded-xl  flex justify-start items-center px-[6px]">
+              <span className=" font-[google] font-light text-[22px] flex justify-start items-center text-[#bb2a23] ">
+                <TbAlertTriangle className="text-[25px] text-[#bb2a23]" />{" "}
+                &nbsp; Delete this Contact?
               </span>
             </div>
 
             <div
               className={
-                "w-full mt-[10px] rounded-xl font-[work]  flex justify-center items-center px-[40px]" +
+                "w-full mt-[10px] rounded-xl font-[google]  flex justify-center items-center px-[6px]" +
                 (theme ? " text-[#343434] " : " text-[#b7b7b7]")
               }
             >
               <span className="  font-light ">
-                ⚠️&nbsp; All the chats history and media with this contact will
-                be deleted. Are you sure?
+                All the chat's history and media with this contact will be
+                deleted. Are you sure?
               </span>
             </div>
-            <div className=" h-[35px] w-full mt-[20px] flex justify-end items-center px-[40px] rounded-xl">
+            <div className=" h-auto w-full mt-[20px] flex justify-end items-center px-[6px] rounded-xl">
               <button
                 className={
-                  "w-auto h-[45px]  flex items-end bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
+                  "w-auto h-auto  flex items-end bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
                   (theme
                     ? " bg-[#e4eaf1] text-[#000000]"
                     : " bg-[#17171a] text-[#ffffff]")
@@ -467,7 +475,7 @@ const Friends = (props) => {
                 Close
               </button>
               <button
-                className="w-auto flex items-end ml-[30px] h-[45px] text-[#5f54ff]   cursor-pointer  font-[google] font-light  rounded-2xl"
+                className="w-auto flex items-end ml-[30px] h-auto text-[#bb2a23]   cursor-pointer  font-[google] font-light  rounded-2xl"
                 onClick={() => {
                   // console.log("clicked");
                   deleteChatUser();
@@ -506,11 +514,13 @@ const Friends = (props) => {
                 {photoURL === "nophoto" ? (
                   <img
                     src={profile2}
+                    alt=""
                     className="w-full h-full rounded-[18px] object-cover "
                   ></img>
                 ) : (
                   <img
                     src={photoURL}
+                    alt=""
                     className="w-full h-full rounded-[18px] object-cover "
                   ></img>
                 )}
@@ -720,11 +730,13 @@ const Friends = (props) => {
                 {photoURL === "nophoto" ? (
                   <img
                     src={profile2}
+                    alt=""
                     className="w-full h-full rounded-[18px] object-cover "
                   ></img>
                 ) : (
                   <img
                     src={photoURL}
+                    alt=""
                     className="w-full h-full rounded-[18px] object-cover "
                   ></img>
                 )}
@@ -1198,6 +1210,7 @@ const UserList = (props) => {
   const [isSearchBar, setIsSearchBar] = useState(false);
   const [ownerInfo, setOwnerInfo] = useState("");
   const [statusImage, setStatusImage] = useState();
+  const [groupImage, setGroupImage] = useState();
   const [statusTextModal, setStatusTextModal] = useState(false);
   const [statusImageUrl, setStatusImageUrl] = useState();
   const [nameChangeFlag, setNameChangeFlag] = useState(false);
@@ -1220,6 +1233,10 @@ const UserList = (props) => {
   const [profileZoom, setProfileZoom] = useState("");
   const [confirmStatusDelete, setConfirmStatusDelete] = useState(false);
   const [timeoutId, setTimeoutId] = useState();
+  const [subAlert, setSubAlert] = useState(false);
+  const [subSuccess, setSubSuccess] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   // const [left, setRight] = useState(0);
   // addFriendList;
   console.log("UserList");
@@ -1415,37 +1432,118 @@ const UserList = (props) => {
     });
   }
 
+  function GroupProfileImage(e) {
+    setGroupImage(e.target.files[0]);
+  }
+
+  const uploadGroupImage = async () => {
+    const user = firebase.auth().currentUser;
+    const fileRef = ref(storage, `/group_image/${user.uid}/${statusCount + 1}`);
+    const myPromise = uploadGroupImageGetUrl(fileRef);
+    toast.promise(
+      myPromise,
+      {
+        loading: "Uploading Photo",
+        success: "Photo Updated",
+        error: "Error",
+      },
+      {
+        style: {
+          backgroundColor: "#333333",
+          color: "#fff",
+          font: "work",
+          fontWeight: "400",
+        },
+      }
+    );
+  };
+
+  const uploadGroupImageGetUrl = async (fileRef) => {
+    const user = firebase.auth().currentUser;
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes();
+    const amPM = hours >= 12 ? "pm" : "am";
+    hours = hours % 12 || 12;
+    const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")} ${amPM}`;
+
+    var geturl = await uploadBytes(fileRef, groupImage).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        console.log(url);
+        setTempUrl(url);
+        // const statusRef = db
+        //   .collection("Chat Record")
+        //   .doc(user.uid)
+        //   .update({
+        //     Status: arrayUnion({
+        //       url: url,
+        //       text: "",
+        //     }),
+        //     StTime: formattedTime,
+        //   });
+        geturl = url;
+      });
+      // console.log("Uploaded a blob or file!");
+    });
+    setGroupImage();
+    return geturl;
+  };
+
+  useEffect(() => {
+    if (groupImage) {
+      uploadGroupImage();
+    }
+  }, [groupImage]);
+
   function createGroup() {
     const user = firebase.auth().currentUser;
     console.log(user.uid);
-    const grpRef = db
-      .collection("Chat Record")
+
+    db.collection("Chat Record")
       .doc(user.uid)
       .collection("Group")
-      // .doc(user.uid)
-      .doc(user.uid)
-      .collection("GroupNames")
       .doc(groupName)
-      .collection("Member")
-      .doc(user.uid)
-      // .doc(user.uid)
+      .set({ Admin: true });
+    db.collection("Groups")
+      .doc(groupName)
       .set({
-        chat: "hello",
-        // Description: groupDescription,
+        ProfileURL: tempUrl,
+        Description: groupDescription,
+        Name: groupName,
+        Member: [user.uid],
+        MessageId: 0,
       });
 
-    const grp2Ref = db
-      .collection("Chat Record")
-      .doc(user.uid)
-      .collection("Group")
-      // .doc(user.uid)
-      .doc(user.uid)
-      .collection("GroupNames")
-      .doc(groupName)
-      // .doc(user.uid)
-      .set({
-        Description: groupDescription,
-      });
+    // const grpRef = db
+    //   .collection("Chat Record")
+    //   .doc(user.uid)
+    //   .collection("Group")
+    //   // .doc(user.uid)
+    //   .doc(user.uid)
+    //   .collection("GroupNames")
+    //   .doc(groupName)
+    //   .collection("Member")
+    //   .doc(user.uid)
+    //   // .doc(user.uid)
+    //   .set({
+    //     chat: "hello",
+    //     // Description: groupDescription,
+    //   });
+
+    // const grp2Ref = db
+    //   .collection("Chat Record")
+    //   .doc(user.uid)
+    //   .collection("Group")
+    //   // .doc(user.uid)
+    //   .doc(user.uid)
+    //   .collection("GroupNames")
+    //   .doc(groupName)
+    //   // .doc(user.uid)
+    //   .set({
+    //     Description: groupDescription,
+    //   });
   }
 
   function fetchAllGroups() {
@@ -1464,7 +1562,7 @@ const UserList = (props) => {
       dispatch(clearAllGroup());
       snapshot.docs.forEach((name) => {
         console.log("name---------------------------");
-        console.log(name.id);
+        console.log(name?.id);
         dispatch(addAllGroup({ GroupName: name.id }));
       });
       // dispatch(clearAllFriendList());
@@ -1494,10 +1592,24 @@ const UserList = (props) => {
 
   function deleteStatus() {
     const user = firebase.auth().currentUser;
-    db.collection("Chat Record").doc(user.uid).update({
-      Status: "",
-    });
+    db.collection("Chat Record")
+      .doc(user.uid)
+      .update({
+        Status: "",
+      })
+      .then(() => {
+        // console.log("Deleteddddddddddddd..............")
+        // setShowAlert(true);
+        setAlertMessage("Status Deleted");
+      });
   }
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setShowAlert(false);
+  //     setAlertMessage("");
+  //   }, 2000);
+  // }, []);
 
   const uploadImageGetUrl = async (fileRef) => {
     const user = firebase.auth().currentUser;
@@ -1736,6 +1848,25 @@ const UserList = (props) => {
 
   return (
     <>
+      {showAlert === true ? (
+        <>
+          <div
+            className="fixed w-full h-[60px] top-[10px] z-50 flex justify-center items-center"
+            style={{ transition: ".4s" }}
+          >
+            <div className="w-auto h-[60px] bg-slate-400">{alertMessage}</div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div
+            className="fixed w-full h-[60px] top-[10px] z-50 flex justify-center items-center mt-[-80px]"
+            style={{ transition: ".4s" }}
+          >
+            <div className="w-auto h-[60px] bg-slate-400">{alertMessage}</div>
+          </div>
+        </>
+      )}
       <div className="w-[calc(100%-20px)] md:w-full lg:w-full  h-[calc(100%-140px)] flex flex-col items-end  pt-[0px] overflow-y-scroll">
         {searchFlag === true ? (
           <>
@@ -1762,7 +1893,7 @@ const UserList = (props) => {
               <div
                 className={
                   "w-full backdrop-blur-sm lg:w-[400px] md:w-[400px] lg:left-0 md:left-0 h-[100svh]  fixed z-50 right-0 top-0 flex justify-center items-center flex-col drop-shadow-md" +
-                  (theme ? " bg-[#e4eaf16d]" : " bg-[#17171a25]")
+                  (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
                 }
                 onClick={() => {
                   setProfileZoom("");
@@ -1903,7 +2034,7 @@ const UserList = (props) => {
               <div
                 className={
                   "w-full backdrop-blur-sm lg:w-[400px] md:w-[400px] lg:left-0 md:left-0 h-[100svh] fixed z-50 right-0 top-0 flex justify-center items-center flex-col drop-shadow-md" +
-                  (theme ? " bg-[#e4eaf16d]" : " bg-[#17171a25]")
+                  (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
                 }
                 onClick={() => {
                   setProfileZoom("");
@@ -1913,7 +2044,7 @@ const UserList = (props) => {
                   <img
                     src={profile2}
                     className={
-                      "w-[280px] rounded-3xl aspect-square object-cover " +
+                      "w-[320px] rounded-3xl aspect-square object-cover " +
                       (theme ? " bg-[#ffffff]" : " bg-[#222228]")
                     }
                   ></img>
@@ -1921,7 +2052,7 @@ const UserList = (props) => {
                   <img
                     src={profileZoom}
                     className={
-                      "w-[280px] rounded-3xl aspect-square object-cover " +
+                      "w-[320px] rounded-3xl aspect-square object-cover " +
                       (theme ? " bg-[#ffffff]" : " bg-[#222228]")
                     }
                   ></img>
@@ -2036,7 +2167,7 @@ const UserList = (props) => {
               <div
                 className={
                   "w-full backdrop-blur-sm lg:w-[400px] md:w-[400px] lg:left-0 md:left-0 h-[100svh] fixed z-50 right-0 top-0 flex justify-center items-center flex-col drop-shadow-md" +
-                  (theme ? " bg-[#e4eaf16d]" : " bg-[#17171a25]")
+                  (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
                 }
                 onClick={() => {
                   setProfileZoom("");
@@ -2046,7 +2177,7 @@ const UserList = (props) => {
                   <img
                     src={profile2}
                     className={
-                      "w-[280px] rounded-3xl aspect-square object-cover " +
+                      "w-[320px] rounded-3xl aspect-square object-cover " +
                       (theme ? " bg-[#ffffff]" : " bg-[#222228]")
                     }
                   ></img>
@@ -2054,7 +2185,7 @@ const UserList = (props) => {
                   <img
                     src={profileZoom}
                     className={
-                      "w-[280px] rounded-3xl aspect-square object-cover " +
+                      "w-[320px] rounded-3xl aspect-square object-cover " +
                       (theme ? " bg-[#ffffff]" : " bg-[#222228]")
                     }
                   ></img>
@@ -2136,7 +2267,7 @@ const UserList = (props) => {
                     className="hidden"
                     type="file"
                     id="groupDp"
-                    onChange={(e) => Image(e)}
+                    onChange={(e) => GroupProfileImage(e)}
                     accept="image/*"
                   ></input>
                   <label
@@ -2234,7 +2365,7 @@ const UserList = (props) => {
               <div
                 className={
                   "fixed  w-full lg:w-[400px] md:w-[400px]  h-[100svh]  flex justify-center items-center    backdrop-blur-md top-[0px] left-0" +
-                  (theme ? " bg-[#e4eaf16d]" : " bg-[#000000a2]")
+                  (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
                 }
                 style={{ zIndex: "100" }}
                 onClick={() => {
@@ -2244,32 +2375,37 @@ const UserList = (props) => {
               >
                 <div
                   className={
-                    " text-[15px] w-[320px] h-auto py-[28px] rounded-3xl flex flex-col justify-center items-center " +
+                    " text-[15px] w-[320px] p-[20px] rounded-3xl flex flex-col justify-center items-center " +
                     (theme
                       ? " bg-[#ffffff] text-black"
-                      : " bg-[#17171a] text-white")
+                      : " bg-[#222228] text-white") +
+                    (subAlert ? " h-[70px]" : " h-[171px]")
                   }
+                  style={{ transition: ".3s" }}
                 >
-                  <div className="w-full rounded-xl  flex justify-start items-center px-[40px]">
-                    <span className=" font-[google] font-medium text-[22px] ">
-                      Delete all Status?
+                  {/* {subAlert === false ? (
+                    <> */}
+                  <div className="w-full rounded-xl  flex justify-start items-center px-[6px]">
+                    <span className=" font-[google] font-medium text-[22px] flex justify-start items-center text-[#bb2a23] ">
+                      <TbAlertTriangle className="text-[25px] text-[#bb2a23]" />{" "}
+                      &nbsp; Delete all Status?
                     </span>
                   </div>
                   <div
                     className={
-                      "w-full mt-[10px] rounded-xl font-[work]  flex justify-center items-center px-[40px]" +
+                      "w-full mt-[10px] rounded-xl font-[google]  flex justify-center items-center px-[6px]" +
                       (theme ? " text-[#343434]" : " text-[#b7b7b7]")
                     }
                   >
                     <span className="  font-light ">
-                      ⚠️&nbsp; Once deleted none will be able to see the status.
-                      Are you sure?
+                      Once deleted none will be able to see the status. Are you
+                      sure?
                     </span>
                   </div>
-                  <div className=" h-[45px] w-full mt-[20px] flex justify-end items-center px-[40px] rounded-xl">
+                  <div className=" h-auto w-full mt-[20px] flex justify-end items-center px-[6px] rounded-xl">
                     <button
                       className={
-                        "w-auto h-[35px] flex items-end  bg-transparent  cursor-pointer  font-[google] font-light   rounded-2xl" +
+                        "w-auto h-auto flex items-end  bg-transparent  cursor-pointer  font-[google] font-light   rounded-2xl" +
                         (theme
                           ? " bg-[#e4eaf1] text-[#000000]"
                           : " bg-[#17171a] text-[#ffffff]")
@@ -2283,11 +2419,23 @@ const UserList = (props) => {
                       Close
                     </button>
                     <button
-                      className="w-auto h-[35px] flex items-end ml-[30px] text-[#5f54ff]   cursor-pointer  font-[google] font-light   rounded-2xl"
+                      className="w-auto h-auto flex items-end ml-[30px] text-[#bb2a23]   cursor-pointer  font-[google] font-light   rounded-2xl"
                       onClick={() => {
                         // console.log("clicked");
                         // setDelConfirmation(false);
                         // deleteChats();
+                        // setSubAlert(true);
+                        // setShowAlert(true);
+                        // setTimeout(() => {
+                        //   setShowAlert(false);
+                        //   setAlertMessage("");
+                        //   setTimeout(() => {
+                        //     // setShowAlert(false);
+                        //     setSubAlert(false);
+                        //     // setAlertMessage("");
+                        //     setConfirmStatusDelete(false);
+                        //   }, 1000);
+                        // }, 1000);
                         deleteStatus();
                         setConfirmStatusDelete(false);
                       }}
@@ -2295,6 +2443,25 @@ const UserList = (props) => {
                       Delete
                     </button>
                   </div>
+                  {/* </>
+                  ) : (
+                    <>
+                      {showAlert === true ? (
+                        <>
+                          <span class="loaderDel"></span>
+                        </>
+                      ) : (
+                        <>
+                          <span className=" font-[google] font-medium text-[18px] flex justify-start items-center text-[#bb2a23] ">
+                            <FaCheckCircle className="text-[20px] mr-[10px]" />
+                            Deleted Successfully
+                          </span>
+                        </>
+                      )}
+                    </>
+                  )} */}
+
+                  {/* <FaCheckCircle className="text-[38px] mr-[10px] text-[#bb2a23]" /> */}
                 </div>
               </div>
             ) : (
@@ -2337,26 +2504,26 @@ const UserList = (props) => {
                     // setShowStatus(true);
                   }}
                 >
-                  <div className="w-[50px] h-[50px]  border-[2.4px] border-[#8981f7] rounded-[22px]  flex justify-center items-center z-10">
+                  <div className="w-[53px] h-[53px]  border-[2.2px] border-transparent rounded-[22.2px]  flex justify-center items-center z-10">
                     {profileURL === "nophoto" ? (
                       <img
                         src={profile2}
-                        className="w-[41px] h-[41px] rounded-[18px] object-cover z-10 "
+                        className="w-[45px] h-[45px] rounded-[18px] object-cover z-10 "
                       ></img>
                     ) : (
                       <img
                         src={profileURL}
-                        className="w-[41px] h-[41px] rounded-[18px] object-cover z-10 "
+                        className="w-[45px] h-[45px] rounded-[18px] object-cover z-10 "
                       ></img>
                     )}
-                    <div
+                    {/* <div
                       className={
                         "w-[45px] h-[45px] rounded-[19.5px] fixed z-0" +
                         (theme
                           ? " bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
                           : " bg-[#17171a] md:bg-[#17171a] lg:bg-[#17171a]")
                       }
-                    ></div>
+                    ></div> */}
                   </div>
                   <div className="w-[calc(100%-65px)] h-[50px] ml-[15px] bg-transparent  flex flex-col justify-center items-start ">
                     <div className="w-full font-semibold flex h-[23px]">
@@ -3095,18 +3262,18 @@ const UserList = (props) => {
                   <div
                     className={
                       "w-full md:w-[400px] lg-[400px] h-[100svh]  z-50 fixed top-0 left-0 flex justify-center items-center px-[10px] md:px-0 lg:px-0 backdrop-blur-md" +
-                      (theme ? " bg-[#e4eaf16d]" : " bg-[#17171a25]")
+                      (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
                     }
                   >
                     <div
                       className={
-                        "w-[320px] h-auto rounded-3xl  flex flex-col justify-center items-center px-[20px] py-[28px] drop-shadow-sm" +
+                        "w-[320px] h-auto rounded-3xl  flex flex-col justify-center items-center p-[20px] drop-shadow-sm" +
                         (theme ? " bg-[white]" : " bg-[#222228]")
                       }
                     >
                       <span
                         className={
-                          "font-medium w-full pl-[20px] h-[30px]  flex items-start mt-[-5px]  text-[21px] font-[google]" +
+                          "font-medium w-full px-[6px] h-[30px]  flex items-start mt-[-5px]  text-[21px] font-[google]" +
                           (theme ? " text-black" : " text-white")
                         }
                       >
@@ -3118,10 +3285,10 @@ const UserList = (props) => {
                         onChange={(e) => setOwnerName(e.target.value)}
                         placeholder="Name"
                         className={
-                          "log w-[calc(100%-40px)] h-[45px] font-normal px-[20px]  input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px]  rounded-2xl pr-[50px] mt-[20px]" +
+                          "log w-[calc(100%-12px)] bg-transparent h-[35px] font-normal  input tracking-[.4px] font-[google]  border-b-[1.5px]   z-0 outline-none  text-[15px]  mt-[20px]" +
                           (theme
-                            ? " text-black bg-[#e4eaf1]"
-                            : " text-[white] bg-[#17171a]")
+                            ? " text-black bg-[#e4eaf1] border-[#545454]"
+                            : " text-[white] bg-[#17171a] border-[#c3c3c3]")
                         }
                       ></input>
                       <input
@@ -3130,17 +3297,17 @@ const UserList = (props) => {
                         onChange={(e) => setOwnerInfo(e.target.value)}
                         placeholder="About"
                         className={
-                          "log w-[calc(100%-40px)] h-[45px] font-normal px-[20px]  input tracking-[.4px] font-[google]  border-none  z-0 outline-none  text-[15px]  rounded-2xl pr-[50px] mt-[10px]" +
+                          "log w-[calc(100%-12px)] bg-transparent h-[35px] font-normal  input tracking-[.4px] font-[google]  border-b-[1.5px]   z-0 outline-none  text-[15px]  mt-[10px]" +
                           (theme
-                            ? " text-black bg-[#e4eaf1]"
-                            : " text-[white] bg-[#17171a]")
+                            ? " text-black bg-[#e4eaf1] border-[#545454]"
+                            : " text-[white] bg-[#17171a] border-[#c3c3c3]")
                         }
                       ></input>
 
-                      <div className="w-[calc(100%-40px)] h-[35px] flex justify-end items-center font-[google] font-normal text-[15px] mt-[20px]">
+                      <div className="w-[100%] h-auto px-[6px] flex justify-end items-center font-[google] font-normal text-[15px] mt-[20px]">
                         <span
                           className={
-                            "w-auto  flex items-end h-full rounded-2xl bg-transparent  z-20" +
+                            "w-auto  flex items-end h-auto rounded-2xl bg-transparent  z-20" +
                             (theme
                               ? " text-black bg-[#e4eaf1]"
                               : " text-[white] bg-[#17171a]")
@@ -3153,7 +3320,7 @@ const UserList = (props) => {
                           Close
                         </span>
                         <span
-                          className="w-auto ml-[30px] flex items-end h-full rounded-2xl text-[#5f54ff]   z-20"
+                          className="w-auto ml-[30px] flex items-end h-auto rounded-2xl text-[#5f54ff]   z-20"
                           onClick={() => {
                             setNameChangeFlag(false);
                             CamalCaseName();
@@ -3207,7 +3374,7 @@ const UserList = (props) => {
                       className={
                         " w-[30px] h-[30px]  flex justify-center items-center border-[2px]   fixed rounded-full cursor-pointer z-10" +
                         (theme
-                          ? " bg-[#c48ed8] text-black border-[#e4eaf1] md:border-[#e4eaf1] lg:border-[#e4eaf1]"
+                          ? " bg-[#8981f7] text-white border-[#e4eaf1] md:border-[#e4eaf1] lg:border-[#e4eaf1]"
                           : " bg-[#4b565c] text-white border-[#17171a] md:border-[#17171a] lg:border-[#17171a]")
                       }
                     >
@@ -3250,7 +3417,7 @@ const UserList = (props) => {
                 {help === true ? (
                   <>
                     <div
-                      className="w-full md:w-[400px] lg:w-[400px] h-[calc(100svh-75px)] fixed top-[70px] p-[10px] flex flex-col justify-center items-center z-50 text-[15px]"
+                      className="w-full md:w-[400px] lg:w-[400px] h-[calc(100svh-75px)] backdrop-blur-md fixed top-[70px] p-[10px] flex flex-col justify-center items-center z-50 text-[15px]"
                       style={{ transition: ".4s" }}
                     >
                       <div
