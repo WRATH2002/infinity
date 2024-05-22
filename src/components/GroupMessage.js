@@ -89,7 +89,7 @@ const Chat = (props) => {
                     "w-auto  max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] pt-[5px] px-[8px] pr-[8px] rounded-lg flex flex-col items-start justify-center flex-wrap " +
                     (theme
                       ? " bg-[#ffffff] text-[black]"
-                      : " bg-[#282828] text-[white]")
+                      : " bg-[#222228] text-[white]")
                   }
                 >
                   <div
@@ -101,7 +101,7 @@ const Chat = (props) => {
                     {name}
                   </div>
                   <div className="px-[6px] w-auto flex justify-end items-end ">
-                    <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[google] font-light">
+                    <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[google] leading-[19px]  font-light">
                       {props?.data?.Message}
                     </pre>
                     <div
@@ -128,7 +128,7 @@ const Chat = (props) => {
                   loading="lazy"
                   onLoad={() => {
                     setIsImageLoaded(true);
-                    console.log("Loaded Image");
+                    // console.log("Loaded Image");
                   }}
                   src={props?.data?.Image}
                   className="rounded-lg w-full h-full object-cover group-hover:opacity-60"
@@ -225,11 +225,11 @@ const Chat = (props) => {
                 className={
                   "w-auto max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] px-[14px] pr-[8px] rounded-lg flex  flex-wrap justify-between" +
                   (theme
-                    ? " bg-[#ffffff] text-[black]"
-                    : " bg-[#282828] text-[white]")
+                    ? " bg-[#c9c5ff] text-[black]"
+                    : " bg-[#756dedcd] text-[white]")
                 }
               >
-                <pre className="max-w-[calc(100%)] whitespace-pre-wrap   font-[google] font-light">
+                <pre className="max-w-[calc(100%)] whitespace-pre-wrap  leading-[19px] font-[google] font-light">
                   {props?.data?.Message}
                 </pre>
                 <div
@@ -259,7 +259,7 @@ const Chat = (props) => {
                   loading="lazy"
                   onLoad={() => {
                     setIsImageLoaded(true);
-                    console.log("Loaded Image");
+                    // console.log("Loaded Image");
                   }}
                   // onClick={() => {
                   //   setZoomImage(true);
@@ -446,12 +446,19 @@ const GroupMessage = () => {
       setChatRecord(snapshot?.data()?.Message);
     });
   }
+
+  const listRef = useRef(null);
+  useEffect(() => {
+    listRef.current?.lastElementChild?.scrollIntoView();
+  }, [chatRecord]);
+
   return (
     <>
       <div
+        ref={listRef}
         className={
-          "w-full  md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] right-0 h-[calc(100svh-140px)] top-[80px] fixed" +
-          (theme ? " bg-[#d9e1e4]" : " bg-[#17171a]")
+          "w-full  md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] right-0 h-[calc(100svh-140px)] top-[80px] fixed overflow-y-scroll " +
+          (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
         }
       >
         {chatRecord?.map((chats) => {
@@ -599,20 +606,20 @@ const GroupMessage = () => {
                   <span class="loader"></span>
                   <span class="loader1"></span>
                 </div>
-                <input
+                <textarea
                   onChange={(e) => setMessages(e.target.value)}
                   value={Messages}
                   // ref={textAreaRef}
                   rows="1"
                   placeholder="Write Something .."
                   className={
-                    "input w-[calc(100%-135px)] ml-[10px]   px-[20px] pr-[50px]  outline-none text-[15px] font-[work] font-medium tracking-[.4px] rounded-2xl   h-[45px]   pl-[20px]" +
+                    "input w-[calc(100%-135px)] ml-[10px]  resize-none px-[20px] pr-[50px] pt-[10px]  outline-none text-[15px] font-[work] font-medium tracking-[.4px] rounded-2xl   h-[45px]   pl-[20px]" +
                     (theme
                       ? " bg-[#ffffff] text-[black]"
-                      : " bg-[#282828] text-[white]")
+                      : " bg-[#222228] text-[white]")
                   }
                   style={{ transition: ".4s" }}
-                ></input>
+                ></textarea>
               </>
             )}
             <button

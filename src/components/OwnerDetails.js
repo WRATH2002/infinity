@@ -79,7 +79,7 @@ const OwnerDetails = (props) => {
 
   useEffect(() => {
     window.addEventListener("offline", function (e) {
-      console.log("offline");
+      // console.log("offline");
 
       setIsOnline(false);
       setIsAni(true);
@@ -89,7 +89,7 @@ const OwnerDetails = (props) => {
       }, 2000);
     });
     window.addEventListener("online", function (e) {
-      console.log("online");
+      // console.log("online");
       setIsOnline(true);
       setIsAni(true);
       setTimeout(() => {
@@ -145,7 +145,7 @@ const OwnerDetails = (props) => {
   }
 
   function Image(e) {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     setImage(e.target.files[0]);
   }
 
@@ -155,7 +155,7 @@ const OwnerDetails = (props) => {
     const fileRef = ref(storage, `/users/${user.uid}/Profile Photo`);
     uploadBytes(fileRef, image).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        console.log(url);
+        // console.log(url);
         db.collection("Chat Record").doc(user.uid).update({ Photo: url });
       });
       // toast.success("Photo Changed Successfully");
@@ -168,7 +168,7 @@ const OwnerDetails = (props) => {
           color: "#cdd8dd",
         },
       });
-      console.log("Uploaded a blob or file!");
+      // console.log("Uploaded a blob or file!");
     });
   }
 

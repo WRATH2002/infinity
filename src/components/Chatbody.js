@@ -240,7 +240,9 @@ const Chatbody = (props) => {
                       <UserInfo />
                     </>
                   ) : (
-                    <>message 2</>
+                    <>
+                      <GroupInfo />
+                    </>
                   )}
                 </div>
                 {props?.mode === 1 ? (
@@ -248,7 +250,9 @@ const Chatbody = (props) => {
                     <MessageBody />
                   </>
                 ) : (
-                  <>message 2</>
+                  <>
+                    <GroupMessage />
+                  </>
                 )}
               </div>
 

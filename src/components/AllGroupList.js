@@ -20,7 +20,7 @@ export const AllGroupList = (props) => {
 
   useEffect(() => {
     fetchGroupInfo();
-  }, []);
+  }, [props?.data?.GroupName]);
 
   useEffect(() => {
     const user = firebase.auth().currentUser;
@@ -32,7 +32,7 @@ export const AllGroupList = (props) => {
 
   function deleteChatUser() {
     const user = firebase.auth().currentUser;
-    console.log(user.uid);
+    // console.log(user.uid);
     // console.log(UserUid);
     // var docRef = doc(db,"")
     var delRef = db
@@ -50,17 +50,17 @@ export const AllGroupList = (props) => {
   }
 
   function activerChatUser() {
-    console.log("props.data.UserId");
-    console.log(props.data.UserId);
+    // console.log("props.data.UserId");
+    // console.log(props.data.UserId);
     dispatch(addActiveUser(name));
   }
 
   function fetchGroupInfo() {
     const user = firebase.auth().currentUser;
-    const grpRef = db.collection("Groups").doc(props.data.GroupName);
+    const grpRef = db.collection("Groups").doc(props?.data?.GroupName);
     onSnapshot(grpRef, (snapshot) => {
-      console.log("Group Dattaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-      console.log(snapshot.data());
+      // console.log("Group Dattaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      // console.log(snapshot.data());
       setDescription(snapshot?.data()?.Description);
       setName(snapshot?.data()?.Name);
       setProfile(snapshot?.data()?.ProfileURL);

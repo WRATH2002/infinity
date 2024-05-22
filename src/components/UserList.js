@@ -79,7 +79,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 // import { LuSearch } from "react-icons/lu";
 // import { RxCross2 } from "react-icons/rx";
 import { TbAlertTriangle, TbPlaystationCircle } from "react-icons/tb";
-import { MdDescription, MdGroups } from "react-icons/md";
+import { MdBugReport, MdDescription, MdGroups } from "react-icons/md";
 import { BsFillChatSquareTextFill } from "react-icons/bs";
 import { PiChatCircleTextFill } from "react-icons/pi";
 import { MdPersonSearch } from "react-icons/md";
@@ -237,9 +237,9 @@ const Friends = (props) => {
       chatFlag == 2 &&
       props.data.UserId !== ActiveChatUser
     ) {
-      console.log(
-        "Incominggggggggggggggggggggggg------------------------------------------------------"
-      );
+      // console.log(
+      //   "Incominggggggggggggggggggggggg------------------------------------------------------"
+      // );
       // toast.dismiss();
       setNot(true);
       toast.remove();
@@ -384,15 +384,15 @@ const Friends = (props) => {
   }
 
   function activerChatUser() {
-    console.log("props.data.UserId");
-    console.log(props.data.UserId);
+    // console.log("props.data.UserId");
+    // console.log(props.data.UserId);
     dispatch(addActiveUser(props.data.UserId));
   }
 
   function deleteChatUser() {
     const user = firebase.auth().currentUser;
-    console.log(user.uid);
-    console.log(UserUid);
+    // console.log(user.uid);
+    // console.log(UserUid);
     // var docRef = doc(db,"")
     var delRef = db
       .collection("Chat Record")
@@ -700,7 +700,7 @@ const Friends = (props) => {
               onClick={() => {
                 deleteChatUser();
                 setConfirmDelete(true);
-                console.log("clickeddddddd");
+                // console.log("clickeddddddd");
               }}
             >
               <MdDelete
@@ -925,7 +925,7 @@ const Friends = (props) => {
               className="group-hover:flex hidden justify-center items-start pt-[5px] h-full w-[20px] ml-[-20px] z-40"
               onClick={() => {
                 setConfirmDelete(true);
-                console.log("clickeddddddd");
+                // console.log("clickeddddddd");
               }}
             >
               <MdDelete
@@ -993,8 +993,8 @@ const SearchFriends = (props) => {
   }
 
   function activerChatUser() {
-    console.log("props.data.UserId");
-    console.log(props.data.UserId);
+    // console.log("props.data.UserId");
+    // console.log(props.data.UserId);
     dispatch(addActiveUser(props.data.UserId));
   }
 
@@ -1009,9 +1009,9 @@ const SearchFriends = (props) => {
 
     tete.get().then((doc) => {
       if (doc.data()) {
-        console.log("frinds");
+        // console.log("frinds");
       } else {
-        console.log("not frinds");
+        // console.log("not frinds");
         tete.set({
           ChatHistory: [],
           LastUpdated: serverTimestamp(),
@@ -1034,7 +1034,7 @@ const SearchFriends = (props) => {
     const userDoc = db.collection("Chat Record").doc(props.data.UserId);
     onSnapshot(userDoc, (snapshot) => {
       setIsOnline(snapshot?.data()?.Online);
-      console.log(snapshot?.data()?.Online);
+      // console.log(snapshot?.data()?.Online);
     });
   }
 
@@ -1237,10 +1237,12 @@ const UserList = (props) => {
   const [subSuccess, setSubSuccess] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [bugAbout, setBugAbout] = useState("");
+  const [reportBug, setReportBug] = useState(false);
   // const [left, setRight] = useState(0);
   // addFriendList;
-  console.log("UserList");
-  console.log(UserList);
+  // console.log("UserList");
+  // console.log(UserList);
 
   function changeTheme() {
     const user = firebase.auth().currentUser;
@@ -1361,8 +1363,8 @@ const UserList = (props) => {
       .orderBy("LastUpdated", "desc");
 
     onSnapshot(userDoc, (snapshot) => {
-      console.log("Last Updated User Message");
-      console.log(snapshot.docs);
+      // console.log("Last Updated User Message");
+      // console.log(snapshot.docs);
       // setUserList(snapshot.docs);
       dispatch(clearFriendList());
       snapshot.docs?.map((user) => {
@@ -1375,8 +1377,8 @@ const UserList = (props) => {
     const users = firebase.auth().currentUser;
     const userDoc = db.collection("Chat Record").orderBy("Name", "desc");
     onSnapshot(userDoc, (snapshot) => {
-      console.log("Last Updated User Message");
-      console.log(snapshot.docs);
+      // console.log("Last Updated User Message");
+      // console.log(snapshot.docs);
       // setUserList(snapshot.docs);
       dispatch(clearAllFriendList());
       snapshot.docs?.map((user) => {
@@ -1416,16 +1418,16 @@ const UserList = (props) => {
   }
 
   function searchUserFriend(nameString) {
-    console.log("USers--------");
+    // console.log("USers--------");
     const UserRef = db.collection("Chat Record");
 
     const queryRef = UserRef.where("Name", "==", nameString);
     queryRef.get().then((data) => {
-      console.log(data.docs);
+      // console.log(data.docs);
       // setSearchUserList(data.docs);
       dispatch(clearSearchFriendList());
       data.docs.forEach((userId) => {
-        console.log(userId.id);
+        // console.log(userId.id);
         dispatch(addSearchFriendList({ UserId: userId.id }));
         // SearchUserList.push(userId.id);
       });
@@ -1471,7 +1473,7 @@ const UserList = (props) => {
 
     var geturl = await uploadBytes(fileRef, groupImage).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        console.log(url);
+        // console.log(url);
         setTempUrl(url);
         // const statusRef = db
         //   .collection("Chat Record")
@@ -1499,7 +1501,7 @@ const UserList = (props) => {
 
   function createGroup() {
     const user = firebase.auth().currentUser;
-    console.log(user.uid);
+    // console.log(user.uid);
 
     db.collection("Chat Record")
       .doc(user.uid)
@@ -1548,7 +1550,7 @@ const UserList = (props) => {
 
   function fetchAllGroups() {
     const user = firebase.auth().currentUser;
-    console.log(user.uid);
+    // console.log(user.uid);
     const grpRef = db
       .collection("Chat Record")
       .doc(user.uid)
@@ -1556,13 +1558,13 @@ const UserList = (props) => {
     // .doc(user.uid);
 
     onSnapshot(grpRef, (snapshot) => {
-      console.log("Group Naemeeeee");
-      console.log(snapshot.docs);
+      // console.log("Group Naemeeeee");
+      // console.log(snapshot.docs);
 
       dispatch(clearAllGroup());
       snapshot.docs.forEach((name) => {
-        console.log("name---------------------------");
-        console.log(name?.id);
+        // console.log("name---------------------------");
+        // console.log(name?.id);
         dispatch(addAllGroup({ GroupName: name.id }));
       });
       // dispatch(clearAllFriendList());
@@ -1630,7 +1632,7 @@ const UserList = (props) => {
 
     var geturl = await uploadBytes(fileRef, statusImage).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        console.log(url);
+        // console.log(url);
         setTempUrl(url);
         const statusRef = db
           .collection("Chat Record")
@@ -1655,7 +1657,7 @@ const UserList = (props) => {
         // setMessages("");
         geturl = url;
       });
-      console.log("Uploaded a blob or file!");
+      // console.log("Uploaded a blob or file!");
     });
     setStatusImage();
     return geturl;
@@ -1722,7 +1724,7 @@ const UserList = (props) => {
   const [tempProfileImage, setTempProfileImage] = useState();
 
   function profileImage(e) {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     setTempProfileImage(e.target.files[0]);
 
     //  setImageLength(e.target.files.length);
@@ -1739,12 +1741,12 @@ const UserList = (props) => {
     var geturl = await uploadBytes(fileRef, tempProfileImage).then(
       (snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
-          console.log(url);
+          // console.log(url);
           db.collection("Chat Record").doc(user.uid).update({ Photo: url });
 
           geturl = url;
         });
-        console.log("Uploaded a blob or file!");
+        // console.log("Uploaded a blob or file!");
       }
     );
     return geturl;
@@ -1836,7 +1838,7 @@ const UserList = (props) => {
 
   function deleteAccount() {
     const user = firebase.auth().currentUser;
-    console.log(user.uid);
+    // console.log(user.uid);
     // console.log(UserUid);
     // var docRef = doc(db,"")
     var delRef = db.collection("Chat Record").doc(user.uid).delete();
@@ -1844,6 +1846,17 @@ const UserList = (props) => {
     //   console.log("chat deleted");
     // });
     // dispatch(addActiveUser(""));
+  }
+
+  function postBug() {
+    const user = firebase.auth().currentUser;
+    db.collection("Feedbacks")
+      .doc("Bugs")
+      .update({
+        Bugs: arrayUnion({ Bugs: bugAbout, User: user.uid }),
+      });
+
+    setBugAbout("");
   }
 
   return (
@@ -2918,7 +2931,7 @@ const UserList = (props) => {
                         // deleteStatus();
                         setConfirmStatusDelete(true);
                         setShowStatus(false);
-                        console.log("clicked");
+                        // console.log("clicked");
                       }}
                     >
                       <MdDelete
@@ -2993,6 +3006,82 @@ const UserList = (props) => {
           </>
         ) : (
           <>
+            {reportBug === true ? (
+              <>
+                <div
+                  className=" w-full lg:w-[400px] md:w-[400px] h-[100svh] top-0 left-0 fixed bg-[#17171a25] z-50 backdrop-blur-md flex justify-center items-center"
+                  style={{ zIndex: "99" }}
+                >
+                  <div
+                    className={
+                      " text-[15px] w-[320px]  h-auto p-[20px] rounded-3xl flex flex-col justify-center items-center " +
+                      (theme
+                        ? " bg-[#ffffff] text-black"
+                        : " bg-[#222228] text-white")
+                    }
+                  >
+                    <div className="w-full rounded-xl  flex justify-start items-center px-[6px]">
+                      <span className=" font-[google] font-light text-[22px] flex justify-start items-center text-[#bb2a23] ">
+                        <MdBugReport className="text-[25px] text-[#bb2a23]" />{" "}
+                        &nbsp; Report Bug Form
+                      </span>
+                    </div>
+
+                    <div
+                      className={
+                        "w-full mt-[10px] rounded-xl font-[google]  flex justify-start items-center px-[6px]" +
+                        (theme ? " text-[#343434] " : " text-[#b7b7b7]")
+                      }
+                    >
+                      <span className="  font-light ">
+                        Feddback / Explain about Bug *
+                      </span>
+                    </div>
+                    <textarea
+                      placeholder="Feedback"
+                      value={bugAbout}
+                      onChange={(e) => {
+                        setBugAbout(e.target.value);
+                      }}
+                      className={
+                        "log w-[calc(100%-12px)] mt-[10px] rounded-xl font-[google]  flex justify-start items-center font-normal resize-none h-[100px] outline-none p-[10px]" +
+                        (theme ? " bg-[#e4eaf1] " : " bg-[#17171a]")
+                      }
+                    />
+                    <div className=" h-auto w-full mt-[20px] flex justify-end items-center px-[6px] rounded-xl">
+                      <button
+                        className={
+                          "w-auto h-auto  flex items-end bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
+                          (theme
+                            ? " bg-[#e4eaf1] text-[#000000]"
+                            : " bg-[#17171a] text-[#ffffff]")
+                        }
+                        onClick={() => {
+                          // console.log("clicked");
+                          setReportBug(false);
+                        }}
+                      >
+                        Close
+                      </button>
+                      <button
+                        className="w-auto flex items-end ml-[30px] h-auto text-[#bb2a23]   cursor-pointer  font-[google] font-light  rounded-2xl"
+                        onClick={() => {
+                          // console.log("clicked");
+                          // exitGroup();
+                          postBug();
+
+                          setReportBug(false);
+                        }}
+                      >
+                        Post
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
             {timer ? (
               <div
                 className={
@@ -3895,6 +3984,21 @@ const UserList = (props) => {
                       />{" "}
                       Help
                     </div>
+                    <div
+                      className="w-[100%] h-[34px]  rounded-xl    mt-[10px] flex justify-start items-center  font-[google] font-light  text-[15px] cursor-pointer"
+                      onClick={() => {
+                        setReportBug(true);
+                      }}
+                    >
+                      <MdBugReport
+                        className={
+                          " text-[23px] mr-[16px]" +
+                          (theme ? " text-[#000000]" : " text-[#8981f7]")
+                        }
+                      />{" "}
+                      Report Bug
+                    </div>
+
                     <div
                       className="w-[100%] h-[34px]  rounded-xl    mt-[10px] flex justify-start items-center font-[google] font-light  text-[15px] cursor-pointer"
                       onClick={() => {

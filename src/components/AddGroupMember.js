@@ -25,8 +25,8 @@ const AddGroupMember = (props) => {
     });
     setUid(props?.data?.UserId);
 
-    console.log("addgroup memberbjhbhbv dvvhisvhsvubosubv");
-    console.log(props);
+    // console.log("addgroup memberbjhbhbv dvvhisvhsvubosubv");
+    // console.log(props);
   }, []);
 
   useEffect(() => {
@@ -110,7 +110,7 @@ const AddGroupMember = (props) => {
                 onClick={() => {
                   if (isAdded) {
                     Unselect();
-                    console.log(uid);
+                    // console.log(uid);
                   }
                 }}
               >
@@ -127,17 +127,30 @@ const AddGroupMember = (props) => {
         <div
           className={
             "w-[100%] h-[65px] py-[10px] flex items-center justify-center cursor-pointer px-[10px]   " +
-            (isAdded ? " bg-[#c9c5ff]" : " bg-transparent")
+            (isAdded
+              ? theme
+                ? " bg-[#c9c5ff]"
+                : " bg-[#756dedcd]"
+              : " bg-transparent")
           }
+          // onClick={() => {
+          //   // addMemberToGroup();
+          //   setAdminModal(true);
+          // }}
+
           onClick={() => {
-            // addMemberToGroup();
-            setAdminModal(true);
+            if (!isAdded) {
+              addMemberToGroup();
+            } else if (isAdded) {
+              Unselect();
+              // console.log(uid);
+            }
           }}
         >
           <div
             className={
               "w-[45px] h-[45px]   rounded-[18px] " +
-              (theme ? " bg-[#ffffff]" : " bg-[#222228]")
+              (theme ? " bg-[#e4eaf1]" : " bg-[#17171a]")
             }
           >
             {profile === "nophoto" ? (
@@ -164,7 +177,11 @@ const AddGroupMember = (props) => {
               <span
                 className={
                   "w-full text-[17px] h-[23px]  flex items-center whitespace-nowrap overflow-hidden text-ellipsis font-[google] font-normal" +
-                  (theme ? " text-[#000000]" : " text-[#ffffff]")
+                  (!theme
+                    ? isAdded
+                      ? " text-[white]"
+                      : " text-[white]"
+                    : " text-[#000000]")
                 }
                 // style={{ transition: ".9s" }}
               >
@@ -172,8 +189,12 @@ const AddGroupMember = (props) => {
               </span>
               <span
                 className={
-                  "w-full text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-[23px]    font-[work] font-normal" +
-                  (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                  "w-full  text-[14px]   mt-[2px] h-[19px] overflow-hidden text-ellipsis line-clamp-1     font-[work] font-normal" +
+                  (!theme
+                    ? isAdded
+                      ? " text-[#bdbdbd]"
+                      : " text-[#bdbdbd]"
+                    : " text-[#5f5f5f]")
                 }
               >
                 {about}
@@ -191,7 +212,12 @@ const AddGroupMember = (props) => {
             <span className="w-[70px] text-[14px] h-full font-normal  flex justify-end items-center"></span> */}
               {isAdded ? (
                 <>
-                  <FaCircleCheck className="text-[20px] text-[#8981f7]" />
+                  <FaCircleCheck
+                    className={
+                      "text-[20px] " +
+                      (theme ? " text-[#8981f7]" : " text-[#ffffff]")
+                    }
+                  />
                 </>
               ) : (
                 <></>

@@ -22,6 +22,7 @@ import { addActiveUser } from "../utils/chatSlice";
 import {
   FieldValue,
   arrayRemove,
+  arrayUnion,
   onSnapshot,
   serverTimestamp,
 } from "firebase/firestore";
@@ -40,7 +41,7 @@ import toast, { Toaster, useToaster } from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 import del from "../assets/img/delete2.png";
 import { IoIosInformationCircle, IoMdVideocam } from "react-icons/io";
-import { LuChevronRight, LuRefreshCw } from "react-icons/lu";
+import { LuChevronRight, LuRefreshCw, LuSettings2 } from "react-icons/lu";
 import { RiMessage2Fill, RiSettings3Fill } from "react-icons/ri";
 import { BsFiletypeJpg } from "react-icons/bs";
 import { BsFiletypePng } from "react-icons/bs";
@@ -64,6 +65,7 @@ import { uploadBytes } from "firebase/storage";
 import { RiEditFill } from "react-icons/ri";
 import AddGroupMember from "./AddGroupMember";
 import { IoExit } from "react-icons/io5";
+import { HiBadgeCheck } from "react-icons/hi";
 // import {MdCall} from "react-icons/md";
 
 // import { FaAngleLeft } from "react-icons/fa6";
@@ -177,8 +179,11 @@ const Members = (props) => {
   const [about, setAbout] = useState(true);
   const [admin, setAdmin] = useState(true);
   const [adminModal, setAdminModal] = useState(false);
+  const [me, setMe] = useState(false);
   const [uid, setUid] = useState("");
   const [userAdmin, setUserAdmin] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const user = firebase.auth().currentUser;
@@ -195,14 +200,25 @@ const Members = (props) => {
     onSnapshot(Adref, (snapshot) => {
       setUserAdmin(snapshot?.data()?.Admin);
     });
-    console.log("addgroup memberbjhbhbv dvvhisvhsvubosubv");
-    console.log(props);
-  }, []);
+    // console.log("addgroup memberbjhbhbv dvvhisvhsvubosubv");
+    // console.log(props);
+  }, [props?.data]);
 
   useEffect(() => {
+    const user = firebase.auth().currentUser;
     const ref = db.collection("Chat Record").doc(props?.data);
+    if (user.uid === props?.data) {
+      setMe(true);
+    } else {
+      setMe(false);
+    }
     onSnapshot(ref, (snapshot) => {
-      setName(snapshot?.data()?.Name);
+      if (user.uid === props?.data) {
+        setName("You");
+      } else {
+        setName(snapshot?.data()?.Name);
+      }
+      // setName(snapshot?.data()?.Name);
       setAbout(snapshot?.data()?.Info);
       setProfile(snapshot?.data()?.Photo);
     });
@@ -242,7 +258,15 @@ const Members = (props) => {
         Member: arrayRemove(uid),
       });
 
-    console.log(uid);
+    db.collection("Chat Record")
+      .doc(uid)
+      .collection("Group")
+      .doc(props?.groupName)
+      .delete();
+
+    // dispatch(addActiveUser(""));
+
+    // console.log(uid);
   }
 
   return (
@@ -250,7 +274,10 @@ const Members = (props) => {
       {adminModal === true ? (
         <>
           <div
-            className="w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] h-[100svh] fixed right-0 top-0 backdrop-blur-md flex justify-center items-center bg-[#17171a25] z-50"
+            className={
+              "w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] h-[100svh] fixed right-0 top-0 backdrop-blur-md flex justify-center items-center  z-50" +
+              (theme ? " bg-[#17171a25]" : " bg-[#0000008c]")
+            }
             onClick={() => {
               setAdminModal(false);
             }}
@@ -265,7 +292,16 @@ const Members = (props) => {
               style={{ zIndex: "999" }}
               onClick={() => {}}
             >
-              <div className="w-full h-[35px] flex justify-start items-center cursor-pointer">
+              <div
+                className="w-full h-[35px] flex justify-start items-center cursor-pointer"
+                onClick={() => {
+                  // if (!admin) {
+                  // makeAdmin();
+                  // }
+
+                  dispatch(addActiveUser(uid));
+                }}
+              >
                 <RiMessage2Fill className="text-[18px] mr-[10px]" /> Message{" "}
                 {name}
               </div>
@@ -315,7 +351,7 @@ const Members = (props) => {
       )}
       <div className="w-[100%] h-[65px]  py-[10px] flex items-center justify-center cursor-pointer bg-transparent ">
         <div
-          className="w-[100%] h-[65px] py-[10px] flex items-center justify-center cursor-pointer    "
+          className="w-[100%] h-[65px] py-[10px] flex items-center justify-center cursor-pointer     rounded-2xl"
           onClick={() => {
             if (userAdmin === true) {
               setAdminModal(true);
@@ -357,14 +393,25 @@ const Members = (props) => {
                 // style={{ transition: ".9s" }}
               >
                 {/* {props.data.user} */}
-                {name}
+                {name === "You" ? (
+                  <>
+                    {name}{" "}
+                    <HiBadgeCheck className="text-[19px] text-[#8981f7] ml-[5px]" />{" "}
+                  </>
+                ) : (
+                  <>{name}</>
+                )}
                 {/* {isOnline} */}
               </span>
               <span
                 className={
                   "w-[100px]  h-full text-[12px] font-normal font-[google]  flex justify-center rounded-md items-center whitespace-nowrap " +
-                  (admin
-                    ? " text-black bg-[#c9c5ff]"
+                  (theme
+                    ? admin
+                      ? " text-black bg-[#c9c5ff]"
+                      : " text-transparent bg-transparent"
+                    : admin
+                    ? " text-white bg-[#756dedcd]"
                     : " text-transparent bg-transparent")
                 }
               >
@@ -374,8 +421,8 @@ const Members = (props) => {
             <div className="w-full flex h-[23px]">
               <span
                 className={
-                  "w-[100%] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis line-clamp-1 flex items-center h-full    font-[work] font-normal" +
-                  (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
+                  "w-[100%] text-[14px]   mt-[2px] h-[19px] overflow-hidden text-ellipsis line-clamp-1  font-[work] font-normal" +
+                  (theme ? " text-[#5f5f5f]" : " text-[#bdbdbd]")
                 }
               >
                 {about}
@@ -410,7 +457,7 @@ const MemberName = (props) => {
     <>
       <div className="text-[14px]  font-[work] font-light   z-20">
         {" "}
-        {name},&nbsp;
+        {name},{" "}
       </div>
     </>
   );
@@ -473,8 +520,52 @@ export const GroupInfo = () => {
   const [tempProfileImage, setTempProfileImage] = useState();
   const [availableFriends, setAvaiableFriends] = useState();
 
+  const [exitGroupModal, setExitGroupModal] = useState(false);
+  const [reportBug, setReportBug] = useState(false);
+  const [bugAbout, setBugAbout] = useState("");
+
+  const [tempName, setTempName] = useState("");
+  const [tempDescription, setTempDescription] = useState("");
+  // const dispatch = useDispatch();
+
+  const [userAdmin, setUserAdmin] = useState(false);
+
+  useEffect(() => {
+    const user = firebase.auth().currentUser;
+    const adminRef = db
+      .collection("Chat Record")
+      .doc(user.uid)
+      .collection("Group")
+      .doc(ActiveChatUser);
+    onSnapshot(adminRef, (snapshot) => {
+      setUserAdmin(snapshot?.data()?.Admin);
+    });
+  }, [ActiveChatUser]);
+
+  // useEffect(() => {
+  //   const user = firebase.auth().currentUser;
+  //   const Adref = db
+  //     .collection("Chat Record")
+  //     .doc(user.uid)
+  //     .collection("Group")
+  //     .doc(name);
+  //   onSnapshot(Adref, (snapshot) => {
+  //     setUserAdmin(snapshot?.data()?.Admin);
+  //   });
+  // }, []);
+  function postBug() {
+    const user = firebase.auth().currentUser;
+    db.collection("Feedbacks")
+      .doc("Bugs")
+      .update({
+        Bugs: arrayUnion({ Bugs: bugAbout, User: user.uid }),
+      });
+
+    setBugAbout("");
+  }
+
   function profileImage(e) {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     setTempProfileImage(e.target.files[0]);
 
     //  setImageLength(e.target.files.length);
@@ -491,12 +582,12 @@ export const GroupInfo = () => {
     var geturl = await uploadBytes(fileRef, tempProfileImage).then(
       (snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
-          console.log(url);
+          // console.log(url);
           db.collection("Groups").doc(name).update({ ProfileURL: url });
 
           geturl = url;
         });
-        console.log("Uploaded a blob or file!");
+        // console.log("Uploaded a blob or file!");
       }
     );
     return geturl;
@@ -528,12 +619,12 @@ export const GroupInfo = () => {
     fetchGroupInfo();
   }, [ActiveChatUser]);
 
-  useEffect(() => {
-    console.log(
-      "memberrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-    );
-    console.log(member);
-  }, [member]);
+  // useEffect(() => {
+  //   console.log(
+  //     "memberrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+  //   );
+  //   console.log(member);
+  // }, [member]);
 
   useEffect(() => {
     const user = firebase.auth().currentUser;
@@ -639,7 +730,7 @@ export const GroupInfo = () => {
   }, [ActiveChatUser]);
 
   useEffect(() => {
-    console.log("fetch media");
+    // console.log("fetch media");
     fetchMedia();
   }, [ActiveChatUser]);
 
@@ -650,14 +741,14 @@ export const GroupInfo = () => {
     // Find all the prefixes and items.
     listAll(listRef)
       .then((res) => {
-        console.log("media");
-        console.log(res);
+        // console.log("media");
+        // console.log(res);
         res.items.forEach((itemRef) => {
-          console.log("item");
-          console.log(itemRef);
+          // console.log("item");
+          // console.log(itemRef);
           itemRef.getDownloadURL().then((url) => {
-            console.log("media url");
-            console.log(url);
+            // console.log("media url");
+            // console.log(url);
           });
           // console.log(itemRef.getDown)
           // All the items under listRef.
@@ -695,40 +786,38 @@ export const GroupInfo = () => {
 
   function deleteChats() {
     const user = firebase.auth().currentUser;
-    const chatRef = db
-      .collection("Chat Record")
-      .doc(user.uid)
-      .collection("Chat Friends")
-      .doc(ActiveChatUser);
+    const chatRef = db.collection("Groups").doc(name).update({ Message: [] });
+    //   .collection("Chat Friends")
+    //   .doc(ActiveChatUser);
 
-    chatRef.get().then((doc) => {
-      if (doc.data().ChatHistory.length == 0) {
-        toast.error("No Chats to Delete", {
-          style: {
-            backgroundColor: "#333333",
-            color: "#fff",
-            font: "work",
-            fontWeight: "400",
-          },
-        });
-      } else {
-        toast.success("Chats Deleted", {
-          style: {
-            backgroundColor: "#333333",
-            color: "#fff",
-            font: "work",
-            fontWeight: "400",
-          },
-        });
-        chatRef.set({
-          ChatHistory: [],
-          LastUpdated: serverTimestamp(),
-          LastId: 0,
-          TotalMessage: 0,
-          LastMessage: 0,
-        });
-      }
-    });
+    // chatRef.get().then((doc) => {
+    //   if (doc.data().ChatHistory.length == 0) {
+    //     toast.error("No Chats to Delete", {
+    //       style: {
+    //         backgroundColor: "#333333",
+    //         color: "#fff",
+    //         font: "work",
+    //         fontWeight: "400",
+    //       },
+    //     });
+    //   } else {
+    //     toast.success("Chats Deleted", {
+    //       style: {
+    //         backgroundColor: "#333333",
+    //         color: "#fff",
+    //         font: "work",
+    //         fontWeight: "400",
+    //       },
+    //     });
+    //     chatRef.set({
+    //       ChatHistory: [],
+    //       LastUpdated: serverTimestamp(),
+    //       LastId: 0,
+    //       TotalMessage: 0,
+    //       LastMessage: 0,
+    //     });
+    //   }
+    // });
   }
 
   useEffect(() => {
@@ -750,7 +839,7 @@ export const GroupInfo = () => {
     const userDoc = db.collection("Chat Record").doc(ActiveChatUser);
     onSnapshot(userDoc, (snapshot) => {
       setIsOnline(snapshot?.data()?.Online);
-      console.log(snapshot?.data()?.Online);
+      // console.log(snapshot?.data()?.Online);
       // setLock(snapshot?.data?.ChatLock);
     });
 
@@ -818,10 +907,12 @@ export const GroupInfo = () => {
     const user = firebase.auth().currentUser;
     const grpRef = db.collection("Groups").doc(ActiveChatUser);
     onSnapshot(grpRef, (snapshot) => {
-      console.log("Group Dattaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-      console.log(snapshot.data());
+      // console.log("Group Dattaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      // console.log(snapshot.data());
       setDescription(snapshot?.data()?.Description);
       setName(snapshot?.data()?.Name);
+      setTempName(snapshot?.data()?.Name);
+      setTempDescription(snapshot?.data()?.Description);
       setProfile(snapshot?.data()?.ProfileURL);
       setMember(snapshot?.data()?.Member);
     });
@@ -835,19 +926,280 @@ export const GroupInfo = () => {
   function differenceArray(key) {
     const idSet = new Set(member);
 
-    console.log(member);
-    console.log(UserList);
+    // console.log(member);
+    // console.log(UserList);
 
     setAvaiableFriends(
       UserList.filter((item) => !member.includes(item.UserId))
     );
 
-    console.log(UserList.filter((item) => !member.includes(item.UserId)));
+    // console.log(UserList.filter((item) => !member.includes(item.UserId)));
+  }
+
+  function exitGroup() {
+    const user = firebase.auth().currentUser;
+    db.collection("Groups")
+      .doc(name)
+      .update({
+        // Member: Member.filter((post) => post !== props?.data),
+        Member: arrayRemove(user.uid),
+      });
+
+    db.collection("Chat Record")
+      .doc(user.uid)
+      .collection("Group")
+      .doc(name)
+      .delete();
+
+    dispatch(addActiveUser(""));
+  }
+
+  function CamalCaseName() {
+    let words = tempName.split(" ");
+    for (let i = 0; i < words.length; i++) {
+      // Capitalize the first character of the word and make the rest lowercase
+      words[i] =
+        words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+    }
+    updateUserName(words.join(" "));
+    // setOwnerName(words.join(" "));
+  }
+
+  function updateUserInfo() {
+    const user = firebase.auth().currentUser;
+    db.collection("Groups").doc(name).update({ Description: tempDescription });
+    // toast.success("Name Changed");
+  }
+  function updateUserName(dataName) {
+    db.collection("Groups").doc(name).update({ Name: dataName });
+    // toast.success("Info Changed");
   }
 
   return (
     <>
-      {ActiveChatUser.length === 0 ? (
+      {nameChangeFlag === true ? (
+        <div
+          className={
+            "w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[100svh]   fixed top-0 right-0 flex justify-center items-center px-[10px] md:px-0 lg:px-0 backdrop-blur-md z-50" +
+            (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
+          }
+          style={{ zIndex: "999" }}
+        >
+          <div
+            className={
+              "w-[320px] h-auto rounded-3xl  flex flex-col justify-center items-center p-[20px] drop-shadow-sm" +
+              (theme ? " bg-[white]" : " bg-[#222228]")
+            }
+          >
+            <span
+              className={
+                "font-medium w-full px-[6px] h-[30px]  flex items-start mt-[-5px]  text-[21px] font-[google]" +
+                (theme ? " text-black" : " text-white")
+              }
+            >
+              Update Profile
+            </span>
+            <input
+              style={{ transition: ".5s" }}
+              value={tempName}
+              onChange={(e) => setTempName(e.target.value)}
+              placeholder="Name"
+              className={
+                "log w-[calc(100%-12px)] bg-transparent h-[35px] font-normal  input tracking-[.4px] font-[google]  border-b-[1.5px]   z-0 outline-none  text-[15px]  mt-[20px]" +
+                (theme
+                  ? " text-black bg-[#e4eaf1] border-[#545454]"
+                  : " text-[white] bg-[#17171a] border-[#c3c3c3]")
+              }
+            ></input>
+            <input
+              style={{ transition: ".5s" }}
+              value={tempDescription}
+              onChange={(e) => setTempDescription(e.target.value)}
+              placeholder="About"
+              className={
+                "log w-[calc(100%-12px)] bg-transparent h-[35px] font-normal  input tracking-[.4px] font-[google]  border-b-[1.5px]   z-0 outline-none  text-[15px]  mt-[10px]" +
+                (theme
+                  ? " text-black bg-[#e4eaf1] border-[#545454]"
+                  : " text-[white] bg-[#17171a] border-[#c3c3c3]")
+              }
+            ></input>
+
+            <div className="w-[100%] h-auto px-[6px] flex justify-end items-center font-[google] font-normal text-[15px] mt-[20px]">
+              <span
+                className={
+                  "w-auto  flex items-end h-auto rounded-2xl bg-transparent  z-20" +
+                  (theme
+                    ? " text-black bg-[#e4eaf1]"
+                    : " text-[white] bg-[#17171a]")
+                }
+                onClick={() => {
+                  setTempName(name);
+                  setTempDescription(description);
+                  setNameChangeFlag(false);
+                }}
+              >
+                {/* <RxCross2 className="text-[18px] text-[#8981f7]" /> */}
+                Close
+              </span>
+              <span
+                className="w-auto ml-[30px] flex items-end h-auto rounded-2xl text-[#5f54ff]   z-20"
+                onClick={() => {
+                  setNameChangeFlag(false);
+                  CamalCaseName();
+                  updateUserInfo();
+                }}
+              >
+                {/* <MdOutlineDone className="text-[18px] text-[#8981f7]" /> */}
+                Update
+              </span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+
+      {exitGroupModal === true ? (
+        <>
+          <div
+            className=" w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[100svh] top-0 right-0 fixed bg-[#17171a25] z-50 backdrop-blur-md flex justify-center items-center"
+            style={{ zIndex: "999" }}
+          >
+            <div
+              className={
+                " text-[15px] w-[320px]  h-auto p-[20px] rounded-3xl flex flex-col justify-center items-center " +
+                (theme
+                  ? " bg-[#ffffff] text-black"
+                  : " bg-[#222228] text-white")
+              }
+            >
+              <div className="w-full rounded-xl  flex justify-start items-center px-[6px]">
+                <span className=" font-[google] font-light text-[22px] flex justify-start items-center text-[#bb2a23] ">
+                  <TbAlertTriangle className="text-[25px] text-[#bb2a23]" />{" "}
+                  &nbsp; Exit this Group?
+                </span>
+              </div>
+
+              <div
+                className={
+                  "w-full mt-[10px] rounded-xl font-[google]  flex justify-center items-center px-[6px]" +
+                  (theme ? " text-[#343434] " : " text-[#b7b7b7]")
+                }
+              >
+                <span className="  font-light ">
+                  If you exit the group you will no longer be able to send any
+                  messages in this group. Are you sure ?
+                </span>
+              </div>
+              <div className=" h-auto w-full mt-[20px] flex justify-end items-center px-[6px] rounded-xl">
+                <button
+                  className={
+                    "w-auto h-auto  flex items-end bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
+                    (theme
+                      ? " bg-[#e4eaf1] text-[#000000]"
+                      : " bg-[#17171a] text-[#ffffff]")
+                  }
+                  onClick={() => {
+                    // console.log("clicked");
+                    setExitGroupModal(false);
+                  }}
+                >
+                  Close
+                </button>
+                <button
+                  className="w-auto flex items-end ml-[30px] h-auto text-[#bb2a23]   cursor-pointer  font-[google] font-light  rounded-2xl"
+                  onClick={() => {
+                    // console.log("clicked");
+                    exitGroup();
+                    setExitGroupModal(false);
+                  }}
+                >
+                  Exit
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
+
+      {reportBug === true ? (
+        <>
+          <div
+            className=" w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[100svh] top-0 right-0 fixed bg-[#17171a25] z-50 backdrop-blur-md flex justify-center items-center"
+            style={{ zIndex: "999" }}
+          >
+            <div
+              className={
+                " text-[15px] w-[320px]  h-auto p-[20px] rounded-3xl flex flex-col justify-center items-center " +
+                (theme
+                  ? " bg-[#ffffff] text-black"
+                  : " bg-[#222228] text-white")
+              }
+            >
+              <div className="w-full rounded-xl  flex justify-start items-center px-[6px]">
+                <span className=" font-[google] font-light text-[22px] flex justify-start items-center text-[#bb2a23] ">
+                  <MdBugReport className="text-[25px] text-[#bb2a23]" /> &nbsp;
+                  Report Bug Form
+                </span>
+              </div>
+
+              <div
+                className={
+                  "w-full mt-[10px] rounded-xl font-[google]  flex justify-start items-center px-[6px]" +
+                  (theme ? " text-[#343434] " : " text-[#b7b7b7]")
+                }
+              >
+                <span className="  font-light ">
+                  Feddback / Explain about Bug *
+                </span>
+              </div>
+              <textarea
+                placeholder="Feedback"
+                value={bugAbout}
+                onChange={(e) => {
+                  setBugAbout(e.target.value);
+                }}
+                className={
+                  "log w-[calc(100%-12px)] mt-[10px] rounded-xl font-[google]  flex justify-start items-center font-normal resize-none h-[100px] outline-none p-[10px]" +
+                  (theme ? " bg-[#e4eaf1] " : " bg-[#17171a]")
+                }
+              />
+              <div className=" h-auto w-full mt-[20px] flex justify-end items-center px-[6px] rounded-xl">
+                <button
+                  className={
+                    "w-auto h-auto  flex items-end bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
+                    (theme
+                      ? " bg-[#e4eaf1] text-[#000000]"
+                      : " bg-[#17171a] text-[#ffffff]")
+                  }
+                  onClick={() => {
+                    // console.log("clicked");
+                    setReportBug(false);
+                  }}
+                >
+                  Close
+                </button>
+                <button
+                  className="w-auto flex items-end ml-[30px] h-auto text-[#bb2a23]   cursor-pointer  font-[google] font-light  rounded-2xl"
+                  onClick={() => {
+                    // console.log("clicked");
+                    // exitGroup();
+                    postBug();
+                    setReportBug(false);
+                  }}
+                >
+                  Post
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
+      {ActiveChatUser?.length === 0 ? (
         <></>
       ) : (
         <>
@@ -859,7 +1211,7 @@ export const GroupInfo = () => {
           {availableFriends ? (
             <>
               <div
-                className="w-full md:[calc(100%-400px)]  lg:[calc(100%-400px)] h-[100svh] fixed top-0 right-0 backdrop-blur-md bg-[#17171a25] z-50 p-[10px]"
+                className="w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] h-[100svh] fixed top-0 right-0 backdrop-blur-md bg-[#17171a25] z-50 p-[10px]"
                 style={{ zIndex: "999" }}
               >
                 <div
@@ -871,27 +1223,61 @@ export const GroupInfo = () => {
                   }
                 >
                   {/* <input className="w-full h-[45px] rounded-2xl bg-[#e4eaf1] mb-[10px]"></input> */}
-                  <div className="w-full flex font-[google] text-[14px] font-normal px-[10px] mb-[5px] justify-start items-center">
-                    {selected}&nbsp; Members Selected
+                  <div
+                    className={
+                      " font-[google] text-[14px] font-normal w-[calc(100%-20px)] md:[calc(100%-420px)]  lg:[calc(100%-420px)] h-[50px] pl-[20px]  rounded-t-3xl flex justify-start items-center fixed top-[10px] right-[10px]" +
+                      (theme
+                        ? " bg-[#ffffff] text-black"
+                        : " bg-[#222228] text-white")
+                    }
+                  >
+                    {availableFriends?.length != 0 ? (
+                      <>{selected}&nbsp; Members Selected</>
+                    ) : (
+                      <></>
+                    )}
                   </div>
-                  {availableFriends?.map((data) => {
-                    return (
-                      <>
-                        <AddGroupMember
-                          data={data}
-                          groupName={name}
-                          sel={selected}
-                          selected={setSelected}
-                        />
-                      </>
-                    );
-                  })}
+                  <div className="w-full min-h-[30px]"></div>
+                  {availableFriends?.length != 0 ? (
+                    <>
+                      {availableFriends?.map((data) => {
+                        return (
+                          <>
+                            <AddGroupMember
+                              data={data}
+                              groupName={name}
+                              sel={selected}
+                              selected={setSelected}
+                            />
+                          </>
+                        );
+                      })}
+                    </>
+                  ) : (
+                    <>
+                      <div className="w-full min-h-[30px] text-[16px] font-normal font-[google]  flex justify-center items-center">
+                        No Friends to Add in the Group
+                      </div>
+                    </>
+                  )}
+
+                  <div className="w-full min-h-[40px] "></div>
                 </div>
-                <div className="w-full md:[calc(100%-400px)]  lg:[calc(100%-400px)] h-[60px] rounded-b-3xl flex justify-center items-center fixed bottom-[10px]">
+
+                <div
+                  className={
+                    " w-[calc(100%-20px)] md:[calc(100%-420px)]  lg:[calc(100%-420px)] h-[60px] rounded-b-3xl flex justify-center items-center fixed bottom-[10px] right-[10px]" +
+                    (theme
+                      ? " bg-[#ffffff] text-black"
+                      : " bg-[#222228] text-white")
+                  }
+                >
                   <div
                     className={
                       "w-auto h-[40px] px-[15px] font-[google] flex justify-center items-center font-normal bg-[#c9c5ff] rounded-3xl" +
-                      (theme ? "  text-black" : "  text-white")
+                      (theme
+                        ? "  text-black bg-[#c9c5ff]"
+                        : "  text-white bg-[#756dedcd]")
                     }
                     onClick={() => {
                       setAvaiableFriends();
@@ -1052,7 +1438,7 @@ export const GroupInfo = () => {
                 {ImageMediaLink.map((link) => {
                   return (
                     <>
-                      {console.log(link)}
+                      {/* {console.log(link)} */}
                       {mediaOption === "Photos" ? (
                         <>
                           {!link.docName ? (
@@ -1248,7 +1634,7 @@ export const GroupInfo = () => {
                 {ImageMediaLink.map((link) => {
                   return (
                     <>
-                      {console.log(link)}
+                      {/* {console.log(link)} */}
                       {mediaOption === "Photos" ? (
                         <>
                           {!link.docName ? (
@@ -1362,12 +1748,201 @@ export const GroupInfo = () => {
             <>
               <div
                 className={
-                  "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[calc(100svh-200px)]  top-[190px] flex flex-col justify-start items-start rounded-2xl  pb-[10px] px-[15px] pt-[10px]" +
+                  "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[calc(100svh-200px)]  top-[190px] flex flex-col justify-start items-start rounded-2xl  py-[10px] md:py-[30px] lg:py-[30px] px-[15px] md:px-[35px] lg:px-[35px] " +
                   (theme ? " bg-[#ffffff]" : " bg-[#222228]")
                 }
                 style={{ zIndex: "100", transition: ".4s" }}
               >
-                <div className="w-full h-[100px] flex justify-start items-center ">
+                <div
+                  className="w-full h-[100px] flex justify-start opacity-100 items-center "
+                  style={{ transition: ".4s", transitionDelay: ".4s" }}
+                >
+                  <div className="group w-[80px] h-[80px] rounded-full  flex justify-end items-end">
+                    {/* <img
+                    src={profileURL}
+                    className="w-full h-full rounded-full object-cover"
+                  ></img> */}
+                    {profile === "nophoto" ? (
+                      <img
+                        src={profile2}
+                        className={
+                          "w-full h-full rounded-[28px] object-cover" +
+                          (theme ? " bg-[#ffffff]" : " bg-[#222228]")
+                        }
+                      ></img>
+                    ) : (
+                      <img
+                        src={profile}
+                        className={
+                          "w-full h-full rounded-[28px] object-cover" +
+                          (theme ? " bg-[#ffffff]" : " bg-[#222228]")
+                        }
+                      ></img>
+                    )}
+                    <input
+                      type="file"
+                      id="getFile"
+                      accept="image/*"
+                      className="hidden fixed opacity-0 text-white bg-transparent w-[45px] h-[35px] rounded-full z-30 cursor-pointer"
+                      onChange={(e) => profileImage(e)}
+                    ></input>
+                    <label
+                      for="getFile"
+                      // onclick={document.getElementById("getFile").click()}
+                      className={
+                        " w-[30px] h-[30px]  flex justify-center items-center border-[2px]   fixed rounded-full cursor-pointer z-10" +
+                        (theme
+                          ? " bg-[#c9c5ff] text-black border-[#ffffff]"
+                          : " bg-[#756ded] text-white border-[#222228]")
+                      }
+                    >
+                      <BsCameraFill className=" text-[13px]" />
+                    </label>
+                  </div>
+
+                  <div className="w-[calc(100%-140px)] h-full  ml-[20px] flex flex-col justify-center  items-start">
+                    <div
+                      className={
+                        " font-[google] font-normal text-[22px] md:text-[22px] lg:text-[22px] w-full " +
+                        (theme ? " text-black" : " text-white")
+                      }
+                    >
+                      {name}
+                    </div>
+                    <div
+                      className={
+                        " font-[google] max-h-[47px] line-clamp-2 overflow-hidden text-ellipsis mt-[0px] text-[16px] w-full font-light" +
+                        (theme ? " text-[#2d2d2d]" : " text-[#bbbbbb]")
+                      }
+                    >
+                      {description}
+                    </div>
+                  </div>
+
+                  {userAdmin ? (
+                    <>
+                      <div
+                        className="w-[30px] flex justify-end items-center"
+                        onClick={() => {
+                          setNameChangeFlag(true);
+                        }}
+                      >
+                        <RiEditFill
+                          className={
+                            "text-[20px] " +
+                            (theme ? " text-black" : " text-white")
+                          }
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                <div
+                  className="w-full h-[70px] flex justify-start opacity-100 items-center"
+                  style={{ transition: ".4s", transitionDelay: ".5s" }}
+                >
+                  <div
+                    className={
+                      "w-[45px] aspect-square cursor-pointer flex justify-center items-center border-[1.5px] rounded-2xl" +
+                      (theme ? " border-[#e4eaf1]" : " border-[#4c4c4c]")
+                    }
+                    onClick={() => {
+                      // if (userAdmin) {
+                      differenceArray();
+                      // }
+                    }}
+                  >
+                    <TiUserAdd
+                      className={
+                        "text-[20px]" + (theme ? " text-black" : " text-white")
+                      }
+                    />
+                  </div>
+                  {/* <div
+                    className="w-[45px] ml-[20px] aspect-square cursor-pointer flex justify-center items-center border-[1.5px] rounded-2xl"
+                    onClick={() => {
+                      differenceArray();
+                    }}
+                  >
+                    <MdGroupRemove
+                      className={
+                        "text-[20px]" + (theme ? " text-black" : " text-white")
+                      }
+                    />
+                  </div> */}
+                  <div
+                    className={
+                      "w-[45px] ml-[15px] aspect-square cursor-pointer flex justify-center items-center border-[1.5px] rounded-2xl" +
+                      (theme ? " border-[#e4eaf1]" : " border-[#4c4c4c]")
+                    }
+                    onClick={() => {
+                      // differenceArray();
+                      setReportBug(true);
+                    }}
+                  >
+                    <MdBugReport
+                      className={
+                        "text-[20px]" + (theme ? " text-black" : " text-white")
+                      }
+                    />
+                  </div>
+                  <div
+                    className={
+                      "w-[45px] ml-[15px] aspect-square cursor-pointer flex justify-center items-center border-[1.5px] rounded-2xl" +
+                      (theme ? " border-[#bb2a235e]" : " border-[#bb2a2387]")
+                    }
+                    onClick={() => {
+                      // differenceArray();
+
+                      setExitGroupModal(true);
+                    }}
+                  >
+                    <IoExit
+                      className={
+                        "text-[20px]" +
+                        (theme ? " text-[#bb2a23]" : " text-[#bb2a23]")
+                      }
+                    />
+                  </div>
+                </div>
+                <div
+                  className={
+                    "w-full flex font-[google] text-[14px] font-normal mt-[10px] mb-[5px] justify-start items-center opacity-100" +
+                    (theme ? " text-black" : " text-white")
+                  }
+                  style={{ transition: ".4s", transitionDelay: ".6s" }}
+                >
+                  {member?.length} Members
+                </div>
+                <div
+                  className="flex flex-col justify-start items-start h-[calc(100%-200px)] w-full overflow-y-scroll opacity-100"
+                  style={{ transition: ".4s", transitionDelay: ".7s" }}
+                >
+                  {member?.map((data) => {
+                    return (
+                      <>
+                        <Members data={data} groupName={name} />
+                      </>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                className={
+                  "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[0]  top-[190px] flex flex-col justify-start items-center rounded-2xl  pb-[0px] px-[15px] pt-[0px] overflow-hidden" +
+                  (theme ? " bg-[#ffffff]" : " bg-[#222228]")
+                }
+                style={{ zIndex: "100", transition: ".4s" }}
+              >
+                <div
+                  className="w-full h-[100px] flex justify-start opacity-0 items-center "
+                  // style={{ transition: ".4s", transitionDelay: ".5s" }}
+                >
                   <div className="group w-[80px] h-[80px] rounded-full  flex justify-end items-end">
                     {/* <img
                     src={profileURL}
@@ -1443,11 +2018,19 @@ export const GroupInfo = () => {
                     />
                   </div>
                 </div>
-                <div className="w-full h-[70px] flex justify-start items-center">
+                <div
+                  className="w-full h-[70px] flex justify-start opacity-0 items-center"
+                  // style={{ transition: ".4s", transitionDelay: ".5s" }}
+                >
                   <div
-                    className="w-[50px] aspect-square cursor-pointer bg-[#c9c5ff] flex justify-center items-center rounded-2xl"
+                    className={
+                      "w-[45px] aspect-square cursor-pointer flex justify-center items-center border-[1.5px] rounded-2xl" +
+                      (theme ? " border-[#e4eaf1]" : " border-[#4c4c4c]")
+                    }
                     onClick={() => {
+                      // if (userAdmin) {
                       differenceArray();
+                      // }
                     }}
                   >
                     <TiUserAdd
@@ -1456,8 +2039,8 @@ export const GroupInfo = () => {
                       }
                     />
                   </div>
-                  <div
-                    className="w-[50px] ml-[10px] aspect-square cursor-pointer bg-[#c9c5ff] flex justify-center items-center rounded-2xl"
+                  {/* <div
+                    className="w-[45px] ml-[20px] aspect-square cursor-pointer flex justify-center items-center border-[1.5px] rounded-2xl"
                     onClick={() => {
                       differenceArray();
                     }}
@@ -1467,9 +2050,12 @@ export const GroupInfo = () => {
                         "text-[20px]" + (theme ? " text-black" : " text-white")
                       }
                     />
-                  </div>
+                  </div> */}
                   <div
-                    className="w-[50px] ml-[10px] aspect-square cursor-pointer bg-[#c9c5ff] flex justify-center items-center rounded-2xl"
+                    className={
+                      "w-[45px] ml-[20px] aspect-square cursor-pointer flex justify-center items-center border-[1.5px] rounded-2xl" +
+                      (theme ? " border-[#e4eaf1]" : " border-[#4c4c4c]")
+                    }
                     onClick={() => {
                       differenceArray();
                     }}
@@ -1481,7 +2067,10 @@ export const GroupInfo = () => {
                     />
                   </div>
                   <div
-                    className="w-[50px] ml-[10px] aspect-square cursor-pointer bg-[#c9c5ff] flex justify-center items-center rounded-2xl"
+                    className={
+                      "w-[45px] ml-[20px] aspect-square cursor-pointer flex justify-center items-center border-[1.5px] rounded-2xl" +
+                      (theme ? " border-[#e4eaf1]" : " border-[#4c4c4c]")
+                    }
                     onClick={() => {
                       differenceArray();
                     }}
@@ -1493,10 +2082,19 @@ export const GroupInfo = () => {
                     />
                   </div>
                 </div>
-                <div className="w-full flex font-[google] text-[14px] font-normal mt-[10px] mb-[5px] justify-start items-center">
-                  {member.length} Members
+                <div
+                  className={
+                    "w-full flex font-[google] text-[14px] font-normal mt-[10px] mb-[5px] justify-start items-center opacity-0" +
+                    (theme ? " text-black" : " text-white")
+                  }
+                  // style={{ transition: ".4s", transitionDelay: ".5s" }}
+                >
+                  {member?.length} Members
                 </div>
-                <div className="flex flex-col justify-start items-start h-[calc(100%-200px)] w-full overflow-y-scroll">
+                <div
+                  className="flex flex-col justify-start items-start h-[calc(100%-200px)] w-full overflow-y-scroll opacity-0"
+                  // style={{ transition: ".4s", transitionDelay: ".5s" }}
+                >
                   {member?.map((data) => {
                     return (
                       <>
@@ -1506,16 +2104,6 @@ export const GroupInfo = () => {
                   })}
                 </div>
               </div>
-            </>
-          ) : (
-            <>
-              <div
-                className={
-                  "w-[calc(100%-20px)] md:w-[calc(100%-420px)] lg:w-[calc(100%-420px)] right-[10px] fixed h-[0]  top-[190px] flex flex-col justify-start items-center rounded-2xl  pb-[0px] px-[15px] pt-[0px]" +
-                  (theme ? " bg-[#ffffff]" : " bg-[#222228]")
-                }
-                style={{ zIndex: "100", transition: ".4s" }}
-              ></div>
             </>
           )}
 
@@ -1542,7 +2130,7 @@ export const GroupInfo = () => {
               <div
                 className={
                   "w-full h-[170px] z-50  rounded-2xl  top-0 flex justify-between items-center p-[20px] " +
-                  (theme ? " bg-[#ffffff]" : " bg-[#282828]")
+                  (theme ? " bg-[#ffffff]" : " bg-[#222228]")
                 }
                 style={{ transition: ".4s" }}
               >
@@ -1576,6 +2164,7 @@ export const GroupInfo = () => {
                   onClick={() => {
                     setExpand(!expand);
                     setMediaShow(false);
+                    setSettings(false);
                   }}
                 >
                   {profile === "nophoto" ? (
@@ -1605,7 +2194,7 @@ export const GroupInfo = () => {
                   </span>
                   <span
                     className={
-                      "text-[15px]  font-[work] font-light    z-20 whitespace-nowrap flex justify-start items-center" +
+                      "text-[15px] w-full overflow-hidden line-clamp-1 text-ellipsis  font-[work] font-light    z-20 whitespace-nowrap flex justify-start items-center" +
                       (theme ? " text-[#2d2d2d]" : " text-[#b1b1b1]")
                     }
                     style={{
@@ -1633,10 +2222,18 @@ export const GroupInfo = () => {
 
                   <span className="flex justify-start items-center">
                     <span
-                      className="w-auto p-[15px] mt-[10px] h-[30px] rounded-3xl bg-[#8981f7] text-white text-[14px]  font-[google] font-light flex justify-center items-center overflow-hidden"
+                      className={
+                        "w-auto p-[15px] mt-[10px] h-[30px] rounded-3xl  text-[14px]  font-[google] font-light flex justify-center items-center overflow-hidden" +
+                        (theme
+                          ? " text-black bg-[#c9c5ff]"
+                          : " text-white bg-[#756dedcd]")
+                      }
                       onClick={() => {
                         // setUserSidebar(!userSidebar);
                         setMediaShow(!mediaShow);
+                        if (settings === true) {
+                          setSettings(false);
+                        }
                         setMediaOption("Documents");
                       }}
                       style={{
@@ -1644,21 +2241,19 @@ export const GroupInfo = () => {
                         transitionDelay: ".8s",
                       }}
                     >
-                      {/* <span
-                            className=" opacity-100"
-                            style={{
-                              transition: ".4s",
-                              transitionDelay: ".8s",
-                            }}
-                          >
-                            {ImageMediaLink.length !== 0 ? (
-                              <>
-                                {mediaShow === true ? <>Close</> : <>Media</>}
-                              </>
-                            ) : (
-                              <>No Media</>
-                            )}
-                          </span> */}
+                      <span
+                        className=" opacity-100"
+                        style={{
+                          transition: ".4s",
+                          transitionDelay: ".8s",
+                        }}
+                      >
+                        {ImageMediaLink.length !== 0 ? (
+                          <>{mediaShow === true ? <>Close</> : <>Media</>}</>
+                        ) : (
+                          <>No Media</>
+                        )}
+                      </span>
                     </span>
                     <span
                       className={
@@ -1668,6 +2263,9 @@ export const GroupInfo = () => {
                       onClick={() => {
                         // setUserSidebar(!userSidebar);
                         setSettings(!settings);
+                        if (mediaShow === true) {
+                          setMediaShow(false);
+                        }
                         // setMediaOption("Documents");
                       }}
                       style={{
@@ -1675,7 +2273,7 @@ export const GroupInfo = () => {
                         transitionDelay: ".8s",
                       }}
                     >
-                      <RiSettings3Fill className="text-[20px]" />
+                      <LuSettings2 className="text-[20px]" />
                     </span>
 
                     {/* <div
@@ -1755,7 +2353,7 @@ export const GroupInfo = () => {
                   "w-full h-[60px] z-50  rounded-2xl  top-0 flex justify-between items-center px-[20px]" +
                   (theme
                     ? " bg-[#ffffff] text-[black]"
-                    : " bg-[#282828] text-[white]")
+                    : " bg-[#222228] text-[white]")
                 }
                 style={{ transition: ".4s", transitionDelay: ".4s" }}
                 // onClick={() => {
@@ -1823,7 +2421,7 @@ export const GroupInfo = () => {
                   </span>
                   <span
                     className={
-                      "text-[14px]  font-[work] font-light   z-20 whitespace-nowrap flex justify-start items-center" +
+                      "text-[14px] w-full overflow-hidden line-clamp-1 font-[work] font-light whitespace-nowrap  z-20  " +
                       (theme ? "  text-[#2d2d2d]" : "  text-[#b1b1b1]")
                     }
                     style={{

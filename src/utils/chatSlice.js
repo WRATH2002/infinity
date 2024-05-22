@@ -100,7 +100,7 @@ const chatSlice = createSlice({
     },
     toggleStateMode: (state, action) => {
       state.signingMode = action.payload;
-      console.log(state.signingMode);
+      // console.log(state.signingMode);
     },
 
     addAllGroup: (state, action) => {

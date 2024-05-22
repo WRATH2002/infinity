@@ -124,7 +124,7 @@ const Messagess = (props) => {
       {/* <div className="w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] right-0 h-[100svh] fixed bg-[#0000003a] z-50 mt-[-70px] flex justify-center items-center">
         <img src={props.data.Image} className=" w-full"></img>
       </div> */}
-      {console.log(props.data)}
+      {/* {console.log(props.data)} */}
 
       {props?.data?.Flag === 2 ? (
         <>
@@ -139,7 +139,7 @@ const Messagess = (props) => {
                       : " bg-[#282828] text-[white]")
                   }
                 >
-                  <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[google] font-light">
+                  <pre className=" max-w-[calc(100%)] whitespace-pre-wrap leading-[19px]  font-[google] font-light">
                     {props?.data?.Message}
                   </pre>
                   <div
@@ -166,7 +166,7 @@ const Messagess = (props) => {
                   loading="lazy"
                   onLoad={() => {
                     setIsImageLoaded(true);
-                    console.log("Loaded Image");
+                    // console.log("Loaded Image");
                   }}
                   src={props.data.Image}
                   className="rounded-lg w-full h-full object-cover group-hover:opacity-60"
@@ -295,7 +295,7 @@ const Messagess = (props) => {
                     : " bg-[#282828] text-[white]")
                 }
               >
-                <pre className="max-w-[calc(100%)] whitespace-pre-wrap   font-[google] font-light">
+                <pre className="max-w-[calc(100%)] whitespace-pre-wrap  leading-[19px]  font-[google] font-light">
                   {props?.data?.Message}
                 </pre>
                 <div
@@ -351,7 +351,7 @@ const Messagess = (props) => {
                   loading="lazy"
                   onLoad={() => {
                     setIsImageLoaded(true);
-                    console.log("Loaded Image");
+                    // console.log("Loaded Image");
                   }}
                   // onClick={() => {
                   //   setZoomImage(true);
@@ -547,7 +547,7 @@ export const MessageBody = () => {
   // -------------------------------------------------------------------------- Send Message to Firebase Firestore
 
   function sendMessage() {
-    console.log("Message Sending to Firestore -----");
+    // console.log("Message Sending to Firestore -----");
     if (ActiveChatUser.length !== 0) {
       const user = firebase.auth().currentUser;
       const userDoc = db
@@ -585,8 +585,8 @@ export const MessageBody = () => {
   // --------------------------------------------------------------------------
 
   useEffect(() => {
-    console.log("Chat One Changed ---- ");
-    console.log(ChatOne);
+    // console.log("Chat One Changed ---- ");
+    // console.log(ChatOne);
     if (send === true) {
       sendMessage();
       setSend(false);
@@ -667,7 +667,7 @@ export const MessageBody = () => {
         .doc(user.uid);
       onSnapshot(userTwoChat, (snapshot) => {
         if (snapshot.data()) {
-          console.log("exists");
+          // console.log("exists");
           setLastIdTwo(snapshot.data().LastId);
           setLastMessageTwo(snapshot.data().LastMessage);
           setPassCode2(snapshot.data()?.ChatPassCode);
@@ -677,7 +677,7 @@ export const MessageBody = () => {
             dispatch(pushFlagTwoMessage(flagTwo));
           });
         } else {
-          console.log("dont exists");
+          // console.log("dont exists");
           setLastIdTwo(0);
           setLastMessageTwo(0);
           dispatch(clearFlagTwoMessage());
@@ -718,7 +718,7 @@ export const MessageBody = () => {
   // -------------------------------------------------------------------------- Get Image, Gif File
 
   function Image(e) {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     setImage(e.target.files[0]);
     setImageLength(e.target.files.length);
   }
@@ -726,7 +726,7 @@ export const MessageBody = () => {
   // -------------------------------------------------------------------------- Get Document File
 
   function Document(e) {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     setDoc(e.target.files[0]);
     setDocName(e.target.files[0].name);
     setDocSize(Math.round(e.target.files[0].size / 1024));
@@ -735,7 +735,7 @@ export const MessageBody = () => {
   // -------------------------------------------------------------------------- Get Video File
 
   function Video(e) {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     setVideo(e.target.files[0]);
   }
 
@@ -744,7 +744,7 @@ export const MessageBody = () => {
   const uploadImageGetUrl = async (fileRef) => {
     var geturl = await uploadBytes(fileRef, image).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        console.log(url);
+        // console.log(url);
         var temp = formatAMPM(new Date());
         storeToReactStore(
           Messages,
@@ -758,7 +758,7 @@ export const MessageBody = () => {
         setMessages("");
         geturl = url;
       });
-      console.log("Uploaded a blob or file!");
+      // console.log("Uploaded a blob or file!");
     });
     return geturl;
   };
@@ -793,7 +793,7 @@ export const MessageBody = () => {
   const uploadVideoGetUrl = async (fileRef) => {
     var geturl = await uploadBytes(fileRef, video).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        console.log(url);
+        // console.log(url);
         var temp = formatAMPM(new Date());
         storeToReactStore(
           Messages,
@@ -807,7 +807,7 @@ export const MessageBody = () => {
         setMessages("");
         geturl = url;
       });
-      console.log("Uploaded a blob or file!");
+      // console.log("Uploaded a blob or file!");
     });
     return geturl;
   };
@@ -842,7 +842,7 @@ export const MessageBody = () => {
   const uploadDocumentGetUrl = async (fileRef) => {
     var geturl = await uploadBytes(fileRef, video).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        console.log(url);
+        // console.log(url);
         var temp = formatAMPM(new Date());
         storeToReactStore(
           Messages,
@@ -858,7 +858,7 @@ export const MessageBody = () => {
         setDocSize("");
         geturl = url;
       });
-      console.log("Uploaded a blob or file!");
+      // console.log("Uploaded a blob or file!");
     });
     return geturl;
   };
@@ -906,8 +906,8 @@ export const MessageBody = () => {
 
   const ImageMediaLinkk = useSelector((store) => store.chat.imageMediaLink);
   useEffect(() => {
-    console.log("urlllll------------------------------------------------");
-    console.log(ImageMediaLinkk);
+    // console.log("urlllll------------------------------------------------");
+    // console.log(ImageMediaLinkk);
     getImageMediaLink();
   }, [ActiveChatUser]);
 
@@ -922,23 +922,23 @@ export const MessageBody = () => {
         .collection("Chat Friends")
         .doc(ActiveChatUser);
       onSnapshot(mediaRef, (snapshot) => {
-        console.log(
-          "Last Updated User Message -------------------------------------------"
-        );
-        console.log(snapshot.data().ChatHistory);
+        // console.log(
+        //   "Last Updated User Message -------------------------------------------"
+        // );
+        // console.log(snapshot.data().ChatHistory);
         dispatch(clearImageMediaLink());
         snapshot.data().ChatHistory.forEach((media) => {
           if (media.Document !== "") {
-            console.log("media.Document");
+            // console.log("media.Document");
 
-            console.log(media.Document);
+            // console.log(media.Document);
             dispatch(
               addImageMediaLink({ url: media.Document, docName: media.docName })
             );
           } else if (media.Image !== "") {
-            console.log("media.image");
+            // console.log("media.image");
 
-            console.log(media.Image);
+            // console.log(media.Image);
             dispatch(addImageMediaLink({ url: media.Image }));
           }
         });
@@ -1017,7 +1017,7 @@ export const MessageBody = () => {
   // }, [Messages]);
 
   function Mes() {
-    console.log("Clicked");
+    // console.log("Clicked");
     let chattt = {
       Document: "",
       Flag: 1,
@@ -1136,7 +1136,7 @@ export const MessageBody = () => {
                 <input
                   value={inp1}
                   onChange={(e) => {
-                    console.log(e);
+                    // console.log(e);
                     // setEe(e);
                     checkInput(e.target.value);
                   }}
@@ -1148,7 +1148,7 @@ export const MessageBody = () => {
                 <input
                   value={inp2}
                   onChange={(e) => {
-                    console.log(e);
+                    // console.log(e);
                     checkInput(e.target.value);
                   }}
                   className={
@@ -1159,7 +1159,7 @@ export const MessageBody = () => {
                 <input
                   value={inp3}
                   onChange={(e) => {
-                    console.log(e);
+                    // console.log(e);
                     checkInput(e.target.value);
                   }}
                   className={
@@ -1170,7 +1170,7 @@ export const MessageBody = () => {
                 <input
                   value={inp4}
                   onChange={(e) => {
-                    console.log(e);
+                    // console.log(e);
                     checkInput(e.target.value);
                   }}
                   className={
@@ -1357,7 +1357,7 @@ export const MessageBody = () => {
                 </span>
               </div>
 
-              {console.log("zero ")}
+              {/* {console.log("zero ")} */}
             </>
           ) : (
             <>
@@ -1402,7 +1402,7 @@ export const MessageBody = () => {
             theme="light"
             data={data}
             onEmojiSelect={(e) => {
-              console.log(e.native);
+              // console.log(e.native);
               setMessages(Messages + e.native);
             }}
           />
@@ -1444,7 +1444,7 @@ export const MessageBody = () => {
                       accept="document/*"
                       onChange={(e) => {
                         Document(e);
-                        console.log(e.target.files[0].name);
+                        // console.log(e.target.files[0].name);
                       }}
                       className="hidden"
                     ></input>
@@ -1619,7 +1619,7 @@ export const MessageBody = () => {
                           // uploadDoc();
                           // setDoc();
                           setImage();
-                          console.log("upload");
+                          // console.log("upload");
                           setImageLength();
                         }
                         // else if (doc) {
@@ -1630,7 +1630,7 @@ export const MessageBody = () => {
                         //   console.log("upload");
                         // }
                         else {
-                          console.log("not upload");
+                          // console.log("not upload");
                           // toast.error("Select Image First");
                           toast("Select Image", {
                             icon: "❌",
@@ -1683,10 +1683,10 @@ export const MessageBody = () => {
                           // uploadDoc();
                           // setDoc();
                           setVideo();
-                          console.log("upload");
+                          // console.log("upload");
                           setImageLength();
                         } else {
-                          console.log("not upload");
+                          // console.log("not upload");
                           // toast.error("Select Image First");
                           toast("Select Image", {
                             icon: "❌",
@@ -1726,7 +1726,7 @@ export const MessageBody = () => {
                           setSend(true);
                           uploadDocument();
                           setDoc();
-                          console.log("upload");
+                          // console.log("upload");
                           setImageLength();
                         }
                         // else if (doc) {
@@ -1737,7 +1737,7 @@ export const MessageBody = () => {
                         //   console.log("upload");
                         // }
                         else {
-                          console.log("not upload");
+                          // console.log("not upload");
                           // toast.error("Select Image First");
                           toast("Select Image", {
                             icon: "❌",
@@ -1788,7 +1788,7 @@ export const MessageBody = () => {
                           setSend(true);
                           uploadImage();
                           setImage();
-                          console.log("upload");
+                          // console.log("upload");
                           setImageLength();
                         }
                         // else if (doc) {
@@ -1799,7 +1799,7 @@ export const MessageBody = () => {
                         //   console.log("upload");
                         // }
                         else {
-                          console.log("not upload");
+                          // console.log("not upload");
                           // toast.error("Select Image First");
                           toast("Select Image", {
                             icon: "❌",
@@ -1872,7 +1872,7 @@ export const MessageBody = () => {
                       accept="document/*"
                       onChange={(e) => {
                         Document(e);
-                        console.log(e.target.files);
+                        // console.log(e.target.files);
                       }}
                       className="hidden"
                     ></input>
@@ -2025,7 +2025,7 @@ export const MessageBody = () => {
                         setSend(true);
                         uploadImage();
                         setImage();
-                        console.log("upload");
+                        // console.log("upload");
                         setImageLength();
                       }
                       // else if (doc) {
@@ -2036,7 +2036,7 @@ export const MessageBody = () => {
                       //   console.log("upload");
                       // }
                       else {
-                        console.log("not upload");
+                        // console.log("not upload");
                         // toast.error("Select Image First");
                         toast("Select Image", {
                           icon: "❌",
@@ -2061,7 +2061,7 @@ export const MessageBody = () => {
                     //   }
                     // }}
                   >
-                    <sen className="text-[22px] mr-[8px]" />
+                    {/* <sen className="text-[22px] mr-[8px]" /> */}
                     {/* <img src={sendd} className="w-[25px] mr-[0] z-0 "></img> */}
                     Send
                     <span className="w-[20px] h-[20px] text-[12px] rounded-full ml-[40px] opacity-0 text-[black]   flex justify-center items-center"></span>

@@ -82,18 +82,18 @@ const Loading = (props) => {
 
   function fetchAllGroups() {
     const user = firebase.auth().currentUser;
-    console.log(user.uid);
+    // console.log(user.uid);
     const grpRef = db.collection("Groups");
     // .doc(user.uid);
 
     onSnapshot(grpRef, (snapshot) => {
-      console.log("Group Naemeeeee");
-      console.log(snapshot.docs);
+      // console.log("Group Naemeeeee");
+      // console.log(snapshot.docs);
 
       dispatch(clearTotalGroup());
       snapshot.docs.forEach((name) => {
-        console.log("name---------------------------");
-        console.log(name?.id);
+        // console.log("name---------------------------");
+        // console.log(name?.id);
         dispatch(addTotalGroup({ GroupName: name.id }));
       });
     });
@@ -236,7 +236,7 @@ const AuthDetails = () => {
   };
 
   function uploadImage(e) {
-    console.log(e.target.files);
+    // console.log(e.target.files);
   }
   const mode = useSelector((store) => store.chat.signingMode);
 

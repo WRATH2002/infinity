@@ -54,7 +54,7 @@ const Media = (props) => {
   const [url, setUrl] = useState("");
   const downloadImage = (data) => {
     // console.log("url");
-    console.log(data);
+    // console.log(data);
     let urll = data;
     saveAs(urll, "helo.jpg");
   };
@@ -298,7 +298,7 @@ export const UserInfo = () => {
   }, [ActiveChatUser]);
 
   useEffect(() => {
-    console.log("fetch media");
+    // console.log("fetch media");
     fetchMedia();
   }, [ActiveChatUser]);
 
@@ -309,14 +309,14 @@ export const UserInfo = () => {
     // Find all the prefixes and items.
     listAll(listRef)
       .then((res) => {
-        console.log("media");
-        console.log(res);
+        // console.log("media");
+        // console.log(res);
         res.items.forEach((itemRef) => {
-          console.log("item");
-          console.log(itemRef);
+          // console.log("item");
+          // console.log(itemRef);
           itemRef.getDownloadURL().then((url) => {
-            console.log("media url");
-            console.log(url);
+            // console.log("media url");
+            // console.log(url);
           });
           // console.log(itemRef.getDown)
           // All the items under listRef.
@@ -409,7 +409,7 @@ export const UserInfo = () => {
     const userDoc = db.collection("Chat Record").doc(ActiveChatUser);
     onSnapshot(userDoc, (snapshot) => {
       setIsOnline(snapshot?.data()?.Online);
-      console.log(snapshot?.data()?.Online);
+      // console.log(snapshot?.data()?.Online);
       // setLock(snapshot?.data?.ChatLock);
     });
 
@@ -817,7 +817,7 @@ export const UserInfo = () => {
                     {ImageMediaLink.map((link) => {
                       return (
                         <>
-                          {console.log(link)}
+                          {/* {console.log(link)} */}
                           {mediaOption === "Photos" ? (
                             <>
                               {!link.docName ? (
@@ -1047,7 +1047,7 @@ export const UserInfo = () => {
                     {ImageMediaLink.map((link) => {
                       return (
                         <>
-                          {console.log(link)}
+                          {/* {console.log(link)} */}
                           {mediaOption === "Photos" ? (
                             <>
                               {!link.docName ? (
@@ -1262,7 +1262,7 @@ export const UserInfo = () => {
                       <input
                         value={inp1}
                         onChange={(e) => {
-                          console.log(e);
+                          // console.log(e);
                           // setEe(e);
                           checkInput(e.target.value);
                         }}
@@ -1274,7 +1274,7 @@ export const UserInfo = () => {
                       <input
                         value={inp2}
                         onChange={(e) => {
-                          console.log(e);
+                          // console.log(e);
                           checkInput(e.target.value);
                         }}
                         className={
@@ -1285,7 +1285,7 @@ export const UserInfo = () => {
                       <input
                         value={inp3}
                         onChange={(e) => {
-                          console.log(e);
+                          // console.log(e);
                           checkInput(e.target.value);
                         }}
                         className={
@@ -1296,7 +1296,7 @@ export const UserInfo = () => {
                       <input
                         value={inp4}
                         onChange={(e) => {
-                          console.log(e);
+                          // console.log(e);
                           checkInput(e.target.value);
                         }}
                         className={
@@ -1473,7 +1473,7 @@ export const UserInfo = () => {
                       <input
                         value={inp1}
                         onChange={(e) => {
-                          console.log(e);
+                          // console.log(e);
                           // setEe(e);
                           checkInput(e.target.value);
                         }}
@@ -1485,7 +1485,7 @@ export const UserInfo = () => {
                       <input
                         value={inp2}
                         onChange={(e) => {
-                          console.log(e);
+                          // console.log(e);
                           checkInput(e.target.value);
                         }}
                         className={
@@ -1496,7 +1496,7 @@ export const UserInfo = () => {
                       <input
                         value={inp3}
                         onChange={(e) => {
-                          console.log(e);
+                          // console.log(e);
                           checkInput(e.target.value);
                         }}
                         className={
@@ -1507,7 +1507,7 @@ export const UserInfo = () => {
                       <input
                         value={inp4}
                         onChange={(e) => {
-                          console.log(e);
+                          // console.log(e);
                           checkInput(e.target.value);
                         }}
                         className={

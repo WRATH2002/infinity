@@ -25,8 +25,8 @@ const StatusUserList = (props) => {
     });
   }, []);
   useEffect(() => {
-    console.log("propssssssssssssssssssssssssssssss");
-    console.log(props);
+    // console.log("propssssssssssssssssssssssssssssss");
+    // console.log(props);
     getInfo();
   }, []);
 
@@ -34,11 +34,11 @@ const StatusUserList = (props) => {
     const user = firebase.auth().currentUser;
     const UserRef = db.collection("Chat Record").doc(props.data.UserId);
     onSnapshot(UserRef, (snapshot) => {
-      console.log(snapshot.data());
+      // console.log(snapshot.data());
       setName(snapshot.data().Name);
       setPhoto(snapshot.data().Photo);
       setStatusLength(snapshot.data()?.Status?.length);
-      console.log(snapshot.data()?.Status?.length);
+      // console.log(snapshot.data()?.Status?.length);
       setStatusImageUrl(snapshot.data().Status);
       setStTime(snapshot?.data()?.StTime);
     });
