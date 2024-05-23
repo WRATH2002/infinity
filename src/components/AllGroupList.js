@@ -18,6 +18,10 @@ export const AllGroupList = (props) => {
   const [theme, setTheme] = useState(true);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
+  // useEffect(() => {
+  //   fetchGroupInfo();
+  // }, [props?.data?.GroupName]);
+
   useEffect(() => {
     fetchGroupInfo();
   }, [props?.data?.GroupName]);
@@ -50,8 +54,6 @@ export const AllGroupList = (props) => {
   }
 
   function activerChatUser() {
-    // console.log("props.data.UserId");
-    // console.log(props.data.UserId);
     dispatch(addActiveUser(name));
   }
 

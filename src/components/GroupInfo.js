@@ -14,6 +14,7 @@ import {
   MdCall,
   MdDoNotDisturb,
   MdGroupRemove,
+  MdOutlineAdd,
   MdPersonRemoveAlt1,
 } from "react-icons/md";
 import { BiCross, BiSolidVideo } from "react-icons/bi";
@@ -43,7 +44,7 @@ import del from "../assets/img/delete2.png";
 import { IoIosInformationCircle, IoMdVideocam } from "react-icons/io";
 import { LuChevronRight, LuRefreshCw, LuSettings2 } from "react-icons/lu";
 import { RiMessage2Fill, RiSettings3Fill } from "react-icons/ri";
-import { BsFiletypeJpg } from "react-icons/bs";
+import { BsFiletypeJpg, BsFillCameraFill } from "react-icons/bs";
 import { BsFiletypePng } from "react-icons/bs";
 import { BsFiletypeTxt } from "react-icons/bs";
 import { BsFiletypePdf } from "react-icons/bs";
@@ -66,6 +67,7 @@ import { RiEditFill } from "react-icons/ri";
 import AddGroupMember from "./AddGroupMember";
 import { IoExit } from "react-icons/io5";
 import { HiBadgeCheck } from "react-icons/hi";
+import { AiOutlineUsergroupDelete } from "react-icons/ai";
 // import {MdCall} from "react-icons/md";
 
 // import { FaAngleLeft } from "react-icons/fa6";
@@ -523,7 +525,7 @@ export const GroupInfo = () => {
   const [exitGroupModal, setExitGroupModal] = useState(false);
   const [reportBug, setReportBug] = useState(false);
   const [bugAbout, setBugAbout] = useState("");
-
+  const [changeDpModal, setChangeDpModal] = useState(false);
   const [tempName, setTempName] = useState("");
   const [tempDescription, setTempDescription] = useState("");
   // const dispatch = useDispatch();
@@ -571,11 +573,11 @@ export const GroupInfo = () => {
     //  setImageLength(e.target.files.length);
   }
 
-  useEffect(() => {
-    if (tempProfileImage) {
-      uploadProfileImage();
-    }
-  }, [tempProfileImage]);
+  // useEffect(() => {
+  //   if (tempProfileImage) {
+  //     uploadProfileImage();
+  //   }
+  // }, [tempProfileImage]);
 
   const uploadProfileImageGetUrl = async (fileRef) => {
     const user = firebase.auth().currentUser;
@@ -595,7 +597,10 @@ export const GroupInfo = () => {
 
   const uploadProfileImage = async () => {
     const user = firebase.auth().currentUser;
-    const fileRef = ref(storage, `/users/${user.uid}/Profile Photo`);
+    const fileRef = ref(
+      storage,
+      `/group_image/${user.uid}/${user.uid}.${name}`
+    );
     const myPromise = uploadProfileImageGetUrl(fileRef);
     toast.promise(
       myPromise,
@@ -1059,10 +1064,139 @@ export const GroupInfo = () => {
         <></>
       )}
 
+      {changeDpModal === true ? (
+        <>
+          <div
+            className={
+              " w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[100svh] top-0 right-0 fixed  z-50 backdrop-blur-md flex justify-center items-center" +
+              (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
+            }
+            style={{ zIndex: "999" }}
+          >
+            <div
+              className={
+                " text-[15px] w-[320px]  h-auto p-[20px] rounded-3xl flex flex-col justify-center items-center " +
+                (theme
+                  ? " bg-[#ffffff] text-black"
+                  : " bg-[#222228] text-white")
+              }
+            >
+              <div className="w-full rounded-xl  flex justify-start items-center px-[6px]">
+                {userAdmin ? (
+                  <span className=" font-[google] font-light text-[22px] flex justify-start items-center ">
+                    <BsFillCameraFill className="text-[25px] " /> &nbsp; Choose
+                    any Photo
+                  </span>
+                ) : (
+                  <></>
+                )}
+              </div>
+
+              {!userAdmin ? (
+                <div
+                  className={
+                    "w-full mt-[10px] rounded-xl font-[google]  flex justify-center items-center px-[6px]" +
+                    (theme ? " text-[#343434] " : " text-[#b7b7b7]")
+                  }
+                >
+                  <span className="  font-light ">
+                    You can't change this Group's Profile Photo. You must be the
+                    admin of this group to do any kind of changes.
+                  </span>
+                </div>
+              ) : (
+                <label
+                  for="getFile"
+                  className={
+                    "w-full mt-[20px] rounded-xl font-[google]  flex justify-center items-center px-[6px]" +
+                    (theme ? " text-[#343434] " : " text-[#b7b7b7]")
+                  }
+                >
+                  <div
+                    className={
+                      "w-[60px] h-[60px] rounded-2xl border-[2px]  flex justify-center items-center cursor-pointer" +
+                      (theme ? " border-[#e4eaf1]" : " border-[#878787]")
+                    }
+                  >
+                    {tempProfileImage === undefined ? (
+                      <MdOutlineAdd
+                        className={
+                          "text-[25px]" +
+                          (theme ? " text-[#e4eaf1]" : " text-[#878787]")
+                        }
+                      />
+                    ) : (
+                      <div
+                        className={
+                          "w-[25px] h-[25px] flex justify-center items-center text-[14px] rounded-full " +
+                          (theme
+                            ? " bg-[#e4eaf1] text-black"
+                            : " bg-[#878787] text-white")
+                        }
+                      >
+                        1
+                      </div>
+                    )}
+                  </div>
+                </label>
+              )}
+
+              <div className=" h-auto w-full mt-[20px] flex justify-end items-center px-[6px] rounded-xl">
+                <button
+                  className={
+                    "w-auto h-auto  flex items-end bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
+                    (theme
+                      ? " bg-[#e4eaf1] text-[#000000]"
+                      : " bg-[#17171a] text-[#ffffff]")
+                  }
+                  onClick={() => {
+                    // console.log("clicked");
+
+                    setTempProfileImage();
+                    setChangeDpModal(false);
+                  }}
+                >
+                  Close
+                </button>
+                {userAdmin ? (
+                  <button
+                    className={
+                      "w-auto flex items-end ml-[30px] h-auto text-[#bb2a23]   cursor-pointer  font-[google] font-light  rounded-2xl" +
+                      (tempProfileImage === undefined
+                        ? " text-[#c9c5ff]"
+                        : " text-[#655fc7]")
+                    }
+                    onClick={() => {
+                      // console.log("clicked");
+
+                      if (tempProfileImage !== undefined) {
+                        uploadProfileImage();
+
+                        setChangeDpModal(false);
+                        setTempProfileImage();
+                      }
+                    }}
+                  >
+                    Update
+                  </button>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
+
       {exitGroupModal === true ? (
         <>
           <div
-            className=" w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[100svh] top-0 right-0 fixed bg-[#17171a25] z-50 backdrop-blur-md flex justify-center items-center"
+            className={
+              " w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[100svh] top-0 right-0 fixed  z-50 backdrop-blur-md flex justify-center items-center" +
+              (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
+            }
             style={{ zIndex: "999" }}
           >
             <div
@@ -1127,7 +1261,10 @@ export const GroupInfo = () => {
       {reportBug === true ? (
         <>
           <div
-            className=" w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[100svh] top-0 right-0 fixed bg-[#17171a25] z-50 backdrop-blur-md flex justify-center items-center"
+            className={
+              " w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[100svh] top-0 right-0 fixed  z-50 backdrop-blur-md flex justify-center items-center" +
+              (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
+            }
             style={{ zIndex: "999" }}
           >
             <div
@@ -1211,7 +1348,10 @@ export const GroupInfo = () => {
           {availableFriends ? (
             <>
               <div
-                className="w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] h-[100svh] fixed top-0 right-0 backdrop-blur-md bg-[#17171a25] z-50 p-[10px]"
+                className={
+                  "w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] h-[100svh] fixed top-0 right-0 backdrop-blur-md  z-50 p-[10px]" +
+                  (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
+                }
                 style={{ zIndex: "999" }}
               >
                 <div
@@ -1274,7 +1414,7 @@ export const GroupInfo = () => {
                 >
                   <div
                     className={
-                      "w-auto h-[40px] px-[15px] font-[google] flex justify-center items-center font-normal bg-[#c9c5ff] rounded-3xl" +
+                      "w-auto h-[40px] px-[15px] font-[google] flex justify-center items-center font-normal  rounded-3xl" +
                       (theme
                         ? "  text-black bg-[#c9c5ff]"
                         : "  text-white bg-[#756dedcd]")
@@ -1784,10 +1924,15 @@ export const GroupInfo = () => {
                       id="getFile"
                       accept="image/*"
                       className="hidden fixed opacity-0 text-white bg-transparent w-[45px] h-[35px] rounded-full z-30 cursor-pointer"
-                      onChange={(e) => profileImage(e)}
+                      onChange={(e) => {
+                        // setChangeDpModal(true)
+                        profileImage(e);
+                      }}
                     ></input>
                     <label
-                      for="getFile"
+                      onClick={() => {
+                        setChangeDpModal(true);
+                      }}
                       // onclick={document.getElementById("getFile").click()}
                       className={
                         " w-[30px] h-[30px]  flex justify-center items-center border-[2px]   fixed rounded-full cursor-pointer z-10" +
@@ -2257,7 +2402,27 @@ export const GroupInfo = () => {
                     </span>
                     <span
                       className={
-                        "w-[30px] ml-[15px] mt-[10px] h-[30px] rounded-3xl cursor-pointer text-[14px]  font-[google] font-light flex justify-center items-center overflow-hidden" +
+                        "w-[25px] ml-[15px] mt-[10px] h-[30px] rounded-3xl cursor-pointer text-[14px]  font-[google] font-light flex justify-center items-center overflow-hidden" +
+                        (theme ? " text-[black]" : " text-[white]")
+                      }
+                      onClick={() => {
+                        // setUserSidebar(!userSidebar);
+                        // setSettings(!settings);
+                        // if (mediaShow === true) {
+                        //   setMediaShow(false);
+                        // }
+                        // setMediaOption("Documents");
+                      }}
+                      style={{
+                        transition: ".4s",
+                        transitionDelay: ".8s",
+                      }}
+                    >
+                      <AiOutlineUsergroupDelete className="text-[20px]" />
+                    </span>
+                    <span
+                      className={
+                        "w-[25px] ml-[10px] mt-[10px] h-[30px] rounded-3xl cursor-pointer text-[14px]  font-[google] font-light flex justify-center items-center overflow-hidden" +
                         (theme ? " text-[black]" : " text-[white]")
                       }
                       onClick={() => {

@@ -12,6 +12,10 @@ font-family: 'Raleway', sans-serif;
 font-family: 'Roboto', sans-serif;
 font-family: 'Rubik', sans-serif; */
 
+#highlighted-link {
+  color: blue; /* Change this to the color you want */
+}
+
 .b {
   background-image: url(../src/assets/img/bb1.webp);
   background-repeat: no-repeat;

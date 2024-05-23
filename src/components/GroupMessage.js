@@ -33,6 +33,7 @@ const Chat = (props) => {
   const [profile, setProfile] = useState("");
   const [name, setName] = useState("");
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [message, setMessage] = useState([]);
   useEffect(() => {
     const user = firebase.auth().currentUser;
     setUser(user.uid);
@@ -62,6 +63,56 @@ const Chat = (props) => {
   //       setTheme(snapshot?.data()?.theme);
   //     });
   //   },[])
+
+  useEffect(() => {
+    findAndStyleUrls();
+  }, [props?.data?.Message]);
+
+  function highlightLinks(message) {
+    // Regular expression to find URLs
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+
+    // Replace URLs with span-wrapped URLs
+    var highlightedText = props?.data?.Message?.replace(
+      urlRegex,
+      function (url) {
+        return '<span className="highlighted-link">' + url + "</span>";
+      }
+    );
+
+    // Get the pre tag and set the modified text with innerHTML to render HTML tags
+    var preTag = document.getElementById("linkColor");
+    preTag.innerHTML = highlightedText;
+  }
+
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+
+  function findAndStyleUrls() {
+    // Enhanced regular expression for more robust URL matching
+    // const urlRegex =
+    //   /(?:(https?|ftp):\/\/)?[\w.-]+(?:\.[\w.-]+)*[:\d]*(\/[^\s\"\<\>]*)(?:\?[^\s\"\<\>]*#?[\s\"\<\>]*$)?/g;
+
+    // Function to wrap URLs in red-colored anchors
+    // const wrapUrl = (url) =>
+    //   `<span href="${url}" className="highlighted-link">${url} </span>`;
+
+    // // Replace URLs with wrapped anchors using a callback function
+    // const styledText = props?.data?.Message?.replace(urlRegex, wrapUrl);
+
+    // Wrap the entire styled text in a pre tag
+    setMessage(props?.data?.Message?.split(urlRegex));
+    // return `<pre>${styledText}</pre>`;
+  }
+
+  useEffect(() => {
+    // if (message) {
+    //   const messageElement = document.getElementById("linkColor");
+    //   messageElement.innerHTML = message;
+    // }
+    console.log("messageeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+    console.log(message);
+  }, [message]);
+
   return (
     <>
       {props?.data?.Sender !== user ? (
@@ -81,12 +132,12 @@ const Chat = (props) => {
               ></img>
             )}
           </div>
-          <div className="w-full  my-[4px] flex text-[15px] justify-start  pl-[10px]">
+          <div className="w-[calc(100%-50px)]  my-[4px] flex text-[15px] justify-start  pl-[10px]">
             {props?.data?.Message?.length != 0 ? (
               <>
                 <div
                   className={
-                    "w-auto  max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] pt-[5px] px-[8px] pr-[8px] rounded-lg flex flex-col items-start justify-center flex-wrap " +
+                    "w-auto  max-w-[80%] lg:max-w-[60%] md:max-w-[60%]  py-[8px] pt-[7px] px-[14px] pr-[8px] rounded-lg flex flex-col items-start justify-center flex-wrap " +
                     (theme
                       ? " bg-[#ffffff] text-[black]"
                       : " bg-[#222228] text-[white]")
@@ -94,24 +145,64 @@ const Chat = (props) => {
                 >
                   <div
                     className={
-                      "px-[6px] w-auto whitespace-pre-wrap font-[google] text-[14px] text-[#17bbca]  rounded-[4px] font-light" +
+                      "px-[6px] w-auto whitespace-pre-wrap font-[google] text-[14px] text-[#17bbca] ml-[-7px]  rounded-[4px] font-light" +
                       (theme ? " bg-[#f0f4f9]" : " bg-[#17171a]")
                     }
                   >
                     {name}
                   </div>
-                  <div className="px-[6px] w-auto flex justify-end items-end ">
-                    <pre className=" max-w-[calc(100%)] whitespace-pre-wrap font-[google] leading-[19px]  font-light">
-                      {props?.data?.Message}
-                    </pre>
-                    <div
-                      className={
-                        "ml-auto w-[49px] flex justify-end items-end whitespace-nowrap  font-[google] font-light  text-[10px]  mb-[-5px]  " +
-                        (theme ? "  text-[#2d2d2d]" : "  text-[#bcbcbc]")
+                  {/* <div className="px-[6px] w-auto flex justify-end items-end "> */}
+                  <pre
+                    className=" max-w-[calc(100%)] whitespace-pre-wrap font-[work] leading-[19px] mt-[3px] font-light break-words"
+                    id="linkColor"
+                  >
+                    {/* {props?.data?.Message} */}
+                    {/* {message} */}
+                    {/* {"`shdcobib` + " + "<span> adfv </span>"} */}
+                    {/* {message.map((part, index) => {
+                      // Check if the part matches the URL regex
+                      if (urlRegex.test(part)) {
+                        return (
+                          <span key={index} style={{ color: "red" }}>
+                            {part}
+                          </span>
+                        );
                       }
-                    >
-                      {props?.data?.Time}
-                    </div>
+                      // Return the non-URL part without styling
+                      return <span key={index}>{part}</span>;
+                    })} */}
+
+                    {message.map((part, index) => {
+                      // Check if the part matches the URL regex
+                      if (urlRegex.test(part)) {
+                        return (
+                          <a
+                            key={index}
+                            href={part}
+                            className={
+                              "cursor-pointer" +
+                              (theme ? " text-[#115bc4]" : " text-[#3cdeed]")
+                            }
+                            // style={{ color: "#115bc4" }}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {part}
+                          </a>
+                        );
+                      }
+                      // Return the non-URL part without styling
+                      return <span key={index}>{part}</span>;
+                    })}
+                  </pre>
+                  {/* </div> */}
+                  <div
+                    className={
+                      "ml-auto w-[49px] flex justify-end items-end whitespace-nowrap  font-[google] font-light  text-[10px]  mb-[-5px]  " +
+                      (theme ? "  text-[#2d2d2d]" : "  text-[#bcbcbc]")
+                    }
+                  >
+                    {props?.data?.Time}
                   </div>
                 </div>
               </>
@@ -229,8 +320,51 @@ const Chat = (props) => {
                     : " bg-[#756dedcd] text-[white]")
                 }
               >
-                <pre className="max-w-[calc(100%)] whitespace-pre-wrap  leading-[19px] font-[google] font-light">
-                  {props?.data?.Message}
+                <pre
+                  className="max-w-[calc(100%)] whitespace-pre-wrap  leading-[19px] font-[work] font-light break-words"
+                  // id="linkColor"
+                >
+                  {/* {props?.data?.Message} */}
+                  {/* {message} */}
+                  {/* {message.map((part, index) => {
+                    // Check if the part matches the URL regex
+                    if (urlRegex.test(part)) {
+                      return (
+                        <span
+                          className="cursor-pointer"
+                          key={index}
+                          style={{ color: "#115bc4" }}
+                        >
+                          {part}
+                        </span>
+                      );
+                    }
+                    // Return the non-URL part without styling
+                    return <span key={index}>{part}</span>;
+                  })} */}
+
+                  {message.map((part, index) => {
+                    // Check if the part matches the URL regex
+                    if (urlRegex.test(part)) {
+                      return (
+                        <a
+                          key={index}
+                          href={part}
+                          className={
+                            "cursor-pointer" +
+                            (theme ? " text-[#115bc4]" : " text-[#3cdeed]")
+                          }
+                          // style={{ color: "#115bc4" }}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {part}
+                        </a>
+                      );
+                    }
+                    // Return the non-URL part without styling
+                    return <span key={index}>{part}</span>;
+                  })}
                 </pre>
                 <div
                   className={
@@ -436,7 +570,7 @@ const GroupMessage = () => {
 
   useEffect(() => {
     getMessageInfo();
-  }, []);
+  }, [ActiveChatUser]);
 
   function getMessageInfo() {
     const user = firebase.auth().currentUser;
@@ -444,6 +578,10 @@ const GroupMessage = () => {
     onSnapshot(ref, (snapshot) => {
       setLastMessageId(snapshot?.data()?.MessageId);
       setChatRecord(snapshot?.data()?.Message);
+      console.log("Group Nameeeeeeeee");
+      console.log(ActiveChatUser);
+      console.log("Messageeeeeeeeeeeeee");
+      console.log(snapshot?.data()?.Message);
     });
   }
 

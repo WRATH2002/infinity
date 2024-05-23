@@ -1239,6 +1239,7 @@ const UserList = (props) => {
   const [alertMessage, setAlertMessage] = useState("");
   const [bugAbout, setBugAbout] = useState("");
   const [reportBug, setReportBug] = useState(false);
+  const [subModal, setSubModal] = useState(false);
   // const [left, setRight] = useState(0);
   // addFriendList;
   // console.log("UserList");
@@ -1440,7 +1441,10 @@ const UserList = (props) => {
 
   const uploadGroupImage = async () => {
     const user = firebase.auth().currentUser;
-    const fileRef = ref(storage, `/group_image/${user.uid}/${statusCount + 1}`);
+    const fileRef = ref(
+      storage,
+      `/group_image/${user.uid}/${user.uid}.${groupName}`
+    );
     const myPromise = uploadGroupImageGetUrl(fileRef);
     toast.promise(
       myPromise,
@@ -2232,7 +2236,7 @@ const UserList = (props) => {
             {groupModal === true ? (
               <div
                 className={
-                  "fixed  bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px]  w-[40px] h-[40px] z-30 rounded-full   flex justify-center items-center rotate-[135deg] cursor-pointer" +
+                  "fixed  bottom-[90px] mr-[10px] md:mr-[20px] lg:mr-[20px]  w-[40px] h-[40px] z-30 rounded-full   flex justify-center items-center rotate-[135deg] cursor-pointer " +
                   (theme
                     ? " bg-[#ffffff] text-[black]"
                     : " bg-[#17171a] text-[white]")
@@ -2263,82 +2267,204 @@ const UserList = (props) => {
 
             {groupModal === true ? (
               <div
-                className="fixed bottom-[140px] mr-[10px] md:mr-[20px] lg:mr-[20px] h-auto py-[30px] rounded-3xl w-[320px] bg-[#ffffff]   flex flex-col justify-center items-center"
-                style={{ transition: ".4s" }}
+                className={
+                  "w-full md:w-[400px] lg:w-[400px] left-0 top-0 fixed backdrop-blur-md flex justify-center items-center z-50 h-[100svh]" +
+                  (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
+                }
               >
-                {/* hello */}
-                <div className="group w-[110px] h-[110px] rounded-full bg-[#e4eaf1] flex  justify-center items-center ">
-                  {tempUrl.length != 0 ? (
-                    <img
-                      src={tempUrl}
-                      className="w-[110px] h-[110px] z-10 rounded-full fixed object-cover"
-                    ></img>
+                <div
+                  className={
+                    "px-[24px] h-auto p-[20px] rounded-3xl w-[320px]  flex flex-col justify-center items-center z-50" +
+                    (theme
+                      ? " bg-[#ffffff] text-black"
+                      : " bg-[#222228] text-white")
+                  }
+                  style={{ transition: ".4s" }}
+                >
+                  {subModal === true ? (
+                    <>
+                      <div
+                        className={
+                          "group w-[110px] h-[110px] rounded-full flex  justify-center items-center " +
+                          (theme
+                            ? " bg-[#e4eaf1] text-black"
+                            : " bg-[#17171a] text-white")
+                        }
+                      >
+                        {tempUrl.length != 0 ? (
+                          <img
+                            src={tempUrl}
+                            className="w-[110px] h-[110px] z-10 rounded-full fixed object-cover"
+                          ></img>
+                        ) : (
+                          <></>
+                        )}
+                        <input
+                          className="hidden"
+                          type="file"
+                          id="groupDp"
+                          onChange={(e) => GroupProfileImage(e)}
+                          accept="image/*"
+                        ></input>
+                        <label
+                          className="group-hover:opacity-100 opacity-0 cursor-pointer w-[40px] h-[40px] rounded-full flex justify-center items-center bg-[#000000a9] text-white z-20"
+                          for="groupDp"
+                        >
+                          <BsCameraFill className="text-[17px]" />
+                        </label>
+                      </div>
+
+                      <div className=" h-auto w-full mt-[20px] flex justify-end items-center  rounded-xl text-[14px]">
+                        <button
+                          className={
+                            "w-auto h-auto  flex items-end bg-transparent  text-[14px]  cursor-pointer  font-[google] font-light   rounded-2xl" +
+                            (theme
+                              ? " bg-[#e4eaf1] text-[#000000]"
+                              : " bg-[#17171a] text-[#ffffff]")
+                          }
+                          onClick={() => {
+                            // console.log("clicked");
+                            setSubModal(false);
+                          }}
+                        >
+                          Back
+                        </button>
+
+                        {tempUrl.length === 0 ? (
+                          <button className="w-auto flex items-end text-[14px] ml-[30px] h-auto text-[#c9c5ff]   cursor-pointer  font-[google] font-light  rounded-2xl ">
+                            {/* <img src={tick} className="w-full"></img> */}
+                            Create
+                          </button>
+                        ) : (
+                          <div
+                            className="w-auto flex items-end text-[14px] ml-[30px] h-auto text-[#655fc7]   cursor-pointer  font-[google] font-light  rounded-2xl "
+                            onClick={() => {
+                              createGroup();
+                              setGroupModal(false);
+                              setGroupDescription("");
+                              setGroupName("");
+                              setSubModal(false);
+                              setTempUrl("");
+                            }}
+                          >
+                            Create
+                            {/* <img src={tick} className="w-full"></img> */}
+                          </div>
+                        )}
+                      </div>
+                    </>
                   ) : (
-                    <></>
+                    <>
+                      <div className="w-full  flex flex-col justify-center items-center">
+                        {groupName?.length === 0 ? (
+                          <label
+                            className={
+                              " font-[google] font-normal text-[14px]  w-full flex justify-start items-center h-[30px] mb-[-30px]" +
+                              (theme ? " text-[#606060]" : " text-[#b1b1b1]")
+                            }
+                            style={{ transition: ".3s" }}
+                          >
+                            Group Name
+                          </label>
+                        ) : (
+                          <label
+                            className={
+                              " font-[google] font-normal text-[12px]  w-full flex justify-start items-center h-[30px] mb-[-11px]" +
+                              (theme ? " text-[#606060]" : " text-[#b1b1b1]")
+                            }
+                            style={{ transition: ".3s" }}
+                          >
+                            Group Name
+                          </label>
+                        )}
+                        <input
+                          value={groupName}
+                          onChange={(e) => {
+                            setGroupName(e.target.value);
+                          }}
+                          className={
+                            " input border-b-[1.5px]  h-[30px] w-full  font-[google] tracking-[.4px] font-normal text-[15px]   bg-transparent outline-none" +
+                            (theme
+                              ? " border-[#606060] text-black"
+                              : " border-[#b1b1b1] text-white")
+                          }
+                          // placeholder="Group Name"
+                        ></input>
+                        {groupDescription?.length === 0 ? (
+                          <label
+                            className={
+                              " mt-[15px] font-[google] font-normal text-[14px]  w-full flex justify-start items-center h-[30px] mb-[-30px]" +
+                              (theme ? " text-[#606060]" : " text-[#b1b1b1]")
+                            }
+                            style={{ transition: ".3s" }}
+                          >
+                            Group Description
+                          </label>
+                        ) : (
+                          <label
+                            className={
+                              " mt-[15px] font-[google] font-normal text-[12px]  w-full flex justify-start items-center h-[30px] mb-[-11px]" +
+                              (theme ? " text-[#606060]" : " text-[#b1b1b1]")
+                            }
+                            style={{ transition: ".3s" }}
+                          >
+                            Group Description
+                          </label>
+                        )}
+                        <input
+                          value={groupDescription}
+                          onChange={(e) => {
+                            setGroupDescription(e.target.value);
+                          }}
+                          className={
+                            " input border-b-[1.5px]  h-[30px] w-full   flex justify-start items-start font-[google] tracking-[.4px] font-normal text-[15px]  bg-transparent outline-none" +
+                            (theme
+                              ? " border-[#606060] text-black"
+                              : " border-[#b1b1b1] text-white")
+                          }
+                          // placeholder="Group Descritption"
+                        ></input>
+
+                        <div className=" h-auto w-full mt-[20px] flex justify-end items-center  rounded-xl text-[14px]">
+                          <button
+                            className={
+                              "w-auto h-auto  flex items-end bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
+                              (theme
+                                ? " bg-[#e4eaf1] text-[#000000]"
+                                : " bg-[#17171a] text-[#ffffff]")
+                            }
+                            onClick={() => {
+                              // console.log("clicked");
+                              setGroupName("");
+                              setGroupDescription("");
+                              setGroupModal(false);
+                              setTempUrl("");
+                            }}
+                          >
+                            Close
+                          </button>
+                          <button
+                            className={
+                              "w-auto flex items-end ml-[30px] h-auto text-[#bb2a23]   cursor-pointer  font-[google] font-light  rounded-2xl" +
+                              (groupName.length === 0
+                                ? " text-[#c5c9ff]"
+                                : " text-[#655fc7]")
+                            }
+                            onClick={() => {
+                              // console.log("clicked");
+                              // exitGroup();
+                              if (groupName.length !== 0) {
+                                setSubModal(true);
+                              }
+                            }}
+                          >
+                            Next
+                          </button>
+                        </div>
+                      </div>
+                    </>
                   )}
-                  <input
-                    className="hidden"
-                    type="file"
-                    id="groupDp"
-                    onChange={(e) => GroupProfileImage(e)}
-                    accept="image/*"
-                  ></input>
-                  <label
-                    className="group-hover:opacity-100 opacity-0 cursor-pointer w-[40px] h-[40px] rounded-full flex justify-center items-center bg-[#000000a9] text-white z-20"
-                    for="groupDp"
-                  >
-                    <BsCameraFill className="text-[17px]" />
-                  </label>
                 </div>
-                <div className="w-full  flex flex-col justify-center items-center">
-                  <input
-                    value={groupName}
-                    onChange={(e) => {
-                      setGroupName(e.target.value);
-                    }}
-                    className="input bg-[#e4eaf1] h-[45px] rounded-2xl mt-[30px] w-[80%] border-b-[2px] font-[work] tracking-[.4px] font-normal text-[15px] text-black py-[5px] border-none px-[20px] outline-none"
-                    placeholder="Group Name"
-                  ></input>
-                  <input
-                    value={groupDescription}
-                    onChange={(e) => {
-                      setGroupDescription(e.target.value);
-                    }}
-                    className="input bg-[#e4eaf1] h-[45px] rounded-2xl w-[80%]  mt-[10px] flex justify-start items-start border-b-[2px] font-[work] tracking-[.4px] font-normal text-[15px] text-black py-[5px] border-none px-[20px] outline-none"
-                    placeholder="Group Descritption"
-                  ></input>
-                </div>
-                {/* <div className="w-full h-[70px]  flex justify-center items-start overflow-x-scroll">
-                  {UserList?.map((friend) => {
-                    // return <AddFriend data={friend} />;
-                  })}
-                  
-                </div> */}
-                {/* <div className="w-[65%]">
-                  <input
-                    className="input w-full  mt-[20px] flex justify-start items-start border-b-[2px] font-[google] font-normal text-[15px] py-[5px] border-b-black outline-none"
-                    placeholder="Community Descritption"
-                  ></input>
-                </div> */}
-                {groupName.length === 0 ? (
-                  <div className="w-auto px-[15px] opacity-50 h-[40px] mt-[30px] rounded-full flex justify-center items-center font-[google] font-normal bg-[#95df73ab] ">
-                    {/* <img src={tick} className="w-full"></img> */}
-                    Create
-                  </div>
-                ) : (
-                  <div
-                    className="w-auto px-[15px] h-[40px] opacity-100 mt-[30px] cursor-pointer rounded-full flex justify-center items-center font-[google] font-normal bg-[#96df73] "
-                    onClick={() => {
-                      createGroup();
-                      setGroupModal(false);
-                      setGroupDescription("");
-                      setGroupName("");
-                    }}
-                  >
-                    Create
-                    {/* <img src={tick} className="w-full"></img> */}
-                  </div>
-                )}
               </div>
             ) : (
               <></>
