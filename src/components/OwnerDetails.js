@@ -1,64 +1,24 @@
 import React from "react";
-import dp from "../assets/img/dp2.jpg";
-import { auth, st } from "../firebase";
-import { storage } from "../firebase";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { db } from "../firebase";
 import firebase from "../firebase";
 import { useState, useEffect } from "react";
-import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
-import { RxCross2 } from "react-icons/rx";
-import { AiTwotoneEdit } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
-import { IoSettingsSharp } from "react-icons/io5";
-import { FiLogOut } from "react-icons/fi";
-import { MdOutlineFileUpload } from "react-icons/md";
-import { BsCameraFill } from "react-icons/bs";
-import { FaCamera } from "react-icons/fa";
-import { upload } from "@testing-library/user-event/dist/upload";
-import { getDownloadURL } from "firebase/storage";
 import { onSnapshot } from "firebase/firestore";
-import toast, { Toaster } from "react-hot-toast";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import profile2 from "../assets/img/d.png";
-import profile from "../assets/img/profile.png";
-import logout from "../assets/img/logout.png";
-import settings from "../assets/img/settings.png";
-import three from "../assets/img/threedots.png";
-import cross from "../assets/img/cross.png";
-import uploadd from "../assets/img/upload.png";
-import { GrFormUpload } from "react-icons/gr";
-import { FiSearch } from "react-icons/fi";
 import { useSelector } from "react-redux";
-import { BsFillChatSquareTextFill } from "react-icons/bs";
-import { RiSettings3Fill } from "react-icons/ri";
-
-import { TiGroup } from "react-icons/ti";
 import { RiSettings4Fill } from "react-icons/ri";
-import { MdGroupAdd } from "react-icons/md";
-import { TbPlaystationCircle } from "react-icons/tb";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { MdGroups2 } from "react-icons/md";
 import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
 import { LuCircleDashed } from "react-icons/lu";
+
 const OwnerDetails = (props) => {
   const [ownerInfo, setOwnerInfo] = useState("");
-  const [changeOwnerInfo, setChangeOwnerInfo] = useState("");
   const [ownerName, setOwnerName] = useState("");
-  const [changeOwnerName, setChangeOwnerName] = useState("");
-  const [isMenu, setIsMenu] = useState(false);
-  const [isProfileMenu, setIsProfileMenu] = useState(false);
-  const [isSettingsMenu, setIsSettingsMenu] = useState(false);
-  const [nameChangeFlag, setNameChangeFlag] = useState(false);
-  const [aboutChangeFlag, setAboutChangeFlag] = useState(false);
-  const [image, setImage] = useState();
   const [profileURL, setProfileURL] = useState("");
   const [totalChats, setTotalChats] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
   const [isOnline, setIsOnline] = useState(true);
   const [isAni, setIsAni] = useState();
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
-  const [showTime, setShowTime] = useState(false);
   const [theme, setTheme] = useState(true);
 
   useEffect(() => {
@@ -79,32 +39,24 @@ const OwnerDetails = (props) => {
 
   useEffect(() => {
     window.addEventListener("offline", function (e) {
-      // console.log("offline");
-
       setIsOnline(false);
       setIsAni(true);
       setTimeout(() => {
-        // console.log("Hello, World!");
         setIsAni(false);
       }, 2000);
     });
     window.addEventListener("online", function (e) {
-      // console.log("online");
       setIsOnline(true);
       setIsAni(true);
       setTimeout(() => {
-        // console.log("Hello, World!");
         setIsAni(false);
       }, 2000);
     });
-    // console.log("navigator.onLine");
-    // console.log(navigator.onLine);
   }, []);
 
   function Transition() {
     setIsAni(true);
     setTimeout(() => {
-      // console.log("Hello, World!");
       setIsAni(false);
     }, 2000);
   }
@@ -129,54 +81,11 @@ const OwnerDetails = (props) => {
 
     const userDoc = db.collection("Chat Record").doc(user.uid);
     onSnapshot(userDoc, (snapshot) => {
-      // console.log("snapshot.docssssssssssssss");
-      // console.log(snapshot.data());
       setOwnerName(snapshot?.data()?.Name);
       setOwnerInfo(snapshot?.data()?.Info);
       setProfileURL(snapshot?.data()?.Photo);
     });
-    // userDoc.get().then((data) => {
-    //   setOwnerName(data?.data()?.Name);
-    //   setOwnerInfo(data?.data()?.Info);
-    //   setProfileURL(data?.data()?.Photo);
-    // });
-    // console.log(userDoc.data());
-    // console.log(userDoc);
   }
-
-  function Image(e) {
-    // console.log(e.target.files[0]);
-    setImage(e.target.files[0]);
-  }
-
-  function uploadImage() {
-    const user = firebase.auth().currentUser;
-    // const storage = getStorage();
-    const fileRef = ref(storage, `/users/${user.uid}/Profile Photo`);
-    uploadBytes(fileRef, image).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        // console.log(url);
-        db.collection("Chat Record").doc(user.uid).update({ Photo: url });
-      });
-      // toast.success("Photo Changed Successfully");
-      toast("Photo Changed", {
-        icon: "✅",
-        className: "font-[nunitosans] font-normal",
-        style: {
-          borderRadius: "9px",
-          background: "#333",
-          color: "#cdd8dd",
-        },
-      });
-      // console.log("Uploaded a blob or file!");
-    });
-  }
-
-  const userSignOut = () => {
-    signOut(auth)
-      .then(() => console.log("Signed Out Successfully"))
-      .catch((error) => console.log(error));
-  };
 
   const UpdateIsOnline = () => {
     const user = firebase.auth().currentUser;
@@ -271,9 +180,7 @@ const OwnerDetails = (props) => {
                           <span
                             className="opacity-0 text-transparent"
                             style={{ transition: ".1s" }}
-                          >
-                            {/* Back Online */}
-                          </span>
+                          ></span>
                         </div>
                       </>
                     )}
@@ -309,9 +216,7 @@ const OwnerDetails = (props) => {
                           <span
                             className="opacity-0 text-transparent"
                             style={{ transition: ".1s" }}
-                          >
-                            {/* Oh! Offline */}
-                          </span>
+                          ></span>
                         </div>
                       </>
                     )}
@@ -396,9 +301,7 @@ const OwnerDetails = (props) => {
                           <span
                             className="opacity-0 text-transparent"
                             style={{ transition: ".1s" }}
-                          >
-                            {/* Back Online */}
-                          </span>
+                          ></span>
                         </div>
                       </>
                     )}
@@ -434,9 +337,7 @@ const OwnerDetails = (props) => {
                           <span
                             className="opacity-0 text-transparent"
                             style={{ transition: ".1s" }}
-                          >
-                            {/* Oh! Offline */}
-                          </span>
+                          ></span>
                         </div>
                       </>
                     )}
@@ -446,12 +347,6 @@ const OwnerDetails = (props) => {
             </div>
           </>
         )}
-
-        {/* <span className="text-[13px] font-[google] font-normal">RECENT</span> */}
-
-        {/* <div className="w-[10%] h-[40px] text-[#ffffff] rounded-full flex justify-end items-center overflow-hidden">
-          <FiSearch className="text-[23px]" /> 
-        </div> */}
       </div>
       <div className="w-full md:w-[400px] lg:w-[400px] h-[70px] top-0 flex  bg-transparent justify-between items-center px-[20px]"></div>
     </>

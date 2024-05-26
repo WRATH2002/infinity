@@ -15,6 +15,7 @@ export const AllGroupList = (props) => {
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [profile, setProfile] = useState("");
+  const [lastMessage, setLastMessage] = useState("");
   const [theme, setTheme] = useState(true);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
@@ -66,6 +67,10 @@ export const AllGroupList = (props) => {
       setDescription(snapshot?.data()?.Description);
       setName(snapshot?.data()?.Name);
       setProfile(snapshot?.data()?.ProfileURL);
+      setLastMessage(
+        snapshot?.data()?.Message[snapshot?.data()?.Message?.length - 1]
+          ?.Message
+      );
     });
   }
 
@@ -188,7 +193,7 @@ export const AllGroupList = (props) => {
               <div className="w-full font-semibold flex h-[23px]">
                 <span
                   className={
-                    "w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis font-[google] font-normal " +
+                    "w-full text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis font-[google] font-normal " +
                     (theme ? " text-[#000000]" : " text-[#ffffff]")
                   }
                   // style={{ transition: ".9s" }}
@@ -196,16 +201,16 @@ export const AllGroupList = (props) => {
                   {/* {props.data.user} */}
                   {name}
                 </span>
+              </div>
+              <div className="w-full font-semibold flex h-[23px]">
                 <span
                   className={
-                    "w-[70px] h-full group-hover:mr-[25px] text-[14px] flex justify-end items-center  font-[work] font-light z-50" +
+                    "w-full text-[14px] h-full overflow-hidden text-ellipsis line-clamp-1 font-[work] font-normal " +
                     (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                   }
-
                   // style={{ transition: ".9s" }}
                 >
-                  {/* {props.data.time} */}
-                  {/* {Time} */}
+                  {lastMessage.length === 0 ? <></> : <>{lastMessage}</>}
                 </span>
               </div>
               {/* <div className="w-full  flex h-[23px] justify-between items-center">

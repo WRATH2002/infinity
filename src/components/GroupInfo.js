@@ -1069,7 +1069,7 @@ export const GroupInfo = () => {
           <div
             className={
               " w-full lg:w-[calc(100%-400px)] md:w-[calc(100%-400px)] h-[100svh] top-0 right-0 fixed  z-50 backdrop-blur-md flex justify-center items-center" +
-              (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
+              (theme ? " bg-[#17171a25]" : " bg-[#000000ab]")
             }
             style={{ zIndex: "999" }}
           >
@@ -1100,8 +1100,8 @@ export const GroupInfo = () => {
                   }
                 >
                   <span className="  font-light ">
-                    You can't change this Group's Profile Photo. You must be the
-                    admin of this group to do any kind of changes.
+                    You are not an admin anymore. You must have to be an admin
+                    of this group to change this Group's Profile Photo.
                   </span>
                 </div>
               ) : (
@@ -1130,8 +1130,8 @@ export const GroupInfo = () => {
                         className={
                           "w-[25px] h-[25px] flex justify-center items-center text-[14px] rounded-full " +
                           (theme
-                            ? " bg-[#e4eaf1] text-black"
-                            : " bg-[#878787] text-white")
+                            ? " bg-[#655fc7] text-white"
+                            : " bg-[#8b85f4] text-black")
                         }
                       >
                         1
@@ -1145,9 +1145,16 @@ export const GroupInfo = () => {
                 <button
                   className={
                     "w-auto h-auto  flex items-end bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
-                    (theme
-                      ? " bg-[#e4eaf1] text-[#000000]"
-                      : " bg-[#17171a] text-[#ffffff]")
+                    (!userAdmin
+                      ? theme
+                        ? " text-[#655fc7]"
+                        : " text-[#8b85f4]"
+                      : theme
+                      ? " text-[#000000]"
+                      : " text-[#ffffff]")
+                    // (theme
+                    //   ? (userAdmin ? " text-[#000000]" : " text-[#655fc7]")
+                    //   : (userAdmin ? " text-[#ffffff]"  " text-[#655fc7]") )
                   }
                   onClick={() => {
                     // console.log("clicked");
@@ -1156,15 +1163,22 @@ export const GroupInfo = () => {
                     setChangeDpModal(false);
                   }}
                 >
-                  Close
+                  {userAdmin ? <>Close</> : <>Ok</>}
                 </button>
                 {userAdmin ? (
                   <button
                     className={
-                      "w-auto flex items-end ml-[30px] h-auto text-[#bb2a23]   cursor-pointer  font-[google] font-light  rounded-2xl" +
+                      "w-auto flex items-end ml-[30px] h-auto  cursor-pointer  font-[google] font-light  rounded-2xl" +
                       (tempProfileImage === undefined
-                        ? " text-[#c9c5ff]"
-                        : " text-[#655fc7]")
+                        ? theme
+                          ? " text-[#c9c5ff]"
+                          : " text-[#8b84ff87]"
+                        : theme
+                        ? " text-[#655fc7]"
+                        : " text-[#8b85f4]") +
+                      (tempProfileImage === undefined
+                        ? " cursor-default"
+                        : " cursor-pointer")
                     }
                     onClick={() => {
                       // console.log("clicked");
@@ -1346,89 +1360,136 @@ export const GroupInfo = () => {
           ></div>
 
           {availableFriends ? (
-            <>
-              <div
-                className={
-                  "w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] h-[100svh] fixed top-0 right-0 backdrop-blur-md  z-50 p-[10px]" +
-                  (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
-                }
-                style={{ zIndex: "999" }}
-              >
+            userAdmin ? (
+              <>
                 <div
                   className={
-                    "flex flex-col justify-start items-start w-full p-[20px] px-[10px]  h-full rounded-3xl overflow-y-scroll" +
-                    (theme
-                      ? " bg-[#ffffff] text-black"
-                      : " bg-[#222228] text-white")
+                    "w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] h-[100svh] fixed top-0 right-0 backdrop-blur-md  z-50 p-[10px]" +
+                    (theme ? " bg-[#17171a25]" : " bg-[#000000ab]")
                   }
+                  style={{ zIndex: "999" }}
                 >
-                  {/* <input className="w-full h-[45px] rounded-2xl bg-[#e4eaf1] mb-[10px]"></input> */}
                   <div
                     className={
-                      " font-[google] text-[14px] font-normal w-[calc(100%-20px)] md:[calc(100%-420px)]  lg:[calc(100%-420px)] h-[50px] pl-[20px]  rounded-t-3xl flex justify-start items-center fixed top-[10px] right-[10px]" +
+                      "flex flex-col justify-start items-start w-full p-[20px] px-[10px]  h-full rounded-3xl overflow-y-scroll" +
                       (theme
                         ? " bg-[#ffffff] text-black"
                         : " bg-[#222228] text-white")
                     }
                   >
+                    {/* <input className="w-full h-[45px] rounded-2xl bg-[#e4eaf1] mb-[10px]"></input> */}
+                    <div
+                      className={
+                        " font-[google] text-[14px] font-normal w-[calc(100%-20px)] md:[calc(100%-420px)]  lg:[calc(100%-420px)] h-[50px] pl-[20px]  rounded-t-3xl flex justify-start items-center fixed top-[10px] right-[10px]" +
+                        (theme
+                          ? " bg-[#ffffff] text-black"
+                          : " bg-[#222228] text-white")
+                      }
+                    >
+                      {availableFriends?.length != 0 ? (
+                        <>{selected}&nbsp; Members Selected</>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                    <div className="w-full min-h-[30px]"></div>
                     {availableFriends?.length != 0 ? (
-                      <>{selected}&nbsp; Members Selected</>
+                      <>
+                        {availableFriends?.map((data) => {
+                          return (
+                            <>
+                              <AddGroupMember
+                                data={data}
+                                groupName={name}
+                                sel={selected}
+                                selected={setSelected}
+                              />
+                            </>
+                          );
+                        })}
+                      </>
                     ) : (
-                      <></>
+                      <>
+                        <div className="w-full min-h-[30px] text-[16px] font-normal font-[google]  flex justify-center items-center">
+                          No Friends to Add in the Group
+                        </div>
+                      </>
                     )}
+
+                    <div className="w-full min-h-[40px] "></div>
                   </div>
-                  <div className="w-full min-h-[30px]"></div>
-                  {availableFriends?.length != 0 ? (
-                    <>
-                      {availableFriends?.map((data) => {
-                        return (
-                          <>
-                            <AddGroupMember
-                              data={data}
-                              groupName={name}
-                              sel={selected}
-                              selected={setSelected}
-                            />
-                          </>
-                        );
-                      })}
-                    </>
-                  ) : (
-                    <>
-                      <div className="w-full min-h-[30px] text-[16px] font-normal font-[google]  flex justify-center items-center">
-                        No Friends to Add in the Group
-                      </div>
-                    </>
-                  )}
 
-                  <div className="w-full min-h-[40px] "></div>
+                  <div
+                    className={
+                      " w-[calc(100%-20px)] md:[calc(100%-420px)]  lg:[calc(100%-420px)] h-[60px] rounded-b-3xl flex justify-center items-center fixed bottom-[10px] right-[10px]" +
+                      (theme
+                        ? " bg-[#ffffff] text-black"
+                        : " bg-[#222228] text-white")
+                    }
+                  >
+                    <div
+                      className={
+                        "w-auto h-[40px] px-[15px] font-[google] flex justify-center items-center font-normal  rounded-3xl" +
+                        (theme
+                          ? "  text-black bg-[#c9c5ff]"
+                          : "  text-white bg-[#756dedcd]")
+                      }
+                      onClick={() => {
+                        setAvaiableFriends();
+                        setSelected(0);
+                      }}
+                    >
+                      Done
+                    </div>
+                  </div>
                 </div>
-
+              </>
+            ) : (
+              <>
                 <div
                   className={
-                    " w-[calc(100%-20px)] md:[calc(100%-420px)]  lg:[calc(100%-420px)] h-[60px] rounded-b-3xl flex justify-center items-center fixed bottom-[10px] right-[10px]" +
-                    (theme
-                      ? " bg-[#ffffff] text-black"
-                      : " bg-[#222228] text-white")
+                    "w-full md:w-[calc(100%-400px)] lg:w-[calc(100%-400px)] h-[100svh] fixed top-0 right-0 backdrop-blur-md  z-50 flex justify-center items-center" +
+                    (theme ? " bg-[#17171a25]" : " bg-[#000000ab]")
                   }
+                  style={{ zIndex: "999" }}
                 >
                   <div
                     className={
-                      "w-auto h-[40px] px-[15px] font-[google] flex justify-center items-center font-normal  rounded-3xl" +
+                      " text-[15px] w-[320px]  h-auto p-[20px] rounded-3xl flex flex-col justify-center items-center " +
                       (theme
-                        ? "  text-black bg-[#c9c5ff]"
-                        : "  text-white bg-[#756dedcd]")
+                        ? " bg-[#ffffff] text-black"
+                        : " bg-[#222228] text-white")
                     }
-                    onClick={() => {
-                      setAvaiableFriends();
-                      setSelected(0);
-                    }}
                   >
-                    Done
+                    <div
+                      className={
+                        "w-full  rounded-xl font-[google]  flex justify-center items-center px-[6px]" +
+                        (theme ? " text-[#343434] " : " text-[#b7b7b7]")
+                      }
+                    >
+                      <span className="  font-light ">
+                        You are not an admin anymore. You must have to be an
+                        admin of this group to add your friends.
+                      </span>
+                    </div>
+
+                    <div className=" h-auto w-full mt-[20px] flex justify-end items-center px-[6px] rounded-xl">
+                      <button
+                        className={
+                          "w-auto h-auto  flex items-end bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
+                          (theme ? " text-[#655fc7]" : " text-[#8b85f4]")
+                        }
+                        onClick={() => {
+                          setAvaiableFriends();
+                        }}
+                      >
+                        Ok
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </>
+              </>
+            )
           ) : (
             <></>
           )}
@@ -1492,7 +1553,7 @@ export const GroupInfo = () => {
                       deleteChats();
                     }}
                   >
-                    Delete
+                    Ok
                   </button>
                 </div>
               </div>

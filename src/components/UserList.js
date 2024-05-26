@@ -47,22 +47,15 @@ import {
   snapshotEqual,
   where,
 } from "firebase/firestore";
-import { query } from "firebase/firestore";
 import { RxCross2 } from "react-icons/rx";
-import { LuSearch } from "react-icons/lu";
 import {
   BsCaretDownFill,
   BsCaretUpFill,
   BsFillCameraFill,
 } from "react-icons/bs";
-import { BiCamera, BiSolidSearch } from "react-icons/bi";
-import { orderBy } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
-import searchh from "../assets/img/searchh.png";
-import cross from "../assets/img/cross.png";
-// import { MdGroups2 } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
-import { RiSearch2Line } from "react-icons/ri";
+import { RiDonutChartLine, RiSearch2Line } from "react-icons/ri";
 import { IoMdDocument } from "react-icons/io";
 import { TiVideo } from "react-icons/ti";
 import { BsCameraFill } from "react-icons/bs";
@@ -76,128 +69,76 @@ import {
   FaPen,
 } from "react-icons/fa";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-// import { LuSearch } from "react-icons/lu";
-// import { RxCross2 } from "react-icons/rx";
 import { TbAlertTriangle, TbPlaystationCircle } from "react-icons/tb";
-import { MdBugReport, MdDescription, MdGroups } from "react-icons/md";
-import { BsFillChatSquareTextFill } from "react-icons/bs";
-import { PiChatCircleTextFill } from "react-icons/pi";
-import { MdPersonSearch } from "react-icons/md";
-// import { FaPlus } from "react-icons/fa6";
-import { MdSettings } from "react-icons/md";
-import { BsFillPersonPlusFill } from "react-icons/bs";
-import { TiGroup } from "react-icons/ti";
+import {
+  MdBarChart,
+  MdBugReport,
+  MdDescription,
+  MdGroups,
+  MdOutlineAdd,
+} from "react-icons/md";
 import { MdGroups2 } from "react-icons/md";
-import { MdOutlinePassword } from "react-icons/md";
-import { IoTrailSignOutline } from "react-icons/io5";
-import { TiDelete } from "react-icons/ti";
-import { TiDeleteOutline } from "react-icons/ti";
-import { RiDeleteBack2Fill } from "react-icons/ri";
-import { MdPermContactCalendar } from "react-icons/md";
-import { IoChevronDownOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { signOut } from "firebase/auth";
 import { RiEditFill } from "react-icons/ri";
 import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
-import { MdOutlineDone } from "react-icons/md";
-import { RiRadioButtonLine } from "react-icons/ri";
 import { RiSettings4Fill } from "react-icons/ri";
 import StatusUserList from "./StatusUserList";
-
-import { LuSettings2 } from "react-icons/lu";
-// import { MdGroups2 } from "react-icons/md";
-import { MdGroupAdd } from "react-icons/md";
 import { BsPersonFillAdd } from "react-icons/bs";
-import { IoIosApps } from "react-icons/io";
-import { FaAngleDown } from "react-icons/fa6";
-// import { BsFillChatSquareTextFill } from "react-icons/bs";
-// const Hello = () => {
-//   const [userName, setUserName] = useState("");
-//   const [photoURL, setPhotoURL] = useState("");
-
-//   const [UserUid, setUserUid] = useState("");
-
-//   useEffect(() => {
-//     setUserUid(props.data.UserId);
-//     fetchUserName();
-//   });
-//   return(<></>)
-// }
 import { BiSolidMoon } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { MdNoAccounts } from "react-icons/md";
 import { TbHelpSquareRoundedFilled } from "react-icons/tb";
-import { IoLogOut } from "react-icons/io5";
-import { IoIosHelpCircleOutline } from "react-icons/io";
-import { IoMdMoon } from "react-icons/io";
-import { IoMoonOutline } from "react-icons/io5";
-import { PiMoon } from "react-icons/pi";
-import { TbLogout } from "react-icons/tb";
-import { AiOutlineDelete } from "react-icons/ai";
-// import { MdNoAccounts } from "react-icons/md";
-import { FaAppStoreIos } from "react-icons/fa";
+import { IoChevronDownOutline, IoLogOut } from "react-icons/io5";
 import { RiTimer2Fill } from "react-icons/ri";
 import { LuCircleDashed } from "react-icons/lu";
-
 import { Flat, Heat, Nested } from "@alptugidin/react-circular-progress-bar";
+
 const data = [
-  { name: 1, num: 360 },
-  { name: 2, num: 346 },
-  { name: 3, num: 430 },
-  { name: 4, num: 649 },
-  { name: 5, num: 407 },
-  { name: 6, num: 333 },
-  { name: 7, num: 372 },
-  { name: 8, num: 188 },
-  { name: 9, num: 399 },
-  { name: 10, num: 440 },
+  {
+    date: 4,
+    usage: 2,
+  },
+  // { date: 5, usage: 4 },
+  // { date: 6, usage: 6 },
+  { date: 7, usage: 1 },
+  // { date: 6, usage: 6 },
+  // { date: 7, usage: 1 },
+  // {
+  //   date: 4,
+  //   usage: 2,
+  // },
+  { date: 5, usage: 4 },
+  // { date: 6, usage: 6 },
+  // { date: 7, usage: 1 },
+  { date: 6, usage: 6 },
+  // { date: 5, usage: 4 },
+  // { date: 6, usage: 6 },
+  // { date: 7, usage: 1 },
+  // { date: 6, usage: 6 },
+  // { date: 7, usage: 1 },
+  {
+    date: 4,
+    usage: 2,
+  },
+  { date: 5, usage: 4 },
+  { date: 6, usage: 6 },
 ];
 
-const AddFriend = (props) => {
-  const [userName, setUserName] = useState("");
-  const [photoURL, setPhotoURL] = useState("");
-
-  const [UserUid, setUserUid] = useState("");
-
-  const dispatch = useDispatch();
-  const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
-
-  useEffect(() => {
-    setUserUid(props.data.UserId);
-    fetchUserName();
-  });
-
-  function fetchUserName() {
-    const user = firebase.auth().currentUser;
-
-    const userName = db.collection("Chat Record").doc(props.data.UserId);
-
-    onSnapshot(userName, (snapshot) => {
-      setUserName(snapshot.data().Name);
-      if (snapshot.data().Photo) {
-        setPhotoURL(snapshot.data().Photo);
-      } else {
-        setPhotoURL("nophoto");
-      }
-    });
-  }
-
-  return (
-    <div className="w-[60px] h-[60px] mx-[5px] rounded-full ">
-      {photoURL === "nophoto" ? (
-        <img
-          src={profile2}
-          className="w-full h-full rounded-full object-cover "
-        ></img>
-      ) : (
-        <img
-          src={photoURL}
-          className="w-full h-full rounded-full object-cover "
-        ></img>
-      )}
-    </div>
-  );
-};
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 const Friends = (props) => {
   const [userName, setUserName] = useState("");
@@ -211,13 +152,12 @@ const Friends = (props) => {
   const [docName, setDocName] = useState("");
   const [id, setId] = useState();
   const [not, setNot] = useState(true);
-
   const dispatch = useDispatch();
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
-
   const [theme, setTheme] = useState(true);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
+  // -----------------------------------------------------------------------------------------------------
   useEffect(() => {
     const user = firebase.auth().currentUser;
     const ref = db.collection("Chat Record").doc(user.uid);
@@ -225,81 +165,26 @@ const Friends = (props) => {
       setTheme(snapshot?.data()?.theme);
     });
   }, []);
-
+  // -----------------------------------------------------------------------------------------------------
   useEffect(() => {
     setUserUid(props.data.UserId);
     fetchUserName();
   });
-
+  // -----------------------------------------------------------------------------------------------------
   useEffect(() => {
     if (
       lastMsg !== "" &&
       chatFlag == 2 &&
       props.data.UserId !== ActiveChatUser
     ) {
-      // console.log(
-      //   "Incominggggggggggggggggggggggg------------------------------------------------------"
-      // );
-      // toast.dismiss();
       setNot(true);
       toast.remove();
-      // const toastId =
-      //     toast.custom((t) => (
-
-      //       <div
-      //       style={{zIndex:"10000"}}
-      //         className={`${
-      //           t.visible ? "animate-enter" : "animate-leave"
-      //         } max-w-md z-50 w-full bg-[#17171a] border border-[#797979] shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
-      //       >
-      //         <div className="flex-1 w-0 p-4">
-      //           <div className="flex items-start">
-      //             <div className="flex-shrink-0 pt-0.5">
-      //               {photoURL === "nophoto" ? (
-      //                 <img
-      //                 className="h-10 w-10 rounded-full object-cover"
-      //                 src={profile2}
-      //                 alt=""
-      //               />
-
-      //                 ) : (
-      // <img
-      //                 className="h-10 w-10 rounded-full  object-cover"
-      //                 src={photoURL}
-      //                 alt=""
-      //               />
-
-      //                 )}
-
-      //             </div>
-      //             <div className="ml-3 flex-1">
-      //               <p className="text-sm font-medium text-[white]">{userName}</p>
-      //               <p className="mt-1 text-sm text-[#b3b3b3]">{lastMsg}</p>
-      //             </div>
-      //           </div>
-      //         </div>
-      //         {/* <div className="flex border-l ">
-      //           <button
-      //             onClick={() => toast.dismiss(t.id)}
-      //             className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      //           >
-      //             Close
-      //           </button>
-      //         </div> */}
-      //       </div>
-      //     ));
-      // setId(toastId)
     }
   }, [lastMsg]);
-
+  // -----------------------------------------------------------------------------------------------------
   function fetchUserName() {
     const user = firebase.auth().currentUser;
-
     const userName = db.collection("Chat Record").doc(props.data.UserId);
-    // .onSnapshot((data) => {
-    //   setUserName(data.data().Name);
-    // });
-
     onSnapshot(userName, (snapshot) => {
       setUserName(snapshot.data().Name);
       if (snapshot.data().Photo) {
@@ -314,13 +199,6 @@ const Friends = (props) => {
       .doc(user.uid)
       .collection("Chat Friends")
       .doc(props.data.UserId);
-    // .onSnapshot((doc) => {
-    //   setLastMsg(
-    //     doc?.data()?.ChatHistory[doc?.data()?.ChatHistory?.length - 1]
-    //       ?.Message
-    //   );
-    // });
-
     onSnapshot(userMsg, (snapshot) => {
       setChatlength(snapshot?.data()?.ChatHistory.length);
       setTime(
@@ -384,26 +262,17 @@ const Friends = (props) => {
   }
 
   function activerChatUser() {
-    // console.log("props.data.UserId");
-    // console.log(props.data.UserId);
     dispatch(addActiveUser(props.data.UserId));
   }
 
   function deleteChatUser() {
     const user = firebase.auth().currentUser;
-    // console.log(user.uid);
-    // console.log(UserUid);
-    // var docRef = doc(db,"")
     var delRef = db
       .collection("Chat Record")
       .doc(user.uid)
       .collection("Chat Friends")
       .doc(UserUid)
       .delete();
-    // deleteDoc(delRef).then(() => {
-    //   console.log("chat deleted");
-    // });
-    // dispatch(addActiveUser(""));
   }
 
   return (
@@ -418,29 +287,6 @@ const Friends = (props) => {
               (theme ? " bg-[#ffffff] text-black" : " bg-[#222228] text-white")
             }
           >
-            {/* <div className="w-full rounded-xl  flex justify-start items-center px-[6px]">
-              <span
-                className={
-                  " font-[work]  font-normal flex justify-start items-center text-[20px] mt-[5px]" +
-                  (theme ? "  text-black" : "  text-white")
-                }
-              >
-                {photoURL === "nophoto" ? (
-                  <img
-                    src={profile2}
-                    alt=""
-                    className="w-[40px] h-[40px] rounded-full object-cover mr-[10px] "
-                  ></img>
-                ) : (
-                  <img
-                    src={photoURL}
-                    alt=""
-                    className="w-[40px] h-[40px] rounded-full object-cover mr-[10px] "
-                  ></img>
-                )}{" "}
-                {userName}
-              </span>
-            </div> */}
             <div className="w-full rounded-xl  flex justify-start items-center px-[6px]">
               <span className=" font-[google] font-light text-[22px] flex justify-start items-center text-[#bb2a23] ">
                 <TbAlertTriangle className="text-[25px] text-[#bb2a23]" />{" "}
@@ -468,7 +314,6 @@ const Friends = (props) => {
                     : " bg-[#17171a] text-[#ffffff]")
                 }
                 onClick={() => {
-                  // console.log("clicked");
                   setConfirmDelete(false);
                 }}
               >
@@ -477,7 +322,6 @@ const Friends = (props) => {
               <button
                 className="w-auto flex items-end ml-[30px] h-auto text-[#bb2a23]   cursor-pointer  font-[google] font-light  rounded-2xl"
                 onClick={() => {
-                  // console.log("clicked");
                   deleteChatUser();
                 }}
               >
@@ -501,7 +345,6 @@ const Friends = (props) => {
               className="group w-full h-[75px] py-[10px] flex justify-center items-center cursor-pointer  "
               onClick={() => {
                 activerChatUser();
-                // dispatch(toggleSendFlag(true));
               }}
             >
               <div
@@ -533,7 +376,6 @@ const Friends = (props) => {
                       (theme ? " text-[#000000]" : " text-[#ffffff]")
                     }
                   >
-                    {/* {props.data.user} */}
                     {userName}
                   </span>
                   <span
@@ -541,17 +383,11 @@ const Friends = (props) => {
                       "w-[70px] group-hover:mr-[25px] h-full text-[14px]  flex justify-end items-center font-light   font-[work] " +
                       (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                     }
-                    onClick={() => {
-                      // deleteChatUser();
-                    }}
                   >
-                    {/* {props.data.time} */}
                     {Time}
                   </span>
                 </div>
                 <div className="w-full flex h-[23px] justify-between items-center">
-                  {/* {props.data.msg} */}
-
                   {lastMsg === "Image" ? (
                     <>
                       {chatFlag === 1 ? (
@@ -669,7 +505,6 @@ const Friends = (props) => {
                           "w-[calc(100%-70px)] text-[14px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
-                        // style={{ transition: ".5s" }}
                       >
                         {!lastMsg ? (
                           <>Messages are end-to-end encrypted.</>
@@ -679,7 +514,6 @@ const Friends = (props) => {
                       </span>
                     </>
                   )}
-                  {/* </span> */}
                   <span className="w-[70px] text-[14px] h-full font-normal   flex justify-end items-center">
                     {unreadMessages === 0 ? (
                       <></>
@@ -692,7 +526,6 @@ const Friends = (props) => {
                     )}
                   </span>
                 </div>
-                {/* <span className="text-[15px]">Hello! How Are you</span> */}
               </div>
             </div>
             <span
@@ -700,7 +533,6 @@ const Friends = (props) => {
               onClick={() => {
                 deleteChatUser();
                 setConfirmDelete(true);
-                // console.log("clickeddddddd");
               }}
             >
               <MdDelete
@@ -751,9 +583,7 @@ const Friends = (props) => {
                       "w-[calc(100%-70px)] text-[17px] h-full  flex items-center whitespace-nowrap overflow-hidden text-ellipsis font-[google] font-normal " +
                       (theme ? " text-[#000000]" : " text-[#ffffff]")
                     }
-                    // style={{ transition: ".9s" }}
                   >
-                    {/* {props.data.user} */}
                     {userName}
                   </span>
                   <span
@@ -761,10 +591,7 @@ const Friends = (props) => {
                       "w-[70px] h-full group-hover:mr-[25px] text-[14px] flex justify-end items-center  font-[work] font-light z-50" +
                       (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                     }
-
-                    // style={{ transition: ".9s" }}
                   >
-                    {/* {props.data.time} */}
                     {Time}
                   </span>
                 </div>
@@ -778,7 +605,6 @@ const Friends = (props) => {
                               "w-[35px] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work] " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
-                            // style={{ transition: ".5s" }}
                           >
                             you:
                           </span>
@@ -791,14 +617,12 @@ const Friends = (props) => {
                           "mr-[5px]  " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
-                        // style={{ transition: ".5s" }}
                       />
                       <span
                         className={
                           "w-[calc(100%-105px)] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
-                        // style={{ transition: ".5s" }}
                       >
                         {lastMsg}
                       </span>
@@ -812,7 +636,6 @@ const Friends = (props) => {
                               "w-[35px] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work]  " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
-                            // style={{ transition: ".5s" }}
                           >
                             you:
                           </span>
@@ -825,14 +648,12 @@ const Friends = (props) => {
                           "mr-[5px]   " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
-                        // style={{ transition: ".5s" }}
                       />
                       <span
                         className={
                           "w-[calc(100%-105px)] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full     font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
-                        // style={{ transition: ".5s" }}
                       >
                         {lastMsg}
                       </span>
@@ -846,7 +667,6 @@ const Friends = (props) => {
                               "w-[35px] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work]  " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
-                            // style={{ transition: ".5s" }}
                           >
                             you:
                           </span>
@@ -859,14 +679,12 @@ const Friends = (props) => {
                           "mr-[5px] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
-                        // style={{ transition: ".5s" }}
                       />
                       <span
                         className={
                           "w-[calc(100%-105px)] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
-                        // style={{ transition: ".5s" }}
                       >
                         {docName}
                       </span>
@@ -880,7 +698,6 @@ const Friends = (props) => {
                               "w-[30px] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full   font-[work]  " +
                               (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                             }
-                            // style={{ transition: ".5s" }}
                           >
                             you:
                           </span>
@@ -893,7 +710,6 @@ const Friends = (props) => {
                           "w-[calc(100%-70px)] text-[14px]    whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full    font-[work] " +
                           (theme ? " text-[#5f5f5f]" : " text-[#8e9396]")
                         }
-                        // style={{ transition: ".5s" }}
                       >
                         {!lastMsg ? (
                           <>Messages are end-to-end encrypted.</>
@@ -903,9 +719,6 @@ const Friends = (props) => {
                       </span>
                     </>
                   )}
-                  {/* <span className="w-[calc(100%-70px)] text-[14px]  leading-[13px] whitespace-nowrap overflow-hidden text-ellipsis flex items-center h-full text-[#9fa5a7] group-hover:text-[#474747]">
-                  {lastMsg}
-                </span> */}
                   <span className="w-[70px] text-[14px] h-full font-normal  flex justify-end items-center">
                     {unreadMessages === 0 ? (
                       <></>
@@ -918,14 +731,12 @@ const Friends = (props) => {
                     )}
                   </span>
                 </div>
-                {/* <span className="text-[15px]">Hello! How Are you</span> */}
               </div>
             </div>
             <span
               className="group-hover:flex hidden justify-center items-start pt-[5px] h-full w-[20px] ml-[-20px] z-40"
               onClick={() => {
                 setConfirmDelete(true);
-                // console.log("clickeddddddd");
               }}
             >
               <MdDelete
@@ -935,8 +746,6 @@ const Friends = (props) => {
               />
             </span>
           </div>
-
-          {/* <div className="w-full h-[100svh] backdrop-blur-md fixed"></div> */}
         </>
       )}
     </>
@@ -946,17 +755,11 @@ const Friends = (props) => {
 const SearchFriends = (props) => {
   const [userName, setUserName] = useState("");
   const [info, setInfo] = useState("");
-  // const [lastMsg, setLastMsg] = useState("");
   const [UserUid, setUserUid] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [isOnline, setIsOnline] = useState(false);
-  // const [Time, setTime] = useState("");
-  // const [unreadMessages, setUnreadMessages] = useState(0);
-  // const [chatLength, setChatlength] = useState(0);
-
   const dispatch = useDispatch();
   const ActiveChatUser = useSelector((store) => store.chat.ActiveUser);
-
   const [theme, setTheme] = useState(true);
 
   useEffect(() => {
@@ -1240,6 +1043,12 @@ const UserList = (props) => {
   const [bugAbout, setBugAbout] = useState("");
   const [reportBug, setReportBug] = useState(false);
   const [subModal, setSubModal] = useState(false);
+  const [graph, setGraph] = useState(false);
+  const [changeDpModal, setChangeDpModal] = useState(false);
+  const [usageData, setUsageData] = useState();
+  const [tempUsageData, setTempUsageData] = useState();
+  const [showMonthFlag, setShowMonthFlag] = useState(false);
+  const [showMonth, setShowMonth] = useState(0);
   // const [left, setRight] = useState(0);
   // addFriendList;
   // console.log("UserList");
@@ -1273,10 +1082,20 @@ const UserList = (props) => {
       setTotalDay(snapshot?.data()?.totalDay);
       setTotalHour(snapshot?.data()?.totalHour);
       setServerDate(snapshot?.data()?.server);
+      setUsageData(snapshot?.data()?.UsageArray);
+      // setTempUsageData(snapshot?.data()?.UsageArray);
     });
   }, []);
 
   useEffect(() => {
+    setTempUsageData(usageData);
+  }, [usageData]);
+
+  useEffect(() => {
+    const today = new Date();
+    const date = today.getDate();
+    const month = today.getMonth() + 1; // getMonth() returns 0-11, so we add 1
+    const year = today.getFullYear();
     const user = firebase.auth().currentUser;
     if (serverDate !== 0) {
       let checkDate = generateDateMonthNumber();
@@ -1290,9 +1109,20 @@ const UserList = (props) => {
             totalDay: totalDay + 1,
             totalHour: totalHour + onHour * 60 + onMin,
           });
+
+        db.collection("Chat Record")
+          .doc(user.uid)
+          .update({
+            UsageArray: arrayUnion({
+              month: month,
+              date: date,
+              year: year,
+              usage: (onHour * 60 + onMin) / 60,
+            }),
+          });
       }
     }
-  }, [serverDate]);
+  }, [serverDate, onMin]);
 
   function generateDateMonthNumber() {
     let currentDate = new Date();
@@ -1734,11 +1564,11 @@ const UserList = (props) => {
     //  setImageLength(e.target.files.length);
   }
 
-  useEffect(() => {
-    if (tempProfileImage) {
-      uploadProfileImage();
-    }
-  }, [tempProfileImage]);
+  // useEffect(() => {
+  //   if (tempProfileImage) {
+  //     uploadProfileImage();
+  //   }
+  // }, [tempProfileImage]);
 
   const uploadProfileImageGetUrl = async (fileRef) => {
     const user = firebase.auth().currentUser;
@@ -1862,6 +1692,18 @@ const UserList = (props) => {
 
     setBugAbout("");
   }
+
+  function filterByMonth() {
+    return usageData?.filter((entry) => entry.month === showMonth);
+  }
+
+  useEffect(() => {
+    if (showMonth !== 0) {
+      setTempUsageData(filterByMonth());
+    } else if (showMonth === 0) {
+      setTempUsageData(usageData);
+    }
+  }, [showMonth]);
 
   return (
     <>
@@ -3132,6 +2974,110 @@ const UserList = (props) => {
           </>
         ) : (
           <>
+            {changeDpModal === true ? (
+              <>
+                <div
+                  className={
+                    " w-full lg:w-[400px] md:w-[400px] h-[100svh] top-0 left-0 fixed  z-50 backdrop-blur-md flex justify-center items-center" +
+                    (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
+                  }
+                  style={{ zIndex: "999" }}
+                >
+                  <div
+                    className={
+                      " text-[15px] w-[320px]  h-auto p-[20px] rounded-3xl flex flex-col justify-center items-center " +
+                      (theme
+                        ? " bg-[#ffffff] text-black"
+                        : " bg-[#222228] text-white")
+                    }
+                  >
+                    <div className="w-full rounded-xl  flex justify-start items-center px-[6px]">
+                      <span className=" font-[google] font-light text-[22px] flex justify-start items-center ">
+                        <BsFillCameraFill className="text-[25px] " /> &nbsp;
+                        Choose any Photo
+                      </span>
+                    </div>
+
+                    <label
+                      for="getFile"
+                      className={
+                        "w-full mt-[20px] rounded-xl font-[google]  flex justify-center items-center px-[6px]" +
+                        (theme ? " text-[#343434] " : " text-[#b7b7b7]")
+                      }
+                    >
+                      <div
+                        className={
+                          "w-[60px] h-[60px] rounded-2xl border-[2px]  flex justify-center items-center cursor-pointer" +
+                          (theme ? " border-[#e4eaf1]" : " border-[#878787]")
+                        }
+                      >
+                        {tempProfileImage === undefined ? (
+                          <MdOutlineAdd
+                            className={
+                              "text-[25px]" +
+                              (theme ? " text-[#e4eaf1]" : " text-[#878787]")
+                            }
+                          />
+                        ) : (
+                          <div
+                            className={
+                              "w-[25px] h-[25px] flex justify-center items-center text-[14px] rounded-full " +
+                              (theme
+                                ? " bg-[#e4eaf1] text-black"
+                                : " bg-[#878787] text-white")
+                            }
+                          >
+                            1
+                          </div>
+                        )}
+                      </div>
+                    </label>
+
+                    <div className=" h-auto w-full mt-[20px] flex justify-end items-center px-[6px] rounded-xl">
+                      <button
+                        className={
+                          "w-auto h-auto  flex items-end bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
+                          (theme
+                            ? " bg-[#e4eaf1] text-[#000000]"
+                            : " bg-[#17171a] text-[#ffffff]")
+                        }
+                        onClick={() => {
+                          // console.log("clicked");
+
+                          setTempProfileImage();
+                          setChangeDpModal(false);
+                        }}
+                      >
+                        Close
+                      </button>
+
+                      <button
+                        className={
+                          "w-auto flex items-end ml-[30px] h-auto text-[#bb2a23]   cursor-pointer  font-[google] font-light  rounded-2xl" +
+                          (tempProfileImage === undefined
+                            ? " text-[#c9c5ff]"
+                            : " text-[#655fc7]")
+                        }
+                        onClick={() => {
+                          // console.log("clicked");
+
+                          if (tempProfileImage !== undefined) {
+                            uploadProfileImage();
+
+                            setChangeDpModal(false);
+                            setTempProfileImage();
+                          }
+                        }}
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
             {reportBug === true ? (
               <>
                 <div
@@ -3208,6 +3154,386 @@ const UserList = (props) => {
             ) : (
               <></>
             )}
+
+            {graph ? (
+              <div
+                className={
+                  "w-full md:w-[400px] lg:w-[400px] h-[100svh] fixed top-0 left-0 flex justify-center items-center backdrop-blur-md z-50" +
+                  (theme ? " bg-[#e4eaf125]" : " bg-[#17171a25]")
+                }
+                // onClick={() => {
+                //   // deleteStatus();
+                //   setGraph(false);
+                // }}
+              >
+                <div
+                  className={
+                    "w-[320px] h-auto p-[20px] px-[20px] rounded-3xl flex flex-col justify-center items-center" +
+                    (theme ? " bg-[white]" : " bg-[#282828]")
+                  }
+                >
+                  <div
+                    className={
+                      "text-[21px]  font-[google] mb-[10px] w-full flex justify-start items-center whitespace-nowrap" +
+                      (theme ? " text-black" : " text-white")
+                    }
+                  >
+                    {showMonth === 0 ? (
+                      <>Showing Last 7 Days</>
+                    ) : (
+                      <>
+                        Showing Month{" "}
+                        <span className="ml-[7px] text-[#655fc7]">
+                          {monthNames[showMonth - 1]}
+                        </span>{" "}
+                        <div
+                          className={
+                            "w-[25px] h-[25px] flex justify-center items-center rounded-full ml-[10px] " +
+                            (theme ? " bg-[#c9c5ff]" : " bg-[#655fc7]")
+                          }
+                          onClick={() => {
+                            setShowMonth(0);
+                            // setShowMonth(0)
+                          }}
+                        >
+                          <RxCross2
+                            className={
+                              " text-[18px]" +
+                              (theme ? " text-black" : " text-white")
+                            }
+                          />
+                        </div>{" "}
+                      </>
+                    )}
+                  </div>
+                  <div
+                    className={
+                      "text-[14px]  font-[google] mb-[10px] w-full flex justify-start items-center" +
+                      (theme ? " text-black" : " text-white")
+                    }
+                    onClick={() => {
+                      setShowMonthFlag(!showMonthFlag);
+                      // setShowMonth(0)
+                    }}
+                  >
+                    <IoChevronDownOutline
+                      className={
+                        "text-[18px] mr-[5px] " +
+                        (showMonthFlag ? " rotate-180" : " rotate-0")
+                      }
+                      style={{ transition: ".4s" }}
+                    />{" "}
+                    Choose Month
+                  </div>
+                  {showMonthFlag ? (
+                    <>
+                      <div
+                        className={
+                          "w-[280px] rounded-2xl h-[120px]  flex justify-center items-center font-[google] font-normal mb-[15px] text-[14px]" +
+                          (theme
+                            ? " bg-[#e4eaf1] text-black"
+                            : " bg-[#17171a] text-white")
+                        }
+                        style={{ transition: ".4s" }}
+                      >
+                        <div className="w-[calc(100%/3)] h-full flex flex-col justify-center items-center">
+                          <div
+                            className="w-full h-[30px] flex justify-center items-center cursor-pointer"
+                            style={{
+                              transition: ".3s",
+                              transitionDelay: ".4s",
+                            }}
+                            onClick={() => {
+                              setShowMonth(1);
+                              setShowMonthFlag(false);
+                            }}
+                          >
+                            Jan
+                          </div>
+                          <div
+                            className="w-full h-[30px] flex justify-center items-center cursor-pointer"
+                            style={{
+                              transition: ".3s",
+                              transitionDelay: ".7s",
+                            }}
+                            onClick={() => {
+                              setShowMonth(2);
+                              setShowMonthFlag(false);
+                            }}
+                          >
+                            Feb
+                          </div>
+                          <div
+                            className="w-full h-[30px] flex justify-center items-center cursor-pointer"
+                            style={{ transition: ".3s", transitionDelay: "1s" }}
+                            onClick={() => {
+                              setShowMonth(3);
+                              setShowMonthFlag(false);
+                            }}
+                          >
+                            Mar
+                          </div>
+                          <div
+                            className="w-full h-[30px] flex justify-center items-center cursor-pointer"
+                            style={{
+                              transition: ".3s",
+                              transitionDelay: "1.3s",
+                            }}
+                            onClick={() => {
+                              setShowMonth(4);
+                              setShowMonthFlag(false);
+                            }}
+                          >
+                            Apr
+                          </div>
+                        </div>
+                        <div className="w-[calc(100%/3)] h-full flex flex-col justify-center items-center">
+                          <div
+                            className="w-full h-[30px] flex justify-center items-center cursor-pointer"
+                            style={{
+                              transition: ".3s",
+                              transitionDelay: ".5s",
+                            }}
+                            onClick={() => {
+                              setShowMonth(5);
+                              setShowMonthFlag(false);
+                            }}
+                          >
+                            May
+                          </div>
+                          <div
+                            className="w-full h-[30px] flex justify-center items-center cursor-pointer"
+                            style={{
+                              transition: ".3s",
+                              transitionDelay: ".8s",
+                            }}
+                            onClick={() => {
+                              setShowMonth(6);
+                              setShowMonthFlag(false);
+                            }}
+                          >
+                            June
+                          </div>
+                          <div
+                            className="w-full h-[30px] flex justify-center items-center cursor-pointer"
+                            style={{
+                              transition: ".3s",
+                              transitionDelay: "1.1s",
+                            }}
+                            onClick={() => {
+                              setShowMonth(7);
+                              setShowMonthFlag(false);
+                            }}
+                          >
+                            July
+                          </div>
+                          <div
+                            className="w-full h-[30px] flex justify-center items-center cursor-pointer"
+                            style={{
+                              transition: ".3s",
+                              transitionDelay: "1.4s",
+                            }}
+                            onClick={() => {
+                              setShowMonth(8);
+                              setShowMonthFlag(false);
+                            }}
+                          >
+                            Aug
+                          </div>
+                        </div>
+                        <div className="w-[calc(100%/3)] h-full flex flex-col justify-center items-center">
+                          <div
+                            className="w-full h-[30px] flex justify-center items-center cursor-pointer"
+                            style={{
+                              transition: ".3s",
+                              transitionDelay: ".6s",
+                            }}
+                            onClick={() => {
+                              setShowMonth(9);
+                              setShowMonthFlag(false);
+                            }}
+                          >
+                            Sep
+                          </div>
+                          <div
+                            className="w-full h-[30px] flex justify-center items-center cursor-pointer"
+                            style={{
+                              transition: ".3s",
+                              transitionDelay: ".9s",
+                            }}
+                            onClick={() => {
+                              setShowMonth(10);
+                              setShowMonthFlag(false);
+                            }}
+                          >
+                            Oct
+                          </div>
+                          <div
+                            className="w-full h-[30px] flex justify-center items-center cursor-pointer"
+                            style={{
+                              transition: ".3s",
+                              transitionDelay: "1.2s",
+                            }}
+                            onClick={() => {
+                              setShowMonth(11);
+                              setShowMonthFlag(false);
+                            }}
+                          >
+                            Nov
+                          </div>
+                          <div
+                            className="w-full h-[30px] flex justify-center items-center cursor-pointer"
+                            style={{
+                              transition: ".3s",
+                              transitionDelay: "1.5s",
+                            }}
+                            onClick={() => {
+                              setShowMonth(12);
+                              setShowMonthFlag(false);
+                            }}
+                          >
+                            Dec
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div
+                        className={
+                          "w-[280px] rounded-2xl h-[0px] overflow-hidden  flex justify-center items-center font-[google] font-normal text-[14px]" +
+                          (theme
+                            ? " bg-[#e4eaf1] text-black"
+                            : " bg-[#17171a] text-white")
+                        }
+                        style={{ transition: ".4s" }}
+                      >
+                        <div className="w-[calc(100%/3)] h-full flex flex-col justify-center items-center">
+                          <div className="w-full h-[30px] flex justify-center items-center opacity-0">
+                            Jan
+                          </div>
+                          <div className="w-full h-[30px] flex justify-center items-center opacity-0">
+                            Feb
+                          </div>
+                          <div className="w-full h-[30px] flex justify-center items-center opacity-0">
+                            Mar
+                          </div>
+                          <div className="w-full h-[30px] flex justify-center items-center opacity-0">
+                            Apr
+                          </div>
+                        </div>
+                        <div className="w-[calc(100%/3)] h-full flex flex-col justify-center items-center">
+                          <div className="w-full h-[30px] flex justify-center items-center opacity-0">
+                            May
+                          </div>
+                          <div className="w-full h-[30px] flex justify-center items-center opacity-0">
+                            June
+                          </div>
+                          <div className="w-full h-[30px] flex justify-center items-center opacity-0">
+                            July
+                          </div>
+                          <div className="w-full h-[30px] flex justify-center items-center opacity-0">
+                            Aug
+                          </div>
+                        </div>
+                        <div className="w-[calc(100%/3)] h-full flex flex-col justify-center items-center">
+                          <div className="w-full h-[30px] flex justify-center items-center opacity-0">
+                            Sep
+                          </div>
+                          <div className="w-full h-[30px] flex justify-center items-center opacity-0">
+                            Oct
+                          </div>
+                          <div className="w-full h-[30px] flex justify-center items-center opacity-0">
+                            Nov
+                          </div>
+                          <div className="w-full h-[30px] flex justify-center items-center opacity-0">
+                            Dec
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  <div
+                    className={
+                      "w-full h-[115px] text-[14px]   flex flex-col justify-center items-center whitespace-nowrap  rounded-2xl" +
+                      (theme ? " text-black" : " text-white")
+                    }
+                  >
+                    <div className="w-full h-full flex justify-center items-center">
+                      {tempUsageData?.length === 0 || !tempUsageData ? (
+                        <>
+                          <span className="font-[google] font-normal text-[17px] ">
+                            No Data to Show
+                          </span>
+                        </>
+                      ) : (
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart
+                            width={730}
+                            height={250}
+                            data={tempUsageData}
+                            // fontSize="16"
+                          >
+                            <defs>
+                              <linearGradient
+                                id="colorAvg"
+                                x1="0"
+                                y1="0"
+                                x2="0"
+                                y2="1"
+                              >
+                                <stop
+                                  offset="10%"
+                                  stopColor="#8981f7"
+                                  stopOpacity={0.6}
+                                />
+                                <stop
+                                  offset="100%"
+                                  stopColor="#8981f7"
+                                  stopOpacity={0}
+                                />
+                              </linearGradient>
+                            </defs>
+                            {/* <XAxis style={{ fontSize: "10px" }} dataKey="date"/>
+                            <YAxis  style={{ fontSize: "10px" }}/> */}
+                            <Tooltip content={<CustomTooltip />} />
+
+                            <Area
+                              type="natural"
+                              dataKey="usage"
+                              stroke="#8981f7"
+                              fillOpacity={1}
+                              fill="url(#colorAvg)"
+                            />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      )}
+                    </div>
+                  </div>
+                  <div className=" h-auto w-full mt-[20px] flex justify-end items-center px-[6px] rounded-xl">
+                    <button
+                      className={
+                        "w-auto h-auto  flex items-end bg-transparent   cursor-pointer  font-[google] font-light   rounded-2xl" +
+                        (theme
+                          ? " bg-[#e4eaf1] text-[#000000]"
+                          : " bg-[#17171a] text-[#ffffff]")
+                      }
+                      onClick={() => {
+                        // console.log("clicked");
+                        setGraph(false);
+                        setShowMonth(0);
+                      }}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+
             {timer ? (
               <div
                 className={
@@ -3476,25 +3802,93 @@ const UserList = (props) => {
                 {nameChangeFlag === true ? (
                   <div
                     className={
-                      "w-full md:w-[400px] lg-[400px] h-[100svh]  z-50 fixed top-0 left-0 flex justify-center items-center px-[10px] md:px-0 lg:px-0 backdrop-blur-md" +
+                      "w-full md:w-[400px] lg-[400px] h-[100svh]  z-50 fixed top-0 left-0 flex justify-center items-center p-[10px] md:px-0 lg:px-0 backdrop-blur-md" +
                       (theme ? " bg-[#17171a25]" : " bg-[#17171a25]")
                     }
                   >
                     <div
                       className={
-                        "w-[320px] h-auto rounded-3xl  flex flex-col justify-center items-center p-[20px] drop-shadow-sm" +
+                        "w-[320px] h-auto rounded-3xl  flex flex-col justify-center items-center p-[30px] drop-shadow-sm" +
                         (theme ? " bg-[white]" : " bg-[#222228]")
                       }
                     >
                       <span
                         className={
-                          "font-medium w-full px-[6px] h-[30px]  flex items-start mt-[-5px]  text-[21px] font-[google]" +
+                          "font-medium w-full h-[30px]  flex items-start mt-[-5px]  text-[21px] font-[google]" +
                           (theme ? " text-black" : " text-white")
                         }
                       >
                         Update Profile
                       </span>
+                      {ownerName?.length === 0 ? (
+                        <label
+                          className={
+                            " font-[google] font-normal text-[14px]  w-full flex justify-start items-center h-[30px] mb-[-30px]" +
+                            (theme ? " text-[#606060]" : " text-[#b1b1b1]")
+                          }
+                          style={{ transition: ".3s" }}
+                        >
+                          Name
+                        </label>
+                      ) : (
+                        <label
+                          className={
+                            " font-[google] font-normal text-[12px]  w-full flex justify-start items-center h-[30px] mb-[-11px]" +
+                            (theme ? " text-[#606060]" : " text-[#b1b1b1]")
+                          }
+                          style={{ transition: ".3s" }}
+                        >
+                          Name
+                        </label>
+                      )}
                       <input
+                        value={ownerName}
+                        onChange={(e) => {
+                          setOwnerName(e.target.value);
+                        }}
+                        className={
+                          " input border-b-[1.5px]  h-[30px] w-full  font-[google] tracking-[.4px] font-normal text-[15px]   bg-transparent outline-none" +
+                          (theme
+                            ? " border-[#606060] text-black"
+                            : " border-[#b1b1b1] text-white")
+                        }
+                        // placeholder="Group Name"
+                      ></input>
+                      {ownerInfo?.length === 0 ? (
+                        <label
+                          className={
+                            " mt-[15px] font-[google] font-normal text-[14px]  w-full flex justify-start items-center h-[30px] mb-[-30px]" +
+                            (theme ? " text-[#606060]" : " text-[#b1b1b1]")
+                          }
+                          style={{ transition: ".3s" }}
+                        >
+                          About
+                        </label>
+                      ) : (
+                        <label
+                          className={
+                            " mt-[15px] font-[google] font-normal text-[12px]  w-full flex justify-start items-center h-[30px] mb-[-11px]" +
+                            (theme ? " text-[#606060]" : " text-[#b1b1b1]")
+                          }
+                          style={{ transition: ".3s" }}
+                        >
+                          About
+                        </label>
+                      )}
+                      <input
+                        value={ownerInfo}
+                        onChange={(e) => {
+                          setOwnerInfo(e.target.value);
+                        }}
+                        className={
+                          " input border-b-[1.5px]  h-[30px] w-full   flex justify-start items-start font-[google] tracking-[.4px] font-normal text-[15px]  bg-transparent outline-none" +
+                          (theme
+                            ? " border-[#606060] text-black"
+                            : " border-[#b1b1b1] text-white")
+                        }
+                        // placeholder="Group Descritption"
+                      ></input>
+                      {/* <input
                         style={{ transition: ".5s" }}
                         value={ownerName}
                         onChange={(e) => setOwnerName(e.target.value)}
@@ -3517,9 +3911,9 @@ const UserList = (props) => {
                             ? " text-black bg-[#e4eaf1] border-[#545454]"
                             : " text-[white] bg-[#17171a] border-[#c3c3c3]")
                         }
-                      ></input>
+                      ></input> */}
 
-                      <div className="w-[100%] h-auto px-[6px] flex justify-end items-center font-[google] font-normal text-[15px] mt-[20px]">
+                      <div className="w-[100%] h-auto flex justify-end items-center font-[google] font-normal text-[15px] mt-[20px]">
                         <span
                           className={
                             "w-auto  flex items-end h-auto rounded-2xl bg-transparent  z-20" +
@@ -3581,11 +3975,16 @@ const UserList = (props) => {
                       id="getFile"
                       accept="image/*"
                       className="hidden fixed opacity-0 text-white bg-transparent w-[45px] h-[35px] rounded-full z-30 cursor-pointer"
-                      onChange={(e) => profileImage(e)}
+                      onChange={(e) => {
+                        profileImage(e);
+                      }}
                     ></input>
                     <label
-                      for="getFile"
+                      // for="getFile"
                       // onclick={document.getElementById("getFile").click()}
+                      onClick={() => {
+                        setChangeDpModal(true);
+                      }}
                       className={
                         " w-[30px] h-[30px]  flex justify-center items-center border-[2px]   fixed rounded-full cursor-pointer z-10" +
                         (theme
@@ -4019,7 +4418,7 @@ const UserList = (props) => {
                         <BiSolidMoon
                           className={
                             " text-[23px] mr-[16px]" +
-                            (theme ? " text-[#000000]" : " text-[#8981f7]")
+                            (theme ? " text-[#000000]" : " text-[#ffffff]")
                           }
                         />
                         Theme : {theme === true ? <>Light</> : <>Dark</>}
@@ -4054,7 +4453,7 @@ const UserList = (props) => {
                         <MdNoAccounts
                           className={
                             " text-[23px] mr-[16px]" +
-                            (theme ? " text-[#000000]" : " text-[#8981f7]")
+                            (theme ? " text-[#000000]" : " text-[#ffffff]")
                           }
                         />
                         Account Visibility :{" "}
@@ -4091,10 +4490,25 @@ const UserList = (props) => {
                       <RiTimer2Fill
                         className={
                           " text-[23px] mr-[16px]" +
-                          (theme ? " text-[#000000]" : " text-[#8981f7]")
+                          (theme ? " text-[#000000]" : " text-[#ffffff]")
                         }
                       />
                       Daily Usage
+                    </div>
+
+                    <div
+                      className="w-[100%] h-[34px]  rounded-xl    mt-[10px] flex justify-start items-center  font-[google] font-light  text-[15px] cursor-pointer"
+                      onClick={() => {
+                        setGraph(!graph);
+                      }}
+                    >
+                      <MdBarChart
+                        className={
+                          " text-[23px] mr-[16px]" +
+                          (theme ? " text-[#000000]" : " text-[#ffffff]")
+                        }
+                      />
+                      Daily Usage Graph
                     </div>
                     <div
                       className="w-[100%] h-[34px]  rounded-xl    mt-[10px] flex justify-start items-center  font-[google] font-light  text-[15px] cursor-pointer"
@@ -4105,7 +4519,7 @@ const UserList = (props) => {
                       <TbHelpSquareRoundedFilled
                         className={
                           " text-[23px] mr-[16px]" +
-                          (theme ? " text-[#000000]" : " text-[#8981f7]")
+                          (theme ? " text-[#000000]" : " text-[#ffffff]")
                         }
                       />{" "}
                       Help
@@ -4119,7 +4533,7 @@ const UserList = (props) => {
                       <MdBugReport
                         className={
                           " text-[23px] mr-[16px]" +
-                          (theme ? " text-[#000000]" : " text-[#8981f7]")
+                          (theme ? " text-[#000000]" : " text-[#ffffff]")
                         }
                       />{" "}
                       Report Bug
@@ -4137,7 +4551,7 @@ const UserList = (props) => {
                       <AiFillDelete
                         className={
                           " text-[23px] mr-[16px]" +
-                          (theme ? " text-[#000000]" : " text-[#8981f7]")
+                          (theme ? " text-[#000000]" : " text-[#ffffff]")
                         }
                       />{" "}
                       Delete Account
@@ -4154,21 +4568,13 @@ const UserList = (props) => {
                       <IoLogOut
                         className={
                           " text-[23px] mr-[12px] ml-[1.5px]" +
-                          (theme ? " text-[#000000]" : " text-[#8981f7]")
+                          (theme ? " text-[#000000]" : " text-[#ffffff]")
                         }
                       />{" "}
                       Log Out
                     </div>
                   </div>
                 </div>
-
-                {/* <div className="w-full py-[40px] text-[#8b8b8b] text-[13px] flex flex-col justify-center items-center">
-                  <span>Want to use this in Android</span>
-                  <span> Click the icon below to download the app</span>
-                  <span>
-                    <FaAppStoreIos className=" text-[25px]" />
-                  </span>
-                </div> */}
               </div>
             </div>
           </>
@@ -4195,16 +4601,11 @@ const UserList = (props) => {
 
       <div
         className="w-full md:w-[400px] lg:w-[400px] h-[60px]   overflow-hidden fixed bottom-0 flex items-center justify-center  " // {
-        //   +
-        //   (theme
-        //     ? "bg-[#e4eaf1] md:bg-[#e4eaf1] lg:bg-[#e4eaf1]"
-        //     : "bg-[#1c1f2f] md:bg-[#17171a] lg:bg-[#17171a]")
-        // }
       >
         <div
           className={
             "w-full h-full  flex  items-center  z-20" +
-            (theme ? " text-[#000000]" : " text-[#8981f7]")
+            (theme ? " text-[#000000]" : " text-[#ffffff]")
           }
           style={{ transition: ".5s" }}
         >
@@ -4247,7 +4648,7 @@ const UserList = (props) => {
           </div>
 
           <div className="min-w-[20%] h-full  flex justify-center items-center">
-            <LuCircleDashed
+            <RiDonutChartLine
               className="text-[23px]"
               onClick={() => {
                 setSearchFlag(false);
@@ -4255,7 +4656,7 @@ const UserList = (props) => {
                 setIsSearchBar(false);
               }}
             />
-            <div
+            {/* <div
               className={
                 "w-[12px] h-[12px] rounded-full ml-[-17.3px]" +
                 (theme ? " bg-[#000000]" : " bg-[#8981f7]")
@@ -4265,7 +4666,7 @@ const UserList = (props) => {
                 props.setData("Status");
                 setIsSearchBar(false);
               }}
-            ></div>
+            ></div> */}
           </div>
           {props.data === "Setting" ? (
             <div
@@ -4307,40 +4708,30 @@ const UserList = (props) => {
 export default UserList;
 
 const CustomTooltip = ({ active, payload, label }) => {
+  const [theme, setTheme] = useState(true);
+
+  // -----------------------------------------------------------------------------------------------------
+  useEffect(() => {
+    const user = firebase.auth().currentUser;
+    const ref = db.collection("Chat Record").doc(user.uid);
+    onSnapshot(ref, (snapshot) => {
+      setTheme(snapshot?.data()?.theme);
+    });
+  }, []);
   if (active && payload && payload.length) {
     return (
-      <div className="p-4 bg-[#373748] border border-[#8d6c6e] rounded-xl flex flex-col gap-4 ">
-        <p className="text-medium text-white text-lg">Hour : {label}</p>
-        <p className="text-sm text-blue-400 font-[google]">
-          Max:
-          <span className="ml-2">{payload[0].value} bpm</span>
-        </p>
-        <p className="text-sm text-[#72f63b] font-[google]">
-          Min:
-          <span className="ml-2">{payload[1].value} bpm</span>
-        </p>
-        <p className="text-sm text-[#ff7b00] font-[google]">
-          Avg:
-          <span className="ml-2">{payload[2].value} bpm</span>
-        </p>
+      <div
+        className={
+          "custom-tooltip  rounded-2xl p-[20px] w-[150px] font-[google]" +
+          (theme ? " bg-[#e4eaf1] text-black" : " bg-[#17171a] text-[white]")
+        }
+      >
+        {/* <p className="label text-[15px]">Date {`${label}`}</p> */}
+        <p className="intro">Usage : {payload[0].value.toFixed(2)} Hrs</p>
+        {/* <p className="desc">Anything you want can be displayed here.</p> */}
       </div>
     );
   }
-};
-// const timerProps = {
-//   isPlaying: true,
-//   size: 90,
-//   strokeWidth: 6,
-// };
-// const renderTime = (time) => {
-//   return (
-//     <div className="time-wrapper">
-//       <div className="title time">{time}</div>
-//     </div>
-//   );
-// };
 
-// const getTimeSeconds = (time) => Math.ceil(minuteSeconds - time) - 1;
-// const getTimeMinutes = (time) => Math.ceil(time / minuteSeconds) - 1;
-// const getTimeHours = (time) => Math.ceil(time / hourSeconds) - 1;
-// const getTimeDays = (time) => Math.ceil(time / daySeconds) - 1;
+  return null;
+};
